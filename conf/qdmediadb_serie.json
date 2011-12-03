@@ -1,0 +1,12 @@
+{
+	"folderSeriesList" : [
+		{"name":"D"		,"path":"/mnt/D/__Series"	,"xbmcpath":"smb://mediaserver/media/D/__Series"},
+		{"name":"E"		,"path":"/mnt/E/__Series"	,"xbmcpath":"smb://mediaserver/media/E/__Series"},
+		{"name":"F"		,"path":"/mnt/F/__Series"	,"xbmcpath":"smb://mediaserver/media/F/__Series"},
+		{"name":"G"		,"path":"/mnt/G/__Series"	,"xbmcpath":"smb://mediaserver/media/G/__Series"},
+		{"name":"K"		,"path":"/mnt/K/__Series"	,"xbmcpath":"smb://mediaserver/media/K/__Series"},
+		{"name":"M"		,"path":"/mnt/M/__Series"	,"xbmcpath":"smb://mediaserver/media/M/__Series"},
+		{"name":"O"		,"path":"/mnt/O/__Series"	,"xbmcpath":"smb://mediaserver/media/O/__Series"},
+		{"name":"Q"		,"path":"/mnt/Q/__Series"	,"xbmcpath":"smb://mediaserver/media/Q/__Series"}
+	]
+}

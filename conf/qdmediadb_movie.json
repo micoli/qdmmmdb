@@ -1,0 +1,18 @@
+{
+	"folderMoviesList" : [
+		{"name":"F1"	, "path":"/mnt/F/__FilmsTest"				, "xbmcpath":"smb://mediaserver/media/F/__FilmsTest"				},
+		{"name":"F"		, "path":"/mnt/F/__Films"					, "xbmcpath":"smb://mediaserver/media/F/__Films"					},
+		{"name":"K"		, "path":"/mnt/K/__Films"					, "xbmcpath":"smb://mediaserver/media/K/__Films"					},
+		{"name":"M"		, "path":"/mnt/M/__Films"					, "xbmcpath":"smb://mediaserver/media/M/__Films"					},
+		{"name":"O"		, "path":"/mnt/O/__Films"					, "xbmcpath":"smb://mediaserver/media/O/__Films"					},
+		{"name":"Q"		, "path":"/mnt/Q/__Films"					, "xbmcpath":"smb://mediaserver/media/Q/__Films"					},
+		{"name":"Q"		, "path":"/mnt/Q/__Films"					, "xbmcpath":"smb://mediaserver/media/Q/__Films"					},
+		{"name":"QAct"	, "path":"/mnt/Q/__Films_J/Action_policier"	, "xbmcpath":"smb://mediaserver/media/Q/__Films_J/Action_policier"	},
+		{"name":"QDoc"	, "path":"/mnt/Q/__Films_J/documentaires"	, "xbmcpath":"smb://mediaserver/media/Q/__Films_J/documentaires"	},
+		{"name":"QDra"	, "path":"/mnt/Q/__Films_J/Drame"			, "xbmcpath":"smb://mediaserver/media/Q/__Films_J/Drame"			},
+		{"name":"QEnf"	, "path":"/mnt/Q/__Films_J/Enfants"			, "xbmcpath":"smb://mediaserver/media/Q/__Films_J/Enfants"			},
+		{"name":"QHor"	, "path":"/mnt/Q/__Films_J/Horreur"			, "xbmcpath":"smb://mediaserver/media/Q/__Films_J/Horreur"			},
+		{"name":"QHum"	, "path":"/mnt/Q/__Films_J/Humour"			, "xbmcpath":"smb://mediaserver/media/Q/__Films_J/Humour"			},
+		{"name":"QSFF"	, "path":"/mnt/Q/__Films_J/SF_Fantastique"	, "xbmcpath":"smb://mediaserver/media/Q/__Films_J/SF_Fantastique"	}
+	]
+}
