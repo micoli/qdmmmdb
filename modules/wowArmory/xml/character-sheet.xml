@@ -1,0 +1,792 @@
+<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type="text/xsl" href="/arm/modules/extjswowarmory/xsl/character.xsl"?>
+<page globalSearch="1" lang="fr_fr" requestUrl="/character-sheet.xml">
+  <characterInfo>
+    <character battleGroup="Némésis" charUrl="r=Eitrigg&amp;n=Kaerok" class="Druide" classId="11" faction="Alliance" factionId="0" gender="(M)" genderId="0" guildName="Addict" guildUrl="r=Eitrigg&amp;n=Addict&amp;p=1" lastModified="26 décembre 2008" level="80" name="Kaerok" points="1130" prefix="" race="Elfe de la nuit" raceId="4" realm="Eitrigg" suffix=""><reputationTab>
+      <factionCategory key="alliance" name="Alliance">
+        <faction key="darnassus" name="Darnassus" reputation="40215"/>
+        <faction key="gnomereganexiles" name="Exilés de Gnomeregan" reputation="22337"/>
+        <faction key="exodar" name="Exodar" reputation="33143"/>
+        <faction key="ironforge" name="Forgefer" reputation="28512"/>
+        <faction key="stormwind" name="Hurlevent" reputation="39966"/>
+
+      </factionCategory>
+      <factionCategory key="allianceforces" name="Forces de l'Alliance">
+        <faction key="stormpikeguard" name="Garde Foudrepique" reputation="3753"/>
+        <faction key="theleagueofarathor" name="La Ligue d'Arathor" reputation="430"/>
+        <faction key="silverwingsentinels" name="Sentinelles d'Aile-argent" reputation="0"/>
+      </factionCategory>
+      <factionCategory key="alliancevanguard" name="Avant-garde de l'Alliance">
+        <faction key="valianceexpedition" name="Expédition de la Bravoure" reputation="27690"/>
+        <faction key="thesilvercovenant" name="Le Concordat argenté" reputation="0"/>
+
+        <faction key="thefrostborn" name="Les Givre-nés" reputation="260"/>
+        <faction key="explorers'league" name="Ligue des explorateurs" reputation="3100"/>
+      </factionCategory>
+      <factionCategory key="classic" name="Classique">
+        <faction key="argentdawn" name="Aube d'argent" reputation="14748"/>
+        <faction key="gelkisclancentaur" name="Centaures (Gelkis)" reputation="4210"/>
+        <faction key="magramclancentaur" name="Centaures (Magram)" reputation="-8000"/>
+        <faction key="cenarioncircle" name="Cercle cénarien" reputation="7036"/>
+        <faction key="thoriumbrotherhood" name="Confrérie du thorium" reputation="1750"/>
+
+        <faction key="darkmoonfaire" name="Foire de Sombrelune" reputation="0"/>
+        <faction key="bloodsailbuccaneers" name="La Voile sanglante" reputation="-17150"/>
+        <faction key="timbermawhold" name="Les Grumegueules" reputation="-1675"/>
+        <faction key="hydraxianwaterlords" name="Les Hydraxiens" reputation="57"/>
+        <faction key="shen'dralar" name="Shen'dralar" reputation="500"/>
+        <faction key="zandalartribe" name="Tribu Zandalar" reputation="489"/>
+      </factionCategory>
+      <factionCategory key="shattrathcity" name="Shattrath">
+        <faction key="sha'tariskyguard" name="Garde-ciel sha'tari" reputation="1655"/>
+
+        <faction key="thealdor" name="L'Aldor" reputation="42045"/>
+        <faction key="thescryers" name="Les Clairvoyants" reputation="-42000"/>
+        <faction key="thesha'tar" name="Les Sha'tar" reputation="42999"/>
+        <faction key="shatteredsunoffensive" name="Opération Soleil brisé" reputation="42999"/>
+        <faction key="lowercity" name="Ville basse" reputation="35620"/>
+      </factionCategory>
+      <factionCategory key="sholazarbasin" name="Bassin de Sholazar">
+        <faction key="theoracles" name="Les Oracles" reputation="-770"/>
+        <faction key="frenzyhearttribe" name="Tribu Frénécœur" reputation="700"/>
+
+      </factionCategory>
+      <factionCategory key="steamwheedlecartel" name="Cartel Gentepression">
+        <faction key="bootybay" name="Baie-du-Butin" reputation="14705"/>
+        <faction key="ratchet" name="Cabestan" reputation="10923"/>
+        <faction key="gadgetzan" name="Gadgetzan" reputation="13265"/>
+        <faction key="everlook" name="Long-guet" reputation="11273"/>
+      </factionCategory>
+      <factionCategory key="theburningcrusade" name="The Burning Crusade">
+        <faction key="honorhold" name="Bastion de l'Honneur" reputation="42999"/>
+
+        <faction key="cenarionexpedition" name="Expédition cénarienne" reputation="42999"/>
+        <faction key="keepersoftime" name="Gardiens du Temps" reputation="35430"/>
+        <faction key="kurenai" name="Kurenaï" reputation="18442"/>
+        <faction key="thevioleteye" name="L'Œil pourpre" reputation="42999"/>
+        <faction key="thescaleofthesands" name="La Balance des sables" reputation="14481"/>
+        <faction key="theconsortium" name="Le Consortium" reputation="17204"/>
+        <faction key="ashtonguedeathsworn" name="Ligemort cendrelangue" reputation="879"/>
+        <faction key="ogri'la" name="Ogri'la" reputation="25"/>
+        <faction key="sporeggar" name="Sporeggar" reputation="5165"/>
+
+      </factionCategory>
+      <factionCategory key="wrathofthelichking" name="Wrath of the Lich King">
+        <faction key="knightsoftheebonblade" name="Chevaliers de la Lame d'ébène" reputation="10409"/>
+        <faction key="kirintor" name="Kirin Tor" reputation="2970"/>
+        <faction key="thewyrmrestaccord" name="L'Accord de Repos du ver" reputation="10883"/>
+        <faction key="argentcrusade" name="La Croisade d'argent" reputation="19854"/>
+        <faction key="thekalu'ak" name="Les Kalu'aks" reputation="8310"/>
+      </factionCategory>
+    </reputationTab><talentTab>
+
+      <talentTree value="00000000000000000000000000005532301323200120531203033131120550001000000000000000000"/>
+    </talentTab></character>
+    <characterTab>
+      <talentSpec treeOne="0" treeThree="13" treeTwo="58"/>
+      <buffs/>
+      <debuffs/>
+      <pvp>
+        <lifetimehonorablekills value="379"/>
+        <arenacurrency value="0"/>
+
+      </pvp>
+      <professions>
+        <skill key="jewelcrafting" max="450" name="Joaillerie" value="414"/>
+        <skill key="mining" max="450" name="Minage" value="450"/>
+      </professions>
+      <title value=""/>
+      <knownTitles/>
+      <characterBars>
+        <health effective="18777"/>
+
+        <secondBar casting="0" effective="5931" notCasting="63" type="m"/>
+      </characterBars>
+      <baseStats>
+        <strength attack="412" base="91" block="-1" effective="216"/>
+        <agility armor="1380" attack="-1" base="92" critHitPercent="15.76" effective="690"/>
+        <stamina base="102" effective="1104" health="10860" petBonus="-1"/>
+        <intellect base="181" critHitPercent="2.94" effective="181" mana="2435" petBonus="-1"/>
+        <spirit base="168" effective="168" healthRegen="14" manaRegen="63"/>
+        <armor base="7037" effective="7157" percent="31.97" petBonus="-1"/>
+
+      </baseStats>
+      <resistances>
+        <arcane petBonus="-1" value="0"/>
+        <fire petBonus="-1" value="0"/>
+        <frost petBonus="-1" value="0"/>
+        <holy petBonus="-1" value="0"/>
+        <nature petBonus="-1" value="0"/>
+        <shadow petBonus="-1" value="0"/>
+      </resistances>
+
+      <melee>
+        <mainHandDamage dps="214.6" max="603" min="423" percent="0" speed="2.39"/>
+        <offHandDamage dps="44.4" max="89" min="88" percent="0" speed="1.99"/>
+        <mainHandSpeed hastePercent="0.37" hasteRating="12" value="2.39"/>
+        <offHandSpeed hastePercent="0.37" hasteRating="12" value="1.99"/>
+        <power base="412" effective="1120" increasedDps="80.0"/>
+        <hitRating increasedHitPercent="1.59" penetration="0" reducedArmorPercent="0.00" value="52"/>
+        <critChance percent="18.59" plusPercent="4.79" rating="220"/>
+        <expertise additional="4" percent="1.00" rating="40" value="4"/>
+
+      </melee>
+      <ranged>
+        <weaponSkill rating="0" value="0"/>
+        <damage dps="0.0" max="0" min="0" percent="0" speed="0.00"/>
+        <speed hastePercent="0.37" hasteRating="12" value="0.00"/>
+        <power base="680" effective="1388" increasedDps="99.0" petAttack="-1.00" petSpell="-1.00"/>
+        <hitRating increasedHitPercent="1.59" penetration="0" reducedArmorPercent="0.00" value="52"/>
+        <critChance percent="10.15" plusPercent="4.79" rating="220"/>
+      </ranged>
+
+      <spell>
+        <bonusDamage>
+          <arcane value="0"/>
+          <fire value="0"/>
+          <frost value="0"/>
+          <holy value="0"/>
+          <nature value="0"/>
+          <shadow value="0"/>
+          <petBonus attack="-1" damage="-1" fromType=""/>
+
+        </bonusDamage>
+        <bonusHealing value="483"/>
+        <hitRating increasedHitPercent="1.98" penetration="0" reducedResist="0" value="52"/>
+        <critChance rating="220">
+          <arcane percent="7.73"/>
+          <fire percent="7.73"/>
+          <frost percent="7.73"/>
+          <holy percent="7.73"/>
+          <nature percent="7.73"/>
+
+          <shadow percent="7.73"/>
+        </critChance>
+        <penetration value="0"/>
+        <manaRegen casting="0.00" notCasting="63.00"/>
+        <hasteRating hastePercent="0.37" hasteRating="12"/>
+      </spell>
+      <defenses>
+        <armor base="7037" effective="7157" percent="31.97" petBonus="-1"/>
+        <defense decreasePercent="0.40" increasePercent="0.40" plusDefense="10" rating="52" value="400.00"/>
+
+        <dodge increasePercent="2.24" percent="22.34" rating="88"/>
+        <parry increasePercent="0.00" percent="0.00" rating="0"/>
+        <block increasePercent="0.00" percent="0.00" rating="0"/>
+        <resilience damagePercent="5.90" hitPercent="2.68" value="220.00"/>
+      </defenses>
+      <items>
+        <item durability="60" gem0Id="0" gem1Id="0" gem2Id="0" icon="inv_helmet_04" id="43260" maxDurability="60" permanentenchant="0" randomPropertiesId="0" seed="2130778260" slot="0" itemLevel="187" onList="1"><info>
+      <cost sellPrice="54270"/>
+      <disenchantLoot requiredSkillRank="325">
+
+        <item dropRate="6" icon="inv_enchant_dreamshard_02" id="34052" level="80" maxCount="1" minCount="1" name="Eclat de rêve" quality="3" type="Enchantement"/>
+      </disenchantLoot>
+      <createdBy>
+        <spell icon="trade_leatherworking" id="60697" name="Masque d'éviscérateur">
+          <reagent count="12" icon="inv_misc_leatherscrap_19" id="38425" name="Cuir boréen lourd"/>
+          <reagent count="1" icon="inv_elemental_eternal_air" id="35623" name="Air éternel"/>
+        </spell>
+      </createdBy>
+    </info><datas>
+
+      <id>43260</id>
+      <name>Masque d'éviscérateur</name>
+      <icon>inv_helmet_04</icon>
+      <overallQualityId>3</overallQualityId>
+      <bonding>2</bonding>
+      <classId>4</classId>
+
+      <equipData>
+        <inventoryType>1</inventoryType>
+        <subclassName>Cuir</subclassName>
+      </equipData>
+      <damageData/>
+      <bonusAgility>69</bonusAgility>
+      <bonusStamina>69</bonusStamina>
+
+      <armor armorBonus="0">428</armor>
+      <durability current="0" max="60"/>
+      <requiredLevel>78</requiredLevel>
+      <bonusAttackPower>92</bonusAttackPower>
+      <bonusResilienceRating>46</bonusResilienceRating>
+      <bonusCritRating>46</bonusCritRating>
+
+      <itemSource value="sourceType.createdBySpell"/>
+    </datas></item>
+        <item durability="0" gem0Id="0" gem1Id="0" gem2Id="0" icon="inv_jewelry_necklace_41" id="35680" maxDurability="0" permanentenchant="0" randomPropertiesId="0" seed="541728840" slot="1" itemLevel="183" onList="1"><info>
+      <cost sellPrice="49140"/>
+      <disenchantLoot requiredSkillRank="325">
+        <item dropRate="6" icon="inv_enchant_dreamshard_02" id="34052" level="80" maxCount="1" minCount="1" name="Eclat de rêve" quality="3" type="Enchantement"/>
+      </disenchantLoot>
+      <dropCreatures>
+        <creature area="Les salles de Pierre" areaUrl="fl[source]=dungeon&amp;fl[dungeon]=4264&amp;fl[boss]=all" classification="1" dropRate="4" id="27978" maxLevel="79" minLevel="79" name="Sjonnir le Sculptefer" type="Humanoïde" url="fl[source]=dungeon&amp;fl[dungeon]=4264&amp;fl[difficulty]=normal&amp;fl[boss]=27978"/>
+
+      </dropCreatures>
+    </info><datas>
+      <id>35680</id>
+      <name>Amulette des volontés</name>
+      <icon>inv_jewelry_necklace_41</icon>
+      <overallQualityId>3</overallQualityId>
+      <bonding>1</bonding>
+
+      <classId>4</classId>
+      <equipData>
+        <inventoryType>2</inventoryType>
+      </equipData>
+      <damageData/>
+      <bonusStrength>36</bonusStrength>
+      <bonusStamina>55</bonusStamina>
+
+      <armor armorBonus="0">336</armor>
+      <requiredLevel>77</requiredLevel>
+      <bonusDodgeRating>25</bonusDodgeRating>
+      <itemSource areaId="4264" areaName="Les salles de Pierre" creatureId="27978" creatureName="Sjonnir le Sculptefer" difficulty="n" dropRate="4" value="sourceType.creatureDrop"/>
+    </datas></item>
+        <item durability="60" gem0Id="0" gem1Id="0" gem2Id="0" icon="inv_shoulder_87" id="43433" maxDurability="60" permanentenchant="0" randomPropertiesId="0" seed="596420175" slot="2" itemLevel="187" onList="1"><info>
+      <cost sellPrice="50440"/>
+
+      <disenchantLoot requiredSkillRank="325">
+        <item dropRate="6" icon="inv_enchant_dreamshard_02" id="34052" level="80" maxCount="1" minCount="1" name="Eclat de rêve" quality="3" type="Enchantement"/>
+      </disenchantLoot>
+      <createdBy>
+        <spell icon="trade_leatherworking" id="60702" name="Protège-épaules d'éviscérateur">
+          <reagent count="10" icon="inv_misc_leatherscrap_19" id="38425" name="Cuir boréen lourd"/>
+          <reagent count="1" icon="inv_elemental_eternal_air" id="35623" name="Air éternel"/>
+        </spell>
+      </createdBy>
+
+    </info><datas>
+      <id>43433</id>
+      <name>Protège-épaules d'éviscérateur</name>
+      <icon>inv_shoulder_87</icon>
+      <overallQualityId>3</overallQualityId>
+      <bonding>2</bonding>
+
+      <classId>4</classId>
+      <equipData>
+        <inventoryType>3</inventoryType>
+        <subclassName>Cuir</subclassName>
+      </equipData>
+      <damageData/>
+      <bonusAgility>51</bonusAgility>
+
+      <bonusStamina>51</bonusStamina>
+      <armor armorBonus="0">395</armor>
+      <durability current="0" max="60"/>
+      <requiredLevel>78</requiredLevel>
+      <bonusAttackPower>68</bonusAttackPower>
+      <bonusCritRating>34</bonusCritRating>
+
+      <bonusResilienceRating>34</bonusResilienceRating>
+      <itemSource value="sourceType.createdBySpell"/>
+    </datas></item>
+        <item durability="100" gem0Id="0" gem1Id="0" gem2Id="0" icon="inv_chest_leather_10" id="43434" maxDurability="100" permanentenchant="3329" randomPropertiesId="0" seed="169018962" slot="4" itemLevel="187" onList="1"><info>
+      <cost sellPrice="67509"/>
+      <disenchantLoot requiredSkillRank="325">
+        <item dropRate="6" icon="inv_enchant_dreamshard_02" id="34052" level="80" maxCount="1" minCount="1" name="Eclat de rêve" quality="3" type="Enchantement"/>
+      </disenchantLoot>
+
+      <createdBy>
+        <spell icon="trade_leatherworking" id="60703" name="Corselet d'éviscérateur">
+          <reagent count="12" icon="inv_misc_leatherscrap_19" id="38425" name="Cuir boréen lourd"/>
+          <reagent count="1" icon="inv_elemental_eternal_air" id="35623" name="Air éternel"/>
+        </spell>
+      </createdBy>
+    </info><datas>
+      <id>43434</id>
+
+      <name>Corselet d'éviscérateur</name>
+      <icon>inv_chest_leather_10</icon>
+      <overallQualityId>3</overallQualityId>
+      <bonding>2</bonding>
+      <classId>4</classId>
+      <equipData>
+
+        <inventoryType>5</inventoryType>
+        <subclassName>Cuir</subclassName>
+      </equipData>
+      <damageData/>
+      <bonusStamina>69</bonusStamina>
+      <bonusAgility>69</bonusAgility>
+      <armor armorBonus="0">527</armor>
+
+      <durability current="0" max="100"/>
+      <requiredLevel>78</requiredLevel>
+      <bonusAttackPower>92</bonusAttackPower>
+      <bonusResilienceRating>46</bonusResilienceRating>
+      <bonusCritRating>46</bonusCritRating>
+      <itemSource value="sourceType.createdBySpell"/>
+    </datas></item>
+
+        <item durability="35" gem0Id="0" gem1Id="0" gem2Id="0" icon="inv_belt_04" id="43437" maxDurability="35" permanentenchant="0" randomPropertiesId="0" seed="399495174" slot="5" itemLevel="187" onList="1"><info>
+      <cost sellPrice="34134"/>
+      <disenchantLoot requiredSkillRank="325">
+        <item dropRate="6" icon="inv_enchant_dreamshard_02" id="34052" level="80" maxCount="1" minCount="1" name="Eclat de rêve" quality="3" type="Enchantement"/>
+      </disenchantLoot>
+      <createdBy>
+        <spell icon="trade_leatherworking" id="60706" name="Sangle d'éviscérateur">
+          <reagent count="10" icon="inv_misc_leatherscrap_19" id="38425" name="Cuir boréen lourd"/>
+          <reagent count="1" icon="inv_elemental_eternal_air" id="35623" name="Air éternel"/>
+
+        </spell>
+      </createdBy>
+    </info><datas>
+      <id>43437</id>
+      <name>Sangle d'éviscérateur</name>
+      <icon>inv_belt_04</icon>
+      <overallQualityId>3</overallQualityId>
+
+      <bonding>2</bonding>
+      <classId>4</classId>
+      <equipData>
+        <inventoryType>6</inventoryType>
+        <subclassName>Cuir</subclassName>
+      </equipData>
+      <damageData/>
+
+      <bonusStamina>51</bonusStamina>
+      <bonusAgility>51</bonusAgility>
+      <armor armorBonus="0">296</armor>
+      <durability current="0" max="35"/>
+      <requiredLevel>78</requiredLevel>
+      <bonusAttackPower>68</bonusAttackPower>
+
+      <bonusResilienceRating>34</bonusResilienceRating>
+      <bonusCritRating>34</bonusCritRating>
+      <itemSource value="sourceType.createdBySpell"/>
+    </datas></item>
+        <item durability="90" gem0Id="0" gem1Id="0" gem2Id="0" icon="inv_pants_leather_25" id="37644" maxDurability="90" permanentenchant="0" randomPropertiesId="0" seed="1748571607" slot="6" itemLevel="200" onList="1"><info>
+      <cost sellPrice="98023"/>
+      <disenchantLoot requiredSkillRank="375">
+        <item dropRate="6" icon="inv_enchant_abysscrystal" id="34057" level="80" maxCount="1" minCount="1" name="Cristal abyssal" quality="4" type="Enchantement"/>
+
+      </disenchantLoot>
+      <dropCreatures>
+        <creature area="Gundrak" areaUrl="fl[source]=dungeon&amp;fl[dungeon]=4416&amp;fl[boss]=all" classification="1" dropRate="4" heroic="1" id="31368" maxLevel="82" minLevel="82" name="Gal'darah" title="Grand prophète d'Akali" type="Humanoïde" url="fl[source]=dungeon&amp;fl[dungeon]=4416&amp;fl[difficulty]=normal&amp;fl[boss]=29306"/>
+      </dropCreatures>
+    </info><datas>
+      <id>37644</id>
+      <name>Garde-jambes en peau ensanglantée</name>
+      <icon>inv_pants_leather_25</icon>
+
+      <overallQualityId>4</overallQualityId>
+      <bonding>1</bonding>
+      <classId>4</classId>
+      <equipData>
+        <inventoryType>7</inventoryType>
+        <subclassName>Cuir</subclassName>
+
+      </equipData>
+      <damageData/>
+      <bonusAgility>89</bonusAgility>
+      <bonusStamina>96</bonusStamina>
+      <armor armorBonus="0">494</armor>
+      <durability current="0" max="90"/>
+      <requiredLevel>80</requiredLevel>
+
+      <bonusHitRating>52</bonusHitRating>
+      <spellData>
+        <spell>
+          <trigger>1</trigger>
+          <desc>Augmente de 180 la puissance d'attaque.</desc>
+        </spell>
+      </spellData>
+
+      <itemSource areaId="4416" areaName="Gundrak" creatureId="29306" creatureName="Gal'darah" difficulty="h" dropRate="4" value="sourceType.creatureDrop"/>
+    </datas></item>
+        <item durability="50" gem0Id="0" gem1Id="0" gem2Id="0" icon="inv_boots_08" id="43439" maxDurability="50" permanentenchant="3329" randomPropertiesId="0" seed="229139946" slot="7" itemLevel="187" onList="1"><info>
+      <cost sellPrice="51584"/>
+      <disenchantLoot requiredSkillRank="325">
+        <item dropRate="6" icon="inv_enchant_dreamshard_02" id="34052" level="80" maxCount="1" minCount="1" name="Eclat de rêve" quality="3" type="Enchantement"/>
+      </disenchantLoot>
+      <createdBy>
+        <spell icon="trade_leatherworking" id="60712" name="Bottines d'éviscérateur">
+
+          <reagent count="10" icon="inv_misc_leatherscrap_19" id="38425" name="Cuir boréen lourd"/>
+          <reagent count="1" icon="inv_elemental_eternal_air" id="35623" name="Air éternel"/>
+        </spell>
+      </createdBy>
+    </info><datas>
+      <id>43439</id>
+      <name>Bottines d'éviscérateur</name>
+      <icon>inv_boots_08</icon>
+
+      <overallQualityId>3</overallQualityId>
+      <bonding>2</bonding>
+      <classId>4</classId>
+      <equipData>
+        <inventoryType>8</inventoryType>
+        <subclassName>Cuir</subclassName>
+
+      </equipData>
+      <damageData/>
+      <bonusAgility>51</bonusAgility>
+      <bonusStamina>51</bonusStamina>
+      <armor armorBonus="0">362</armor>
+      <durability current="0" max="50"/>
+      <requiredLevel>78</requiredLevel>
+
+      <bonusAttackPower>58</bonusAttackPower>
+      <bonusResilienceRating>34</bonusResilienceRating>
+      <bonusCritRating>34</bonusCritRating>
+      <itemSource value="sourceType.createdBySpell"/>
+    </datas></item>
+        <item durability="35" gem0Id="0" gem1Id="0" gem2Id="0" icon="inv_bracer_09" id="43435" maxDurability="35" permanentenchant="0" randomPropertiesId="0" seed="1324117340" slot="8" itemLevel="187" onList="1"><info>
+      <cost sellPrice="33882"/>
+
+      <disenchantLoot requiredSkillRank="325">
+        <item dropRate="6" icon="inv_enchant_dreamshard_02" id="34052" level="80" maxCount="1" minCount="1" name="Eclat de rêve" quality="3" type="Enchantement"/>
+      </disenchantLoot>
+      <createdBy>
+        <spell icon="trade_leatherworking" id="60704" name="Manchettes d'éviscérateur">
+          <reagent count="8" icon="inv_misc_leatherscrap_19" id="38425" name="Cuir boréen lourd"/>
+          <reagent count="1" icon="inv_elemental_eternal_air" id="35623" name="Air éternel"/>
+        </spell>
+      </createdBy>
+
+    </info><datas>
+      <id>43435</id>
+      <name>Manchettes d'éviscérateur</name>
+      <icon>inv_bracer_09</icon>
+      <overallQualityId>3</overallQualityId>
+      <bonding>2</bonding>
+
+      <classId>4</classId>
+      <equipData>
+        <inventoryType>9</inventoryType>
+        <subclassName>Cuir</subclassName>
+      </equipData>
+      <damageData/>
+      <bonusAgility>39</bonusAgility>
+
+      <bonusStamina>38</bonusStamina>
+      <armor armorBonus="0">230</armor>
+      <durability current="0" max="35"/>
+      <requiredLevel>78</requiredLevel>
+      <bonusResilienceRating>26</bonusResilienceRating>
+      <bonusAttackPower>50</bonusAttackPower>
+
+      <bonusCritRating>26</bonusCritRating>
+      <itemSource value="sourceType.createdBySpell"/>
+    </datas></item>
+        <item durability="35" gem0Id="0" gem1Id="0" gem2Id="0" icon="inv_gauntlets_05" id="44397" maxDurability="35" permanentenchant="3329" randomPropertiesId="0" seed="1106088566" slot="9" itemLevel="187" onList="1"><info>
+      <cost sellPrice="34527"/>
+      <disenchantLoot requiredSkillRank="325">
+        <item dropRate="6" icon="inv_enchant_dreamshard_02" id="34052" level="80" maxCount="1" minCount="1" name="Eclat de rêve" quality="3" type="Enchantement"/>
+      </disenchantLoot>
+
+      <rewardFromQuests>
+        <quest area="L'Épuration de Stratholme" id="13151" level="80" name="Une escorte royale" reqMinLevel="78" suggestedPartySize="0" type="Donjon"/>
+      </rewardFromQuests>
+    </info><datas>
+      <id>44397</id>
+      <name>Protège-mains de l'histoire préservée</name>
+      <icon>inv_gauntlets_05</icon>
+
+      <overallQualityId>3</overallQualityId>
+      <bonding>1</bonding>
+      <classId>4</classId>
+      <equipData>
+        <inventoryType>10</inventoryType>
+        <subclassName>Cuir</subclassName>
+
+      </equipData>
+      <damageData/>
+      <bonusAgility>68</bonusAgility>
+      <bonusStamina>103</bonusStamina>
+      <armor armorBonus="0">329</armor>
+      <durability current="0" max="35"/>
+      <requiredLevel>-1</requiredLevel>
+
+      <bonusAttackPower>100</bonusAttackPower>
+      <bonusExpertiseRating>40</bonusExpertiseRating>
+      <itemSource reqLvl="78" value="sourceType.questReward"/>
+    </datas></item>
+        <item durability="0" gem0Id="0" gem1Id="0" gem2Id="0" icon="inv_jewelry_ring_62" id="29279" maxDurability="0" permanentenchant="0" randomPropertiesId="0" seed="801320612" slot="10" itemLevel="130" onList="1"><info>
+      <objectiveOfQuests>
+        <quest area="Défilé de Deuillevent" id="11032" level="70" name="Quitter la voie du protecteur" reqMinLevel="70" suggestedPartySize="0"/>
+      </objectiveOfQuests>
+
+      <rewardFromQuests>
+        <quest area="Défilé de Deuillevent" id="10728" level="70" name="L'excellence auprès de l'Œil pourpre" reqMinLevel="70" suggestedPartySize="0"/>
+        <quest area="Défilé de Deuillevent" id="11031" level="70" name="Quitter la voie de l'archimage" reqMinLevel="70" suggestedPartySize="0"/>
+        <quest area="Défilé de Deuillevent" id="11034" level="70" name="Quitter la voie du guérisseur" reqMinLevel="70" suggestedPartySize="0"/>
+        <quest area="Défilé de Deuillevent" id="11033" level="70" name="Quitter la voie de l'assassin" reqMinLevel="70" suggestedPartySize="0"/>
+      </rewardFromQuests>
+      <vendors>
+        <creature area="Île de Brume-azur" classification="0" id="26300" maxLevel="70" minLevel="70" name="Vendeur d'accessoires" type="Humanoïde"/>
+      </vendors>
+
+    </info><datas>
+      <id>29279</id>
+      <name>Chevalière pourpre du grand protecteur</name>
+      <icon>inv_jewelry_ring_62</icon>
+      <overallQualityId>4</overallQualityId>
+      <bonding>1</bonding>
+
+      <maxCount>1</maxCount>
+      <classId>4</classId>
+      <equipData>
+        <inventoryType>11</inventoryType>
+      </equipData>
+      <damageData/>
+      <bonusStamina>37</bonusStamina>
+
+      <armor armorBonus="1">392</armor>
+      <requiredLevel>-1</requiredLevel>
+      <bonusDefenseSkillRating>19</bonusDefenseSkillRating>
+      <itemSource value="sourceType.factionReward"/>
+    </datas></item>
+        <item durability="0" gem0Id="0" gem1Id="0" gem2Id="0" icon="inv_jewelry_ring_ahnqiraj_02" id="35661" maxDurability="0" permanentenchant="0" randomPropertiesId="0" seed="1706113510" slot="11" itemLevel="163" onList="1"><info>
+      <cost sellPrice="55035"/>
+
+      <disenchantLoot requiredSkillRank="325">
+        <item dropRate="6" icon="inv_enchant_dreamshard_01" id="34053" level="80" maxCount="1" minCount="1" name="Petit éclat de rêve" quality="3" type="Enchantement"/>
+      </disenchantLoot>
+      <dropCreatures>
+        <creature area="Azjol-Nérub" areaUrl="fl[source]=dungeon&amp;fl[dungeon]=4277&amp;fl[boss]=all" classification="1" dropRate="4" id="29120" maxLevel="74" minLevel="74" name="Anub'arak" type="Mort-vivant" url="fl[source]=dungeon&amp;fl[dungeon]=4277&amp;fl[difficulty]=normal&amp;fl[boss]=29120"/>
+      </dropCreatures>
+    </info><datas>
+      <id>35661</id>
+
+      <name>Chevalière du commandement arachnathide</name>
+      <icon>inv_jewelry_ring_ahnqiraj_02</icon>
+      <overallQualityId>3</overallQualityId>
+      <bonding>1</bonding>
+      <maxCount uniqueEquippable="1">1</maxCount>
+      <classId>4</classId>
+
+      <equipData>
+        <inventoryType>11</inventoryType>
+      </equipData>
+      <damageData/>
+      <bonusStrength>30</bonusStrength>
+      <bonusStamina>46</bonusStamina>
+      <armor armorBonus="0">308</armor>
+
+      <requiredLevel>72</requiredLevel>
+      <bonusDefenseSkillRating>17</bonusDefenseSkillRating>
+      <itemSource areaId="4277" areaName="Azjol-Nérub" creatureId="29120" creatureName="Anub'arak" difficulty="n" dropRate="4" value="sourceType.creatureDrop"/>
+    </datas></item>
+        <item durability="0" gem0Id="39919" gem1Id="39918" gem2Id="0" icon="inv_jewelcrafting_goldencrab" id="44063" maxDurability="0" permanentenchant="0" randomPropertiesId="0" seed="1505653666" slot="12" itemLevel="200" onList="1"><info>
+      <cost sellPrice="80507"/>
+      <disenchantLoot requiredSkillRank="325">
+        <item dropRate="6" icon="inv_enchant_dreamshard_02" id="34052" level="80" maxCount="1" minCount="1" name="Eclat de rêve" quality="3" type="Enchantement"/>
+
+      </disenchantLoot>
+    </info><datas>
+      <id>44063</id>
+      <name>Figurine de crabe monarchique</name>
+      <icon>inv_jewelcrafting_goldencrab</icon>
+      <overallQualityId>3</overallQualityId>
+      <bonding>1</bonding>
+
+      <maxCount>1</maxCount>
+      <classId>4</classId>
+      <equipData>
+        <inventoryType>12</inventoryType>
+      </equipData>
+      <damageData/>
+      <bonusStamina>63</bonusStamina>
+
+      <socketData>
+        <socket color="Blue"/>
+        <socket color="Yellow"/>
+        <socketMatchEnchant>+9 Endurance</socketMatchEnchant>
+      </socketData>
+      <requiredLevel>75</requiredLevel>
+      <requiredSkill name="Joaillerie" rank="400"/>
+      <spellData>
+
+        <spell>
+          <trigger>0</trigger>
+          <desc>Augmente le score d'esquive de 300 pendant 10 sec.</desc>
+        </spell>
+      </spellData>
+      <itemSource value="sourceType.none"/>
+    </datas></item>
+        <item durability="0" gem0Id="0" gem1Id="0" gem2Id="0" icon="inv_misc_pocketwatch_02" id="28528" maxDurability="0" permanentenchant="0" randomPropertiesId="0" seed="1637018882" slot="13" itemLevel="115" onList="1"><info>
+
+      <cost sellPrice="91160"/>
+      <disenchantLoot requiredSkillRank="300">
+        <item dropRate="6" icon="inv_enchant_voidcrystal" id="22450" level="70" maxCount="2" minCount="1" name="Cristal de vide" quality="4" type="Enchantement"/>
+      </disenchantLoot>
+      <dropCreatures>
+        <creature area="Karazhan" areaUrl="fl[source]=dungeon&amp;fl[dungeon]=3457&amp;fl[boss]=all" classification="3" dropRate="3" id="15687" maxLevel="73" minLevel="73" name="Moroes" title="Régisseur de la tour" type="Mort-vivant" url="fl[source]=dungeon&amp;fl[dungeon]=3457&amp;fl[difficulty]=normal&amp;fl[boss]=15687"/>
+      </dropCreatures>
+    </info><datas>
+      <id>28528</id>
+
+      <name>Montre de gousset porte-bonheur de Moroes</name>
+      <icon>inv_misc_pocketwatch_02</icon>
+      <overallQualityId>4</overallQualityId>
+      <bonding>1</bonding>
+      <maxCount uniqueEquippable="1">1</maxCount>
+      <classId>4</classId>
+
+      <equipData>
+        <inventoryType>12</inventoryType>
+      </equipData>
+      <damageData/>
+      <requiredLevel>70</requiredLevel>
+      <bonusDodgeRating>38</bonusDodgeRating>
+      <spellData>
+
+        <spell>
+          <trigger>0</trigger>
+          <desc>Augmente le score d'esquive de 300 pendant 10 sec.</desc>
+        </spell>
+      </spellData>
+      <itemSource areaId="3457" areaName="Karazhan" creatureId="15687" creatureName="Moroes" difficulty="n" dropRate="3" value="sourceType.creatureDrop"/>
+    </datas></item>
+        <item durability="0" gem0Id="0" gem1Id="0" gem2Id="0" icon="inv_misc_cape_18" id="33593" maxDurability="0" permanentenchant="2662" randomPropertiesId="0" seed="0" slot="14" itemLevel="128" onList="1"><info>
+
+      <cost>
+        <token count="35" icon="spell_holy_championsbond" id="29434"/>
+      </cost>
+      <disenchantLoot requiredSkillRank="300">
+        <item dropRate="6" icon="inv_enchant_voidcrystal" id="22450" level="70" maxCount="2" minCount="1" name="Cristal de vide" quality="4" type="Enchantement"/>
+      </disenchantLoot>
+      <vendors>
+        <creature area="Shattrath" classification="1" id="18525" maxLevel="72" minLevel="72" name="G'eras" type="Non spécifié"/>
+      </vendors>
+
+    </info><datas>
+      <id>33593</id>
+      <name>Cape d'apaisement de Slikk</name>
+      <icon>inv_misc_cape_18</icon>
+      <overallQualityId>4</overallQualityId>
+      <bonding>1</bonding>
+
+      <classId>4</classId>
+      <equipData>
+        <inventoryType>16</inventoryType>
+      </equipData>
+      <damageData/>
+      <bonusStamina>37</bonusStamina>
+      <armor armorBonus="1">346</armor>
+
+      <requiredLevel>70</requiredLevel>
+      <bonusDefenseSkillRating>16</bonusDefenseSkillRating>
+      <bonusDodgeRating>25</bonusDodgeRating>
+      <itemSource value="sourceType.vendor"/>
+    </datas></item>
+        <item durability="100" gem0Id="0" gem1Id="0" gem2Id="0" icon="inv_staff_71" id="37190" maxDurability="100" permanentenchant="0" randomPropertiesId="0" seed="1598056766" slot="15" itemLevel="200" onList="1"><info>
+      <cost sellPrice="177562"/>
+
+      <disenchantLoot requiredSkillRank="325">
+        <item dropRate="6" icon="inv_enchant_dreamshard_02" id="34052" level="80" maxCount="1" minCount="1" name="Eclat de rêve" quality="3" type="Enchantement"/>
+      </disenchantLoot>
+      <dropCreatures>
+        <creature area="Donjon d'Utgarde" areaUrl="fl[source]=dungeon&amp;fl[dungeon]=206&amp;fl[boss]=all" classification="1" dropRate="4" heroic="1" id="31673" maxLevel="81" minLevel="80" name="Ingvar le Pilleur" type="Humanoïde"/>
+        <creature area="Donjon d'Utgarde" areaUrl="fl[source]=dungeon&amp;fl[dungeon]=206&amp;fl[boss]=all" classification="1" dropRate="4" heroic="1" id="31674" maxLevel="81" minLevel="80" name="Ingvar le Pilleur" type="Mort-vivant" url="fl[source]=dungeon&amp;fl[dungeon]=206&amp;fl[difficulty]=normal&amp;fl[boss]=23980"/>
+      </dropCreatures>
+    </info><datas>
+      <id>37190</id>
+
+      <name>Bâton féral enragé</name>
+      <icon>inv_staff_71</icon>
+      <overallQualityId>3</overallQualityId>
+      <bonding>1</bonding>
+      <classId>2</classId>
+      <equipData>
+
+        <inventoryType>17</inventoryType>
+        <subclassName>Bâton</subclassName>
+      </equipData>
+      <damageData>
+        <damage>
+          <type>0</type>
+          <min>193</min>
+
+          <max>356</max>
+        </damage>
+        <speed>2.4</speed>
+        <dps>114.38</dps>
+      </damageData>
+      <bonusStrength>52</bonusStrength>
+      <bonusAgility>78</bonusAgility>
+
+      <bonusStamina>117</bonusStamina>
+      <armor armorBonus="0">700</armor>
+      <durability current="0" max="100"/>
+      <requiredLevel>80</requiredLevel>
+      <spellData>
+        <spell>
+          <trigger>1</trigger>
+
+          <desc>Augmente de 1602 la puissance d'attaque pour les formes de félin, d'ours, d'ours redoutable et de sélénien uniquement.</desc>
+        </spell>
+      </spellData>
+      <itemSource areaId="206" areaName="Donjon d'Utgarde" creatureId="0" creatureName="" difficulty="" dropRate="4" value="sourceType.creatureDrop"/>
+    </datas></item>
+        <item durability="0" gem0Id="0" gem1Id="0" gem2Id="0" icon="inv-mount_raven_54" id="32387" maxDurability="0" permanentenchant="0" randomPropertiesId="0" seed="1210310538" slot="17" itemLevel="115" onList="1"><info>
+      <cost sellPrice="25096"/>
+      <disenchantLoot requiredSkillRank="275">
+
+        <item dropRate="5" icon="inv_enchant_shardprismaticlarge" id="22449" level="70" maxCount="1" minCount="1" name="Grand éclat prismatique" quality="3" type="Enchantement"/>
+        <item dropRate="1" icon="inv_enchant_voidcrystal" id="22450" level="70" maxCount="1" minCount="1" name="Cristal de vide" quality="4" type="Enchantement"/>
+      </disenchantLoot>
+      <rewardFromQuests>
+        <quest area="Marécage de Zangar" id="11001" level="-1" name="Triompher du dieu corbeau" reqMinLevel="70" suggestedPartySize="0" type="Héroïque"/>
+      </rewardFromQuests>
+    </info><datas>
+      <id>32387</id>
+
+      <name>Idole de la déesse Corbeau</name>
+      <icon>inv-mount_raven_54</icon>
+      <overallQualityId>3</overallQualityId>
+      <bonding>1</bonding>
+      <maxCount>1</maxCount>
+      <classId>4</classId>
+
+      <equipData>
+        <inventoryType>28</inventoryType>
+        <subclassName>Idole</subclassName>
+      </equipData>
+      <damageData/>
+      <requiredLevel>-1</requiredLevel>
+      <spellData>
+
+        <spell>
+          <trigger>1</trigger>
+          <desc>Augmente de 44 la puissance des sorts de soins prodiguée par l'aura de la forme d'Arbre de vie, ajoute 20 au score de coup critique de l'aura de Chef de la meute, et ajoute 20 au score de coup critique des sorts de l'aura de la forme de sélénien.</desc>
+        </spell>
+      </spellData>
+      <itemSource reqLvl="70" value="sourceType.questReward"/>
+    </datas></item>
+        <item durability="0" gem0Id="0" gem1Id="0" gem2Id="0" icon="inv_shirt_guildtabard_01" id="43154" maxDurability="0" permanentenchant="0" randomPropertiesId="0" seed="0" slot="18" itemLevel="75" onList="1"><info>
+
+      <cost buyPrice="10000" sellPrice="2500"/>
+      <vendors>
+        <creature area="La Couronne de glace" classification="1" id="30431" maxLevel="80" minLevel="80" name="Croisé vétéran Aliocha Segard" title="Intendant de la Croisade d'argent" type="Humanoïde"/>
+      </vendors>
+    </info><datas>
+      <id>43154</id>
+      <name>Tabard de la Croisade d'argent</name>
+      <icon>inv_shirt_guildtabard_01</icon>
+
+      <overallQualityId>1</overallQualityId>
+      <bonding>1</bonding>
+      <maxCount>1</maxCount>
+      <classId>4</classId>
+      <equipData>
+        <inventoryType>19</inventoryType>
+
+      </equipData>
+      <damageData/>
+      <requiredLevel>-1</requiredLevel>
+      <requiredFaction name="La Croisade d'argent" rep="4"/>
+      <spellData>
+        <spell>
+          <trigger>1</trigger>
+          <desc>Vous défendez la cause de la Croisade d'argent. Tous vos gains de réputation dans les donjons de niveau 80 sont appliqués à votre réputation auprès d'elle.</desc>
+
+        </spell>
+      </spellData>
+      <itemSource value="sourceType.factionReward"/>
+    </datas></item>
+      </items>
+    </characterTab>
+  </characterInfo>
+</page>

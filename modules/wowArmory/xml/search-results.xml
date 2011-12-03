@@ -1,0 +1,2379 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="../xsl/item.xsl"?>
+<page globalSearch="1" lang="fr_fr" requestQuery="searchType=items&amp;pr=Eitrigg&amp;pn=Azn&amp;pi=41386" requestUrl="/search.xml">
+  <armorySearch>
+    <tabs count="37" selected="items">
+      <tab count="37" label="armory.tabs.items" type="items"/>
+    </tabs>
+    <searchResults pageCount="1" pageCurrent="1" searchError="" searchFilter="pn=Azn&amp;pr=Eitrigg&amp;pi=41386" searchMsg="" searchText="" searchType="items" url="searchType=items&amp;searchQuery=&amp;p=1&amp;selectedTab=items&amp;sd=a" version="1.0">
+      <filters>
+        <filter name="source" value="all"/>
+        <filter name="type" value="armor"/>
+
+        <filter name="rrt" value="un"/>
+        <filter name="slot" value="head"/>
+        <filter name="rqrMin" value="77"/>
+        <filter name="selSubTp" value="plate"/>
+        <filter name="usbleBy" value="6"/>
+        <filter name="selId" value="41386"/>
+        <filter name="classType" value="melee"/>
+        <filter name="selType" value="armor"/>
+        <filter name="rqrMax" value="83"/>
+
+        <filter name="selSlot" value="head"/>
+      </filters>
+      <filterColumns>
+        <filter name="itemLevel" sortName="itemLevel"/>
+        <filter name="requiredLevel" sortName="requiredLevel"/>
+        <filter name="type" sortName="type"/>
+        <filter name="source" sortName="source"/>
+        <filter name="metaSockets" selItemValue="1" sortName="metaSockets"/>
+        <filter name="normalSockets" selItemValue="0" sortName="normalSockets"/>
+
+        <filter name="relevance" sortName="relevance"/>
+      </filterColumns>
+      <items pi="41386" pn="Azn" pr="Eitrigg">
+        <item icon="inv_helmet_134" id="41386" name="Heaume à pointe en acier-titan" rarity="4" url="i=41386" itemLevel="200" onList="1">
+          <filter name="itemLevel" value="200"/>
+
+          <filter name="requiredLevel" value="80"/>
+          <filter name="type" value="Plaques"/>
+          <filter name="source" value="sourceType.createdBySpell"/>
+          <filter name="metaSockets" value="1"/>
+          <filter name="normalSockets" value="0"/>
+          <filter name="relevance" value="88"/>
+        <info>
+      <cost sellPrice="100067"/>
+      <disenchantLoot requiredSkillRank="375">
+
+        <item dropRate="6" icon="inv_enchant_abysscrystal" id="34057" level="80" maxCount="1" minCount="1" name="Cristal abyssal" quality="4" type="Enchantement"/>
+      </disenchantLoot>
+      <createdBy>
+        <spell icon="trade_blacksmithing" id="55372" name="Heaume à pointe en acier-titan">
+          <reagent count="4" icon="inv_ingot_yoggthorite" id="36913" name="Barre de saronite"/>
+          <reagent count="4" icon="inv_ingot_titansteel_blue" id="37663" name="Barre d'acier-titan"/>
+          <reagent count="1" icon="spell_frost_frozencore" id="43102" name="Orbe glacé"/>
+        </spell>
+      </createdBy>
+
+    </info><datas>
+      <id>41386</id>
+      <name>Heaume à pointe en acier-titan</name>
+      <icon>inv_helmet_134</icon>
+      <overallQualityId>4</overallQualityId>
+      <bonding>2</bonding>
+
+      <classId>4</classId>
+      <equipData>
+        <inventoryType>1</inventoryType>
+        <subclassName>Plaques</subclassName>
+      </equipData>
+      <damageData/>
+      <bonusStrength>113</bonusStrength>
+
+      <bonusAgility>60</bonusAgility>
+      <armor armorBonus="0">1821</armor>
+      <socketData>
+        <socket color="Meta"/>
+        <socketMatchEnchant>+6 Agilité</socketMatchEnchant>
+      </socketData>
+      <durability current="0" max="100"/>
+
+      <requiredLevel>80</requiredLevel>
+      <bonusHitRating>60</bonusHitRating>
+      <itemSource value="sourceType.createdBySpell"/>
+    </datas></item>
+        <item icon="inv_helmet_95" id="44006" name="Grand heaume en obsidienne" rarity="4" url="i=44006" itemLevel="226" onList="1">
+          <filter name="itemLevel" value="226"/>
+          <filter name="requiredLevel" value="80"/>
+          <filter name="type" value="Plaques"/>
+          <filter name="source" value="sourceType.none"/>
+          <filter name="metaSockets" value="1"/>
+
+          <filter name="normalSockets" value="1"/>
+          <filter name="relevance" value="97"/>
+        <info>
+      <cost sellPrice="115827"/>
+      <disenchantLoot requiredSkillRank="375">
+        <item dropRate="6" icon="inv_enchant_abysscrystal" id="34057" level="80" maxCount="1" minCount="1" name="Cristal abyssal" quality="4" type="Enchantement"/>
+      </disenchantLoot>
+    </info><datas>
+      <id>44006</id>
+
+      <name>Grand heaume en obsidienne</name>
+      <icon>inv_helmet_95</icon>
+      <overallQualityId>4</overallQualityId>
+      <bonding>1</bonding>
+      <classId>4</classId>
+      <equipData>
+
+        <inventoryType>1</inventoryType>
+        <subclassName>Plaques</subclassName>
+      </equipData>
+      <damageData/>
+      <bonusStrength>98</bonusStrength>
+      <bonusStamina>145</bonusStamina>
+      <armor armorBonus="0">1908</armor>
+
+      <socketData>
+        <socket color="Meta"/>
+        <socket color="Blue"/>
+        <socketMatchEnchant>+8 Force</socketMatchEnchant>
+      </socketData>
+      <durability current="0" max="100"/>
+      <requiredLevel>80</requiredLevel>
+      <bonusCritRating>76</bonusCritRating>
+
+      <bonusExpertiseRating>59</bonusExpertiseRating>
+      <itemSource value="sourceType.none"/>
+    </datas></item>
+        <item icon="inv_helmet_110" id="39723" name="Grand heaume brûlé" rarity="4" url="i=39723" itemLevel="213" onList="1">
+          <filter name="itemLevel" value="213"/>
+          <filter name="requiredLevel" value="80"/>
+          <filter name="type" value="Plaques"/>
+          <filter areaId="3456" areaName="Naxxramas" creatureId="15953" creatureName="Grande veuve Faerlina" difficulty="h" dropRate="3" name="source" value="sourceType.creatureDrop"/>
+
+          <filter name="metaSockets" value="0"/>
+          <filter name="normalSockets" value="0"/>
+          <filter name="relevance" value="96"/>
+        <info>
+      <cost sellPrice="113905"/>
+      <disenchantLoot requiredSkillRank="375">
+        <item dropRate="6" icon="inv_enchant_abysscrystal" id="34057" level="80" maxCount="1" minCount="1" name="Cristal abyssal" quality="4" type="Enchantement"/>
+      </disenchantLoot>
+      <dropCreatures>
+
+        <creature area="Naxxramas" areaUrl="fl[source]=dungeon&amp;fl[dungeon]=3456&amp;fl[boss]=all" classification="3" dropRate="3" heroic="1" id="29268" maxLevel="83" minLevel="83" name="Grande veuve Faerlina" type="Humanoïde" url="fl[source]=dungeon&amp;fl[dungeon]=3456&amp;fl[difficulty]=normal&amp;fl[boss]=15953"/>
+      </dropCreatures>
+    </info><datas>
+      <id>39723</id>
+      <name>Grand heaume brûlé</name>
+      <icon>inv_helmet_110</icon>
+      <overallQualityId>4</overallQualityId>
+
+      <bonding>1</bonding>
+      <classId>4</classId>
+      <equipData>
+        <inventoryType>1</inventoryType>
+        <subclassName>Plaques</subclassName>
+      </equipData>
+      <damageData/>
+
+      <bonusStrength>100</bonusStrength>
+      <bonusStamina>150</bonusStamina>
+      <armor armorBonus="0">1867</armor>
+      <durability current="0" max="100"/>
+      <requiredLevel>80</requiredLevel>
+      <bonusCritRating>72</bonusCritRating>
+
+      <bonusHitRating>59</bonusHitRating>
+      <itemSource areaId="3456" areaName="Naxxramas" creatureId="15953" creatureName="Grande veuve Faerlina" difficulty="h" dropRate="3" value="sourceType.creatureDrop"/>
+    </datas></item>
+        <item icon="inv_helmet_58" id="40554" name="Casque fléauvenant valeureux" rarity="4" url="i=40554" itemLevel="213" onList="1">
+          <filter name="itemLevel" value="213"/>
+          <filter name="requiredLevel" value="80"/>
+          <filter name="type" value="Plaques"/>
+          <filter name="source" value="sourceType.vendor"/>
+
+          <filter name="metaSockets" value="1"/>
+          <filter name="normalSockets" value="1"/>
+          <filter name="relevance" value="93"/>
+        <info>
+      <cost>
+        <token count="1" icon="inv_helmet_24" id="40633"/>
+      </cost>
+      <disenchantLoot requiredSkillRank="375">
+        <item dropRate="6" icon="inv_enchant_abysscrystal" id="34057" level="80" maxCount="1" minCount="1" name="Cristal abyssal" quality="4" type="Enchantement"/>
+
+      </disenchantLoot>
+      <vendors>
+        <creature area="Forêt du Chant de cristal" classification="0" id="28997" maxLevel="75" minLevel="75" name="Griselda Hunderland" title="Marchande d'armures de plaques" type="Humanoïde"/>
+      </vendors>
+    </info><datas>
+      <id>40554</id>
+      <name>Casque fléauvenant valeureux</name>
+      <icon>inv_helmet_58</icon>
+
+      <overallQualityId>4</overallQualityId>
+      <bonding>1</bonding>
+      <classId>4</classId>
+      <equipData>
+        <inventoryType>1</inventoryType>
+        <subclassName>Plaques</subclassName>
+
+      </equipData>
+      <damageData/>
+      <bonusStrength>85</bonusStrength>
+      <bonusStamina>100</bonusStamina>
+      <armor armorBonus="0">1867</armor>
+      <socketData>
+        <socket color="Meta"/>
+
+        <socket color="Blue"/>
+        <socketMatchEnchant>+8 Force</socketMatchEnchant>
+      </socketData>
+      <durability current="0" max="100"/>
+      <allowableClasses>
+        <class>Chevalier de la mort</class>
+      </allowableClasses>
+      <requiredLevel>80</requiredLevel>
+
+      <bonusCritRating>100</bonusCritRating>
+      <bonusHitRating>34</bonusHitRating>
+      <setData>
+        <name>Tenue de combat de fléauvenant</name>
+        <item name="Harnois de bataille fléauvenante"/>
+        <item name="Gantelets fléauvenants"/>
+        <item name="Casque fléauvenant"/>
+
+        <item name="Cuissards fléauvenants"/>
+        <item name="Plaques d'épaules fléauvenantes"/>
+        <setBonus desc="Augmente les chances de coup critique de vos techniques Anéantissement et Frappe du Fléau de 5%." threshold="2"/>
+        <setBonus desc="Anéantissement et Frappe du Fléau génèrent 10 points de puissance runique supplémentaires lors de leur utilisation." threshold="4"/>
+      </setData>
+      <itemSource value="sourceType.vendor"/>
+    </datas></item>
+        <item icon="inv_helmet_58" id="39619" name="Casque fléauvenant de héros" rarity="4" url="i=39619" itemLevel="200" onList="1">
+          <filter name="itemLevel" value="200"/>
+          <filter name="requiredLevel" value="80"/>
+          <filter name="type" value="Plaques"/>
+
+          <filter name="source" value="sourceType.vendor"/>
+          <filter name="metaSockets" value="1"/>
+          <filter name="normalSockets" value="1"/>
+          <filter name="relevance" value="88"/>
+        <info>
+      <cost>
+        <token count="1" icon="inv_helmet_24" id="40618"/>
+      </cost>
+      <disenchantLoot requiredSkillRank="375">
+
+        <item dropRate="6" icon="inv_enchant_abysscrystal" id="34057" level="80" maxCount="1" minCount="1" name="Cristal abyssal" quality="4" type="Enchantement"/>
+      </disenchantLoot>
+      <vendors>
+        <creature area="Forêt du Chant de cristal" classification="0" id="28997" maxLevel="75" minLevel="75" name="Griselda Hunderland" title="Marchande d'armures de plaques" type="Humanoïde"/>
+      </vendors>
+    </info><datas>
+      <id>39619</id>
+      <name>Casque fléauvenant de héros</name>
+
+      <icon>inv_helmet_58</icon>
+      <overallQualityId>4</overallQualityId>
+      <bonding>1</bonding>
+      <classId>4</classId>
+      <equipData>
+        <inventoryType>1</inventoryType>
+
+        <subclassName>Plaques</subclassName>
+      </equipData>
+      <damageData/>
+      <bonusStrength>74</bonusStrength>
+      <bonusStamina>90</bonusStamina>
+      <armor armorBonus="0">1821</armor>
+      <socketData>
+
+        <socket color="Meta"/>
+        <socket color="Blue"/>
+        <socketMatchEnchant>+8 Force</socketMatchEnchant>
+      </socketData>
+      <durability current="0" max="100"/>
+      <allowableClasses>
+        <class>Chevalier de la mort</class>
+      </allowableClasses>
+
+      <requiredLevel>80</requiredLevel>
+      <bonusCritRating>81</bonusCritRating>
+      <bonusHitRating>29</bonusHitRating>
+      <setData>
+        <name>Tenue de combat de fléauvenant</name>
+        <item name="Harnois de bataille fléauvenante"/>
+        <item name="Gantelets fléauvenants"/>
+
+        <item name="Casque fléauvenant"/>
+        <item name="Cuissards fléauvenants"/>
+        <item name="Plaques d'épaules fléauvenantes"/>
+        <setBonus desc="Augmente les chances de coup critique de vos techniques Anéantissement et Frappe du Fléau de 5%." threshold="2"/>
+        <setBonus desc="Anéantissement et Frappe du Fléau génèrent 10 points de puissance runique supplémentaires lors de leur utilisation." threshold="4"/>
+      </setData>
+      <itemSource value="sourceType.vendor"/>
+    </datas></item>
+        <item icon="inv_helmet_110" id="40428" name="Vue du Titan" rarity="4" url="i=40428" itemLevel="200" onList="1">
+
+          <filter name="itemLevel" value="200"/>
+          <filter name="requiredLevel" value="80"/>
+          <filter name="type" value="Plaques"/>
+          <filter areaId="4493" areaName="Le sanctum Obsidien" creatureId="28860" creatureName="Sartharion" difficulty="n" dropRate="3" name="source" value="sourceType.creatureDrop"/>
+          <filter name="metaSockets" value="0"/>
+          <filter name="normalSockets" value="0"/>
+          <filter name="relevance" value="86"/>
+        <info>
+      <cost sellPrice="102369"/>
+
+      <disenchantLoot requiredSkillRank="375">
+        <item dropRate="6" icon="inv_enchant_abysscrystal" id="34057" level="80" maxCount="1" minCount="1" name="Cristal abyssal" quality="4" type="Enchantement"/>
+      </disenchantLoot>
+      <dropCreatures>
+        <creature area="Le sanctum Obsidien" areaUrl="fl[source]=dungeon&amp;fl[dungeon]=4493&amp;fl[boss]=all" classification="3" dropRate="3" id="28860" maxLevel="83" minLevel="83" name="Sartharion" title="Le gardien d'Onyx" type="Draconien" url="fl[source]=dungeon&amp;fl[dungeon]=4493&amp;fl[difficulty]=normal&amp;fl[boss]=28860"/>
+      </dropCreatures>
+    </info><datas>
+      <id>40428</id>
+
+      <name>Vue du Titan</name>
+      <icon>inv_helmet_110</icon>
+      <overallQualityId>4</overallQualityId>
+      <bonding>1</bonding>
+      <classId>4</classId>
+      <equipData>
+
+        <inventoryType>1</inventoryType>
+        <subclassName>Plaques</subclassName>
+      </equipData>
+      <damageData/>
+      <bonusStrength>103</bonusStrength>
+      <bonusStamina>99</bonusStamina>
+      <armor armorBonus="0">1821</armor>
+
+      <durability current="0" max="100"/>
+      <requiredLevel>80</requiredLevel>
+      <bonusCritRating>57</bonusCritRating>
+      <spellData>
+        <spell>
+          <trigger>1</trigger>
+          <desc>Augmente de 63 le score de pénétration d'armure.</desc>
+
+        </spell>
+      </spellData>
+      <itemSource areaId="4493" areaName="Le sanctum Obsidien" creatureId="28860" creatureName="Sartharion" difficulty="n" dropRate="3" value="sourceType.creatureDrop"/>
+    </datas></item>
+        <item icon="inv_helmet_135" id="40824" name="Heaume du gladiateur fatal en plaques d'effroi" rarity="4" url="i=40824" itemLevel="213" onList="1">
+          <filter name="itemLevel" value="213"/>
+          <filter name="requiredLevel" value="80"/>
+          <filter name="type" value="Plaques"/>
+          <filter name="source" value="sourceType.vendor"/>
+
+          <filter name="metaSockets" value="1"/>
+          <filter name="normalSockets" value="1"/>
+          <filter name="relevance" value="83"/>
+        <info>
+      <cost arena="2250"/>
+      <vendors>
+        <creature area="Tanaris" classification="0" id="32359" maxLevel="70" minLevel="70" name="Argex Tripenfer" title="Vendeur de l'arène vétéran" type="Humanoïde"/>
+        <creature area="Forêt du Chant de cristal" classification="0" id="31863" maxLevel="75" minLevel="75" name="Nargle Cinglecorde" title="Vendeur de l'arène vétéran" type="Humanoïde"/>
+        <creature area="Raz-de-Néant" classification="0" id="32356" maxLevel="70" minLevel="70" name="Kezzik le Frappeur" title="Vendeur de l'arène vétéran" type="Humanoïde"/>
+
+      </vendors>
+    </info><datas>
+      <id>40824</id>
+      <name>Heaume du gladiateur fatal en plaques d'effroi</name>
+      <icon>inv_helmet_135</icon>
+      <overallQualityId>4</overallQualityId>
+      <bonding>1</bonding>
+
+      <classId>4</classId>
+      <equipData>
+        <inventoryType>1</inventoryType>
+        <subclassName>Plaques</subclassName>
+      </equipData>
+      <damageData/>
+      <bonusStrength>85</bonusStrength>
+
+      <bonusStamina>150</bonusStamina>
+      <armor armorBonus="0">1867</armor>
+      <socketData>
+        <socket color="Meta"/>
+        <socket color="Red"/>
+        <socketMatchEnchant>+8 au score de coup critique</socketMatchEnchant>
+      </socketData>
+
+      <durability current="0" max="100"/>
+      <allowableClasses>
+        <class>Chevalier de la mort</class>
+      </allowableClasses>
+      <requiredLevel>80</requiredLevel>
+      <bonusCritRating>51</bonusCritRating>
+      <bonusResilienceRating>66</bonusResilienceRating>
+
+      <setData>
+        <name>Violation de gladiateur</name>
+        <item name="Plastron désacralisé de gladiateur"/>
+        <item name="Gantelets désacralisés de gladiateur"/>
+        <item name="Heaume désacralisé de gladiateur"/>
+        <item name="Garde-jambes désacralisés de gladiateur"/>
+        <item name="Epaulières désacralisées de gladiateur"/>
+        <setBonus desc="+50 au score de résilience." threshold="2"/>
+
+        <setBonus desc="Chaque fois que vous êtes atteint par un effet affectant le déplacement, vous générez 15 points de puissance runique en 5 sec." threshold="4"/>
+      </setData>
+      <itemSource value="sourceType.vendor"/>
+    </datas></item>
+        <item icon="inv_helmet_130" id="41344" name="Heaume de commandement" rarity="3" url="i=41344" itemLevel="187" onList="1">
+          <filter name="itemLevel" value="187"/>
+          <filter name="requiredLevel" value="78"/>
+          <filter name="type" value="Plaques"/>
+          <filter name="source" value="sourceType.createdBySpell"/>
+
+          <filter name="metaSockets" value="0"/>
+          <filter name="normalSockets" value="0"/>
+          <filter name="relevance" value="82"/>
+        <info>
+      <cost sellPrice="69925"/>
+      <disenchantLoot requiredSkillRank="325">
+        <item dropRate="6" icon="inv_enchant_dreamshard_02" id="34052" level="80" maxCount="1" minCount="1" name="Eclat de rêve" quality="3" type="Enchantement"/>
+      </disenchantLoot>
+      <createdBy>
+
+        <spell icon="trade_blacksmithing" id="55302" name="Heaume de commandement">
+          <reagent count="14" icon="inv_ingot_yoggthorite" id="36913" name="Barre de saronite"/>
+          <reagent count="1" icon="inv_elemental_eternal_fire" id="36860" name="Feu éternel"/>
+        </spell>
+      </createdBy>
+    </info><datas>
+      <id>41344</id>
+      <name>Heaume de commandement</name>
+
+      <icon>inv_helmet_130</icon>
+      <overallQualityId>3</overallQualityId>
+      <bonding>2</bonding>
+      <classId>4</classId>
+      <equipData>
+        <inventoryType>1</inventoryType>
+
+        <subclassName>Plaques</subclassName>
+      </equipData>
+      <damageData/>
+      <bonusStrength>95</bonusStrength>
+      <armor armorBonus="0">1700</armor>
+      <durability current="0" max="80"/>
+      <requiredLevel>78</requiredLevel>
+
+      <bonusCritRating>55</bonusCritRating>
+      <bonusHasteRating>41</bonusHasteRating>
+      <itemSource value="sourceType.createdBySpell"/>
+    </datas></item>
+        <item icon="inv_helmet_58" id="40565" name="Protège-front fléauvenant valeureux" rarity="4" url="i=40565" itemLevel="213" onList="1">
+          <filter name="itemLevel" value="213"/>
+          <filter name="requiredLevel" value="80"/>
+          <filter name="type" value="Plaques"/>
+
+          <filter name="source" value="sourceType.vendor"/>
+          <filter name="metaSockets" value="1"/>
+          <filter name="normalSockets" value="1"/>
+          <filter name="relevance" value="81"/>
+        <info>
+      <cost>
+        <token count="1" icon="inv_helmet_24" id="40633"/>
+      </cost>
+      <disenchantLoot requiredSkillRank="375">
+
+        <item dropRate="6" icon="inv_enchant_abysscrystal" id="34057" level="80" maxCount="1" minCount="1" name="Cristal abyssal" quality="4" type="Enchantement"/>
+      </disenchantLoot>
+      <vendors>
+        <creature area="Forêt du Chant de cristal" classification="0" id="28997" maxLevel="75" minLevel="75" name="Griselda Hunderland" title="Marchande d'armures de plaques" type="Humanoïde"/>
+      </vendors>
+    </info><datas>
+      <id>40565</id>
+      <name>Protège-front fléauvenant valeureux</name>
+
+      <icon>inv_helmet_58</icon>
+      <overallQualityId>4</overallQualityId>
+      <bonding>1</bonding>
+      <classId>4</classId>
+      <equipData>
+        <inventoryType>1</inventoryType>
+
+        <subclassName>Plaques</subclassName>
+      </equipData>
+      <damageData/>
+      <bonusStrength>80</bonusStrength>
+      <bonusStamina>127</bonusStamina>
+      <armor armorBonus="0">1867</armor>
+      <socketData>
+
+        <socket color="Meta"/>
+        <socket color="Blue"/>
+        <socketMatchEnchant>+8 au score de parade</socketMatchEnchant>
+      </socketData>
+      <durability current="0" max="100"/>
+      <allowableClasses>
+        <class>Chevalier de la mort</class>
+      </allowableClasses>
+
+      <requiredLevel>80</requiredLevel>
+      <bonusDefenseSkillRating>59</bonusDefenseSkillRating>
+      <bonusExpertiseRating>35</bonusExpertiseRating>
+      <bonusParryRating>50</bonusParryRating>
+      <setData>
+        <name>Armure de fléauvenant en plaques</name>
+
+        <item name="Corselet fléauvenant"/>
+        <item name="Protège-front fléauvenant"/>
+        <item name="Garde-mains fléauvenants"/>
+        <item name="Garde-jambes fléauvenants"/>
+        <item name="Espauliers fléauvenants"/>
+        <setBonus desc="Augmente les chances de coup critique de votre Frappe de peste de 10%." threshold="2"/>
+        <setBonus desc="Augmente la durée de votre Robustesse glaciale de 3 secondes." threshold="4"/>
+      </setData>
+      <itemSource value="sourceType.vendor"/>
+
+    </datas></item>
+        <item icon="inv_helmet_130" id="37849" name="Heaume planétaire" rarity="3" url="i=37849" itemLevel="200" onList="1">
+          <filter name="itemLevel" value="200"/>
+          <filter name="requiredLevel" value="80"/>
+          <filter name="type" value="Plaques"/>
+          <filter areaId="4272" areaName="Les salles de Foudre" creatureId="28923" creatureName="Loken" difficulty="h" dropRate="4" name="source" value="sourceType.creatureDrop"/>
+          <filter name="metaSockets" value="0"/>
+          <filter name="normalSockets" value="0"/>
+          <filter name="relevance" value="80"/>
+
+        <info>
+      <cost sellPrice="74727"/>
+      <disenchantLoot requiredSkillRank="325">
+        <item dropRate="6" icon="inv_enchant_dreamshard_02" id="34052" level="80" maxCount="1" minCount="1" name="Eclat de rêve" quality="3" type="Enchantement"/>
+      </disenchantLoot>
+      <dropCreatures>
+        <creature area="Les salles de Foudre" areaUrl="fl[source]=dungeon&amp;fl[dungeon]=4272&amp;fl[boss]=all" classification="1" dropRate="4" heroic="1" id="31538" maxLevel="82" minLevel="82" name="Loken" type="Non spécifié" url="fl[source]=dungeon&amp;fl[dungeon]=4272&amp;fl[difficulty]=normal&amp;fl[boss]=28923"/>
+      </dropCreatures>
+    </info><datas>
+
+      <id>37849</id>
+      <name>Heaume planétaire</name>
+      <icon>inv_helmet_130</icon>
+      <overallQualityId>3</overallQualityId>
+      <bonding>1</bonding>
+      <classId>4</classId>
+
+      <equipData>
+        <inventoryType>1</inventoryType>
+        <subclassName>Plaques</subclassName>
+      </equipData>
+      <damageData/>
+      <bonusStrength>80</bonusStrength>
+      <bonusAgility>76</bonusAgility>
+
+      <bonusStamina>78</bonusStamina>
+      <armor armorBonus="0">1760</armor>
+      <durability current="0" max="80"/>
+      <requiredLevel>80</requiredLevel>
+      <bonusHitRating>52</bonusHitRating>
+      <itemSource areaId="4272" areaName="Les salles de Foudre" creatureId="28923" creatureName="Loken" difficulty="h" dropRate="4" value="sourceType.creatureDrop"/>
+    </datas></item>
+
+        <item icon="inv_helmet_135" id="40820" name="Heaume du gladiateur haineux en plaques d'effroi" rarity="4" url="i=40820" itemLevel="200" onList="1">
+          <filter name="itemLevel" value="200"/>
+          <filter name="requiredLevel" value="80"/>
+          <filter name="type" value="Plaques"/>
+          <filter name="source" value="sourceType.vendor"/>
+          <filter name="metaSockets" value="1"/>
+          <filter name="normalSockets" value="1"/>
+          <filter name="relevance" value="79"/>
+        <info>
+
+      <cost arena="700" factionId="0" honor="12000"/>
+      <vendors>
+        <creature area="Forêt du Chant de cristal" classification="0" id="31581" maxLevel="80" minLevel="80" name="Magistère Brasael" title="Intendant des emblèmes de vaillance" type="Humanoïde"/>
+        <creature area="Forêt du Chant de cristal" classification="0" id="31579" maxLevel="80" minLevel="80" name="Arcaniste Adurin" title="Intendant des emblèmes de vaillance" type="Humanoïde"/>
+        <creature area="Tanaris" classification="0" id="32362" maxLevel="70" minLevel="70" name="Evee Cuivressort" title="Vendeuse de l'arène" type="Humanoïde"/>
+        <creature area="Forêt du Chant de cristal" classification="0" id="31864" maxLevel="75" minLevel="75" name="Xazi Fumetuyère" title="Vendeuse de l'arène" type="Humanoïde"/>
+        <creature area="Raz-de-Néant" classification="0" id="32355" maxLevel="70" minLevel="70" name="Grand Zokk Torquelada" title="Vendeur de l'arène" type="Humanoïde"/>
+      </vendors>
+    </info><datas>
+
+      <id>40820</id>
+      <name>Heaume du gladiateur haineux en plaques d'effroi</name>
+      <icon>inv_helmet_135</icon>
+      <overallQualityId>4</overallQualityId>
+      <bonding>1</bonding>
+      <classId>4</classId>
+
+      <equipData>
+        <inventoryType>1</inventoryType>
+        <subclassName>Plaques</subclassName>
+      </equipData>
+      <damageData/>
+      <bonusStrength>74</bonusStrength>
+      <bonusStamina>133</bonusStamina>
+
+      <armor armorBonus="0">1821</armor>
+      <socketData>
+        <socket color="Meta"/>
+        <socket color="Red"/>
+        <socketMatchEnchant>+8 au score de coup critique</socketMatchEnchant>
+      </socketData>
+      <durability current="0" max="100"/>
+      <allowableClasses>
+
+        <class>Chevalier de la mort</class>
+      </allowableClasses>
+      <requiredLevel>80</requiredLevel>
+      <bonusCritRating>44</bonusCritRating>
+      <bonusResilienceRating>59</bonusResilienceRating>
+      <setData>
+        <name>Violation de gladiateur</name>
+
+        <item name="Plastron désacralisé de gladiateur"/>
+        <item name="Gantelets désacralisés de gladiateur"/>
+        <item name="Heaume désacralisé de gladiateur"/>
+        <item name="Garde-jambes désacralisés de gladiateur"/>
+        <item name="Epaulières désacralisées de gladiateur"/>
+        <setBonus desc="+50 au score de résilience." threshold="2"/>
+        <setBonus desc="Chaque fois que vous êtes atteint par un effet affectant le déplacement, vous générez 15 points de puissance runique en 5 sec." threshold="4"/>
+      </setData>
+      <itemSource value="sourceType.vendor"/>
+
+    </datas></item>
+        <item icon="inv_helmet_110" id="40328" name="Heaume de la protection vitale" rarity="4" url="i=40328" itemLevel="213" onList="1">
+          <filter name="itemLevel" value="213"/>
+          <filter name="requiredLevel" value="80"/>
+          <filter name="type" value="Plaques"/>
+          <filter areaId="3456" areaName="Naxxramas" creatureId="16060" creatureName="Gothik le Moissonneur" difficulty="h" dropRate="3" name="source" value="sourceType.creatureDrop"/>
+          <filter name="metaSockets" value="1"/>
+          <filter name="normalSockets" value="1"/>
+          <filter name="relevance" value="79"/>
+
+        <info>
+      <cost sellPrice="105846"/>
+      <disenchantLoot requiredSkillRank="375">
+        <item dropRate="6" icon="inv_enchant_abysscrystal" id="34057" level="80" maxCount="1" minCount="1" name="Cristal abyssal" quality="4" type="Enchantement"/>
+      </disenchantLoot>
+      <dropCreatures>
+        <creature area="Naxxramas" areaUrl="fl[source]=dungeon&amp;fl[dungeon]=3456&amp;fl[boss]=all" classification="3" dropRate="3" heroic="1" id="29955" maxLevel="83" minLevel="83" name="Gothik le Moissonneur" type="Mort-vivant" url="fl[source]=dungeon&amp;fl[dungeon]=3456&amp;fl[difficulty]=normal&amp;fl[boss]=16060"/>
+      </dropCreatures>
+    </info><datas>
+
+      <id>40328</id>
+      <name>Heaume de la protection vitale</name>
+      <icon>inv_helmet_110</icon>
+      <overallQualityId>4</overallQualityId>
+      <bonding>1</bonding>
+      <classId>4</classId>
+
+      <equipData>
+        <inventoryType>1</inventoryType>
+        <subclassName>Plaques</subclassName>
+      </equipData>
+      <damageData/>
+      <bonusStrength>68</bonusStrength>
+      <bonusStamina>126</bonusStamina>
+
+      <armor armorBonus="0">1867</armor>
+      <socketData>
+        <socket color="Meta"/>
+        <socket color="Yellow"/>
+        <socketMatchEnchant>+12 Endurance</socketMatchEnchant>
+      </socketData>
+      <durability current="0" max="100"/>
+      <requiredLevel>80</requiredLevel>
+
+      <bonusDefenseSkillRating>59</bonusDefenseSkillRating>
+      <bonusParryRating>56</bonusParryRating>
+      <bonusExpertiseRating>36</bonusExpertiseRating>
+      <itemSource areaId="3456" areaName="Naxxramas" creatureId="16060" creatureName="Gothik le Moissonneur" difficulty="h" dropRate="3" value="sourceType.creatureDrop"/>
+    </datas></item>
+        <item icon="inv_helmet_110" id="39403" name="Heaume de l'insoumis" rarity="4" url="i=39403" itemLevel="200" onList="1">
+          <filter name="itemLevel" value="200"/>
+
+          <filter name="requiredLevel" value="80"/>
+          <filter name="type" value="Plaques"/>
+          <filter areaId="3456" areaName="Naxxramas" creatureId="15989" creatureName="Saphiron" difficulty="n" dropRate="3" name="source" value="sourceType.creatureDrop"/>
+          <filter name="metaSockets" value="1"/>
+          <filter name="normalSockets" value="1"/>
+          <filter name="relevance" value="79"/>
+        <info>
+      <cost sellPrice="106921"/>
+      <disenchantLoot requiredSkillRank="375">
+
+        <item dropRate="6" icon="inv_enchant_abysscrystal" id="34057" level="80" maxCount="1" minCount="1" name="Cristal abyssal" quality="4" type="Enchantement"/>
+      </disenchantLoot>
+      <dropCreatures>
+        <creature area="Naxxramas" areaUrl="fl[source]=dungeon&amp;fl[dungeon]=3456&amp;fl[boss]=all" classification="3" dropRate="3" id="15989" maxLevel="83" minLevel="83" name="Saphiron" type="Mort-vivant" url="fl[source]=dungeon&amp;fl[dungeon]=3456&amp;fl[difficulty]=normal&amp;fl[boss]=15989"/>
+      </dropCreatures>
+    </info><datas>
+      <id>39403</id>
+      <name>Heaume de l'insoumis</name>
+
+      <icon>inv_helmet_110</icon>
+      <overallQualityId>4</overallQualityId>
+      <bonding>1</bonding>
+      <classId>4</classId>
+      <equipData>
+        <inventoryType>1</inventoryType>
+
+        <subclassName>Plaques</subclassName>
+      </equipData>
+      <damageData/>
+      <bonusStrength>74</bonusStrength>
+      <bonusStamina>96</bonusStamina>
+      <armor armorBonus="0">1821</armor>
+      <socketData>
+
+        <socket color="Meta"/>
+        <socket color="Blue"/>
+        <socketMatchEnchant>+8 Force</socketMatchEnchant>
+      </socketData>
+      <durability current="0" max="100"/>
+      <requiredLevel>80</requiredLevel>
+      <bonusHitRating>36</bonusHitRating>
+
+      <bonusHasteRating>73</bonusHasteRating>
+      <itemSource areaId="3456" areaName="Naxxramas" creatureId="15989" creatureName="Saphiron" difficulty="n" dropRate="3" value="sourceType.creatureDrop"/>
+    </datas></item>
+        <item icon="inv_helmet_123" id="35670" name="Casque de mineur perdu de Brann" rarity="3" url="i=35670" itemLevel="183" onList="1">
+          <filter name="itemLevel" value="183"/>
+          <filter name="requiredLevel" value="77"/>
+          <filter name="type" value="Plaques"/>
+          <filter areaId="4264" areaName="Les salles de Pierre" creatureId="27977" creatureName="Krystallus" difficulty="n" dropRate="4" name="source" value="sourceType.creatureDrop"/>
+
+          <filter name="metaSockets" value="0"/>
+          <filter name="normalSockets" value="0"/>
+          <filter name="relevance" value="79"/>
+        <info>
+      <cost sellPrice="70827"/>
+      <disenchantLoot requiredSkillRank="325">
+        <item dropRate="6" icon="inv_enchant_dreamshard_02" id="34052" level="80" maxCount="1" minCount="1" name="Eclat de rêve" quality="3" type="Enchantement"/>
+      </disenchantLoot>
+      <dropCreatures>
+
+        <creature area="Les salles de Pierre" areaUrl="fl[source]=dungeon&amp;fl[dungeon]=4264&amp;fl[boss]=all" classification="1" dropRate="4" id="27977" maxLevel="79" minLevel="79" name="Krystallus" type="Géant" url="fl[source]=dungeon&amp;fl[dungeon]=4264&amp;fl[difficulty]=normal&amp;fl[boss]=27977"/>
+      </dropCreatures>
+    </info><datas>
+      <id>35670</id>
+      <name>Casque de mineur perdu de Brann</name>
+      <icon>inv_helmet_123</icon>
+      <overallQualityId>3</overallQualityId>
+
+      <bonding>1</bonding>
+      <classId>4</classId>
+      <equipData>
+        <inventoryType>1</inventoryType>
+        <subclassName>Plaques</subclassName>
+      </equipData>
+      <damageData/>
+
+      <bonusStrength>52</bonusStrength>
+      <bonusStamina>60</bonusStamina>
+      <armor armorBonus="0">1681</armor>
+      <durability current="0" max="80"/>
+      <requiredLevel>77</requiredLevel>
+      <bonusCritRating>92</bonusCritRating>
+
+      <itemSource areaId="4264" areaName="Les salles de Pierre" creatureId="27977" creatureName="Krystallus" difficulty="n" dropRate="4" value="sourceType.creatureDrop"/>
+    </datas></item>
+        <item icon="inv_helmet_130" id="37793" name="Calotte crânienne de la terreur éternelle" rarity="3" url="i=37793" itemLevel="170" onList="1">
+          <filter name="itemLevel" value="170"/>
+          <filter name="requiredLevel" value="77"/>
+          <filter name="type" value="Plaques"/>
+          <filter areaId="3457" areaName="Karazhan" creatureId="0" creatureName="" difficulty="" dropRate="0" name="source" value="sourceType.creatureDrop"/>
+          <filter name="metaSockets" value="0"/>
+          <filter name="normalSockets" value="0"/>
+
+          <filter name="relevance" value="78"/>
+        <info>
+      <cost sellPrice="65128"/>
+      <disenchantLoot requiredSkillRank="325">
+        <item dropRate="6" icon="inv_enchant_dreamshard_02" id="34052" level="80" maxCount="1" minCount="1" name="Eclat de rêve" quality="3" type="Enchantement"/>
+      </disenchantLoot>
+    </info><datas>
+      <id>37793</id>
+
+      <name>Calotte crânienne de la terreur éternelle</name>
+      <icon>inv_helmet_130</icon>
+      <overallQualityId>3</overallQualityId>
+      <bonding>2</bonding>
+      <classId>4</classId>
+      <equipData>
+
+        <inventoryType>1</inventoryType>
+        <subclassName>Plaques</subclassName>
+      </equipData>
+      <damageData/>
+      <bonusStrength>57</bonusStrength>
+      <bonusStamina>82</bonusStamina>
+      <armor armorBonus="0">1572</armor>
+
+      <durability current="0" max="80"/>
+      <requiredLevel>77</requiredLevel>
+      <bonusCritRating>37</bonusCritRating>
+      <bonusHitRating>43</bonusHitRating>
+      <itemSource areaId="3457" areaName="Karazhan" creatureId="0" creatureName="" difficulty="" dropRate="0" value="sourceType.creatureDrop"/>
+    </datas></item>
+        <item icon="inv_helmet_58" id="39625" name="Protège-front fléauvenant de héros" rarity="4" url="i=39625" itemLevel="200" onList="1">
+
+          <filter name="itemLevel" value="200"/>
+          <filter name="requiredLevel" value="80"/>
+          <filter name="type" value="Plaques"/>
+          <filter name="source" value="sourceType.vendor"/>
+          <filter name="metaSockets" value="1"/>
+          <filter name="normalSockets" value="1"/>
+          <filter name="relevance" value="78"/>
+        <info>
+      <cost>
+
+        <token count="1" icon="inv_helmet_24" id="40618"/>
+      </cost>
+      <disenchantLoot requiredSkillRank="375">
+        <item dropRate="6" icon="inv_enchant_abysscrystal" id="34057" level="80" maxCount="1" minCount="1" name="Cristal abyssal" quality="4" type="Enchantement"/>
+      </disenchantLoot>
+      <vendors>
+        <creature area="Forêt du Chant de cristal" classification="0" id="28997" maxLevel="75" minLevel="75" name="Griselda Hunderland" title="Marchande d'armures de plaques" type="Humanoïde"/>
+      </vendors>
+    </info><datas>
+
+      <id>39625</id>
+      <name>Protège-front fléauvenant de héros</name>
+      <icon>inv_helmet_58</icon>
+      <overallQualityId>4</overallQualityId>
+      <bonding>1</bonding>
+      <classId>4</classId>
+
+      <equipData>
+        <inventoryType>1</inventoryType>
+        <subclassName>Plaques</subclassName>
+      </equipData>
+      <damageData/>
+      <bonusStrength>72</bonusStrength>
+      <bonusStamina>111</bonusStamina>
+
+      <armor armorBonus="0">1821</armor>
+      <socketData>
+        <socket color="Meta"/>
+        <socket color="Blue"/>
+        <socketMatchEnchant>+8 au score de parade</socketMatchEnchant>
+      </socketData>
+      <durability current="0" max="100"/>
+      <allowableClasses>
+
+        <class>Chevalier de la mort</class>
+      </allowableClasses>
+      <requiredLevel>80</requiredLevel>
+      <bonusDefenseSkillRating>49</bonusDefenseSkillRating>
+      <bonusExpertiseRating>30</bonusExpertiseRating>
+      <bonusParryRating>43</bonusParryRating>
+
+      <setData>
+        <name>Armure de fléauvenant en plaques</name>
+        <item name="Corselet fléauvenant"/>
+        <item name="Protège-front fléauvenant"/>
+        <item name="Garde-mains fléauvenants"/>
+        <item name="Garde-jambes fléauvenants"/>
+        <item name="Espauliers fléauvenants"/>
+        <setBonus desc="Augmente les chances de coup critique de votre Frappe de peste de 10%." threshold="2"/>
+
+        <setBonus desc="Augmente la durée de votre Robustesse glaciale de 3 secondes." threshold="4"/>
+      </setData>
+      <itemSource value="sourceType.vendor"/>
+    </datas></item>
+        <item icon="inv_helmet_110" id="37237" name="Grand heaume en coquille de chitine" rarity="3" url="i=37237" itemLevel="200" onList="1">
+          <filter name="itemLevel" value="200"/>
+          <filter name="requiredLevel" value="80"/>
+          <filter name="type" value="Plaques"/>
+          <filter areaId="4277" areaName="Azjol-Nérub" creatureId="29120" creatureName="Anub'arak" difficulty="h" dropRate="4" name="source" value="sourceType.creatureDrop"/>
+
+          <filter name="metaSockets" value="1"/>
+          <filter name="normalSockets" value="1"/>
+          <filter name="relevance" value="78"/>
+        <info>
+      <cost sellPrice="78441"/>
+      <disenchantLoot requiredSkillRank="325">
+        <item dropRate="6" icon="inv_enchant_dreamshard_02" id="34052" level="80" maxCount="1" minCount="1" name="Eclat de rêve" quality="3" type="Enchantement"/>
+      </disenchantLoot>
+      <dropCreatures>
+
+        <creature area="Azjol-Nérub" areaUrl="fl[source]=dungeon&amp;fl[dungeon]=4277&amp;fl[boss]=all" classification="1" dropRate="4" heroic="1" id="31610" maxLevel="82" minLevel="82" name="Anub'arak" type="Mort-vivant" url="fl[source]=dungeon&amp;fl[dungeon]=4277&amp;fl[difficulty]=normal&amp;fl[boss]=29120"/>
+      </dropCreatures>
+    </info><datas>
+      <id>37237</id>
+      <name>Grand heaume en coquille de chitine</name>
+      <icon>inv_helmet_110</icon>
+      <overallQualityId>3</overallQualityId>
+
+      <bonding>1</bonding>
+      <classId>4</classId>
+      <equipData>
+        <inventoryType>1</inventoryType>
+        <subclassName>Plaques</subclassName>
+      </equipData>
+      <damageData/>
+
+      <bonusStrength>63</bonusStrength>
+      <bonusStamina>93</bonusStamina>
+      <armor armorBonus="0">1760</armor>
+      <socketData>
+        <socket color="Meta"/>
+        <socket color="Yellow"/>
+        <socketMatchEnchant>+8 Force</socketMatchEnchant>
+
+      </socketData>
+      <durability current="0" max="80"/>
+      <requiredLevel>80</requiredLevel>
+      <bonusCritRating>60</bonusCritRating>
+      <itemSource areaId="4277" areaName="Azjol-Nérub" creatureId="29120" creatureName="Anub'arak" difficulty="h" dropRate="4" value="sourceType.creatureDrop"/>
+    </datas></item>
+        <item icon="inv_helmet_134" id="44247" name="Casque dévieur de crocs" rarity="3" url="i=44247" itemLevel="200" onList="1">
+          <filter name="itemLevel" value="200"/>
+
+          <filter name="requiredLevel" value="80"/>
+          <filter name="type" value="Plaques"/>
+          <filter name="source" value="sourceType.factionReward"/>
+          <filter name="metaSockets" value="0"/>
+          <filter name="normalSockets" value="0"/>
+          <filter name="relevance" value="75"/>
+        <info>
+      <cost buyPrice="379685" sellPrice="75937"/>
+      <vendors>
+
+        <creature area="La Couronne de glace" classification="1" id="30431" maxLevel="80" minLevel="80" name="Croisé vétéran Aliocha Segard" title="Intendant de la Croisade d'argent" type="Humanoïde"/>
+      </vendors>
+    </info><datas>
+      <id>44247</id>
+      <name>Casque dévieur de crocs</name>
+      <icon>inv_helmet_134</icon>
+      <overallQualityId>3</overallQualityId>
+
+      <bonding>1</bonding>
+      <classId>4</classId>
+      <equipData>
+        <inventoryType>1</inventoryType>
+        <subclassName>Plaques</subclassName>
+      </equipData>
+      <damageData/>
+
+      <bonusStrength>89</bonusStrength>
+      <bonusStamina>87</bonusStamina>
+      <armor armorBonus="0">1760</armor>
+      <durability current="0" max="80"/>
+      <requiredLevel>80</requiredLevel>
+      <requiredFaction name="La Croisade d'argent" rep="6"/>
+      <bonusArmorPenetration>78</bonusArmorPenetration>
+
+      <itemSource value="sourceType.factionReward"/>
+    </datas></item>
+        <item icon="inv_helmet_135" id="40817" name="Heaume du gladiateur sauvage en plaques d'effroi" rarity="3" url="i=40817" itemLevel="200" onList="1">
+          <filter name="itemLevel" value="200"/>
+          <filter name="requiredLevel" value="80"/>
+          <filter name="type" value="Plaques"/>
+          <filter name="source" value="sourceType.vendor"/>
+          <filter name="metaSockets" value="1"/>
+          <filter name="normalSockets" value="1"/>
+
+          <filter name="relevance" value="75"/>
+        <info>
+      <cost arena="350" factionId="0" honor="12000"/>
+      <vendors>
+        <creature area="Forêt d'Elwynn" classification="0" id="32834" maxLevel="65" minLevel="65" name="Chevalier-lieutenant Heurtelune" title="Intendant des armures" type="Humanoïde"/>
+        <creature area="Durotar" classification="0" id="32832" maxLevel="65" minLevel="65" name="Garde de sang Zar'shi" title="Intendant des armures" type="Humanoïde"/>
+        <creature area="Forêt du Chant de cristal" classification="0" id="31580" maxLevel="80" minLevel="80" name="Arcaniste Ivrenne" title="Intendante des emblèmes d'héroïsme" type="Humanoïde"/>
+        <creature area="Tanaris" classification="0" id="32360" maxLevel="70" minLevel="70" name="Ecton Briquedouille" title="Apprenti vendeur de l'arène" type="Humanoïde"/>
+        <creature area="Forêt du Chant de cristal" classification="0" id="31582" maxLevel="80" minLevel="80" name="Magistrice Lambriesse" title="Intendante des emblèmes d'héroïsme" type="Humanoïde"/>
+
+        <creature area="Forêt du Chant de cristal" classification="0" id="31865" maxLevel="75" minLevel="75" name="Zom Bocom" title="Apprenti vendeur de l'arène" type="Humanoïde"/>
+        <creature area="Raz-de-Néant" classification="0" id="32354" maxLevel="70" minLevel="70" name="Leeni &quot;Sourire&quot; Smalls" title="Apprentie vendeuse de l'arène" type="Humanoïde"/>
+      </vendors>
+    </info><datas>
+      <id>40817</id>
+      <name>Heaume du gladiateur sauvage en plaques d'effroi</name>
+      <icon>inv_helmet_135</icon>
+
+      <overallQualityId>3</overallQualityId>
+      <bonding>1</bonding>
+      <classId>4</classId>
+      <equipData>
+        <inventoryType>1</inventoryType>
+        <subclassName>Plaques</subclassName>
+
+      </equipData>
+      <damageData/>
+      <bonusStrength>62</bonusStrength>
+      <bonusStamina>115</bonusStamina>
+      <armor armorBonus="0">1760</armor>
+      <socketData>
+        <socket color="Meta"/>
+
+        <socket color="Red"/>
+        <socketMatchEnchant>+8 au score de coup critique</socketMatchEnchant>
+      </socketData>
+      <durability current="0" max="80"/>
+      <allowableClasses>
+        <class>Chevalier de la mort</class>
+      </allowableClasses>
+      <requiredLevel>80</requiredLevel>
+
+      <bonusCritRating>36</bonusCritRating>
+      <bonusResilienceRating>36</bonusResilienceRating>
+      <setData>
+        <name>Violation de gladiateur</name>
+        <item name="Plastron désacralisé de gladiateur"/>
+        <item name="Gantelets désacralisés de gladiateur"/>
+        <item name="Heaume désacralisé de gladiateur"/>
+
+        <item name="Garde-jambes désacralisés de gladiateur"/>
+        <item name="Epaulières désacralisées de gladiateur"/>
+        <setBonus desc="+50 au score de résilience." threshold="2"/>
+        <setBonus desc="Chaque fois que vous êtes atteint par un effet affectant le déplacement, vous générez 15 points de puissance runique en 5 sec." threshold="4"/>
+      </setData>
+      <itemSource value="sourceType.vendor"/>
+    </datas></item>
+        <item icon="inv_helmet_130" id="41350" name="Bouclier-crâne sauvage en saronite" rarity="3" url="i=41350" itemLevel="187" onList="1">
+          <filter name="itemLevel" value="187"/>
+
+          <filter name="requiredLevel" value="78"/>
+          <filter name="type" value="Plaques"/>
+          <filter name="source" value="sourceType.createdBySpell"/>
+          <filter name="metaSockets" value="0"/>
+          <filter name="normalSockets" value="0"/>
+          <filter name="relevance" value="74"/>
+        <info>
+      <cost sellPrice="71516"/>
+      <disenchantLoot requiredSkillRank="325">
+
+        <item dropRate="6" icon="inv_enchant_dreamshard_02" id="34052" level="80" maxCount="1" minCount="1" name="Eclat de rêve" quality="3" type="Enchantement"/>
+      </disenchantLoot>
+      <createdBy>
+        <spell icon="trade_blacksmithing" id="55312" name="Bouclier-crâne sauvage en saronite">
+          <reagent count="14" icon="inv_ingot_yoggthorite" id="36913" name="Barre de saronite"/>
+          <reagent count="1" icon="inv_elemental_eternal_shadow" id="35627" name="Ombre éternelle"/>
+        </spell>
+      </createdBy>
+    </info><datas>
+
+      <id>41350</id>
+      <name>Bouclier-crâne sauvage en saronite</name>
+      <icon>inv_helmet_130</icon>
+      <overallQualityId>3</overallQualityId>
+      <bonding>2</bonding>
+      <classId>4</classId>
+
+      <equipData>
+        <inventoryType>1</inventoryType>
+        <subclassName>Plaques</subclassName>
+      </equipData>
+      <damageData/>
+      <bonusStrength>37</bonusStrength>
+      <bonusStamina>78</bonusStamina>
+
+      <armor armorBonus="0">1700</armor>
+      <durability current="0" max="80"/>
+      <requiredLevel>78</requiredLevel>
+      <bonusCritRating>70</bonusCritRating>
+      <bonusResilienceRating>63</bonusResilienceRating>
+      <itemSource value="sourceType.createdBySpell"/>
+    </datas></item>
+
+        <item icon="inv_helmet_110" id="39395" name="Grand heaume de thane souillé" rarity="4" url="i=39395" itemLevel="200" onList="1">
+          <filter name="itemLevel" value="200"/>
+          <filter name="requiredLevel" value="80"/>
+          <filter name="type" value="Plaques"/>
+          <filter name="source" value="sourceType.gameObjectDrop"/>
+          <filter name="metaSockets" value="1"/>
+          <filter name="normalSockets" value="1"/>
+          <filter name="relevance" value="74"/>
+        <info>
+
+      <cost sellPrice="103900"/>
+      <disenchantLoot requiredSkillRank="375">
+        <item dropRate="6" icon="inv_enchant_abysscrystal" id="34057" level="80" maxCount="1" minCount="1" name="Cristal abyssal" quality="4" type="Enchantement"/>
+      </disenchantLoot>
+      <containerObjects>
+        <object area="Naxxramas" areaUrl="fl[source]=dungeon&amp;fl[dungeon]=3456&amp;fl[boss]=all" dropRate="3" id="181366" name="Coffre des quatre cavaliers"/>
+      </containerObjects>
+    </info><datas>
+      <id>39395</id>
+
+      <name>Grand heaume de thane souillé</name>
+      <icon>inv_helmet_110</icon>
+      <overallQualityId>4</overallQualityId>
+      <bonding>1</bonding>
+      <classId>4</classId>
+      <equipData>
+
+        <inventoryType>1</inventoryType>
+        <subclassName>Plaques</subclassName>
+      </equipData>
+      <damageData/>
+      <bonusStrength>73</bonusStrength>
+      <bonusStamina>111</bonusStamina>
+      <armor armorBonus="0">1821</armor>
+
+      <socketData>
+        <socket color="Meta"/>
+        <socket color="Yellow"/>
+        <socketMatchEnchant>+8 au score de défense</socketMatchEnchant>
+      </socketData>
+      <durability current="0" max="100"/>
+      <requiredLevel>80</requiredLevel>
+      <bonusDefenseSkillRating>40</bonusDefenseSkillRating>
+
+      <bonusDodgeRating>39</bonusDodgeRating>
+      <bonusParryRating>44</bonusParryRating>
+      <itemSource value="sourceType.gameObjectDrop"/>
+    </datas></item>
+        <item icon="inv_helmet_130" id="37633" name="Heaume de tremblement de terre" rarity="3" url="i=37633" itemLevel="200" onList="1">
+          <filter name="itemLevel" value="200"/>
+          <filter name="requiredLevel" value="80"/>
+          <filter name="type" value="Plaques"/>
+
+          <filter areaId="4416" areaName="Gundrak" creatureId="29305" creatureName="Moorabi" difficulty="h" dropRate="4" name="source" value="sourceType.creatureDrop"/>
+          <filter name="metaSockets" value="1"/>
+          <filter name="normalSockets" value="1"/>
+          <filter name="relevance" value="73"/>
+        <info>
+      <cost sellPrice="79605"/>
+      <disenchantLoot requiredSkillRank="325">
+        <item dropRate="6" icon="inv_enchant_dreamshard_02" id="34052" level="80" maxCount="1" minCount="1" name="Eclat de rêve" quality="3" type="Enchantement"/>
+      </disenchantLoot>
+
+      <dropCreatures>
+        <creature area="Gundrak" areaUrl="fl[source]=dungeon&amp;fl[dungeon]=4416&amp;fl[boss]=all" classification="1" dropRate="4" heroic="1" id="30530" maxLevel="82" minLevel="82" name="Moorabi" title="Grand prophète de Mam'toth" type="Humanoïde" url="fl[source]=dungeon&amp;fl[dungeon]=4416&amp;fl[difficulty]=normal&amp;fl[boss]=29305"/>
+      </dropCreatures>
+    </info><datas>
+      <id>37633</id>
+      <name>Heaume de tremblement de terre</name>
+      <icon>inv_helmet_130</icon>
+
+      <overallQualityId>3</overallQualityId>
+      <bonding>1</bonding>
+      <classId>4</classId>
+      <equipData>
+        <inventoryType>1</inventoryType>
+        <subclassName>Plaques</subclassName>
+
+      </equipData>
+      <damageData/>
+      <bonusStrength>48</bonusStrength>
+      <bonusStamina>93</bonusStamina>
+      <armor armorBonus="0">1760</armor>
+      <socketData>
+        <socket color="Meta"/>
+
+        <socket color="Red"/>
+        <socketMatchEnchant>+12 Endurance</socketMatchEnchant>
+      </socketData>
+      <durability current="0" max="80"/>
+      <requiredLevel>80</requiredLevel>
+      <bonusDefenseSkillRating>61</bonusDefenseSkillRating>
+      <bonusHitRating>37</bonusHitRating>
+
+      <itemSource areaId="4416" areaName="Gundrak" creatureId="29305" creatureName="Moorabi" difficulty="h" dropRate="4" value="sourceType.creatureDrop"/>
+    </datas></item>
+        <item icon="inv_helmet_134" id="41387" name="Heaume en acier-titan trempé" rarity="4" url="i=41387" itemLevel="200" onList="1">
+          <filter name="itemLevel" value="200"/>
+          <filter name="requiredLevel" value="80"/>
+          <filter name="type" value="Plaques"/>
+          <filter name="source" value="sourceType.createdBySpell"/>
+          <filter name="metaSockets" value="0"/>
+          <filter name="normalSockets" value="0"/>
+
+          <filter name="relevance" value="72"/>
+        <info>
+      <cost sellPrice="100448"/>
+      <disenchantLoot requiredSkillRank="375">
+        <item dropRate="6" icon="inv_enchant_abysscrystal" id="34057" level="80" maxCount="1" minCount="1" name="Cristal abyssal" quality="4" type="Enchantement"/>
+      </disenchantLoot>
+      <createdBy>
+        <spell icon="trade_blacksmithing" id="55373" name="Heaume en acier-titan trempé">
+          <reagent count="4" icon="inv_ingot_yoggthorite" id="36913" name="Barre de saronite"/>
+
+          <reagent count="4" icon="inv_ingot_titansteel_blue" id="37663" name="Barre d'acier-titan"/>
+          <reagent count="1" icon="spell_frost_frozencore" id="43102" name="Orbe glacé"/>
+        </spell>
+      </createdBy>
+    </info><datas>
+      <id>41387</id>
+      <name>Heaume en acier-titan trempé</name>
+      <icon>inv_helmet_134</icon>
+
+      <overallQualityId>4</overallQualityId>
+      <bonding>2</bonding>
+      <classId>4</classId>
+      <equipData>
+        <inventoryType>1</inventoryType>
+        <subclassName>Plaques</subclassName>
+
+      </equipData>
+      <damageData/>
+      <bonusStrength>61</bonusStrength>
+      <bonusStamina>162</bonusStamina>
+      <armor armorBonus="0">1821</armor>
+      <durability current="0" max="100"/>
+      <requiredLevel>80</requiredLevel>
+
+      <bonusDefenseSkillRating>46</bonusDefenseSkillRating>
+      <itemSource value="sourceType.createdBySpell"/>
+    </datas></item>
+        <item icon="inv_helmet_108" id="40296" name="Couvre-taille de silence" rarity="4" url="i=40296" itemLevel="213" onList="1">
+          <filter name="itemLevel" value="213"/>
+          <filter name="requiredLevel" value="80"/>
+          <filter name="type" value="Cuir"/>
+          <filter areaId="3456" areaName="Naxxramas" creatureId="15928" creatureName="Thaddius" difficulty="h" dropRate="3" name="source" value="sourceType.creatureDrop"/>
+
+          <filter name="metaSockets" value="0"/>
+          <filter name="normalSockets" value="0"/>
+          <filter name="relevance" value="71"/>
+        <info>
+      <cost sellPrice="78059"/>
+      <disenchantLoot requiredSkillRank="375">
+        <item dropRate="6" icon="inv_enchant_abysscrystal" id="34057" level="80" maxCount="1" minCount="1" name="Cristal abyssal" quality="4" type="Enchantement"/>
+      </disenchantLoot>
+      <dropCreatures>
+
+        <creature area="Naxxramas" areaUrl="fl[source]=dungeon&amp;fl[dungeon]=3456&amp;fl[boss]=all" classification="3" dropRate="3" heroic="1" id="29448" maxLevel="83" minLevel="83" name="Thaddius" type="Mort-vivant" url="fl[source]=dungeon&amp;fl[dungeon]=3456&amp;fl[difficulty]=normal&amp;fl[boss]=15928"/>
+      </dropCreatures>
+    </info><datas>
+      <id>40296</id>
+      <name>Couvre-taille de silence</name>
+      <icon>inv_helmet_108</icon>
+      <overallQualityId>4</overallQualityId>
+
+      <bonding>1</bonding>
+      <classId>4</classId>
+      <equipData>
+        <inventoryType>1</inventoryType>
+        <subclassName>Cuir</subclassName>
+      </equipData>
+      <damageData/>
+
+      <bonusAgility>59</bonusAgility>
+      <bonusStamina>108</bonusStamina>
+      <armor armorBonus="0">470</armor>
+      <durability current="0" max="70"/>
+      <requiredLevel>80</requiredLevel>
+      <bonusCritRating>77</bonusCritRating>
+
+      <bonusHitRating>50</bonusHitRating>
+      <spellData>
+        <spell>
+          <trigger>1</trigger>
+          <desc>Augmente de 200 la puissance d'attaque.</desc>
+        </spell>
+      </spellData>
+
+      <itemSource areaId="3456" areaName="Naxxramas" creatureId="15928" creatureName="Thaddius" difficulty="h" dropRate="3" value="sourceType.creatureDrop"/>
+    </datas></item>
+        <item icon="inv_helmet_130" id="36969" name="Heaume du gardien tellurique" rarity="3" url="i=36969" itemLevel="187" onList="1">
+          <filter name="itemLevel" value="187"/>
+          <filter name="requiredLevel" value="78"/>
+          <filter name="type" value="Plaques"/>
+          <filter areaId="4228" areaName="L'Oculus" creatureId="27656" creatureName="Gardien-tellurique Eregos" difficulty="n" dropRate="4" name="source" value="sourceType.creatureDrop"/>
+          <filter name="metaSockets" value="0"/>
+          <filter name="normalSockets" value="1"/>
+
+          <filter name="relevance" value="71"/>
+        <info>
+      <cost sellPrice="73107"/>
+      <disenchantLoot requiredSkillRank="325">
+        <item dropRate="6" icon="inv_enchant_dreamshard_02" id="34052" level="80" maxCount="1" minCount="1" name="Eclat de rêve" quality="3" type="Enchantement"/>
+      </disenchantLoot>
+      <containerObjects>
+        <object area="L'Oculus" areaUrl="fl[source]=dungeon&amp;fl[dungeon]=4228&amp;fl[boss]=all" dropRate="4" id="191349" name="Cache d'Eregos"/>
+      </containerObjects>
+
+      <dropCreatures>
+        <creature area="L'Oculus" areaUrl="fl[source]=dungeon&amp;fl[dungeon]=4228&amp;fl[boss]=all" classification="1" dropRate="4" id="27656" maxLevel="81" minLevel="81" name="Gardien-tellurique Eregos" type="Draconien" url="fl[source]=dungeon&amp;fl[dungeon]=4228&amp;fl[difficulty]=normal&amp;fl[boss]=27656"/>
+      </dropCreatures>
+    </info><datas>
+      <id>36969</id>
+      <name>Heaume du gardien tellurique</name>
+      <icon>inv_helmet_130</icon>
+
+      <overallQualityId>3</overallQualityId>
+      <bonding>1</bonding>
+      <classId>4</classId>
+      <equipData>
+        <inventoryType>1</inventoryType>
+        <subclassName>Plaques</subclassName>
+
+      </equipData>
+      <damageData/>
+      <bonusStrength>40</bonusStrength>
+      <bonusStamina>105</bonusStamina>
+      <armor armorBonus="0">1700</armor>
+      <socketData>
+        <socket color="Red"/>
+
+        <socketMatchEnchant>+6 Endurance</socketMatchEnchant>
+      </socketData>
+      <durability current="0" max="80"/>
+      <requiredLevel>78</requiredLevel>
+      <bonusDefenseSkillRating>68</bonusDefenseSkillRating>
+      <bonusHitRating>36</bonusHitRating>
+      <itemSource areaId="4228" areaName="L'Oculus" creatureId="27656" creatureName="Gardien-tellurique Eregos" difficulty="n" dropRate="4" value="sourceType.creatureDrop"/>
+
+    </datas></item>
+        <item icon="inv_helmet_130" id="37135" name="Heaume à garde arcanique" rarity="3" url="i=37135" itemLevel="200" onList="1">
+          <filter name="itemLevel" value="200"/>
+          <filter name="requiredLevel" value="80"/>
+          <filter name="type" value="Plaques"/>
+          <filter areaId="4265" areaName="Le Nexus" creatureId="26731" creatureName="Grand magus Telestra" difficulty="h" dropRate="4" name="source" value="sourceType.creatureDrop"/>
+          <filter name="metaSockets" value="1"/>
+          <filter name="normalSockets" value="1"/>
+          <filter name="relevance" value="70"/>
+
+        <info>
+      <cost sellPrice="75883"/>
+      <disenchantLoot requiredSkillRank="325">
+        <item dropRate="6" icon="inv_enchant_dreamshard_02" id="34052" level="80" maxCount="1" minCount="1" name="Eclat de rêve" quality="3" type="Enchantement"/>
+      </disenchantLoot>
+      <dropCreatures>
+        <creature area="Le Nexus" areaUrl="fl[source]=dungeon&amp;fl[dungeon]=4265&amp;fl[boss]=all" classification="1" dropRate="4" heroic="1" id="30510" maxLevel="82" minLevel="82" name="Grand magus Telestra" type="Humanoïde" url="fl[source]=dungeon&amp;fl[dungeon]=4265&amp;fl[difficulty]=normal&amp;fl[boss]=26731"/>
+      </dropCreatures>
+    </info><datas>
+
+      <id>37135</id>
+      <name>Heaume à garde arcanique</name>
+      <icon>inv_helmet_130</icon>
+      <overallQualityId>3</overallQualityId>
+      <bonding>1</bonding>
+      <classId>4</classId>
+
+      <equipData>
+        <inventoryType>1</inventoryType>
+        <subclassName>Plaques</subclassName>
+      </equipData>
+      <damageData/>
+      <bonusStrength>61</bonusStrength>
+      <bonusStamina>93</bonusStamina>
+
+      <armor armorBonus="0">1760</armor>
+      <socketData>
+        <socket color="Meta"/>
+        <socket color="Blue"/>
+        <socketMatchEnchant>+8 au score de défense</socketMatchEnchant>
+      </socketData>
+      <durability current="0" max="80"/>
+      <requiredLevel>80</requiredLevel>
+
+      <bonusDefenseSkillRating>36</bonusDefenseSkillRating>
+      <bonusDodgeRating>52</bonusDodgeRating>
+      <itemSource areaId="4265" areaName="Le Nexus" creatureId="26731" creatureName="Grand magus Telestra" difficulty="h" dropRate="4" value="sourceType.creatureDrop"/>
+    </datas></item>
+        <item icon="inv_helmet_18" id="40543" name="Heaume de l'aspect bleu" rarity="4" url="i=40543" itemLevel="226" onList="1">
+          <filter name="itemLevel" value="226"/>
+          <filter name="requiredLevel" value="80"/>
+          <filter name="type" value="Mailles"/>
+
+          <filter areaId="4500" areaName="L'Œil de l'éternité" creatureId="28859" creatureName="Malygos" difficulty="h" dropRate="3" name="source" value="sourceType.creatureDrop"/>
+          <filter name="metaSockets" value="1"/>
+          <filter name="normalSockets" value="1"/>
+          <filter name="relevance" value="63"/>
+        <info>
+      <cost sellPrice="99450"/>
+      <disenchantLoot requiredSkillRank="375">
+        <item dropRate="6" icon="inv_enchant_abysscrystal" id="34057" level="80" maxCount="1" minCount="1" name="Cristal abyssal" quality="4" type="Enchantement"/>
+      </disenchantLoot>
+
+      <containerObjects>
+        <object area="L'Œil de l'éternité" areaUrl="fl[source]=dungeon&amp;fl[dungeon]=4500&amp;fl[boss]=all" dropRate="3" id="193967" name="Cadeau d'Alexstrasza"/>
+      </containerObjects>
+      <dropCreatures>
+        <creature area="L'Œil de l'éternité" areaUrl="fl[source]=dungeon&amp;fl[dungeon]=4500&amp;fl[boss]=all" classification="3" dropRate="3" heroic="1" id="31734" maxLevel="83" minLevel="83" name="Malygos" type="Draconien" url="fl[source]=dungeon&amp;fl[dungeon]=4500&amp;fl[difficulty]=normal&amp;fl[boss]=28859"/>
+      </dropCreatures>
+    </info><datas>
+      <id>40543</id>
+
+      <name>Heaume de l'aspect bleu</name>
+      <icon>inv_helmet_18</icon>
+      <overallQualityId>4</overallQualityId>
+      <bonding>1</bonding>
+      <classId>4</classId>
+      <equipData>
+
+        <inventoryType>1</inventoryType>
+        <subclassName>Mailles</subclassName>
+      </equipData>
+      <damageData/>
+      <bonusAgility>58</bonusAgility>
+      <bonusStamina>68</bonusStamina>
+      <bonusIntellect>66</bonusIntellect>
+
+      <armor armorBonus="0">1067</armor>
+      <socketData>
+        <socket color="Meta"/>
+        <socket color="Yellow"/>
+        <socketMatchEnchant>+4 au score de hâte</socketMatchEnchant>
+      </socketData>
+      <durability current="0" max="85"/>
+      <requiredLevel>80</requiredLevel>
+
+      <bonusCritRating>58</bonusCritRating>
+      <bonusAttackPower>202</bonusAttackPower>
+      <bonusHasteRating>51</bonusHasteRating>
+      <itemSource areaId="4500" areaName="L'Œil de l'éternité" creatureId="28859" creatureName="Malygos" difficulty="h" dropRate="3" value="sourceType.creatureDrop"/>
+    </datas></item>
+        <item icon="inv_helmet_03" id="36399" name="Heaume de la nécropole" rarity="2" url="i=36399" itemLevel="182" onList="1">
+          <filter name="itemLevel" value="182"/>
+
+          <filter name="requiredLevel" value="80"/>
+          <filter name="type" value="Plaques"/>
+          <filter name="source" value="sourceType.none"/>
+          <filter name="metaSockets" value="0"/>
+          <filter name="normalSockets" value="0"/>
+          <filter name="relevance" value="58"/>
+        <info>
+      <cost sellPrice="56750"/>
+      <randomProperties>
+
+        <randomProperty suffix="du singe">
+          <randomPropertyEnchant name="+57 Agilité"/>
+          <randomPropertyEnchant name="+87 Endurance"/>
+        </randomProperty>
+        <randomProperty suffix="de l'aigle">
+          <randomPropertyEnchant name="+57 Intelligence"/>
+          <randomPropertyEnchant name="+87 Endurance"/>
+        </randomProperty>
+        <randomProperty suffix="de l'ours">
+
+          <randomPropertyEnchant name="+87 Endurance"/>
+          <randomPropertyEnchant name="+57 Force"/>
+        </randomProperty>
+        <randomProperty suffix="de la baleine">
+          <randomPropertyEnchant name="+57 Esprit"/>
+          <randomPropertyEnchant name="+87 Endurance"/>
+        </randomProperty>
+        <randomProperty suffix="de la chouette">
+          <randomPropertyEnchant name="+57 Intelligence"/>
+
+          <randomPropertyEnchant name="+57 Esprit"/>
+        </randomProperty>
+        <randomProperty suffix="du gorille">
+          <randomPropertyEnchant name="+57 Intelligence"/>
+          <randomPropertyEnchant name="+57 Force"/>
+        </randomProperty>
+        <randomProperty suffix="de l'épervier">
+          <randomPropertyEnchant name="+57 Agilité"/>
+          <randomPropertyEnchant name="+57 Intelligence"/>
+
+        </randomProperty>
+        <randomProperty suffix="du sanglier">
+          <randomPropertyEnchant name="+57 Esprit"/>
+          <randomPropertyEnchant name="+57 Force"/>
+        </randomProperty>
+        <randomProperty suffix="du loup">
+          <randomPropertyEnchant name="+57 Agilité"/>
+          <randomPropertyEnchant name="+57 Esprit"/>
+        </randomProperty>
+
+        <randomProperty suffix="du tigre">
+          <randomPropertyEnchant name="+57 Agilité"/>
+          <randomPropertyEnchant name="+57 Force"/>
+        </randomProperty>
+        <randomProperty suffix="d'Esprit">
+          <randomPropertyEnchant name="+87 Esprit"/>
+        </randomProperty>
+        <randomProperty suffix="d'Endurance">
+          <randomPropertyEnchant name="+130 Endurance"/>
+
+        </randomProperty>
+        <randomProperty suffix="de Force">
+          <randomPropertyEnchant name="+87 Force"/>
+        </randomProperty>
+        <randomProperty suffix="d'Agilité">
+          <randomPropertyEnchant name="+87 Agilité"/>
+        </randomProperty>
+        <randomProperty suffix="d'Intelligence">
+          <randomPropertyEnchant name="+87 Intelligence"/>
+
+        </randomProperty>
+        <randomProperty suffix="de puissance">
+          <randomPropertyEnchant name="+174 à la puissance d'attaque"/>
+        </randomProperty>
+        <randomProperty suffix="de puissance des sorts">
+          <randomPropertyEnchant name="+101 à la puissance des sorts"/>
+        </randomProperty>
+        <randomProperty suffix="de défense">
+          <randomPropertyEnchant name="+87 au score de défense"/>
+
+        </randomProperty>
+        <randomProperty suffix="de protection contre les Arcanes">
+          <randomPropertyEnchant name="+87 Endurance"/>
+          <randomPropertyEnchant name="+57 à la résistance aux Arcanes"/>
+        </randomProperty>
+        <randomProperty suffix="de protection contre le Feu">
+          <randomPropertyEnchant name="+87 Endurance"/>
+          <randomPropertyEnchant name="+57 à la résistance au Feu"/>
+        </randomProperty>
+
+        <randomProperty suffix="de protection contre le Givre">
+          <randomPropertyEnchant name="+87 Endurance"/>
+          <randomPropertyEnchant name="+57 à la résistance au Givre"/>
+        </randomProperty>
+        <randomProperty suffix="de protection contre la Nature">
+          <randomPropertyEnchant name="+87 Endurance"/>
+          <randomPropertyEnchant name="+57 à la résistance à la Nature"/>
+        </randomProperty>
+        <randomProperty suffix="de protection contre l'Ombre">
+
+          <randomPropertyEnchant name="+87 Endurance"/>
+          <randomPropertyEnchant name="+57 à la résistance à l'Ombre"/>
+        </randomProperty>
+        <randomProperty suffix="du voyant">
+          <randomPropertyEnchant name="+68 Endurance"/>
+          <randomPropertyEnchant name="+45 au score de coup critique"/>
+          <randomPropertyEnchant name="+53 à la puissance des sorts"/>
+        </randomProperty>
+        <randomProperty suffix="du soldat">
+
+          <randomPropertyEnchant name="+45 Force"/>
+          <randomPropertyEnchant name="+68 Endurance"/>
+          <randomPropertyEnchant name="+45 au score de coup critique"/>
+        </randomProperty>
+        <randomProperty suffix="du médecin">
+          <randomPropertyEnchant name="+68 Endurance"/>
+          <randomPropertyEnchant name="+45 Intelligence"/>
+          <randomPropertyEnchant name="+53 à la puissance des sorts"/>
+        </randomProperty>
+
+        <randomProperty suffix="du champion">
+          <randomPropertyEnchant name="+45 Force"/>
+          <randomPropertyEnchant name="+68 Endurance"/>
+          <randomPropertyEnchant name="+45 au score de défense"/>
+        </randomProperty>
+      </randomProperties>
+      <disenchantLoot requiredSkillRank="350">
+        <item dropRate="5" icon="inv_misc_dust_infinite" id="34054" level="70" maxCount="5" minCount="2" name="Poussière d'infini" quality="1" type="Enchantement"/>
+        <item dropRate="3" icon="inv_enchant_essencecosmicgreater" id="34055" level="75" maxCount="2" minCount="1" name="Essence cosmique supérieure" quality="2" type="Élémentaire"/>
+
+        <item dropRate="2" icon="inv_enchant_dreamshard_02" id="34052" level="80" maxCount="1" minCount="1" name="Eclat de rêve" quality="3" type="Enchantement"/>
+      </disenchantLoot>
+    </info><datas>
+      <id>36399</id>
+      <name>Heaume de la nécropole</name>
+      <icon>inv_helmet_03</icon>
+      <overallQualityId>2</overallQualityId>
+
+      <bonding>2</bonding>
+      <classId>4</classId>
+      <equipData>
+        <inventoryType>1</inventoryType>
+        <subclassName>Plaques</subclassName>
+      </equipData>
+      <damageData/>
+
+      <armor armorBonus="0">1341</armor>
+      <randomEnchantData/>
+      <durability current="0" max="70"/>
+      <requiredLevel>80</requiredLevel>
+      <itemSource value="sourceType.none"/>
+    </datas></item>
+        <item icon="inv_helmet_105" id="36391" name="Casque de revenant" rarity="2" url="i=36391" itemLevel="178" onList="1">
+          <filter name="itemLevel" value="178"/>
+
+          <filter name="requiredLevel" value="79"/>
+          <filter name="type" value="Plaques"/>
+          <filter name="source" value="sourceType.none"/>
+          <filter name="metaSockets" value="0"/>
+          <filter name="normalSockets" value="0"/>
+          <filter name="relevance" value="58"/>
+        <info>
+      <cost sellPrice="59646"/>
+      <randomProperties>
+
+        <randomProperty suffix="du singe">
+          <randomPropertyEnchant name="+56 Agilité"/>
+          <randomPropertyEnchant name="+85 Endurance"/>
+        </randomProperty>
+        <randomProperty suffix="de l'aigle">
+          <randomPropertyEnchant name="+56 Intelligence"/>
+          <randomPropertyEnchant name="+85 Endurance"/>
+        </randomProperty>
+        <randomProperty suffix="de l'ours">
+
+          <randomPropertyEnchant name="+85 Endurance"/>
+          <randomPropertyEnchant name="+56 Force"/>
+        </randomProperty>
+        <randomProperty suffix="de la baleine">
+          <randomPropertyEnchant name="+56 Esprit"/>
+          <randomPropertyEnchant name="+85 Endurance"/>
+        </randomProperty>
+        <randomProperty suffix="de la chouette">
+          <randomPropertyEnchant name="+56 Intelligence"/>
+
+          <randomPropertyEnchant name="+56 Esprit"/>
+        </randomProperty>
+        <randomProperty suffix="du gorille">
+          <randomPropertyEnchant name="+56 Intelligence"/>
+          <randomPropertyEnchant name="+56 Force"/>
+        </randomProperty>
+        <randomProperty suffix="de l'épervier">
+          <randomPropertyEnchant name="+56 Agilité"/>
+          <randomPropertyEnchant name="+56 Intelligence"/>
+
+        </randomProperty>
+        <randomProperty suffix="du sanglier">
+          <randomPropertyEnchant name="+56 Esprit"/>
+          <randomPropertyEnchant name="+56 Force"/>
+        </randomProperty>
+        <randomProperty suffix="du loup">
+          <randomPropertyEnchant name="+56 Agilité"/>
+          <randomPropertyEnchant name="+56 Esprit"/>
+        </randomProperty>
+
+        <randomProperty suffix="du tigre">
+          <randomPropertyEnchant name="+56 Agilité"/>
+          <randomPropertyEnchant name="+56 Force"/>
+        </randomProperty>
+        <randomProperty suffix="d'Esprit">
+          <randomPropertyEnchant name="+85 Esprit"/>
+        </randomProperty>
+        <randomProperty suffix="d'Endurance">
+          <randomPropertyEnchant name="+127 Endurance"/>
+
+        </randomProperty>
+        <randomProperty suffix="de Force">
+          <randomPropertyEnchant name="+85 Force"/>
+        </randomProperty>
+        <randomProperty suffix="d'Agilité">
+          <randomPropertyEnchant name="+85 Agilité"/>
+        </randomProperty>
+        <randomProperty suffix="d'Intelligence">
+          <randomPropertyEnchant name="+85 Intelligence"/>
+
+        </randomProperty>
+        <randomProperty suffix="de puissance">
+          <randomPropertyEnchant name="+170 à la puissance d'attaque"/>
+        </randomProperty>
+        <randomProperty suffix="de puissance des sorts">
+          <randomPropertyEnchant name="+99 à la puissance des sorts"/>
+        </randomProperty>
+        <randomProperty suffix="de défense">
+          <randomPropertyEnchant name="+85 au score de défense"/>
+
+        </randomProperty>
+        <randomProperty suffix="de protection contre les Arcanes">
+          <randomPropertyEnchant name="+85 Endurance"/>
+          <randomPropertyEnchant name="+56 à la résistance aux Arcanes"/>
+        </randomProperty>
+        <randomProperty suffix="de protection contre le Feu">
+          <randomPropertyEnchant name="+85 Endurance"/>
+          <randomPropertyEnchant name="+56 à la résistance au Feu"/>
+        </randomProperty>
+
+        <randomProperty suffix="de protection contre le Givre">
+          <randomPropertyEnchant name="+85 Endurance"/>
+          <randomPropertyEnchant name="+56 à la résistance au Givre"/>
+        </randomProperty>
+        <randomProperty suffix="de protection contre la Nature">
+          <randomPropertyEnchant name="+85 Endurance"/>
+          <randomPropertyEnchant name="+56 à la résistance à la Nature"/>
+        </randomProperty>
+        <randomProperty suffix="de protection contre l'Ombre">
+
+          <randomPropertyEnchant name="+85 Endurance"/>
+          <randomPropertyEnchant name="+56 à la résistance à l'Ombre"/>
+        </randomProperty>
+        <randomProperty suffix="du voyant">
+          <randomPropertyEnchant name="+67 Endurance"/>
+          <randomPropertyEnchant name="+44 au score de coup critique"/>
+          <randomPropertyEnchant name="+52 à la puissance des sorts"/>
+        </randomProperty>
+        <randomProperty suffix="du soldat">
+
+          <randomPropertyEnchant name="+44 Force"/>
+          <randomPropertyEnchant name="+67 Endurance"/>
+          <randomPropertyEnchant name="+44 au score de coup critique"/>
+        </randomProperty>
+        <randomProperty suffix="du médecin">
+          <randomPropertyEnchant name="+67 Endurance"/>
+          <randomPropertyEnchant name="+44 Intelligence"/>
+          <randomPropertyEnchant name="+52 à la puissance des sorts"/>
+        </randomProperty>
+
+        <randomProperty suffix="du champion">
+          <randomPropertyEnchant name="+44 Force"/>
+          <randomPropertyEnchant name="+67 Endurance"/>
+          <randomPropertyEnchant name="+44 au score de défense"/>
+        </randomProperty>
+      </randomProperties>
+      <disenchantLoot requiredSkillRank="350">
+        <item dropRate="5" icon="inv_misc_dust_infinite" id="34054" level="70" maxCount="5" minCount="2" name="Poussière d'infini" quality="1" type="Enchantement"/>
+        <item dropRate="3" icon="inv_enchant_essencecosmicgreater" id="34055" level="75" maxCount="2" minCount="1" name="Essence cosmique supérieure" quality="2" type="Élémentaire"/>
+
+        <item dropRate="2" icon="inv_enchant_dreamshard_02" id="34052" level="80" maxCount="1" minCount="1" name="Eclat de rêve" quality="3" type="Enchantement"/>
+      </disenchantLoot>
+    </info><datas>
+      <id>36391</id>
+      <name>Casque de revenant</name>
+      <icon>inv_helmet_105</icon>
+      <overallQualityId>2</overallQualityId>
+
+      <bonding>2</bonding>
+      <classId>4</classId>
+      <equipData>
+        <inventoryType>1</inventoryType>
+        <subclassName>Plaques</subclassName>
+      </equipData>
+      <damageData/>
+
+      <armor armorBonus="0">1312</armor>
+      <randomEnchantData/>
+      <durability current="0" max="70"/>
+      <requiredLevel>79</requiredLevel>
+      <itemSource value="sourceType.none"/>
+    </datas></item>
+        <item icon="inv_helmet_18" id="40344" name="Heaume du tombeau" rarity="4" url="i=40344" itemLevel="213" onList="1">
+          <filter name="itemLevel" value="213"/>
+
+          <filter name="requiredLevel" value="80"/>
+          <filter name="type" value="Mailles"/>
+          <filter name="source" value="sourceType.gameObjectDrop"/>
+          <filter name="metaSockets" value="1"/>
+          <filter name="normalSockets" value="1"/>
+          <filter name="relevance" value="57"/>
+        <info>
+      <cost sellPrice="89512"/>
+      <disenchantLoot requiredSkillRank="375">
+
+        <item dropRate="6" icon="inv_enchant_abysscrystal" id="34057" level="80" maxCount="1" minCount="1" name="Cristal abyssal" quality="4" type="Enchantement"/>
+      </disenchantLoot>
+      <containerObjects>
+        <object area="Naxxramas" areaUrl="fl[source]=dungeon&amp;fl[dungeon]=3456&amp;fl[boss]=all" dropRate="3" heroic="1" id="193426" name="Coffre des quatre cavaliers"/>
+      </containerObjects>
+    </info><datas>
+      <id>40344</id>
+      <name>Heaume du tombeau</name>
+
+      <icon>inv_helmet_18</icon>
+      <overallQualityId>4</overallQualityId>
+      <bonding>1</bonding>
+      <classId>4</classId>
+      <equipData>
+        <inventoryType>1</inventoryType>
+
+        <subclassName>Mailles</subclassName>
+      </equipData>
+      <damageData/>
+      <bonusAgility>51</bonusAgility>
+      <bonusStamina>78</bonusStamina>
+      <bonusIntellect>52</bonusIntellect>
+      <armor armorBonus="0">1045</armor>
+
+      <socketData>
+        <socket color="Meta"/>
+        <socket color="Blue"/>
+        <socketMatchEnchant>+8 Agilité</socketMatchEnchant>
+      </socketData>
+      <durability current="0" max="85"/>
+      <requiredLevel>80</requiredLevel>
+      <bonusCritRating>49</bonusCritRating>
+
+      <spellData>
+        <spell>
+          <trigger>1</trigger>
+          <desc>Augmente de 170 la puissance d'attaque.</desc>
+        </spell>
+        <spell>
+          <trigger>1</trigger>
+
+          <desc>Augmente de 53 le score de pénétration d'armure.</desc>
+        </spell>
+      </spellData>
+      <itemSource value="sourceType.gameObjectDrop"/>
+    </datas></item>
+        <item icon="inv_helmet_105" id="36383" name="Casque du golem" rarity="2" url="i=36383" itemLevel="174" onList="1">
+          <filter name="itemLevel" value="174"/>
+          <filter name="requiredLevel" value="78"/>
+
+          <filter name="type" value="Plaques"/>
+          <filter name="source" value="sourceType.none"/>
+          <filter name="metaSockets" value="0"/>
+          <filter name="normalSockets" value="0"/>
+          <filter name="relevance" value="57"/>
+        <info>
+      <cost sellPrice="55244"/>
+      <randomProperties>
+        <randomProperty suffix="du singe">
+
+          <randomPropertyEnchant name="+55 Agilité"/>
+          <randomPropertyEnchant name="+83 Endurance"/>
+        </randomProperty>
+        <randomProperty suffix="de l'aigle">
+          <randomPropertyEnchant name="+55 Intelligence"/>
+          <randomPropertyEnchant name="+83 Endurance"/>
+        </randomProperty>
+        <randomProperty suffix="de l'ours">
+          <randomPropertyEnchant name="+83 Endurance"/>
+
+          <randomPropertyEnchant name="+55 Force"/>
+        </randomProperty>
+        <randomProperty suffix="de la baleine">
+          <randomPropertyEnchant name="+55 Esprit"/>
+          <randomPropertyEnchant name="+83 Endurance"/>
+        </randomProperty>
+        <randomProperty suffix="de la chouette">
+          <randomPropertyEnchant name="+55 Intelligence"/>
+          <randomPropertyEnchant name="+55 Esprit"/>
+
+        </randomProperty>
+        <randomProperty suffix="du gorille">
+          <randomPropertyEnchant name="+55 Intelligence"/>
+          <randomPropertyEnchant name="+55 Force"/>
+        </randomProperty>
+        <randomProperty suffix="de l'épervier">
+          <randomPropertyEnchant name="+55 Agilité"/>
+          <randomPropertyEnchant name="+55 Intelligence"/>
+        </randomProperty>
+
+        <randomProperty suffix="du sanglier">
+          <randomPropertyEnchant name="+55 Esprit"/>
+          <randomPropertyEnchant name="+55 Force"/>
+        </randomProperty>
+        <randomProperty suffix="du loup">
+          <randomPropertyEnchant name="+55 Agilité"/>
+          <randomPropertyEnchant name="+55 Esprit"/>
+        </randomProperty>
+        <randomProperty suffix="du tigre">
+
+          <randomPropertyEnchant name="+55 Agilité"/>
+          <randomPropertyEnchant name="+55 Force"/>
+        </randomProperty>
+        <randomProperty suffix="d'Esprit">
+          <randomPropertyEnchant name="+83 Esprit"/>
+        </randomProperty>
+        <randomProperty suffix="d'Endurance">
+          <randomPropertyEnchant name="+124 Endurance"/>
+        </randomProperty>
+
+        <randomProperty suffix="de Force">
+          <randomPropertyEnchant name="+83 Force"/>
+        </randomProperty>
+        <randomProperty suffix="d'Agilité">
+          <randomPropertyEnchant name="+83 Agilité"/>
+        </randomProperty>
+        <randomProperty suffix="d'Intelligence">
+          <randomPropertyEnchant name="+83 Intelligence"/>
+        </randomProperty>
+
+        <randomProperty suffix="de puissance">
+          <randomPropertyEnchant name="+166 à la puissance d'attaque"/>
+        </randomProperty>
+        <randomProperty suffix="de puissance des sorts">
+          <randomPropertyEnchant name="+97 à la puissance des sorts"/>
+        </randomProperty>
+        <randomProperty suffix="de défense">
+          <randomPropertyEnchant name="+83 au score de défense"/>
+        </randomProperty>
+
+        <randomProperty suffix="de protection contre les Arcanes">
+          <randomPropertyEnchant name="+83 Endurance"/>
+          <randomPropertyEnchant name="+55 à la résistance aux Arcanes"/>
+        </randomProperty>
+        <randomProperty suffix="de protection contre le Feu">
+          <randomPropertyEnchant name="+83 Endurance"/>
+          <randomPropertyEnchant name="+55 à la résistance au Feu"/>
+        </randomProperty>
+        <randomProperty suffix="de protection contre le Givre">
+
+          <randomPropertyEnchant name="+83 Endurance"/>
+          <randomPropertyEnchant name="+55 à la résistance au Givre"/>
+        </randomProperty>
+        <randomProperty suffix="de protection contre la Nature">
+          <randomPropertyEnchant name="+83 Endurance"/>
+          <randomPropertyEnchant name="+55 à la résistance à la Nature"/>
+        </randomProperty>
+        <randomProperty suffix="de protection contre l'Ombre">
+          <randomPropertyEnchant name="+83 Endurance"/>
+
+          <randomPropertyEnchant name="+55 à la résistance à l'Ombre"/>
+        </randomProperty>
+        <randomProperty suffix="du voyant">
+          <randomPropertyEnchant name="+65 Endurance"/>
+          <randomPropertyEnchant name="+43 au score de coup critique"/>
+          <randomPropertyEnchant name="+51 à la puissance des sorts"/>
+        </randomProperty>
+        <randomProperty suffix="du soldat">
+          <randomPropertyEnchant name="+43 Force"/>
+
+          <randomPropertyEnchant name="+65 Endurance"/>
+          <randomPropertyEnchant name="+43 au score de coup critique"/>
+        </randomProperty>
+        <randomProperty suffix="du médecin">
+          <randomPropertyEnchant name="+65 Endurance"/>
+          <randomPropertyEnchant name="+43 Intelligence"/>
+          <randomPropertyEnchant name="+51 à la puissance des sorts"/>
+        </randomProperty>
+        <randomProperty suffix="du champion">
+
+          <randomPropertyEnchant name="+43 Force"/>
+          <randomPropertyEnchant name="+65 Endurance"/>
+          <randomPropertyEnchant name="+43 au score de défense"/>
+        </randomProperty>
+      </randomProperties>
+      <disenchantLoot requiredSkillRank="350">
+        <item dropRate="5" icon="inv_misc_dust_infinite" id="34054" level="70" maxCount="5" minCount="2" name="Poussière d'infini" quality="1" type="Enchantement"/>
+        <item dropRate="3" icon="inv_enchant_essencecosmicgreater" id="34055" level="75" maxCount="2" minCount="1" name="Essence cosmique supérieure" quality="2" type="Élémentaire"/>
+        <item dropRate="2" icon="inv_enchant_dreamshard_02" id="34052" level="80" maxCount="1" minCount="1" name="Eclat de rêve" quality="3" type="Enchantement"/>
+
+      </disenchantLoot>
+    </info><datas>
+      <id>36383</id>
+      <name>Casque du golem</name>
+      <icon>inv_helmet_105</icon>
+      <overallQualityId>2</overallQualityId>
+      <bonding>2</bonding>
+
+      <classId>4</classId>
+      <equipData>
+        <inventoryType>1</inventoryType>
+        <subclassName>Plaques</subclassName>
+      </equipData>
+      <damageData/>
+      <armor armorBonus="0">1284</armor>
+
+      <randomEnchantData/>
+      <durability current="0" max="70"/>
+      <requiredLevel>78</requiredLevel>
+      <itemSource value="sourceType.none"/>
+    </datas></item>
+        <item icon="inv_helmet_105" id="36375" name="Heaume du kraken" rarity="2" url="i=36375" itemLevel="170" onList="1">
+          <filter name="itemLevel" value="170"/>
+          <filter name="requiredLevel" value="77"/>
+
+          <filter name="type" value="Plaques"/>
+          <filter name="source" value="sourceType.none"/>
+          <filter name="metaSockets" value="0"/>
+          <filter name="normalSockets" value="0"/>
+          <filter name="relevance" value="57"/>
+        <info>
+      <cost sellPrice="52433"/>
+      <randomProperties>
+        <randomProperty suffix="du singe">
+
+          <randomPropertyEnchant name="+53 Agilité"/>
+          <randomPropertyEnchant name="+81 Endurance"/>
+        </randomProperty>
+        <randomProperty suffix="de l'aigle">
+          <randomPropertyEnchant name="+53 Intelligence"/>
+          <randomPropertyEnchant name="+81 Endurance"/>
+        </randomProperty>
+        <randomProperty suffix="de l'ours">
+          <randomPropertyEnchant name="+81 Endurance"/>
+
+          <randomPropertyEnchant name="+53 Force"/>
+        </randomProperty>
+        <randomProperty suffix="de la baleine">
+          <randomPropertyEnchant name="+53 Esprit"/>
+          <randomPropertyEnchant name="+81 Endurance"/>
+        </randomProperty>
+        <randomProperty suffix="de la chouette">
+          <randomPropertyEnchant name="+53 Intelligence"/>
+          <randomPropertyEnchant name="+53 Esprit"/>
+
+        </randomProperty>
+        <randomProperty suffix="du gorille">
+          <randomPropertyEnchant name="+53 Intelligence"/>
+          <randomPropertyEnchant name="+53 Force"/>
+        </randomProperty>
+        <randomProperty suffix="de l'épervier">
+          <randomPropertyEnchant name="+53 Agilité"/>
+          <randomPropertyEnchant name="+53 Intelligence"/>
+        </randomProperty>
+
+        <randomProperty suffix="du sanglier">
+          <randomPropertyEnchant name="+53 Esprit"/>
+          <randomPropertyEnchant name="+53 Force"/>
+        </randomProperty>
+        <randomProperty suffix="du loup">
+          <randomPropertyEnchant name="+53 Agilité"/>
+          <randomPropertyEnchant name="+53 Esprit"/>
+        </randomProperty>
+        <randomProperty suffix="du tigre">
+
+          <randomPropertyEnchant name="+53 Agilité"/>
+          <randomPropertyEnchant name="+53 Force"/>
+        </randomProperty>
+        <randomProperty suffix="d'Esprit">
+          <randomPropertyEnchant name="+81 Esprit"/>
+        </randomProperty>
+        <randomProperty suffix="d'Endurance">
+          <randomPropertyEnchant name="+121 Endurance"/>
+        </randomProperty>
+
+        <randomProperty suffix="de Force">
+          <randomPropertyEnchant name="+81 Force"/>
+        </randomProperty>
+        <randomProperty suffix="d'Agilité">
+          <randomPropertyEnchant name="+81 Agilité"/>
+        </randomProperty>
+        <randomProperty suffix="d'Intelligence">
+          <randomPropertyEnchant name="+81 Intelligence"/>
+        </randomProperty>
+
+        <randomProperty suffix="de puissance">
+          <randomPropertyEnchant name="+162 à la puissance d'attaque"/>
+        </randomProperty>
+        <randomProperty suffix="de puissance des sorts">
+          <randomPropertyEnchant name="+94 à la puissance des sorts"/>
+        </randomProperty>
+        <randomProperty suffix="de défense">
+          <randomPropertyEnchant name="+81 au score de défense"/>
+        </randomProperty>
+
+        <randomProperty suffix="de protection contre les Arcanes">
+          <randomPropertyEnchant name="+81 Endurance"/>
+          <randomPropertyEnchant name="+53 à la résistance aux Arcanes"/>
+        </randomProperty>
+        <randomProperty suffix="de protection contre le Feu">
+          <randomPropertyEnchant name="+81 Endurance"/>
+          <randomPropertyEnchant name="+53 à la résistance au Feu"/>
+        </randomProperty>
+        <randomProperty suffix="de protection contre le Givre">
+
+          <randomPropertyEnchant name="+81 Endurance"/>
+          <randomPropertyEnchant name="+53 à la résistance au Givre"/>
+        </randomProperty>
+        <randomProperty suffix="de protection contre la Nature">
+          <randomPropertyEnchant name="+81 Endurance"/>
+          <randomPropertyEnchant name="+53 à la résistance à la Nature"/>
+        </randomProperty>
+        <randomProperty suffix="de protection contre l'Ombre">
+          <randomPropertyEnchant name="+81 Endurance"/>
+
+          <randomPropertyEnchant name="+53 à la résistance à l'Ombre"/>
+        </randomProperty>
+        <randomProperty suffix="du voyant">
+          <randomPropertyEnchant name="+63 Endurance"/>
+          <randomPropertyEnchant name="+42 au score de coup critique"/>
+          <randomPropertyEnchant name="+49 à la puissance des sorts"/>
+        </randomProperty>
+        <randomProperty suffix="du soldat">
+          <randomPropertyEnchant name="+42 Force"/>
+
+          <randomPropertyEnchant name="+63 Endurance"/>
+          <randomPropertyEnchant name="+42 au score de coup critique"/>
+        </randomProperty>
+        <randomProperty suffix="du médecin">
+          <randomPropertyEnchant name="+63 Endurance"/>
+          <randomPropertyEnchant name="+42 Intelligence"/>
+          <randomPropertyEnchant name="+49 à la puissance des sorts"/>
+        </randomProperty>
+        <randomProperty suffix="du champion">
+
+          <randomPropertyEnchant name="+42 Force"/>
+          <randomPropertyEnchant name="+63 Endurance"/>
+          <randomPropertyEnchant name="+42 au score de défense"/>
+        </randomProperty>
+      </randomProperties>
+      <disenchantLoot requiredSkillRank="350">
+        <item dropRate="5" icon="inv_misc_dust_infinite" id="34054" level="70" maxCount="5" minCount="2" name="Poussière d'infini" quality="1" type="Enchantement"/>
+        <item dropRate="3" icon="inv_enchant_essencecosmicgreater" id="34055" level="75" maxCount="2" minCount="1" name="Essence cosmique supérieure" quality="2" type="Élémentaire"/>
+        <item dropRate="2" icon="inv_enchant_dreamshard_02" id="34052" level="80" maxCount="1" minCount="1" name="Eclat de rêve" quality="3" type="Enchantement"/>
+
+      </disenchantLoot>
+    </info><datas>
+      <id>36375</id>
+      <name>Heaume du kraken</name>
+      <icon>inv_helmet_105</icon>
+      <overallQualityId>2</overallQualityId>
+      <bonding>2</bonding>
+
+      <classId>4</classId>
+      <equipData>
+        <inventoryType>1</inventoryType>
+        <subclassName>Plaques</subclassName>
+      </equipData>
+      <damageData/>
+      <armor armorBonus="0">1255</armor>
+
+      <randomEnchantData/>
+      <durability current="0" max="70"/>
+      <requiredLevel>77</requiredLevel>
+      <itemSource value="sourceType.none"/>
+    </datas></item>
+        <item icon="inv_helmet_104" id="37726" name="Heaume du roi Dred" rarity="3" url="i=37726" itemLevel="200" onList="1">
+          <filter name="itemLevel" value="200"/>
+          <filter name="requiredLevel" value="80"/>
+
+          <filter name="type" value="Mailles"/>
+          <filter areaId="4196" areaName="Donjon de Drak'Tharon" creatureId="27483" creatureName="Roi Dred" difficulty="h" dropRate="4" name="source" value="sourceType.creatureDrop"/>
+          <filter name="metaSockets" value="0"/>
+          <filter name="normalSockets" value="0"/>
+          <filter name="relevance" value="54"/>
+        <info>
+      <cost sellPrice="68369"/>
+      <disenchantLoot requiredSkillRank="325">
+        <item dropRate="6" icon="inv_enchant_dreamshard_02" id="34052" level="80" maxCount="1" minCount="1" name="Eclat de rêve" quality="3" type="Enchantement"/>
+
+      </disenchantLoot>
+      <dropCreatures>
+        <creature area="Donjon de Drak'Tharon" areaUrl="fl[source]=dungeon&amp;fl[dungeon]=4196&amp;fl[boss]=all" classification="1" dropRate="4" heroic="1" id="31349" maxLevel="82" minLevel="82" name="Roi Dred" type="Bête" url="fl[source]=dungeon&amp;fl[dungeon]=4196&amp;fl[difficulty]=normal&amp;fl[boss]=27483"/>
+      </dropCreatures>
+    </info><datas>
+      <id>37726</id>
+      <name>Heaume du roi Dred</name>
+      <icon>inv_helmet_104</icon>
+
+      <overallQualityId>3</overallQualityId>
+      <bonding>1</bonding>
+      <classId>4</classId>
+      <equipData>
+        <inventoryType>1</inventoryType>
+        <subclassName>Mailles</subclassName>
+
+      </equipData>
+      <damageData/>
+      <bonusAgility>55</bonusAgility>
+      <bonusStamina>78</bonusStamina>
+      <bonusIntellect>45</bonusIntellect>
+      <armor armorBonus="0">985</armor>
+      <durability current="0" max="70"/>
+
+      <requiredLevel>80</requiredLevel>
+      <bonusHitRating>52</bonusHitRating>
+      <spellData>
+        <spell>
+          <trigger>1</trigger>
+          <desc>Augmente de 156 la puissance d'attaque.</desc>
+        </spell>
+
+      </spellData>
+      <itemSource areaId="4196" areaName="Donjon de Drak'Tharon" creatureId="27483" creatureName="Roi Dred" difficulty="h" dropRate="4" value="sourceType.creatureDrop"/>
+    </datas></item>
+        <item icon="inv_helmet_104" id="37293" name="Masque du gardien" rarity="3" url="i=37293" itemLevel="200" onList="1">
+          <filter name="itemLevel" value="200"/>
+          <filter name="requiredLevel" value="80"/>
+          <filter name="type" value="Cuir"/>
+          <filter areaId="4228" areaName="L'Oculus" creatureId="27656" creatureName="Gardien-tellurique Eregos" difficulty="h" dropRate="4" name="source" value="sourceType.creatureDrop"/>
+          <filter name="metaSockets" value="1"/>
+
+          <filter name="normalSockets" value="1"/>
+          <filter name="relevance" value="54"/>
+        <info>
+      <cost sellPrice="56765"/>
+      <disenchantLoot requiredSkillRank="325">
+        <item dropRate="6" icon="inv_enchant_dreamshard_02" id="34052" level="80" maxCount="1" minCount="1" name="Eclat de rêve" quality="3" type="Enchantement"/>
+      </disenchantLoot>
+      <containerObjects>
+        <object area="L'Oculus" areaUrl="fl[source]=dungeon&amp;fl[dungeon]=4228&amp;fl[boss]=all" dropRate="4" id="193603" name="Cache d'Eregos"/>
+
+      </containerObjects>
+      <dropCreatures>
+        <creature area="L'Oculus" areaUrl="fl[source]=dungeon&amp;fl[dungeon]=4228&amp;fl[boss]=all" classification="1" dropRate="4" heroic="1" id="31561" maxLevel="82" minLevel="82" name="Gardien-tellurique Eregos" type="Draconien" url="fl[source]=dungeon&amp;fl[dungeon]=4228&amp;fl[difficulty]=normal&amp;fl[boss]=27656"/>
+      </dropCreatures>
+    </info><datas>
+      <id>37293</id>
+      <name>Masque du gardien</name>
+      <icon>inv_helmet_104</icon>
+
+      <overallQualityId>3</overallQualityId>
+      <bonding>1</bonding>
+      <classId>4</classId>
+      <equipData>
+        <inventoryType>1</inventoryType>
+        <subclassName>Cuir</subclassName>
+
+      </equipData>
+      <damageData/>
+      <bonusAgility>36</bonusAgility>
+      <bonusStamina>66</bonusStamina>
+      <armor armorBonus="0">443</armor>
+      <socketData>
+        <socket color="Meta"/>
+
+        <socket color="Blue"/>
+        <socketMatchEnchant>+8 Agilité</socketMatchEnchant>
+      </socketData>
+      <durability current="0" max="60"/>
+      <requiredLevel>80</requiredLevel>
+      <bonusExpertiseRating>62</bonusExpertiseRating>
+      <spellData>
+
+        <spell>
+          <trigger>1</trigger>
+          <desc>Augmente de 140 la puissance d'attaque.</desc>
+        </spell>
+      </spellData>
+      <itemSource areaId="4228" areaName="L'Oculus" creatureId="27656" creatureName="Gardien-tellurique Eregos" difficulty="h" dropRate="4" value="sourceType.creatureDrop"/>
+    </datas></item>
+        <item icon="inv_helmet128" id="39294" name="Casque de l'arc brûlé" rarity="4" url="i=39294" itemLevel="200" onList="1">
+
+          <filter name="itemLevel" value="200"/>
+          <filter name="requiredLevel" value="80"/>
+          <filter name="type" value="Mailles"/>
+          <filter areaId="3456" areaName="Naxxramas" creatureId="15928" creatureName="Thaddius" difficulty="n" dropRate="3" name="source" value="sourceType.creatureDrop"/>
+          <filter name="metaSockets" value="1"/>
+          <filter name="normalSockets" value="1"/>
+          <filter name="relevance" value="54"/>
+        <info>
+      <cost sellPrice="84277"/>
+
+      <disenchantLoot requiredSkillRank="375">
+        <item dropRate="6" icon="inv_enchant_abysscrystal" id="34057" level="80" maxCount="1" minCount="1" name="Cristal abyssal" quality="4" type="Enchantement"/>
+      </disenchantLoot>
+      <dropCreatures>
+        <creature area="Naxxramas" areaUrl="fl[source]=dungeon&amp;fl[dungeon]=3456&amp;fl[boss]=all" classification="3" dropRate="3" id="15928" maxLevel="83" minLevel="83" name="Thaddius" type="Mort-vivant" url="fl[source]=dungeon&amp;fl[dungeon]=3456&amp;fl[difficulty]=normal&amp;fl[boss]=15928"/>
+      </dropCreatures>
+    </info><datas>
+      <id>39294</id>
+
+      <name>Casque de l'arc brûlé</name>
+      <icon>inv_helmet128</icon>
+      <overallQualityId>4</overallQualityId>
+      <bonding>1</bonding>
+      <classId>4</classId>
+      <equipData>
+
+        <inventoryType>1</inventoryType>
+        <subclassName>Mailles</subclassName>
+      </equipData>
+      <damageData/>
+      <bonusAgility>47</bonusAgility>
+      <bonusStamina>78</bonusStamina>
+      <bonusIntellect>47</bonusIntellect>
+
+      <armor armorBonus="0">1019</armor>
+      <socketData>
+        <socket color="Meta"/>
+        <socket color="Blue"/>
+        <socketMatchEnchant>+8 au score de coup critique</socketMatchEnchant>
+      </socketData>
+      <durability current="0" max="85"/>
+      <requiredLevel>80</requiredLevel>
+
+      <bonusCritRating>48</bonusCritRating>
+      <bonusHasteRating>30</bonusHasteRating>
+      <spellData>
+        <spell>
+          <trigger>1</trigger>
+          <desc>Augmente de 148 la puissance d'attaque.</desc>
+        </spell>
+
+      </spellData>
+      <itemSource areaId="3456" areaName="Naxxramas" creatureId="15928" creatureName="Thaddius" difficulty="n" dropRate="3" value="sourceType.creatureDrop"/>
+    </datas></item>
+        <item icon="inv_helmet_108" id="40329" name="Chaperon de l'exode" rarity="4" url="i=40329" itemLevel="213" onList="1">
+          <filter name="itemLevel" value="213"/>
+          <filter name="requiredLevel" value="80"/>
+          <filter name="type" value="Cuir"/>
+          <filter areaId="3456" areaName="Naxxramas" creatureId="16060" creatureName="Gothik le Moissonneur" difficulty="h" dropRate="3" name="source" value="sourceType.creatureDrop"/>
+          <filter name="metaSockets" value="1"/>
+
+          <filter name="normalSockets" value="1"/>
+          <filter name="relevance" value="52"/>
+        <info>
+      <cost sellPrice="76037"/>
+      <disenchantLoot requiredSkillRank="375">
+        <item dropRate="6" icon="inv_enchant_abysscrystal" id="34057" level="80" maxCount="1" minCount="1" name="Cristal abyssal" quality="4" type="Enchantement"/>
+      </disenchantLoot>
+      <dropCreatures>
+        <creature area="Naxxramas" areaUrl="fl[source]=dungeon&amp;fl[dungeon]=3456&amp;fl[boss]=all" classification="3" dropRate="3" heroic="1" id="29955" maxLevel="83" minLevel="83" name="Gothik le Moissonneur" type="Mort-vivant" url="fl[source]=dungeon&amp;fl[dungeon]=3456&amp;fl[difficulty]=normal&amp;fl[boss]=16060"/>
+
+      </dropCreatures>
+    </info><datas>
+      <id>40329</id>
+      <name>Chaperon de l'exode</name>
+      <icon>inv_helmet_108</icon>
+      <overallQualityId>4</overallQualityId>
+      <bonding>1</bonding>
+
+      <classId>4</classId>
+      <equipData>
+        <inventoryType>1</inventoryType>
+        <subclassName>Cuir</subclassName>
+      </equipData>
+      <damageData/>
+      <bonusAgility>84</bonusAgility>
+
+      <bonusStamina>115</bonusStamina>
+      <armor armorBonus="0">470</armor>
+      <socketData>
+        <socket color="Meta"/>
+        <socket color="Red"/>
+        <socketMatchEnchant>+12 à la puissance d'attaque</socketMatchEnchant>
+      </socketData>
+
+      <durability current="0" max="70"/>
+      <requiredLevel>80</requiredLevel>
+      <bonusHasteRating>50</bonusHasteRating>
+      <bonusExpertiseRating>35</bonusExpertiseRating>
+      <spellData>
+        <spell>
+          <trigger>1</trigger>
+
+          <desc>Augmente de 134 la puissance d'attaque.</desc>
+        </spell>
+      </spellData>
+      <itemSource areaId="3456" areaName="Naxxramas" creatureId="16060" creatureName="Gothik le Moissonneur" difficulty="h" dropRate="3" value="sourceType.creatureDrop"/>
+    </datas></item>
+        <item icon="inv_helmet_108" id="39399" name="Heaume des vastes légions" rarity="4" url="i=39399" itemLevel="200" onList="1">
+          <filter name="itemLevel" value="200"/>
+          <filter name="requiredLevel" value="80"/>
+
+          <filter name="type" value="Cuir"/>
+          <filter areaId="3456" areaName="Naxxramas" creatureId="15989" creatureName="Saphiron" difficulty="n" dropRate="3" name="source" value="sourceType.creatureDrop"/>
+          <filter name="metaSockets" value="1"/>
+          <filter name="normalSockets" value="1"/>
+          <filter name="relevance" value="50"/>
+        <info>
+      <cost sellPrice="75437"/>
+      <disenchantLoot requiredSkillRank="375">
+        <item dropRate="6" icon="inv_enchant_abysscrystal" id="34057" level="80" maxCount="1" minCount="1" name="Cristal abyssal" quality="4" type="Enchantement"/>
+
+      </disenchantLoot>
+      <dropCreatures>
+        <creature area="Naxxramas" areaUrl="fl[source]=dungeon&amp;fl[dungeon]=3456&amp;fl[boss]=all" classification="3" dropRate="3" id="15989" maxLevel="83" minLevel="83" name="Saphiron" type="Mort-vivant" url="fl[source]=dungeon&amp;fl[dungeon]=3456&amp;fl[difficulty]=normal&amp;fl[boss]=15989"/>
+      </dropCreatures>
+    </info><datas>
+      <id>39399</id>
+      <name>Heaume des vastes légions</name>
+      <icon>inv_helmet_108</icon>
+
+      <overallQualityId>4</overallQualityId>
+      <bonding>1</bonding>
+      <classId>4</classId>
+      <equipData>
+        <inventoryType>1</inventoryType>
+        <subclassName>Cuir</subclassName>
+
+      </equipData>
+      <damageData/>
+      <bonusAgility>74</bonusAgility>
+      <bonusStamina>78</bonusStamina>
+      <armor armorBonus="0">458</armor>
+      <socketData>
+        <socket color="Meta"/>
+
+        <socket color="Red"/>
+        <socketMatchEnchant>+8 au score de hâte</socketMatchEnchant>
+      </socketData>
+      <durability current="0" max="70"/>
+      <requiredLevel>80</requiredLevel>
+      <bonusHitRating>43</bonusHitRating>
+      <bonusHasteRating>48</bonusHasteRating>
+
+      <spellData>
+        <spell>
+          <trigger>1</trigger>
+          <desc>Augmente de 120 la puissance d'attaque.</desc>
+        </spell>
+      </spellData>
+      <itemSource areaId="3456" areaName="Naxxramas" creatureId="15989" creatureName="Saphiron" difficulty="n" dropRate="3" value="sourceType.creatureDrop"/>
+    </datas></item>
+
+      </items>
+    </searchResults>
+  <datas>
+      <id>41386</id>
+      <name>Heaume à pointe en acier-titan</name>
+      <icon>inv_helmet_134</icon>
+      <overallQualityId>4</overallQualityId>
+
+      <bonding>2</bonding>
+      <classId>4</classId>
+      <equipData>
+        <inventoryType>1</inventoryType>
+        <subclassName>Plaques</subclassName>
+      </equipData>
+      <damageData/>
+
+      <bonusStrength>113</bonusStrength>
+      <bonusAgility>60</bonusAgility>
+      <armor armorBonus="0">1821</armor>
+      <socketData>
+        <socket color="Meta"/>
+        <socketMatchEnchant>+6 Agilité</socketMatchEnchant>
+      </socketData>
+
+      <durability current="0" max="100"/>
+      <requiredLevel>80</requiredLevel>
+      <bonusHitRating>60</bonusHitRating>
+      <itemSource value="sourceType.createdBySpell"/>
+    </datas></armorySearch>
+</page>

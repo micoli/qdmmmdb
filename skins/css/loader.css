@@ -1,0 +1,53 @@
+#loading-mask{
+	background-color	: white;
+	height				: 100%;
+	position			: absolute;
+	left				: 0;
+	top					: 0;
+	width				: 100%;
+	z-index				: 20000;
+}
+
+#loading{
+	height				: auto;
+	position			: absolute;
+	left				: 45%;
+	top					: 40%;
+	padding				: 2px;
+	z-index				: 20001;
+}
+
+#loading a {
+	color				: #225588;
+}
+
+#loading h1 {
+	text-align			: center;
+	padding-bottom		: 20px;
+}
+
+#loading img {
+	text-align			: center;
+	margin-right		: 8px;
+	margin-bottom		: 30px;
+	float				: left;
+	vertical-align		: top;
+	clear				: both;
+}
+
+#loading .loading-indicator{
+	background			: white;
+	color				: #444;
+	font				: bold 13px Helvetica, Arial, sans-serif;
+	height				: auto;
+	margin				: 0;
+	padding				: 10px;
+}
+
+#loading-msg {
+	text-align			: center;
+	font-size			: 10px;
+	clear				: both;
+	float				: left;
+	font-weight			: normal;
+}
