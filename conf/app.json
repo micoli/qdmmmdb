@@ -1,0 +1,5 @@
+{
+	"mainClass"		: "qd.mediadb.app",
+	"title"			: "Movie Manager",
+	"loaderImg"		: "skins/resources/125.png"
+}

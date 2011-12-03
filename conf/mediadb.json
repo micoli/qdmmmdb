@@ -1,0 +1,12 @@
+{
+	"helperSite"	:[{
+		"url"		: "/sickbeard/",
+		"title"		: "SickBeard"
+	},{
+		"url"		: "/sabnzbd/",
+		"title"		: "SabNZBd"
+	},{
+		"url"		: "/eXtplorer/",
+		"title"		: "eXtplorer"
+	}]
+}
