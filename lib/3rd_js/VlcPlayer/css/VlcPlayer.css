@@ -1,0 +1,100 @@
+.ext-ux-vlcplayer-play {
+	background-image:url(./images/control_play_blue.png) !important; 	
+}
+
+.ext-ux-vlcplayer-eject {
+	background-image:url(./images/control_eject_blue.png) !important; 	
+}
+
+.ext-ux-vlcplayer-fullscreen{
+	background-image:url(./images/control_fullscreen.png) !important; 	
+}
+
+
+.ext-ux-vlcplayer-stop {
+	background-image:url(./images/control_stop_blue.png) !important; 	
+}
+
+.ext-ux-vlcplayer-pause {
+	background-image:url(./images/control_pause_blue.png) !important; 	
+}
+
+.ext-ux-vlcplayer-start {
+	background-image:url(./images/control_start_blue.png) !important; 	
+}
+
+.ext-ux-vlcplayer-end {
+	background-image:url(./images/control_end_blue.png) !important; 	
+}
+
+.ext-ux-vlcplayer-mute {
+	background-image:url(./images/sound_mute.png) !important; 	
+}
+
+.ext-ux-vlcplayer-volume {
+	background-image:url(./images/sound_none.png) !important; 	
+}
+
+.ext-ux-vlcplayer-volumepanel-fx-el {
+    position:absolute;
+    top:-120px;
+    height : 120px;
+    width:25px;
+    z-index:1120000;
+}
+
+.ext-ux-vlcplayer-slider-hbar {
+	border: solid 1px #B5B8C8;
+	background-color: white;
+	background-image:url(./images/vlcplayer-slider-progress.png);
+	background-position:-1280px 0;
+	background-repeat:no-repeat;
+	height: 1px;
+	z-index:1;
+	position: relative;
+	top: 10px;
+}
+.ext-ux-vlcplayer-slider-thumb {
+	position: relative;
+	z-index:2;
+	width: 11px;
+	height: 15px;
+	top: 1px;
+	left: 0px;
+	background: transparent url(./images/vlcplayer-slider-thumbs.png) no-repeat scroll 0px 0px;
+	cursor: pointer;
+}
+.ext-ux-vlcplayer-slider-thumb .ext-ux-vlcplayer-slider-thumb-over {
+	background: transparent url(./images/vlcplayer-slider-thumbs.png) no-repeat scroll -15px 0px;
+}
+
+.ext-ux-vlcplayer-slider-thumb .ext-ux-vlcplayer-item-disabled .ext-ux-vlcplayer-slider-thumb-over  {
+	background: transparent url(./images/vlcplayer-slider-thumbs.png) no-repeat scroll 0px 0px !important;
+}
+
+.ext-ux-vlcplayer-slider-vbar {
+	border: solid 1px #B5B8C8;
+	background: white;
+	width: 1px;
+	z-index:1;
+	top:4px;
+	position: relative;
+	left: 10px;
+}
+.ext-ux-vlcplayer-slider-vthumb {
+	position: relative;
+	z-index:2;
+	width: 15px;
+	height: 11px;
+	left: 4px;
+	bottom: 10px;
+	background: transparent url(./images/vlcplayer-slider-thumbs.png) no-repeat scroll 0px -15px;
+	cursor: pointer;
+}
+.ext-ux-vlcplayer-slider-thumb .vlcplayer-slider-vthumb-over {
+	background: transparent url(./images/vlcplayer-slider-thumbs.png) no-repeat scroll -15px -15px;
+}
+
+.ext-ux-vlcplayer-slider-vthumb .ext-ux-vlcplayer-item-disabled .ext-ux-vlcplayer-slider-vthumb-over  {
+	background: transparent url(./images/vlcplayer-slider-thumbs.png) no-repeat scroll 0px -15px !important;
+}

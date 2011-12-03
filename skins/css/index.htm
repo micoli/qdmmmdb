@@ -1,0 +1,126 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>phatfusion : lightbox</title>
+
+<link rel="stylesheet" href="../_common/css/main.css" type="text/css" media="all">
+
+<link href="lightbox.css" rel="stylesheet" type="text/css" />
+
+<script type="text/javascript" src="../_common/js/mootools.js"></script>
+<script type="text/javascript" src="lightbox.js"></script>
+
+
+
+</head>
+<body>
+
+	<div id="container">
+	
+		<div id="logo"><h1>phatfusion</h1></div>
+		<div class="nav"><a href="../index.htm">home</a></div>
+		<p class="desc">javascript and flash development.</p>
+		
+		
+		<h2 class="lightbox">lightbox</h2>
+		<p class="version">version 1.5</p>
+		<div class="description">
+		<p>An inline image popup, overlays and fades out the current page.</p>
+		<p>This is based on <a href="http://www.digitalia.be/software/slimbox">Slimbox</a> by Christophe Beyls.</p>
+		</div>
+		
+		
+		<h3 class="example">example</h3>
+		<div id="example">
+			<a href="images/26.jpg" rel="lightbox[mando]" id="image1" title="image 1"><img src="images/26t.jpg" border="0" alt="" /></a>
+		  <div class="lightboxDesc image1">My description for image 1</div>
+		  <a href="images/27.jpg" rel="lightbox[mando]" id="image2" title="image 2"><img src="images/27t.jpg" border="0" alt="" /></a>
+		  <div class="lightboxDesc image2">My description for image 2</div>
+		  <a href="images/28.jpg" rel="lightbox[mando]" id="image3" title="image 3"><img src="images/28t.jpg" border="0" alt="" /></a>
+		  <div class="lightboxDesc image3">My description for image 3</div>
+		
+		<script type="text/javascript">
+			window.addEvent('domready',function(){
+				Lightbox.init({descriptions: '.lightboxDesc', showControls: true});
+			});
+		</script>
+		</div>
+		
+		<h3 class="features">features</h3>
+		<div id="features">
+			<ul>
+				<li>Lightbox has the following added features compared to Slimbox</li>
+				<li>Specify a containing div rather than just the body.</li>
+				<li>Place the next/previous buttons in the footer.</li>
+				<li>Add a description with html markup.</li>
+			</ul>
+		</div>
+		
+		<h3 class="usage">usage</h3>
+		<div id="usage">
+		<p>Add the <code>rel="lightbox"</code> attribute to the links pointing to your full-sized images. Use the optional title attribute if you want to show a caption:</p>
+		  <pre><code>&lt;a href=&quot;image.jpg&quot; rel=&quot;lightbox&quot; title=&quot;my image&quot;&gt;image 1&lt;/a&gt;</code></pre>
+		  <p>For sets of related images that you want to group and make navigable, add a group name to the rel attribute after lightbox, inside square brackets:</p>
+		  <pre><code>&lt;a href=&quot;/images/image-1.jpg&quot; rel=&quot;lightbox[phatfusion]&quot;&gt;image 1&lt;/a&gt;<br />&lt;a href=&quot;/images/image-2.jpg&quot; rel=&quot;lightbox[phatfusion]&quot;&gt;image 2&lt;/a&gt;<br />&lt;a href=&quot;/images/image-3.jpg&quot; rel=&quot;lightbox[phatfusion]&quot;&gt;image 3&lt;/a&gt; </code></pre>
+		  <p>The following code needs to be called onDomReady or inline after the images.</p>
+		  <pre><code>Lightbox.init();</code></pre>
+		  <p>To add an html description to the image, create a div and give it a two classnames, one to say that it is a description and the other should be the id of the a tag:</p>
+		  <pre><code>&lt;a href="image.jpg" rel="lightbox" title="my image" id="image1"&gt;&lt;/a&gt;
+&lt;div class="lightboxDesc image1"&gt;my html description&lt;/div&gt;</code></pre>
+		<p>Then when you initialise the lightbox, set the description option:</p>
+		<pre><code>Lightbox.init({descriptions: '.lightboxDesc')</code></pre>
+<p>Alternatively, you can also launch the Lightbox effect using Javascript to display a single image. Just call the following method, passing the URL of the image as first parameter and optionally a title as second parameter:</p>
+		  <pre><code>Lightbox.show('images/image-1.jpg', 'Spheres in construction');</code></pre>
+			<h3 class="options">options</h3>
+			<dl>
+				<dt>opacity</dt>
+				<dd>the opacity of the background. Default: 0.8</dd>
+				<dt>showControls</dt>
+				<dd> show the controls in the footer. (true/false - default is false) The styles need to be changed when using this option - see lightbox.css</dd>
+				<dt>description</dt>
+				<dd>either a css selector or an array using the $$() of the elements that contain the descriptions.</dd>
+				<dt>showNumbers</dt>
+				<dd>show the image numbers - 1 of 6. (Default: true)</dd>
+				<dt>container</dt>
+				<dd>a div that should contain the background. Default: document.body</dd>
+			</dl>
+		</div>
+		
+		<h3 class="compatibility">browser compatibility</h3>
+		<div id="compatibility">
+			<ul>
+				<li>Firefox 2 (mac / pc)</li>
+				<li>IE 7</li>
+				<li>IE 6</li>
+				<li>Safari (mac)</li>
+			</ul>
+		</div>
+		
+		<h3 class="requirements">requirements</h3>
+		<div id="requirements">
+			<ul>
+				<li><a href="http://www.mootools.net" target="_blank">mootools v1.11</a></li>
+			</ul>
+		</div>
+		
+		<h3 class="downloads">downloads</h3>
+		<div id="downloads">
+			<ul>
+				<li><a href="lightbox.zip">lightbox.zip</a></li>
+			</ul>
+		</div>
+		
+		
+	</div>
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+var pageTracker = _gat._getTracker("UA-3333085-1");
+pageTracker._initData();
+pageTracker._trackPageview();
+</script>
+</body>
+</html>

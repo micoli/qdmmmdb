@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type="text/xsl" href="/arm/modules/extjswowarmory/xsl/item.xsl"?><page globalSearch="1" lang="fr_fr" requestUrl="/guild-info.xml">
+  <guildKey factionId="0" name="Addict" nameUrl="Addict" realm="Eitrigg" realmUrl="Eitrigg" url="r=Eitrigg&amp;n=Addict"/>
+  <guildInfo>
+    <guild>
+      <members filterField="" filterValue="" maxPage="1" memberCount="238" page="1" sortDir="a">
+        <character class="Voleur" classId="4" gender="(F)" genderId="1" level="80" name="Vona" race="Humain" raceId="1" rank="0" url="r=Eitrigg&amp;n=Vona"/>
+        <character class="Druide" classId="11" gender="(M)" genderId="0" level="80" name="Thepoo" race="Elfe de la nuit" raceId="4" rank="1" url="r=Eitrigg&amp;n=Thepoo"/>
+        <character class="Druide" classId="11" gender="(F)" genderId="1" level="80" name="Rudraide" race="Elfe de la nuit" raceId="4" rank="2" url="r=Eitrigg&amp;n=Rudraide"/>
+        <character class="Druide" classId="11" gender="(M)" genderId="0" level="80" name="Kaerok" race="Elfe de la nuit" raceId="4" rank="2" url="r=Eitrigg&amp;n=Kaerok"/>
+        <character class="Guerrier" classId="1" gender="(M)" genderId="0" level="80" name="Méniak" race="Nain" raceId="3" rank="2" url="r=Eitrigg&amp;n=M%C3%A9niak"/>
+        <character class="Guerrier" classId="1" gender="(M)" genderId="0" level="80" name="Ekimius" race="Humain" raceId="1" rank="2" url="r=Eitrigg&amp;n=Ekimius"/>
+        <character class="Prêtre" classId="5" gender="(F)" genderId="1" level="80" name="Volesprits" race="Nain" raceId="3" rank="2" url="r=Eitrigg&amp;n=Volesprits"/>
+        <character class="Mage" classId="8" gender="(M)" genderId="0" level="80" name="Melodus" race="Humain" raceId="1" rank="2" url="r=Eitrigg&amp;n=Melodus"/>
+        <character class="Mage" classId="8" gender="(M)" genderId="0" level="80" name="Gysdawan" race="Humain" raceId="1" rank="2" url="r=Eitrigg&amp;n=Gysdawan"/>
+        <character class="Guerrier" classId="1" gender="(F)" genderId="1" level="80" name="Louloutel" race="Elfe de la nuit" raceId="4" rank="2" url="r=Eitrigg&amp;n=Louloutel"/>
+        <character class="Chasseur" classId="3" gender="(F)" genderId="1" level="80" name="Agla" race="Elfe de la nuit" raceId="4" rank="3" url="r=Eitrigg&amp;n=Agla"/>
+        <character class="Voleur" classId="4" gender="(M)" genderId="0" level="80" name="Molvanian" race="Elfe de la nuit" raceId="4" rank="3" url="r=Eitrigg&amp;n=Molvanian"/>
+        <character class="Prêtre" classId="5" gender="(F)" genderId="1" level="80" name="Fantasme" race="Humain" raceId="1" rank="4" url="r=Eitrigg&amp;n=Fantasme"/>
+        <character class="Mage" classId="8" gender="(F)" genderId="1" level="80" name="Djéli" race="Humain" raceId="1" rank="4" url="r=Eitrigg&amp;n=Dj%C3%A9li"/>
+        <character class="Druide" classId="11" gender="(M)" genderId="0" level="80" name="Loulouttel" race="Elfe de la nuit" raceId="4" rank="4" url="r=Eitrigg&amp;n=Loulouttel"/>
+        <character class="Guerrier" classId="1" gender="(F)" genderId="1" level="80" name="Cassandre" race="Humain" raceId="1" rank="4" url="r=Eitrigg&amp;n=Cassandre"/>
+        <character class="Paladin" classId="2" gender="(M)" genderId="0" level="80" name="Horuss" race="Nain" raceId="3" rank="4" url="r=Eitrigg&amp;n=Horuss"/>
+        <character class="Mage" classId="8" gender="(F)" genderId="1" level="80" name="Câlysta" race="Draeneï" raceId="11" rank="5" url="r=Eitrigg&amp;n=C%C3%A2lysta"/>
+        <character class="Guerrier" classId="1" gender="(M)" genderId="0" level="80" name="Kasuse" race="Humain" raceId="1" rank="5" url="r=Eitrigg&amp;n=Kasuse"/>
+        <character class="Chasseur" classId="3" gender="(M)" genderId="0" level="80" name="Lanfire" race="Nain" raceId="3" rank="5" url="r=Eitrigg&amp;n=Lanfire"/>
+        <character class="Guerrier" classId="1" gender="(M)" genderId="0" level="80" name="Elfeyes" race="Elfe de la nuit" raceId="4" rank="5" url="r=Eitrigg&amp;n=Elfeyes"/>
+        <character class="Druide" classId="11" gender="(F)" genderId="1" level="80" name="Ivaelia" race="Elfe de la nuit" raceId="4" rank="5" url="r=Eitrigg&amp;n=Ivaelia"/>
+        <character class="Démoniste" classId="9" gender="(M)" genderId="0" level="80" name="Flanigan" race="Humain" raceId="1" rank="5" url="r=Eitrigg&amp;n=Flanigan"/>
+        <character class="Chevalier de la mort" classId="6" gender="(M)" genderId="0" level="80" name="Kargas" race="Elfe de la nuit" raceId="4" rank="6" url="r=Eitrigg&amp;n=Kargas"/>
+        <character class="Démoniste" classId="9" gender="(M)" genderId="0" level="80" name="Xendercage" race="Humain" raceId="1" rank="7" url="r=Eitrigg&amp;n=Xendercage"/>
+        <character class="Mage" classId="8" gender="(F)" genderId="1" level="80" name="Minidodoll" race="Humain" raceId="1" rank="7" url="r=Eitrigg&amp;n=Minidodoll"/>
+        <character class="Guerrier" classId="1" gender="(M)" genderId="0" level="80" name="Aronis" race="Elfe de la nuit" raceId="4" rank="7" url="r=Eitrigg&amp;n=Aronis"/>
+        <character class="Démoniste" classId="9" gender="(M)" genderId="0" level="80" name="Alastør" race="Gnome" raceId="7" rank="7" url="r=Eitrigg&amp;n=Alast%C3%B8r"/>
+        <character class="Mage" classId="8" gender="(F)" genderId="1" level="80" name="Aesis" race="Gnome" raceId="7" rank="7" url="r=Eitrigg&amp;n=Aesis"/>
+        <character class="Guerrier" classId="1" gender="(F)" genderId="1" level="80" name="Lylat" race="Elfe de la nuit" raceId="4" rank="7" url="r=Eitrigg&amp;n=Lylat"/>
+        <character class="Guerrier" classId="1" gender="(M)" genderId="0" level="80" name="Schaka" race="Elfe de la nuit" raceId="4" rank="8" url="r=Eitrigg&amp;n=Schaka"/>
+        <character class="Chasseur" classId="3" gender="(F)" genderId="1" level="80" name="Andaman" race="Draeneï" raceId="11" rank="8" url="r=Eitrigg&amp;n=Andaman"/>
+        <character class="Prêtre" classId="5" gender="(M)" genderId="0" level="80" name="Panedalu" race="Humain" raceId="1" rank="8" url="r=Eitrigg&amp;n=Panedalu"/>
+        <character class="Paladin" classId="2" gender="(M)" genderId="0" level="80" name="Ydetiaegnor" race="Draeneï" raceId="11" rank="9" url="r=Eitrigg&amp;n=Ydetiaegnor"/>
+        <character class="Voleur" classId="4" gender="(F)" genderId="1" level="80" name="Tryska" race="Gnome" raceId="7" rank="9" url="r=Eitrigg&amp;n=Tryska"/>
+        <character class="Prêtre" classId="5" gender="(M)" genderId="0" level="79" name="Arsenay" race="Humain" raceId="1" rank="2" url="r=Eitrigg&amp;n=Arsenay"/>
+        <character class="Mage" classId="8" gender="(F)" genderId="1" level="79" name="Edwïna" race="Humain" raceId="1" rank="5" url="r=Eitrigg&amp;n=Edw%C3%AFna"/>
+        <character class="Prêtre" classId="5" gender="(F)" genderId="1" level="79" name="Chrystäl" race="Elfe de la nuit" raceId="4" rank="8" url="r=Eitrigg&amp;n=Chryst%C3%A4l"/>
+        <character class="Chevalier de la mort" classId="6" gender="(F)" genderId="1" level="78" name="Azn" race="Humain" raceId="1" rank="6" url="r=Eitrigg&amp;n=Azn"/>
+        <character class="Chasseur" classId="3" gender="(F)" genderId="1" level="78" name="Lilounnette" race="Elfe de la nuit" raceId="4" rank="7" url="r=Eitrigg&amp;n=Lilounnette"/>
+        <character class="Druide" classId="11" gender="(F)" genderId="1" level="78" name="Neenuit" race="Elfe de la nuit" raceId="4" rank="7" url="r=Eitrigg&amp;n=Neenuit"/>
+        <character class="Druide" classId="11" gender="(M)" genderId="0" level="77" name="Robbart" race="Elfe de la nuit" raceId="4" rank="1" url="r=Eitrigg&amp;n=Robbart"/>
+        <character class="Paladin" classId="2" gender="(M)" genderId="0" level="77" name="Stromar" race="Humain" raceId="1" rank="2" url="r=Eitrigg&amp;n=Stromar"/>
+        <character class="Druide" classId="11" gender="(M)" genderId="0" level="77" name="Ditomazzo" race="Elfe de la nuit" raceId="4" rank="3" url="r=Eitrigg&amp;n=Ditomazzo"/>
+        <character class="Chaman" classId="7" gender="(F)" genderId="1" level="77" name="Chachounne" race="Draeneï" raceId="11" rank="4" url="r=Eitrigg&amp;n=Chachounne"/>
+        <character class="Paladin" classId="2" gender="(M)" genderId="0" level="77" name="Drakkard" race="Draeneï" raceId="11" rank="4" url="r=Eitrigg&amp;n=Drakkard"/>
+        <character class="Mage" classId="8" gender="(M)" genderId="0" level="77" name="Flik" race="Humain" raceId="1" rank="5" url="r=Eitrigg&amp;n=Flik"/>
+        <character class="Prêtre" classId="5" gender="(M)" genderId="0" level="77" name="Socrates" race="Humain" raceId="1" rank="7" url="r=Eitrigg&amp;n=Socrates"/>
+        <character class="Mage" classId="8" gender="(M)" genderId="0" level="77" name="Sharou" race="Humain" raceId="1" rank="7" url="r=Eitrigg&amp;n=Sharou"/>
+        <character class="Chasseur" classId="3" gender="(M)" genderId="0" level="76" name="Darkkameo" race="Elfe de la nuit" raceId="4" rank="2" url="r=Eitrigg&amp;n=Darkkameo"/>
+        <character class="Prêtre" classId="5" gender="(M)" genderId="0" level="76" name="Goldpriest" race="Humain" raceId="1" rank="5" url="r=Eitrigg&amp;n=Goldpriest"/>
+        <character class="Chevalier de la mort" classId="6" gender="(M)" genderId="0" level="76" name="Azgule" race="Draeneï" raceId="11" rank="6" url="r=Eitrigg&amp;n=Azgule"/>
+        <character class="Paladin" classId="2" gender="(F)" genderId="1" level="75" name="Drjekyl" race="Draeneï" raceId="11" rank="2" url="r=Eitrigg&amp;n=Drjekyl"/>
+        <character class="Chaman" classId="7" gender="(F)" genderId="1" level="75" name="Éther" race="Draeneï" raceId="11" rank="2" url="r=Eitrigg&amp;n=%C3%89ther"/>
+        <character class="Chaman" classId="7" gender="(F)" genderId="1" level="75" name="Chamane" race="Draeneï" raceId="11" rank="4" url="r=Eitrigg&amp;n=Chamane"/>
+        <character class="Démoniste" classId="9" gender="(F)" genderId="1" level="75" name="Amnësiä" race="Gnome" raceId="7" rank="5" url="r=Eitrigg&amp;n=Amn%C3%ABsi%C3%A4"/>
+        <character class="Prêtre" classId="5" gender="(F)" genderId="1" level="75" name="Mytsuki" race="Elfe de la nuit" raceId="4" rank="7" url="r=Eitrigg&amp;n=Mytsuki"/>
+        <character class="Prêtre" classId="5" gender="(M)" genderId="0" level="75" name="Shinco" race="Humain" raceId="1" rank="7" url="r=Eitrigg&amp;n=Shinco"/>
+        <character class="Chasseur" classId="3" gender="(F)" genderId="1" level="75" name="Flochipie" race="Elfe de la nuit" raceId="4" rank="8" url="r=Eitrigg&amp;n=Flochipie"/>
+        <character class="Paladin" classId="2" gender="(F)" genderId="1" level="74" name="Fahya" race="Humain" raceId="1" rank="1" url="r=Eitrigg&amp;n=Fahya"/>
+        <character class="Chasseur" classId="3" gender="(F)" genderId="1" level="74" name="Melodi" race="Elfe de la nuit" raceId="4" rank="4" url="r=Eitrigg&amp;n=Melodi"/>
+        <character class="Voleur" classId="4" gender="(F)" genderId="1" level="74" name="Nathalia" race="Humain" raceId="1" rank="4" url="r=Eitrigg&amp;n=Nathalia"/>
+        <character class="Druide" classId="11" gender="(M)" genderId="0" level="74" name="Estaca" race="Elfe de la nuit" raceId="4" rank="4" url="r=Eitrigg&amp;n=Estaca"/>
+        <character class="Paladin" classId="2" gender="(M)" genderId="0" level="74" name="Pallouff" race="Humain" raceId="1" rank="4" url="r=Eitrigg&amp;n=Pallouff"/>
+        <character class="Druide" classId="11" gender="(F)" genderId="1" level="74" name="Bluelight" race="Elfe de la nuit" raceId="4" rank="5" url="r=Eitrigg&amp;n=Bluelight"/>
+        <character class="Démoniste" classId="9" gender="(F)" genderId="1" level="74" name="Aimy" race="Humain" raceId="1" rank="7" url="r=Eitrigg&amp;n=Aimy"/>
+        <character class="Druide" classId="11" gender="(M)" genderId="0" level="74" name="Cùchulainn" race="Elfe de la nuit" raceId="4" rank="7" url="r=Eitrigg&amp;n=C%C3%B9chulainn"/>
+        <character class="Chevalier de la mort" classId="6" gender="(M)" genderId="0" level="73" name="Pokerdas" race="Draeneï" raceId="11" rank="3" url="r=Eitrigg&amp;n=Pokerdas"/>
+        <character class="Druide" classId="11" gender="(F)" genderId="1" level="73" name="Llana" race="Elfe de la nuit" raceId="4" rank="5" url="r=Eitrigg&amp;n=Llana"/>
+        <character class="Guerrier" classId="1" gender="(M)" genderId="0" level="73" name="Doumé" race="Humain" raceId="1" rank="5" url="r=Eitrigg&amp;n=Doum%C3%A9"/>
+        <character class="Mage" classId="8" gender="(F)" genderId="1" level="73" name="Audryna" race="Gnome" raceId="7" rank="7" url="r=Eitrigg&amp;n=Audryna"/>
+        <character class="Prêtre" classId="5" gender="(F)" genderId="1" level="73" name="Lolindira" race="Elfe de la nuit" raceId="4" rank="7" url="r=Eitrigg&amp;n=Lolindira"/>
+        <character class="Druide" classId="11" gender="(M)" genderId="0" level="72" name="Heliandar" race="Elfe de la nuit" raceId="4" rank="3" url="r=Eitrigg&amp;n=Heliandar"/>
+        <character class="Démoniste" classId="9" gender="(F)" genderId="1" level="72" name="Bellabella" race="Gnome" raceId="7" rank="4" url="r=Eitrigg&amp;n=Bellabella"/>
+        <character class="Guerrier" classId="1" gender="(M)" genderId="0" level="72" name="Amalasonte" race="Elfe de la nuit" raceId="4" rank="5" url="r=Eitrigg&amp;n=Amalasonte"/>
+        <character class="Voleur" classId="4" gender="(F)" genderId="1" level="72" name="Sendri" race="Elfe de la nuit" raceId="4" rank="7" url="r=Eitrigg&amp;n=Sendri"/>
+        <character class="Druide" classId="11" gender="(M)" genderId="0" level="72" name="Gluk" race="Elfe de la nuit" raceId="4" rank="7" url="r=Eitrigg&amp;n=Gluk"/>
+        <character class="Démoniste" classId="9" gender="(F)" genderId="1" level="72" name="Oxane" race="Humain" raceId="1" rank="7" url="r=Eitrigg&amp;n=Oxane"/>
+        <character class="Chaman" classId="7" gender="(M)" genderId="0" level="72" name="Dralaar" race="Draeneï" raceId="11" rank="9" url="r=Eitrigg&amp;n=Dralaar"/>
+        <character class="Chaman" classId="7" gender="(F)" genderId="1" level="71" name="Mysterhyde" race="Draeneï" raceId="11" rank="2" url="r=Eitrigg&amp;n=Mysterhyde"/>
+        <character class="Chasseur" classId="3" gender="(M)" genderId="0" level="71" name="Louloutell" race="Elfe de la nuit" raceId="4" rank="2" url="r=Eitrigg&amp;n=Louloutell"/>
+        <character class="Chasseur" classId="3" gender="(F)" genderId="1" level="71" name="Hunterworld" race="Elfe de la nuit" raceId="4" rank="3" url="r=Eitrigg&amp;n=Hunterworld"/>
+        <character class="Démoniste" classId="9" gender="(M)" genderId="0" level="71" name="Litionman" race="Gnome" raceId="7" rank="4" url="r=Eitrigg&amp;n=Litionman"/>
+        <character class="Démoniste" classId="9" gender="(F)" genderId="1" level="71" name="Azelde" race="Humain" raceId="1" rank="4" url="r=Eitrigg&amp;n=Azelde"/>
+        <character class="Voleur" classId="4" gender="(M)" genderId="0" level="71" name="Capella" race="Gnome" raceId="7" rank="4" url="r=Eitrigg&amp;n=Capella"/>
+        <character class="Mage" classId="8" gender="(F)" genderId="1" level="71" name="Génésis" race="Humain" raceId="1" rank="4" url="r=Eitrigg&amp;n=G%C3%A9n%C3%A9sis"/>
+        <character class="Prêtre" classId="5" gender="(M)" genderId="0" level="71" name="Groodshar" race="Nain" raceId="3" rank="4" url="r=Eitrigg&amp;n=Groodshar"/>
+        <character class="Chasseur" classId="3" gender="(F)" genderId="1" level="71" name="Misamisa" race="Elfe de la nuit" raceId="4" rank="7" url="r=Eitrigg&amp;n=Misamisa"/>
+        <character class="Paladin" classId="2" gender="(M)" genderId="0" level="71" name="Narkostyk" race="Humain" raceId="1" rank="7" url="r=Eitrigg&amp;n=Narkostyk"/>
+        <character class="Démoniste" classId="9" gender="(M)" genderId="0" level="71" name="Gamakun" race="Humain" raceId="1" rank="7" url="r=Eitrigg&amp;n=Gamakun"/>
+        <character class="Chasseur" classId="3" gender="(M)" genderId="0" level="71" name="Dargo" race="Elfe de la nuit" raceId="4" rank="7" url="r=Eitrigg&amp;n=Dargo"/>
+        <character class="Guerrier" classId="1" gender="(M)" genderId="0" level="71" name="Warlor" race="Humain" raceId="1" rank="7" url="r=Eitrigg&amp;n=Warlor"/>
+        <character class="Paladin" classId="2" gender="(M)" genderId="0" level="71" name="Paloufun" race="Humain" raceId="1" rank="7" url="r=Eitrigg&amp;n=Paloufun"/>
+        <character class="Paladin" classId="2" gender="(F)" genderId="1" level="71" name="Prëanëa" race="Draeneï" raceId="11" rank="7" url="r=Eitrigg&amp;n=Pr%C3%ABan%C3%ABa"/>
+        <character class="Druide" classId="11" gender="(F)" genderId="1" level="71" name="Ventusmanix" race="Elfe de la nuit" raceId="4" rank="7" url="r=Eitrigg&amp;n=Ventusmanix"/>
+        <character class="Paladin" classId="2" gender="(M)" genderId="0" level="71" name="Warladdin" race="Humain" raceId="1" rank="8" url="r=Eitrigg&amp;n=Warladdin"/>
+        <character class="Démoniste" classId="9" gender="(M)" genderId="0" level="70" name="Tremere" race="Gnome" raceId="7" rank="1" url="r=Eitrigg&amp;n=Tremere"/>
+        <character class="Démoniste" classId="9" gender="(M)" genderId="0" level="70" name="Bajarg" race="Humain" raceId="1" rank="1" url="r=Eitrigg&amp;n=Bajarg"/>
+        <character class="Guerrier" classId="1" gender="(M)" genderId="0" level="70" name="Gauvain" race="Humain" raceId="1" rank="1" url="r=Eitrigg&amp;n=Gauvain"/>
+        <character class="Chasseur" classId="3" gender="(F)" genderId="1" level="70" name="Shaaktie" race="Elfe de la nuit" raceId="4" rank="1" url="r=Eitrigg&amp;n=Shaaktie"/>
+        <character class="Mage" classId="8" gender="(F)" genderId="1" level="70" name="Marieposa" race="Humain" raceId="1" rank="2" url="r=Eitrigg&amp;n=Marieposa"/>
+        <character class="Voleur" classId="4" gender="(F)" genderId="1" level="70" name="Melthissa" race="Humain" raceId="1" rank="2" url="r=Eitrigg&amp;n=Melthissa"/>
+        <character class="Chasseur" classId="3" gender="(M)" genderId="0" level="70" name="Tinmarok" race="Elfe de la nuit" raceId="4" rank="2" url="r=Eitrigg&amp;n=Tinmarok"/>
+        <character class="Prêtre" classId="5" gender="(F)" genderId="1" level="70" name="Tenzy" race="Draeneï" raceId="11" rank="2" url="r=Eitrigg&amp;n=Tenzy"/>
+        <character class="Mage" classId="8" gender="(M)" genderId="0" level="70" name="Pacl" race="Humain" raceId="1" rank="2" url="r=Eitrigg&amp;n=Pacl"/>
+        <character class="Chasseur" classId="3" gender="(F)" genderId="1" level="70" name="Vano" race="Elfe de la nuit" raceId="4" rank="2" url="r=Eitrigg&amp;n=Vano"/>
+        <character class="Démoniste" classId="9" gender="(M)" genderId="0" level="70" name="Blackwatter" race="Gnome" raceId="7" rank="3" url="r=Eitrigg&amp;n=Blackwatter"/>
+        <character class="Prêtre" classId="5" gender="(M)" genderId="0" level="70" name="Hubris" race="Nain" raceId="3" rank="3" url="r=Eitrigg&amp;n=Hubris"/>
+        <character class="Démoniste" classId="9" gender="(F)" genderId="1" level="70" name="Abalamiste" race="Humain" raceId="1" rank="3" url="r=Eitrigg&amp;n=Abalamiste"/>
+        <character class="Chaman" classId="7" gender="(F)" genderId="1" level="70" name="Mylïa" race="Draeneï" raceId="11" rank="4" url="r=Eitrigg&amp;n=Myl%C3%AFa"/>
+        <character class="Démoniste" classId="9" gender="(F)" genderId="1" level="70" name="Karyanna" race="Gnome" raceId="7" rank="4" url="r=Eitrigg&amp;n=Karyanna"/>
+        <character class="Guerrier" classId="1" gender="(M)" genderId="0" level="70" name="Wagoum" race="Draeneï" raceId="11" rank="4" url="r=Eitrigg&amp;n=Wagoum"/>
+        <character class="Prêtre" classId="5" gender="(F)" genderId="1" level="70" name="Prêtyworld" race="Elfe de la nuit" raceId="4" rank="4" url="r=Eitrigg&amp;n=Pr%C3%AAtyworld"/>
+        <character class="Mage" classId="8" gender="(M)" genderId="0" level="70" name="Dreamfire" race="Humain" raceId="1" rank="4" url="r=Eitrigg&amp;n=Dreamfire"/>
+        <character class="Paladin" classId="2" gender="(M)" genderId="0" level="70" name="Militiades" race="Humain" raceId="1" rank="4" url="r=Eitrigg&amp;n=Militiades"/>
+        <character class="Mage" classId="8" gender="(F)" genderId="1" level="70" name="Kamino" race="Draeneï" raceId="11" rank="4" url="r=Eitrigg&amp;n=Kamino"/>
+        <character class="Prêtre" classId="5" gender="(M)" genderId="0" level="70" name="Phaloide" race="Humain" raceId="1" rank="4" url="r=Eitrigg&amp;n=Phaloide"/>
+        <character class="Guerrier" classId="1" gender="(M)" genderId="0" level="70" name="Moivoimoitu" race="Elfe de la nuit" raceId="4" rank="4" url="r=Eitrigg&amp;n=Moivoimoitu"/>
+        <character class="Voleur" classId="4" gender="(F)" genderId="1" level="70" name="Pittitheaf" race="Gnome" raceId="7" rank="4" url="r=Eitrigg&amp;n=Pittitheaf"/>
+        <character class="Paladin" classId="2" gender="(M)" genderId="0" level="70" name="Dharyus" race="Nain" raceId="3" rank="4" url="r=Eitrigg&amp;n=Dharyus"/>
+        <character class="Prêtre" classId="5" gender="(M)" genderId="0" level="70" name="Angelpriest" race="Nain" raceId="3" rank="4" url="r=Eitrigg&amp;n=Angelpriest"/>
+        <character class="Prêtre" classId="5" gender="(M)" genderId="0" level="70" name="Aïhainaï" race="Draeneï" raceId="11" rank="4" url="r=Eitrigg&amp;n=A%C3%AFhaina%C3%AF"/>
+        <character class="Prêtre" classId="5" gender="(F)" genderId="1" level="70" name="Olette" race="Nain" raceId="3" rank="4" url="r=Eitrigg&amp;n=Olette"/>
+        <character class="Mage" classId="8" gender="(F)" genderId="1" level="70" name="Merline" race="Draeneï" raceId="11" rank="4" url="r=Eitrigg&amp;n=Merline"/>
+        <character class="Chasseur" classId="3" gender="(F)" genderId="1" level="70" name="Jiliana" race="Elfe de la nuit" raceId="4" rank="4" url="r=Eitrigg&amp;n=Jiliana"/>
+        <character class="Druide" classId="11" gender="(F)" genderId="1" level="70" name="Crimmy" race="Elfe de la nuit" raceId="4" rank="4" url="r=Eitrigg&amp;n=Crimmy"/>
+        <character class="Chaman" classId="7" gender="(F)" genderId="1" level="70" name="Nexusia" race="Draeneï" raceId="11" rank="4" url="r=Eitrigg&amp;n=Nexusia"/>
+        <character class="Mage" classId="8" gender="(F)" genderId="1" level="70" name="Magilou" race="Draeneï" raceId="11" rank="4" url="r=Eitrigg&amp;n=Magilou"/>
+        <character class="Druide" classId="11" gender="(F)" genderId="1" level="70" name="Jeza" race="Elfe de la nuit" raceId="4" rank="5" url="r=Eitrigg&amp;n=Jeza"/>
+        <character class="Voleur" classId="4" gender="(F)" genderId="1" level="70" name="Blackliss" race="Humain" raceId="1" rank="5" url="r=Eitrigg&amp;n=Blackliss"/>
+        <character class="Guerrier" classId="1" gender="(F)" genderId="1" level="70" name="Asheïra" race="Elfe de la nuit" raceId="4" rank="5" url="r=Eitrigg&amp;n=Ashe%C3%AFra"/>
+        <character class="Prêtre" classId="5" gender="(F)" genderId="1" level="70" name="Léiazelle" race="Draeneï" raceId="11" rank="5" url="r=Eitrigg&amp;n=L%C3%A9iazelle"/>
+        <character class="Mage" classId="8" gender="(M)" genderId="0" level="70" name="Zwon" race="Gnome" raceId="7" rank="5" url="r=Eitrigg&amp;n=Zwon"/>
+        <character class="Chasseur" classId="3" gender="(F)" genderId="1" level="70" name="Hunta" race="Elfe de la nuit" raceId="4" rank="5" url="r=Eitrigg&amp;n=Hunta"/>
+        <character class="Mage" classId="8" gender="(M)" genderId="0" level="70" name="Tikitum" race="Gnome" raceId="7" rank="5" url="r=Eitrigg&amp;n=Tikitum"/>
+        <character class="Chasseur" classId="3" gender="(F)" genderId="1" level="70" name="Maïlyne" race="Elfe de la nuit" raceId="4" rank="5" url="r=Eitrigg&amp;n=Ma%C3%AFlyne"/>
+        <character class="Chasseur" classId="3" gender="(F)" genderId="1" level="70" name="Nycx" race="Elfe de la nuit" raceId="4" rank="7" url="r=Eitrigg&amp;n=Nycx"/>
+        <character class="Chasseur" classId="3" gender="(F)" genderId="1" level="70" name="Dreft" race="Elfe de la nuit" raceId="4" rank="7" url="r=Eitrigg&amp;n=Dreft"/>
+        <character class="Chaman" classId="7" gender="(F)" genderId="1" level="70" name="Elthia" race="Draeneï" raceId="11" rank="7" url="r=Eitrigg&amp;n=Elthia"/>
+        <character class="Chaman" classId="7" gender="(M)" genderId="0" level="70" name="Exødark" race="Draeneï" raceId="11" rank="7" url="r=Eitrigg&amp;n=Ex%C3%B8dark"/>
+        <character class="Mage" classId="8" gender="(F)" genderId="1" level="70" name="Tipout" race="Gnome" raceId="7" rank="7" url="r=Eitrigg&amp;n=Tipout"/>
+        <character class="Mage" classId="8" gender="(M)" genderId="0" level="70" name="Silveryom" race="Humain" raceId="1" rank="7" url="r=Eitrigg&amp;n=Silveryom"/>
+        <character class="Démoniste" classId="9" gender="(M)" genderId="0" level="70" name="Mastema" race="Gnome" raceId="7" rank="7" url="r=Eitrigg&amp;n=Mastema"/>
+        <character class="Chasseur" classId="3" gender="(F)" genderId="1" level="70" name="Tiryana" race="Draeneï" raceId="11" rank="7" url="r=Eitrigg&amp;n=Tiryana"/>
+        <character class="Voleur" classId="4" gender="(F)" genderId="1" level="70" name="Nelvéa" race="Elfe de la nuit" raceId="4" rank="7" url="r=Eitrigg&amp;n=Nelv%C3%A9a"/>
+        <character class="Druide" classId="11" gender="(M)" genderId="0" level="70" name="Riderstorm" race="Elfe de la nuit" raceId="4" rank="7" url="r=Eitrigg&amp;n=Riderstorm"/>
+        <character class="Guerrier" classId="1" gender="(M)" genderId="0" level="70" name="Romdruil" race="Elfe de la nuit" raceId="4" rank="7" url="r=Eitrigg&amp;n=Romdruil"/>
+        <character class="Paladin" classId="2" gender="(F)" genderId="1" level="70" name="Kaite" race="Humain" raceId="1" rank="7" url="r=Eitrigg&amp;n=Kaite"/>
+        <character class="Chasseur" classId="3" gender="(M)" genderId="0" level="70" name="Jolan" race="Elfe de la nuit" raceId="4" rank="7" url="r=Eitrigg&amp;n=Jolan"/>
+        <character class="Mage" classId="8" gender="(F)" genderId="1" level="70" name="Gweneth" race="Humain" raceId="1" rank="7" url="r=Eitrigg&amp;n=Gweneth"/>
+        <character class="Prêtre" classId="5" gender="(F)" genderId="1" level="70" name="Isiio" race="Elfe de la nuit" raceId="4" rank="7" url="r=Eitrigg&amp;n=Isiio"/>
+        <character class="Voleur" classId="4" gender="(F)" genderId="1" level="70" name="Rinoå" race="Elfe de la nuit" raceId="4" rank="7" url="r=Eitrigg&amp;n=Rino%C3%A5"/>
+        <character class="Chaman" classId="7" gender="(M)" genderId="0" level="70" name="Bigorneaux" race="Draeneï" raceId="11" rank="7" url="r=Eitrigg&amp;n=Bigorneaux"/>
+        <character class="Prêtre" classId="5" gender="(F)" genderId="1" level="70" name="Bellama" race="Elfe de la nuit" raceId="4" rank="7" url="r=Eitrigg&amp;n=Bellama"/>
+        <character class="Guerrier" classId="1" gender="(M)" genderId="0" level="70" name="Yom" race="Elfe de la nuit" raceId="4" rank="7" url="r=Eitrigg&amp;n=Yom"/>
+        <character class="Voleur" classId="4" gender="(F)" genderId="1" level="70" name="Orhiime" race="Elfe de la nuit" raceId="4" rank="8" url="r=Eitrigg&amp;n=Orhiime"/>
+        <character class="Chasseur" classId="3" gender="(M)" genderId="0" level="70" name="Klif" race="Draeneï" raceId="11" rank="8" url="r=Eitrigg&amp;n=Klif"/>
+        <character class="Guerrier" classId="1" gender="(M)" genderId="0" level="70" name="Mordboules" race="Draeneï" raceId="11" rank="8" url="r=Eitrigg&amp;n=Mordboules"/>
+        <character class="Démoniste" classId="9" gender="(F)" genderId="1" level="70" name="Coconutte" race="Humain" raceId="1" rank="8" url="r=Eitrigg&amp;n=Coconutte"/>
+        <character class="Chaman" classId="7" gender="(F)" genderId="1" level="70" name="Ysélis" race="Draeneï" raceId="11" rank="8" url="r=Eitrigg&amp;n=Ys%C3%A9lis"/>
+        <character class="Voleur" classId="4" gender="(M)" genderId="0" level="70" name="Alupin" race="Gnome" raceId="7" rank="8" url="r=Eitrigg&amp;n=Alupin"/>
+        <character class="Druide" classId="11" gender="(F)" genderId="1" level="70" name="Lunäe" race="Elfe de la nuit" raceId="4" rank="8" url="r=Eitrigg&amp;n=Lun%C3%A4e"/>
+        <character class="Guerrier" classId="1" gender="(M)" genderId="0" level="70" name="Pweupweu" race="Elfe de la nuit" raceId="4" rank="8" url="r=Eitrigg&amp;n=Pweupweu"/>
+        <character class="Druide" classId="11" gender="(M)" genderId="0" level="70" name="Chakotai" race="Elfe de la nuit" raceId="4" rank="8" url="r=Eitrigg&amp;n=Chakotai"/>
+        <character class="Démoniste" classId="9" gender="(M)" genderId="0" level="70" name="Valdrade" race="Humain" raceId="1" rank="8" url="r=Eitrigg&amp;n=Valdrade"/>
+        <character class="Chasseur" classId="3" gender="(M)" genderId="0" level="70" name="Demembreur" race="Elfe de la nuit" raceId="4" rank="8" url="r=Eitrigg&amp;n=Demembreur"/>
+        <character class="Mage" classId="8" gender="(F)" genderId="1" level="70" name="Maginnette" race="Gnome" raceId="7" rank="8" url="r=Eitrigg&amp;n=Maginnette"/>
+        <character class="Chasseur" classId="3" gender="(M)" genderId="0" level="70" name="Goloum" race="Nain" raceId="3" rank="8" url="r=Eitrigg&amp;n=Goloum"/>
+        <character class="Voleur" classId="4" gender="(M)" genderId="0" level="70" name="Farfadett" race="Elfe de la nuit" raceId="4" rank="9" url="r=Eitrigg&amp;n=Farfadett"/>
+        <character class="Guerrier" classId="1" gender="(M)" genderId="0" level="69" name="Stoukeux" race="Humain" raceId="1" rank="8" url="r=Eitrigg&amp;n=Stoukeux"/>
+        <character class="Paladin" classId="2" gender="(M)" genderId="0" level="69" name="Balïnn" race="Nain" raceId="3" rank="8" url="r=Eitrigg&amp;n=Bal%C3%AFnn"/>
+        <character class="Voleur" classId="4" gender="(F)" genderId="1" level="68" name="Kadambari" race="Gnome" raceId="7" rank="4" url="r=Eitrigg&amp;n=Kadambari"/>
+        <character class="Démoniste" classId="9" gender="(M)" genderId="0" level="68" name="Gabrielsylar" race="Humain" raceId="1" rank="7" url="r=Eitrigg&amp;n=Gabrielsylar"/>
+        <character class="Démoniste" classId="9" gender="(F)" genderId="1" level="67" name="Tiote" race="Gnome" raceId="7" rank="4" url="r=Eitrigg&amp;n=Tiote"/>
+        <character class="Guerrier" classId="1" gender="(M)" genderId="0" level="67" name="Sunrays" race="Elfe de la nuit" raceId="4" rank="7" url="r=Eitrigg&amp;n=Sunrays"/>
+        <character class="Démoniste" classId="9" gender="(M)" genderId="0" level="66" name="Trabbor" race="Humain" raceId="1" rank="4" url="r=Eitrigg&amp;n=Trabbor"/>
+        <character class="Prêtre" classId="5" gender="(M)" genderId="0" level="66" name="Donerail" race="Nain" raceId="3" rank="4" url="r=Eitrigg&amp;n=Donerail"/>
+        <character class="Paladin" classId="2" gender="(F)" genderId="1" level="66" name="Padnon" race="Draeneï" raceId="11" rank="8" url="r=Eitrigg&amp;n=Padnon"/>
+        <character class="Guerrier" classId="1" gender="(F)" genderId="1" level="66" name="Bayla" race="Elfe de la nuit" raceId="4" rank="8" url="r=Eitrigg&amp;n=Bayla"/>
+        <character class="Chasseur" classId="3" gender="(F)" genderId="1" level="65" name="Pullit" race="Elfe de la nuit" raceId="4" rank="8" url="r=Eitrigg&amp;n=Pullit"/>
+        <character class="Chevalier de la mort" classId="6" gender="(M)" genderId="0" level="64" name="Anakïne" race="Humain" raceId="1" rank="4" url="r=Eitrigg&amp;n=Anak%C3%AFne"/>
+        <character class="Mage" classId="8" gender="(M)" genderId="0" level="64" name="Heittarrus" race="Humain" raceId="1" rank="8" url="r=Eitrigg&amp;n=Heittarrus"/>
+        <character class="Chevalier de la mort" classId="6" gender="(M)" genderId="0" level="63" name="Typhõn" race="Draeneï" raceId="11" rank="6" url="r=Eitrigg&amp;n=Typh%C3%B5n"/>
+        <character class="Chevalier de la mort" classId="6" gender="(M)" genderId="0" level="62" name="Deathyom" race="Elfe de la nuit" raceId="4" rank="6" url="r=Eitrigg&amp;n=Deathyom"/>
+        <character class="Druide" classId="11" gender="(F)" genderId="1" level="62" name="Chloupi" race="Elfe de la nuit" raceId="4" rank="8" url="r=Eitrigg&amp;n=Chloupi"/>
+        <character class="Prêtre" classId="5" gender="(F)" genderId="1" level="61" name="Ellenia" race="Humain" raceId="1" rank="4" url="r=Eitrigg&amp;n=Ellenia"/>
+        <character class="Chevalier de la mort" classId="6" gender="(M)" genderId="0" level="61" name="Darkkard" race="Draeneï" raceId="11" rank="6" url="r=Eitrigg&amp;n=Darkkard"/>
+        <character class="Chevalier de la mort" classId="6" gender="(M)" genderId="0" level="61" name="Darkaddin" race="Humain" raceId="1" rank="6" url="r=Eitrigg&amp;n=Darkaddin"/>
+        <character class="Chevalier de la mort" classId="6" gender="(F)" genderId="1" level="61" name="Darktsukette" race="Elfe de la nuit" raceId="4" rank="6" url="r=Eitrigg&amp;n=Darktsukette"/>
+        <character class="Chasseur" classId="3" gender="(M)" genderId="0" level="61" name="Nainchass" race="Nain" raceId="3" rank="7" url="r=Eitrigg&amp;n=Nainchass"/>
+        <character class="Chevalier de la mort" classId="6" gender="(F)" genderId="1" level="61" name="Tora" race="Nain" raceId="3" rank="8" url="r=Eitrigg&amp;n=Tora"/>
+        <character class="Chevalier de la mort" classId="6" gender="(M)" genderId="0" level="60" name="Suntzou" race="Humain" raceId="1" rank="3" url="r=Eitrigg&amp;n=Suntzou"/>
+        <character class="Chevalier de la mort" classId="6" gender="(M)" genderId="0" level="60" name="Darkchépa" race="Draeneï" raceId="11" rank="4" url="r=Eitrigg&amp;n=Darkch%C3%A9pa"/>
+        <character class="Guerrier" classId="1" gender="(F)" genderId="1" level="60" name="Aminia" race="Elfe de la nuit" raceId="4" rank="4" url="r=Eitrigg&amp;n=Aminia"/>
+        <character class="Chevalier de la mort" classId="6" gender="(M)" genderId="0" level="60" name="Daestran" race="Elfe de la nuit" raceId="4" rank="6" url="r=Eitrigg&amp;n=Daestran"/>
+        <character class="Chevalier de la mort" classId="6" gender="(F)" genderId="1" level="60" name="Darkknighte" race="Elfe de la nuit" raceId="4" rank="6" url="r=Eitrigg&amp;n=Darkknighte"/>
+        <character class="Chevalier de la mort" classId="6" gender="(M)" genderId="0" level="60" name="Goldknight" race="Humain" raceId="1" rank="6" url="r=Eitrigg&amp;n=Goldknight"/>
+        <character class="Chevalier de la mort" classId="6" gender="(M)" genderId="0" level="60" name="Shavou" race="Elfe de la nuit" raceId="4" rank="6" url="r=Eitrigg&amp;n=Shavou"/>
+        <character class="Chevalier de la mort" classId="6" gender="(F)" genderId="1" level="60" name="Gôrgone" race="Elfe de la nuit" raceId="4" rank="6" url="r=Eitrigg&amp;n=G%C3%B4rgone"/>
+        <character class="Chevalier de la mort" classId="6" gender="(F)" genderId="1" level="58" name="Telena" race="Draeneï" raceId="11" rank="4" url="r=Eitrigg&amp;n=Telena"/>
+        <character class="Chevalier de la mort" classId="6" gender="(F)" genderId="1" level="58" name="Issin" race="Humain" raceId="1" rank="4" url="r=Eitrigg&amp;n=Issin"/>
+        <character class="Chevalier de la mort" classId="6" gender="(F)" genderId="1" level="58" name="Ninia" race="Gnome" raceId="7" rank="4" url="r=Eitrigg&amp;n=Ninia"/>
+        <character class="Chevalier de la mort" classId="6" gender="(M)" genderId="0" level="58" name="Deekayrok" race="Draeneï" raceId="11" rank="4" url="r=Eitrigg&amp;n=Deekayrok"/>
+        <character class="Chevalier de la mort" classId="6" gender="(M)" genderId="0" level="58" name="Demonnight" race="Elfe de la nuit" raceId="4" rank="6" url="r=Eitrigg&amp;n=Demonnight"/>
+        <character class="Chevalier de la mort" classId="6" gender="(M)" genderId="0" level="58" name="Adønis" race="Elfe de la nuit" raceId="4" rank="6" url="r=Eitrigg&amp;n=Ad%C3%B8nis"/>
+        <character class="Chevalier de la mort" classId="6" gender="(M)" genderId="0" level="58" name="Mözinor" race="Humain" raceId="1" rank="8" url="r=Eitrigg&amp;n=M%C3%B6zinor"/>
+        <character class="Chevalier de la mort" classId="6" gender="(F)" genderId="1" level="56" name="Atiho" race="Draeneï" raceId="11" rank="4" url="r=Eitrigg&amp;n=Atiho"/>
+        <character class="Chevalier de la mort" classId="6" gender="(M)" genderId="0" level="56" name="Hasthør" race="Elfe de la nuit" raceId="4" rank="6" url="r=Eitrigg&amp;n=Hasth%C3%B8r"/>
+        <character class="Prêtre" classId="5" gender="(M)" genderId="0" level="56" name="Solal" race="Draeneï" raceId="11" rank="7" url="r=Eitrigg&amp;n=Solal"/>
+        <character class="Chaman" classId="7" gender="(M)" genderId="0" level="55" name="Drimlox" race="Draeneï" raceId="11" rank="8" url="r=Eitrigg&amp;n=Drimlox"/>
+        <character class="Chasseur" classId="3" gender="(F)" genderId="1" level="54" name="Hysterya" race="Elfe de la nuit" raceId="4" rank="7" url="r=Eitrigg&amp;n=Hysterya"/>
+        <character class="Prêtre" classId="5" gender="(F)" genderId="1" level="53" name="Laurylynn" race="Humain" raceId="1" rank="8" url="r=Eitrigg&amp;n=Laurylynn"/>
+        <character class="Chasseur" classId="3" gender="(M)" genderId="0" level="52" name="Maksirfly" race="Elfe de la nuit" raceId="4" rank="7" url="r=Eitrigg&amp;n=Maksirfly"/>
+        <character class="Paladin" classId="2" gender="(M)" genderId="0" level="52" name="Dürandal" race="Nain" raceId="3" rank="8" url="r=Eitrigg&amp;n=D%C3%BCrandal"/>
+        <character class="Mage" classId="8" gender="(M)" genderId="0" level="50" name="Aiolia" race="Humain" raceId="1" rank="8" url="r=Eitrigg&amp;n=Aiolia"/>
+        <character class="Mage" classId="8" gender="(F)" genderId="1" level="48" name="Tiboû" race="Draeneï" raceId="11" rank="7" url="r=Eitrigg&amp;n=Tibo%C3%BB"/>
+        <character class="Druide" classId="11" gender="(F)" genderId="1" level="47" name="Seleriana" race="Elfe de la nuit" raceId="4" rank="7" url="r=Eitrigg&amp;n=Seleriana"/>
+        <character class="Démoniste" classId="9" gender="(F)" genderId="1" level="46" name="Mogriave" race="Humain" raceId="1" rank="4" url="r=Eitrigg&amp;n=Mogriave"/>
+        <character class="Démoniste" classId="9" gender="(M)" genderId="0" level="46" name="Demostrelle" race="Gnome" raceId="7" rank="7" url="r=Eitrigg&amp;n=Demostrelle"/>
+        <character class="Guerrier" classId="1" gender="(F)" genderId="1" level="46" name="Irah" race="Draeneï" raceId="11" rank="7" url="r=Eitrigg&amp;n=Irah"/>
+        <character class="Chaman" classId="7" gender="(M)" genderId="0" level="46" name="Yomninouu" race="Draeneï" raceId="11" rank="8" url="r=Eitrigg&amp;n=Yomninouu"/>
+        <character class="Druide" classId="11" gender="(F)" genderId="1" level="44" name="Jézabelle" race="Elfe de la nuit" raceId="4" rank="7" url="r=Eitrigg&amp;n=J%C3%A9zabelle"/>
+        <character class="Mage" classId="8" gender="(F)" genderId="1" level="44" name="Pitcho" race="Humain" raceId="1" rank="8" url="r=Eitrigg&amp;n=Pitcho"/>
+        <character class="Prêtre" classId="5" gender="(M)" genderId="0" level="43" name="Trichelin" race="Nain" raceId="3" rank="6" url="r=Eitrigg&amp;n=Trichelin"/>
+        <character class="Mage" classId="8" gender="(M)" genderId="0" level="42" name="Uscule" race="Draeneï" raceId="11" rank="8" url="r=Eitrigg&amp;n=Uscule"/>
+        <character class="Druide" classId="11" gender="(F)" genderId="1" level="36" name="Goliaathe" race="Elfe de la nuit" raceId="4" rank="4" url="r=Eitrigg&amp;n=Goliaathe"/>
+        <character class="Chasseur" classId="3" gender="(M)" genderId="0" level="35" name="Horyu" race="Elfe de la nuit" raceId="4" rank="8" url="r=Eitrigg&amp;n=Horyu"/>
+        <character class="Paladin" classId="2" gender="(F)" genderId="1" level="33" name="Sharout" race="Humain" raceId="1" rank="8" url="r=Eitrigg&amp;n=Sharout"/>
+        <character class="Paladin" classId="2" gender="(F)" genderId="1" level="33" name="Mydona" race="Draeneï" raceId="11" rank="8" url="r=Eitrigg&amp;n=Mydona"/>
+        <character class="Paladin" classId="2" gender="(M)" genderId="0" level="26" name="Solarus" race="Humain" raceId="1" rank="7" url="r=Eitrigg&amp;n=Solarus"/>
+        <character class="Mage" classId="8" gender="(M)" genderId="0" level="26" name="Parletrovite" race="Gnome" raceId="7" rank="8" url="r=Eitrigg&amp;n=Parletrovite"/>
+        <character class="Druide" classId="11" gender="(M)" genderId="0" level="25" name="Flocheur" race="Elfe de la nuit" raceId="4" rank="8" url="r=Eitrigg&amp;n=Flocheur"/>
+        <character class="Druide" classId="11" gender="(F)" genderId="1" level="21" name="Lolindora" race="Elfe de la nuit" raceId="4" rank="8" url="r=Eitrigg&amp;n=Lolindora"/>
+        <character class="Chaman" classId="7" gender="(F)" genderId="1" level="20" name="Lédie" race="Draeneï" raceId="11" rank="8" url="r=Eitrigg&amp;n=L%C3%A9die"/>
+        <character class="Druide" classId="11" gender="(F)" genderId="1" level="19" name="Practinias" race="Elfe de la nuit" raceId="4" rank="8" url="r=Eitrigg&amp;n=Practinias"/>
+        <character class="Démoniste" classId="9" gender="(F)" genderId="1" level="17" name="Seleanor" race="Humain" raceId="1" rank="8" url="r=Eitrigg&amp;n=Seleanor"/>
+      </members>
+    </guild>
+  </guildInfo>
+</page>
