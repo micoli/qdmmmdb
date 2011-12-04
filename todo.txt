@@ -1,5 +1,5 @@
+handle special file tag (vost, R5 dvdscr, ts, part1 part2)
 keys accelerators on differents panels + tooltips 
-filtre sur les films dans Grid pour selectionner uniquement ceux restant a faire
 postprocessing of nzb created
 tester l'erreur sur retour json
 desactiver le parser des links sur recherche simple full text
@@ -13,6 +13,7 @@ detection tag vostfr/vostf sur ITE
 gerer le captach et le batch de synchro des DESC
 ajouter les favicons des providers de fiche cine
 
+**** filtre sur les films dans Grid pour selectionner uniquement ceux restant a faire
 **** display fanart & backdrop on overview sur movie selector
 **** selected sur imageSelector
 **** nzb autofit
