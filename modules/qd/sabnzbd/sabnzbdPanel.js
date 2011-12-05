@@ -80,7 +80,12 @@ Ext.define('qd.sabnzbd.sabnzbdPanel', {
 						var txt = sprintf('%02d KB/s %s',store.proxy.reader.jsonData.kbpersec,store.proxy.reader.jsonData.timeleft);
 						Ext.getCmp(that.statusid).setText(store.proxy.reader.jsonData.status+' '+txt);
 						if (that.autoTitle){
-							that.setTitle('Sabnzbd&nbsp;'+txt);
+							if(that.ownerCt && that.ownerCt.isWindow && that.ownerCt.setTitle){
+								that.ownerCt.setTitle('Sabnzbd&nbsp;'+txt);
+							}else{
+								that.setTitle('Sabnzbd&nbsp;'+txt);
+							}
+							
 						}
 					}
 					clearTimeout(that.timerTick);
