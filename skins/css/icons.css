@@ -28,6 +28,9 @@
 .row-bold{
 	font-weight:bold;
 }
+.icon-edit {
+	background-image:url(../resources/application_edit.png) ! important;
+}
 .icon-save {
 	background-image:url(../resources/save.png) ! important;
 }
@@ -300,4 +303,42 @@
 	background-position: left;
 	padding-left:20px;
 	margin:10px;
+}
+
+.moviegrid-filter-posterTrue{
+	background:url(../resources/pictureTrue.png) center left no-repeat ;
+	width  : 16px;
+	height : 16px;
+}
+.moviegrid-filter-posterFalse{
+	background:url(../resources/pictureFalse.png) center left no-repeat ;
+	width  : 16px;
+	height : 16px;
+}
+.moviegrid-filter-posterDisabled{
+	background:url(../resources/pictureDisabled.png) center left no-repeat ;
+	width  : 16px;
+	height : 16px;
+}
+.moviegrid-filter-nfoTrue{
+	background:url(../resources/nfoTrue.png) center left no-repeat ;
+	width  : 16px;
+	height : 16px;
+}
+.moviegrid-filter-nfoFalse{
+	background:url(../resources/nfoFalse.png) center left no-repeat ;
+	width  : 16px;
+	height : 16px;
+}
+.moviegrid-filter-nfoDisabled{
+	background:url(../resources/nfoDisabled.png) center left no-repeat ;
+	width  : 16px;
+	height : 16px;
+}
+
+.icon-sabnzbd {
+    background-image:url(../resources/sabnzbd.png) !important;
+}
+.icon-sickbeard {
+    background-image:url(../resources/sickbeard.png) !important;
 }
