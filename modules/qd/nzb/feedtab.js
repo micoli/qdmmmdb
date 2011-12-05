@@ -2,15 +2,15 @@ Ext.define('qd.nzb.feedtab', {
     extend		: 'Ext.panel.Panel',
 	alias		: 'widget.qd.nzb.feedtab',
 	requires	:['qd.nzb.feeditemdesc'],
+	qtipTpl		: new Ext.XTemplate(
+		'<tpl for=".">',
+		'<h3>{ITE_TITLE}:</h3>',
+		'<div><i>{ITE_MASK}</i></div>',
+		'</tpl>'
+	),
 	initComponent : function() {
 		var that = this;
 		that.comboid = Ext.id();
-		that.qtipTpl = new Ext.XTemplate(
-			'<tpl for=".">',
-			'<h3>{ITE_TITLE}:</h3>',
-			'<div><i>{ITE_MASK}</i></div>',
-			'</tpl>'
-		);
 		that.tplid = Ext.id();
 
 		that.filterFeeds=function(prm){
