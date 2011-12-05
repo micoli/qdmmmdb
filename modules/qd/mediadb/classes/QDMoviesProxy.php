@@ -1,10 +1,53 @@
 <?php
 class QDMoviesProxy extends QDMediaDBProxy{
+
+	function svc_preloadFolder(){
+		$this->pri_preloadFolder($this->pri_getMoviesFiles('Q'));
+		$this->pri_preloadFolder($this->pri_getMoviesFiles('F'));
+		$this->pri_preloadFolder($this->pri_getMoviesFiles('F1'));
+		$this->pri_preloadFolder($this->pri_getMoviesFiles('K'));
+		$this->pri_preloadFolder($this->pri_getMoviesFiles('QAct'));
+		$this->pri_preloadFolder($this->pri_getMoviesFiles('QDoc'));
+		$this->pri_preloadFolder($this->pri_getMoviesFiles('QDra'));
+		$this->pri_preloadFolder($this->pri_getMoviesFiles('QEnf'));
+		$this->pri_preloadFolder($this->pri_getMoviesFiles('QHor'));
+		$this->pri_preloadFolder($this->pri_getMoviesFiles('QHum'));
+		$this->pri_preloadFolder($this->pri_getMoviesFiles('QSFF'));
+
+	}
+	function pri_preloadFolder($arrFiles){
+		foreach($arrFiles['results'] as $file){
+			if (!$file['nfo'] && $file['title']!=''){
+				print "=>".$file['title']."\n";
+				$res=$this->pri_chooseMovie(array('e'=>'themoviedb','m'=>$file['title']));
+				if(array_key_exists('results',$res)){
+				$cnt = count($res['results']);
+				}else{
+					$cnt = 0;
+				}
+				print "=>count : ".$cnt."\n";
+				if ($cnt>0){
+					$chMovie = $res['results'][0];
+					print "  =>".$chMovie['title'].' '.$chMovie['year']."\n";;
+					$res2 = $this->pri_chooseMoviesDetail(array('e'=>'themoviedb','i'=>$chMovie['id']));
+					print "    ".$res2['data']['title']."\n";
+					print "    ".$res2['data']['summary']."\n";
+					print "    ".$res2['data']['poster']."--"."\n";
+					sleep(3);
+				}
+				print "-----------------------\n";
+			}
+		}
+	}
+
 	function svc_chooseMovie() {
-		$moviesname = trim($_REQUEST['m']);
-		$path = $_REQUEST['p'];
+		return $this->pri_chooseMovie($_REQUEST);
+	}
+	function pri_chooseMovie($prm) {
+		$moviesname = trim($prm['m']);
+		$path = $prm['p'];
 		$sc = null;
-		switch ($_REQUEST['e']){
+		switch ($prm['e']){
 			case 'allocineapi':
 				$sc = new scraperAllocineApi;
 			break;
@@ -24,9 +67,13 @@ class QDMoviesProxy extends QDMediaDBProxy{
 		die(file_get_contents(base64_decode($_REQUEST['i64'])));
 	}
 
+
 	function svc_chooseMoviesDetail() {
+		return $this->pri_chooseMoviesDetail($_REQUEST);
+	}
+	function pri_chooseMoviesDetail($prm) {
 		$sc = null;
-		switch ($_REQUEST['e']){
+		switch ($prm['e']){
 			case 'allocineapi':
 				$sc = new scraperAllocineApi;
 			break;
@@ -36,7 +83,7 @@ class QDMoviesProxy extends QDMediaDBProxy{
 		}
 		$res = array ('data'=>array());
 		if($sc){
-			$res['data'] = $sc->getDetail(trim($_REQUEST['i']));
+			$res['data'] = $sc->getDetail(trim($prm['i']));
 			//$res['data']['poster'	]="http://cf2.imgobject.com/t/p/w92/t7qevwjcTsEAXsErVgQXI1ipxTK.jpg";
 			//$res['data']['backdrop'	]="http://cf2.imgobject.com/t/p/w300/cLDUrc5zmbsEoMvr3y1mlH2EZtv.jpg";
 
@@ -64,13 +111,14 @@ class QDMoviesProxy extends QDMediaDBProxy{
 					'w'		=> $thumb->getImageWidth(),
 					'h'		=> $thumb->getImageHeight()
 				);
-				if ($k>20){
+				if ($k>10){
 					break;
 				}
 			}
 			$this->sortBySize='desc';
 			uasort($arr,array($this,"sortBySize"));
 			$arr=array_values($arr);
+			$arr = array_slice($arr,0,10);
 		}
 	}
 
@@ -293,14 +341,15 @@ class QDMoviesProxy extends QDMediaDBProxy{
 		switch ($ref['inFolder']){
 			case 'file':
 				if(file_exists($ref['fullpath'].'/'.$newFolder)){
-					return array('error'=>'folderAlreadyExists');
+					return array('corrupted'=>'folder already exists');
+				}else{
+					@mkdir($ref['fullpath'].'/'.$newFolder);
 				}
-				@mkdir($ref['fullpath'].'/'.$newFolder);
 				$movieFolder = $ref['fullpath'].'/'.$newFolder;
 			break;
 			case 'inFolder':
 				if(file_exists(dirname($ref['fullpath']).'/'.$newFolder)){
-					return array('error'=>'folderAlreadyExists');
+					return array('corrupted'=>'folder already exists');
 				}
 				if(!file_exists($ref['fullpath'].'/'.$newFolder)){
 					@rename($ref['fullpath'], dirname($ref['fullpath']).'/'.$newFolder);
@@ -311,8 +360,16 @@ class QDMoviesProxy extends QDMediaDBProxy{
 				}
 			break;
 			default:
-				die('error '.$ref['inFolder'].'-'.__FILE__.' - '.__LINE__);
+				return array('corrupted'=>$ref['inFolder'].'-'.__FILE__.' - '.__LINE__);
 			break;
+		}
+
+		$newFullFilename = $movieFolder . '/'.$newFilename.'.'.strtolower($ref['ext']);
+
+		if(file_exists($newFullFilename)){
+			return array('corrupted'=>'renamed file already exists');
+		}else{
+			rename($originalFileName,$newFullFilename);
 		}
 
 		if (!file_exists($movieFolder		. '/info.txt'	) or $forceFileWrite) {
@@ -334,11 +391,6 @@ class QDMoviesProxy extends QDMediaDBProxy{
 		if (!file_exists($movieFolder		. '/fanart.jpg'	) or $forceFileWrite) {
 			file_put_contents($movieFolder	. '/fanart.jpg'	, $this->QDNet->getCacheURL($compatRecord['backdrop'], 'imgs', 60*24*365*20,true));
 		}
-
-
-		$newFullFilename = $movieFolder . '/'.$newFilename.'.'.strtolower($ref['ext']);
-
-		@rename($originalFileName,$newFullFilename);
 
 		$fileDetail = CW_Files::pathinfo_utf($newFullFilename);
 		$newRefRecord =  $this->pri_addFileToGetMoviesFiles(array(

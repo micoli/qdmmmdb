@@ -3,8 +3,19 @@ Ext.define('qd.mediadb.moviePanel', {
 	alias			: 'widget.qd.mediadb.moviePanel',
 	initComponent	: function() {
 		var that = this;
-		that.gridmoviesfilesid = Ext.id();
-		that.treemoviesPathid  = Ext.id();
+		that.gridmoviesfilesid	= Ext.id();
+		that.treemoviesPathid	= Ext.id();
+
+		that.tbfilternfoTrueid	= Ext.id();
+		that.tbfilternfoFalsid	= Ext.id();
+		that.tbfilternfoDisaid	= Ext.id();
+
+		that.tbfilterpostersTrueid	= Ext.id();
+		that.tbfilterpostersFalsid	= Ext.id();
+		that.tbfilterpostersDisaid	= Ext.id();
+
+		that.groupFilter={};
+
 		
 		that.loadMoviesFilesGrid = function(pathname ){
 			Ext.getCmp(that.gridmoviesfilesid).pathname = pathname ;
@@ -98,8 +109,9 @@ Ext.define('qd.mediadb.moviePanel', {
             listeners : {
 				load : function (store){
 					//debugChoosePanel
+					tbfilterhandler();
 					setTimeout(function(){
-						openMovieEditor(store.getAt(0))
+						//openMovieEditor(store.getAt(0))
 					},500);
                 }
             }
@@ -130,7 +142,19 @@ Ext.define('qd.mediadb.moviePanel', {
 				}
 			}).show();
 		}
-
+		var tbfilterhandler = function(){
+			Ext.each(Ext.getCmp(that.gridmoviesfilesid).getDockedItems()[0].items.items,function(v,k){
+				if(v.toggleGroup && v.pressed){
+					that.groupFilter[v.toggleGroup] = v.qdfilter;
+				};
+			})
+			that.moviefilesStore.clearFilter();
+			that.moviefilesStore.filter([
+				{filterFn: function(item) {
+					return (that.groupFilter.nfo==-1?true:item.get("nfo")==that.groupFilter.nfo)&&(that.groupFilter.poster==-1?true:item.get("poster")==that.groupFilter.poster);
+				}}				
+			]);
+		}
 
 		Ext.apply(this,{
 			layout    : 'border',
@@ -160,11 +184,6 @@ Ext.define('qd.mediadb.moviePanel', {
 								}
 							});
 						}
-						/*itemcontextmenu	: function(view, rec, node, index, e){
-							e.stopEvent();
-							that.ctxMenu.showAt(e.getXY());
-							return false;
-						}*/
 					},
 					tbar			: [{
 						text			: 'refresh',
@@ -204,9 +223,10 @@ Ext.define('qd.mediadb.moviePanel', {
 					lines			: false,
 					useArrows		: true,
 					stateful		: false,
-					tbar			: [{
+					tbar			: [/*{
 						text			: 'Select all',
 						handler			: function(){
+							return;
 							Ext.getCmp(that.gridmoviesfilesid).getSelectionModel().selectAll();
 						}
 					},{
@@ -217,6 +237,7 @@ Ext.define('qd.mediadb.moviePanel', {
 					},{
 						text			: 'Rename',
 						handler			: function(){
+							return;
 							//var arrModified = Ext.getCmp(that.gridmoviesfilesid).getStore().data.items;
 							var arrModified = Ext.getCmp(that.gridmoviesfilesid).getSelectionModel().selections.items;
 							var pathname    = Ext.util.base64.encode(Ext.getCmp(that.gridmoviesfilesid).pathname);
@@ -245,13 +266,80 @@ Ext.define('qd.mediadb.moviePanel', {
 					},{
 						text		: 'Un-Select all',
 						handler		: function(){
+							return;
 							Ext.getCmp(that.gridmoviesfilesid).getSelectionModel().clearSelections();
 						}
 					},{
 						text		: 'Invert Selection',
 						handler		: function(){
+							return;
 							alert('to do');
 						}
+					},{
+						xtype		: 'tbseparator'
+					},*/{
+						xtype		: 'tbtext',
+						text		: 'Filters'
+					},{
+						xtype		: 'button',
+						enableToggle:true,
+						toggleGroup	: 'nfo',
+						qdfilter	: true,
+						width		: 30,
+						iconCls		: 'moviegrid-filter-nfoTrue',
+						stateful	: false,
+						handler		: tbfilterhandler
+					},{
+						xtype		: 'button',
+						enableToggle:true,
+						toggleGroup	: 'nfo',
+						qdfilter	: false,
+						width		: 30,
+						iconCls		: 'moviegrid-filter-nfoFalse',
+						pressed		: true,
+						stateful	: false,
+						handler		: tbfilterhandler
+					},{
+						xtype		: 'button',
+						enableToggle:true,
+						toggleGroup	: 'nfo',
+						qdfilter	: -1,
+						width		: 30,
+						iconCls		: 'moviegrid-filter-nfoDisabled',
+						stateful	: false,
+						handler		: tbfilterhandler
+					},{
+						xtype		: 'tbseparator'
+					},{
+						xtype		: 'button',
+						enableToggle:true,
+						toggleGroup	: 'poster',
+						qdfilter	: true,
+						width		: 30,
+						iconCls		: 'moviegrid-filter-posterTrue',
+						stateful	: false,
+						handler		: tbfilterhandler
+					},{
+						xtype		: 'button',
+						enableToggle:true,
+						toggleGroup	: 'poster',
+						qdfilter	: false,
+						width		: 30,
+						iconCls		: 'moviegrid-filter-posterFalse',
+						stateful	: false,
+						handler		: tbfilterhandler
+					},{
+						xtype		: 'button',
+						enableToggle:true,
+						toggleGroup	: 'poster',
+						qdfilter	: -1,
+						width		: 30,
+						iconCls		: 'moviegrid-filter-posterDisabled',
+						stateful	: false,
+						pressed		: true,
+						handler		: tbfilterhandler
+					},{
+						xtype		: 'tbseparator'
 					}],
 					listeners	: {
 						rowclick : function(grid,HTMLElement,rowIndex,columnIndex){
@@ -279,6 +367,17 @@ Ext.define('qd.mediadb.moviePanel', {
 								metaData.tdCls = record.get('inFolder')=='inFolder'?"moviegrid-icon-folder":"moviegrid-icon-avi";
 								return "&nbsp;";
 							}
+						},{
+							header			: 'action',
+							xtype			: 'actioncolumn',
+							width			: 30,
+							items			: [{
+								icon	: 'skins/resources/application_edit.png',
+								handler	: function(grid, rowIndex, colIndex) {
+									var record = grid.getStore().getAt(rowIndex);
+									openMovieEditor(record);
+								}
+							}]
 						},
 						{header	: "folder/filename"	, width: 280,	dataIndex: 'folder'			,	sortable: true,	flex : 1},
 						{header	: "filename"		, width: 280,	dataIndex: 'filename'		,	sortable: true,	flex : 1},

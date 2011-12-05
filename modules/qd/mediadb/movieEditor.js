@@ -195,6 +195,8 @@ Ext.define('qd.mediadb.movieEditor', {
 		};
 
 		var setCurrentRecord = function (rec){
+			choosePosterStore.removeAll();
+			chooseBackdropStore.removeAll();
 			Ext.getCmp(textchoosemoviesid).setValue(rec.get('title'));
 			var title = '';
 			if (rec.get('inFolder')=='file'){
@@ -304,6 +306,7 @@ Ext.define('qd.mediadb.movieEditor', {
 				id				: textchoosemoviesid,
 				label			: 'serie',
 				width			: 250,
+				stateful		: false,
 				enableKeyEvents	: true,
 				listeners		: {
 					keypress: function(ob,e){
@@ -334,33 +337,19 @@ Ext.define('qd.mediadb.movieEditor', {
 					click		:  searchMovie
 				}
 			},{
-				xtype: 'tbseparator'
+				xtype		: 'tbseparator'
 			},{
-				xtype	: 'tbtext',
-				text	: 'autoLoad'
+				xtype		: 'button',
+				id			: 'butprev',
+				iconCls		: Ext.baseCSSPrefix + 'tbar-page-prev',
+				handler		: goPrevious
 			},{
-				xtype		: 'checkbox',
-				id			: autoloadchoosegrid,
-				labelWidth	: 100,
-				width		: 20,
-				checked		: true,
-				//stateful	: false,
-				listeners	:{
-					change		: function (field,newValue,oldValue,eOpts){
-						Ext.getCmp(autoloadfirstingrid).setDisabled(!newValue);
-						Ext.getCmp(autoloadfirstingrid).setValue(newValue);
-					}
-				}
+				xtype		: 'button',
+				id			: 'butnext',
+				iconCls		: Ext.baseCSSPrefix + 'tbar-page-next',
+				handler		: goNext
 			},{
-				xtype		: 'checkbox',
-				id			: autoloadfirstingrid,
-				labelWidth	: 0,
-				width		: 20,
-				label		: '',
-				//stateful	: false,
-				checked		: true
-			},{
-				xtype: 'tbseparator'
+				xtype		: 'tbseparator'
 			},{
 				xtype		: 'button',
 				id			: 'butsaveprev',
@@ -385,16 +374,32 @@ Ext.define('qd.mediadb.movieEditor', {
 					that.afterSave = goNext;
 					saveDetails();
 				}
-			},'->',{
-				xtype		: 'button',
-				id			: 'butprev',
-				iconCls		: Ext.baseCSSPrefix + 'tbar-page-prev',
-				handler		: goPrevious
 			},{
-				xtype		: 'button',
-				id			: 'butnext',
-				iconCls		: Ext.baseCSSPrefix + 'tbar-page-next',
-				handler		: goNext
+				xtype: 'tbseparator'
+			},{
+				xtype	: 'tbtext',
+				text	: 'autoLoad'
+			},'->',{
+				xtype		: 'checkbox',
+				id			: autoloadchoosegrid,
+				labelWidth	: 100,
+				width		: 20,
+				checked		: true,
+				stateful	: false,
+				listeners	:{
+					change		: function (field,newValue,oldValue,eOpts){
+						Ext.getCmp(autoloadfirstingrid).setDisabled(!newValue);
+						Ext.getCmp(autoloadfirstingrid).setValue(newValue);
+					}
+				}
+			},{
+				xtype		: 'checkbox',
+				id			: autoloadfirstingrid,
+				labelWidth	: 0,
+				width		: 20,
+				label		: '',
+				stateful	: false,
+				checked		: true
 			}],
 			items	: [{
 				xtype			: 'grid',
@@ -447,7 +452,7 @@ Ext.define('qd.mediadb.movieEditor', {
 					xtype		: 'ImageSelector',
 					id			: gridposterid,
 					store		: choosePosterStore,
-					imgPrefix	: 'p/QDMediaDBProxy.proxyImg/?c=250x250&u=',
+					imgPrefix	: 'p/QDMediaDBProxy.proxyImg/?c=100x150&u=',
 					listeners	:{
 						selectimg : function(node){
 							that.currentRecord.poster=node[0].get('url');
@@ -461,7 +466,7 @@ Ext.define('qd.mediadb.movieEditor', {
 					xtype		: 'ImageSelector',
 					id			: gridbackdropid,
 					store		: chooseBackdropStore,
-					imgPrefix	: 'p/QDMediaDBProxy.proxyImg/?c=200x200&u=',
+					imgPrefix	: 'p/QDMediaDBProxy.proxyImg/?c=150x100&u=',
 					listeners	:{
 						selectimg : function(node){
 							that.currentRecord.backdrop=node[0].get('url');
