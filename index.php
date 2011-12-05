@@ -61,7 +61,7 @@
 		<link rel="stylesheet" type="text/css" href="modules/desktop/css/desktop.css" />
 
 		<script>
-		if(true){
+		if(false){
 			Ext.Loader.setConfig({
 				enabled			: false,
 				//disableCaching	: true,
