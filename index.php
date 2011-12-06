@@ -58,45 +58,33 @@
 		<script type="text/javascript" src="lib/3rd_js/ux/DataView/LabelEditor.js"></script>
 		<script type="text/javascript" src="lib/3rd_js/ux/DataView/DragSelector.js"></script>
 		<script type="text/javascript" src="modules/qd/mediadb/app.js"></script>
-		<link rel="stylesheet" type="text/css" href="modules/desktop/css/desktop.css" />
+		<link rel="stylesheet" type="text/css" href="lib/3rd_js/desktop/css/desktop.css" />
 
 		<script>
-		if(false){
-			Ext.Loader.setConfig({
-				enabled			: false,
-				//disableCaching	: true,
-				paths			: {
-					'Ext'		: 'lib/3rd_js/extjs4',
-					'qd'		: 'modules/qd',
-					'Ext.ux'	: 'lib/3rd_js/ux'
-				}
-			});
-			Ext.require([
-				'Ext.grid.*',
-				'Ext.data.*',
-				'Ext.util.*',
-				'Ext.Action',
-				'Ext.tab.*',
-				'Ext.button.*',
-				'Ext.form.*',
-				'Ext.layout.*'
-			]);
-		}else{
+		if(true){
 			QD_GBL_CONF.app.mainClass='MyDesktop.App';
-			Ext.Loader.setConfig({
-				enabled			: true
-			});
-			Ext.Loader.setPath({
-				'Ext.ux.desktop'	: 'modules/desktop/js',
-				MyDesktop			: 'modules/desktop'
-			});
-			//Ext.require(QD_GBL_CONF.app.mainClass);
-		
-			//var myDesktopApp;
-			//Ext.onReady(function () {
-			//	myDesktopApp = new MyDesktop.App();
-			//});
 		}
+		Ext.Loader.setConfig({
+			enabled			: true,
+			//disableCaching	: true,
+			paths			: {
+				'Ext'			: 'lib/3rd_js/extjs4',
+				'qd'			: 'modules/qd',
+				'Ext.ux'		: 'lib/3rd_js/ux',
+				'Ext.ux.desktop': 'lib/3rd_js/desktop/js',
+				MyDesktop		: 'lib/3rd_js/desktop'
+			}
+		});
+		Ext.require([
+			'Ext.grid.*',
+			'Ext.data.*',
+			'Ext.util.*',
+			'Ext.Action',
+			'Ext.tab.*',
+			'Ext.button.*',
+			'Ext.form.*',
+			'Ext.layout.*'
+		]);
 		</script>
 	</body>
 </html>
