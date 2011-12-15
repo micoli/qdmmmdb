@@ -19,7 +19,7 @@ class scrapertheMovieDBApi extends QDHtmlMovieParser{
 			if(is_array($v)){
 				$searchresults[]=array(
 					'id'		=> $v['id'],
-					'title'		=> array_key_exists_assign_default('name', $v, '').' '.$v['original_name'],
+					'title'		=> array_key_exists_assign_default('name', $v, '').($v['original_name']?' ('.$v['original_name'].')':''),
 					'year'		=> substr($v['released'],0,4),
 					'overview'	=> $v['overview'],
 					'poster'	=> (array_key_exists('posters',$v) && is_array($v['posters']) && array_key_exists(0,$v['posters']))?$v['posters'][0]['image']['url']:'',
@@ -32,6 +32,24 @@ class scrapertheMovieDBApi extends QDHtmlMovieParser{
 		
 	}
 
+	function getIdFromImdbId($id){
+		if(preg_match('/^tt[0-9]*$/',$id)){
+			$url = 'http://api.themoviedb.org/2.1/Movie.imdbLookup/fr/json/'.$this->themoviedbapikey.'/'.$id;
+			$res = $this->QDNet->getCacheURL($url,'themoviedbapi',$this->cacheminutes,$this->cache);
+			$arrResult = json_decode($res,true);
+			//db($arrResult);
+			if(is_array($arrResult) && count($arrResult)>0){
+				if(is_array($arrResult[0]) && array_key_exists('id',$arrResult[0])){
+					return $arrResult[0]['id'];
+				}else{
+					return null;
+				}
+			}else{
+				return null;
+			}
+		}
+
+	}
 	function getDetail($id){
 		$url = 'http://api.themoviedb.org/2.1/Movie.getInfo/fr/json/'.$this->themoviedbapikey.'/'.$id;
 		$arr = array_pop(object2array(json_decode($this->QDNet->getCacheURL($url,'themoviedbapi',$this->cacheminutes,$this->cache))));

@@ -61,7 +61,7 @@
 		<link rel="stylesheet" type="text/css" href="lib/3rd_js/desktop/css/desktop.css" />
 
 		<script>
-		if(true){
+		if(false){
 			QD_GBL_CONF.app.mainClass='MyDesktop.App';
 		}
 		Ext.Loader.setConfig({
