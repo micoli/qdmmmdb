@@ -1,8 +1,26 @@
 {
 	"thetvdbkey"	: "2F45BCAB1AF4F5EE",
-	"allowedExt"	: ["avi", "mpg", "ogm", "mpeg", "divx", "srt", "sub", "idx", "ram", "mp4"],
-	"movieExt" 		: ["avi", "mpg", "ogm", "mpeg", "divx", "ram", "mp4"],
+	"allowedExt"	: ["avi", "mpg", "mkv", "ogm", "mpeg", "divx", "srt", "sub", "idx", "ram", "mp4"],
+	"movieExt" 		: ["avi", "mpg", "mkv", "ogm", "mpeg", "divx", "ram", "mp4"],
 	"movieFolderWithYear"	: 1,
+	"arrHiddenmovie":[
+		{"rgx" : "sample"			}
+	],
+	"arrKeepSpecialTag":[
+		{"rgx" : "TS"			,"rep":"TS"		},
+		{"rgx" : "screener"		,"rep":"TS"		},
+		{"rgx" : "VO"			,"rep":"VO"		},
+		{"rgx" : "VOST"			,"rep":"VO"		},
+		{"rgx" : "VOSTFR"		,"rep":"VO"		},
+		{"rgx" : "R5"			,"rep":"R5"		},
+		{"rgx" : "(pt|dvd|cd|part)1"	,"rep":"cd1"	},
+		{"rgx" : "(pt|dvd|cd|part)2"	,"rep":"cd2"	},
+		{"rgx" : "(pt|dvd|cd|part)3"	,"rep":"cd3"	},
+		{"rgx" : "(pt|dvd|cd|part)4"	,"rep":"cd4"	},
+		{"rgx" : "(pt|dvd|cd|part)5"	,"rep":"cd5"	},
+		{"rgx" : "(pt|dvd|cd|part)6"	,"rep":"cd6"	},
+		{"rgx" : "(pt|dvd|cd|part)7"	,"rep":"cd7"	}
+	],
 	"arrCleanupMoviesRegexStrict":[
 		{"rgx" : "DVD"				},
 		{"rgx" : " md "				},
@@ -18,6 +36,7 @@
 		{"rgx" : " VOSTFR "			},
 		{"rgx" : " CD[0-9] "		},
 		{"rgx" : " screener "		},
+		{"rgx" : "\\?", "rep" : "-"	},
 		{"rgx" : ":", "rep" : "-"	}
 	],
 	"arrCleanupMoviesRegex":[
