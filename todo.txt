@@ -1,3 +1,7 @@
+mise en base de données
+reprise de nfo géré par xbmc
+gérer les cd1, part1……
+json monitor like firebug + try catch sur eval 
 handle special file tag (vost, R5 dvdscr, ts, part1 part2)
 keys accelerators on differents panels + tooltips 
 postprocessing of nzb created
@@ -13,6 +17,7 @@ detection tag vostfr/vostf sur ITE
 gerer le captach et le batch de synchro des DESC
 ajouter les favicons des providers de fiche cine
 
+**** reprise de nfo géré par qdmmmdb
 **** filtre sur les films dans Grid pour selectionner uniquement ceux restant a faire
 **** display fanart & backdrop on overview sur movie selector
 **** selected sur imageSelector

@@ -83,6 +83,7 @@ Ext.define('qd.mediadb.moviePanel', {
 				'srt'			,
 				'poster'		,
 				'fanart'		,
+				'qdmmmdb'		,
 				'nfo'			,
 				'extrathumbs'	,
 				'backdrop'		,
@@ -383,6 +384,12 @@ Ext.define('qd.mediadb.moviePanel', {
 						{header	: "filename"		, width: 280,	dataIndex: 'filename'		,	sortable: true,	flex : 1},
 						{header	: "ext"				, width:  40,	dataIndex: 'ext'			,	sortable: true,	flex : 0},
 						{header	: "size"			, width:  80,	dataIndex: 'filesize'		,	sortable: true,	flex : 0},
+						{header	: "mmmdb"			, width:  30,	dataIndex: 'qdmmmdb'		,	sortable: true,	flex : 0,
+							renderer : function(value, metaData, record, rowIndex, colIndex, store, view){
+								metaData.tdCls = record.get('qdmmmdb')?"moviegrid-icon-nfo":"moviegrid-icon-none";
+								return "&nbsp;";
+							}
+						},
 						{header	: "nfo"				, width:  30,	dataIndex: 'nfo'			,	sortable: true,	flex : 0,
 							renderer : function(value, metaData, record, rowIndex, colIndex, store, view){
 								metaData.tdCls = record.get('nfo')?"moviegrid-icon-nfo":"moviegrid-icon-none";

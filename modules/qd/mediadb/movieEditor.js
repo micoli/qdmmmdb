@@ -158,7 +158,8 @@ Ext.define('qd.mediadb.movieEditor', {
 				url		: 'p/QDMoviesProxy.chooseMoviesDetail/',
 				params	: {
 					i		: record.get('id'),
-					e		: record.get('engine')
+					e		: record.get('engine'),
+					f		: that.referenceRecord.get('fullpath')
 				},
 				success : function(rawRes){
 					loading.hide();
@@ -179,8 +180,11 @@ Ext.define('qd.mediadb.movieEditor', {
 						var allBackdrops = Ext.apply([],res.data.backdrops);
 						chooseBackdropStore.add(allBackdrops);
 						Ext.getCmp(gridbackdropid).selectByUrl(res.data.backdrop);
-
-						Ext.getCmp(tabpanelid).setActiveTab(1);
+						if(res.alreadyDone){
+							Ext.getCmp(tabpanelid).setActiveTab(0);
+						}else{
+							Ext.getCmp(tabpanelid).setActiveTab(1);
+						}
 						disableSave();
 					}catch(E){
 						console.log('exce',E);
