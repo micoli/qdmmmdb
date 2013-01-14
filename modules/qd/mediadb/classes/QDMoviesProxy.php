@@ -1,10 +1,36 @@
 <?php
 class QDMoviesProxy extends QDMediaDBProxy{
-
+	static $threadArr;
+	function svc_updateDatabase(){
+		header('content-type:text/html');
+		$sc = new QDHtmlMovieParser;
+		$nb=0;
+		foreach($this->folderMoviesList as $movieDrive){
+			$arrMovies = $this->pri_getMoviesFiles($movieDrive['name'],'*');
+			foreach($arrMovies['results'] as $movieData){
+				$nb++;
+				$movieNFO=$movieData['fileDetail']['fullPath'].'/movie.nfo';
+				if(file_exists($movieNFO)){
+					$o = $sc->simpleLoadXbmcMovieNfo($movieNFO);
+					if($o){
+						db($movieData['fileDetail']['fullPath']);
+						set_time_limit(20);
+						$o = object2array($o);
+						$o['fileDetail']=$movieData['fileDetail'];
+						$this->makeMovieDB($o);
+						//db($o);
+						if($nb>2){
+							//die();
+						}
+					}
+				}
+			}
+		}
+	}
 	function svc_convertXBMCNfoToQdMmmDb(){
 		$this->pri_convertXBMCNfoToQdMmmDb($this->pri_getMoviesFiles('G','*'));
 	}
-	
+
 	function pri_convertXBMCNfoToQdMmmDb($arrFiles){
 		foreach($arrFiles['results'] as $file){
 			if ($file['nfo'] && !$file['qdmmmdb']!=''){
@@ -32,8 +58,10 @@ class QDMoviesProxy extends QDMediaDBProxy{
 		//return $sc->getDetail($_REQUEST['id']);
 	}
 	function svc_preloadFolder(){
-		$this->pri_preloadFolder($this->pri_getMoviesFiles('Q'));
-		$this->pri_preloadFolder($this->pri_getMoviesFiles('K'));
+		set_time_limit(0);
+		$this->pri_preloadFolder($this->pri_getMoviesFiles('dwn'));
+		//$this->pri_preloadFolder($this->pri_getMoviesFiles('Q'));
+		//$this->pri_preloadFolder($this->pri_getMoviesFiles('K'));
 		/*
 		$this->pri_preloadFolder($this->pri_getMoviesFiles('F'));
 		$this->pri_preloadFolder($this->pri_getMoviesFiles('F1'));
@@ -75,6 +103,7 @@ class QDMoviesProxy extends QDMediaDBProxy{
 	function svc_chooseMovie() {
 		return $this->pri_chooseMovie($_REQUEST);
 	}
+
 	function pri_chooseMovie($prm) {
 		$moviesname = trim($prm['m']);
 		$path = $prm['p'];
@@ -103,7 +132,7 @@ class QDMoviesProxy extends QDMediaDBProxy{
 	function svc_chooseMoviesDetail() {
 		return $this->pri_chooseMoviesDetail($_REQUEST);
 	}
-	
+
 	function pri_chooseMoviesDetail($prm) {
 		$sc = null;
 		switch ($prm['e']){
@@ -128,8 +157,8 @@ class QDMoviesProxy extends QDMediaDBProxy{
 			}
 			if(!$file){
 				$res['data'] = $sc->getDetail(trim($prm['i']));
-				$this->pri_cacheImages($res['data']['posters'  ]);
-				$this->pri_cacheImages($res['data']['backdrops']);
+				$this->pri_cacheImages($sc,$res['data']['posters'  ]);
+				$this->pri_cacheImages($sc,$res['data']['backdrops']);
 				if(is_array($res['data']['posters'  ]) && count($res['data']['posters'  ])>0){
 					$res['data']['poster']=$res['data']['posters'  ][0]['url'];
 				}
@@ -141,26 +170,82 @@ class QDMoviesProxy extends QDMediaDBProxy{
 		return $res;
 	}
 
-	function pri_cacheImages(&$arr){
-		if(is_array($arr)){
-			foreach($arr as $k=>$v){
-				$url = $v;
-				set_time_limit(20);
-				$this->QDNet->getCacheURL($v, 'imgs', 60*24*365*20,true);
-				$thumb=new Imagick($this->QDNet->lastCacheFile);
-				$arr[$k]=array(
-					'url'	=> $url,
-					'w'		=> $thumb->getImageWidth(),
-					'h'		=> $thumb->getImageHeight()
-				);
-				if ($k>10){
-					break;
+	function pri_processCacheImage($modulo,$arr){
+		foreach($arr as $k=>$v){
+			if (($k % 4)==$modulo){
+				if(is_array($v)){
+					$url = $v['url'];
+				}else{
+					$url = $v;
+					$this->QDNet->getCacheURL($url , 'imgs', 60*24*365*20,true,'');
 				}
 			}
-			$this->sortBySize='desc';
-			uasort($arr,array($this,"sortBySize"));
-			$arr=array_values($arr);
-			$arr = array_slice($arr,0,10);
+		}
+	}
+
+	function pri_cacheImages($scrapper,&$arr){
+		header('content-type:text/html');
+		$withThreads=false;
+		$nbPic=18;
+
+		if(is_array($arr)){
+			if($withThreads){
+				$t1 = new Thread( array($this,'pri_processCacheImage') );
+				$t2 = new Thread( array($this,'pri_processCacheImage') );
+				$t3 = new Thread( array($this,'pri_processCacheImage') );
+				$t4 = new Thread( array($this,'pri_processCacheImage') );
+
+				$t1->start(0,$arr);
+				$t2->start(1,$arr);
+				$t3->start(2,$arr);
+				$t4->start(3,$arr);
+				while( $t1->isAlive() && $t2->isAlive() && $t3->isAlive() && $t4->isAlive() ) {
+					sleep(1);
+				}
+			}else{
+				$this->pri_processCacheImage(0,$arr);
+				$this->pri_processCacheImage(1,$arr);
+				$this->pri_processCacheImage(2,$arr);
+				$this->pri_processCacheImage(3,$arr);
+			}
+			foreach($arr as $k=>$v){
+				if(is_array($v)){
+					$url = $v['url'];
+				}else{
+					$url = $v;
+				}
+				if(is_array($v)){
+					$arr[$k]=array(
+							'url'	=> $v['url'],
+							'w'		=> $v['width'],
+							'h'		=> $v['height']
+					);
+				}else{
+					set_time_limit(20);
+					/*$thumb=new Imagick($this->QDNet->lastCacheFile);
+					self::$threadArr[$k]=array(
+								'url'	=> $v,
+								'w'		=> $thumb->getImageWidth(),
+								'h'		=> $thumb->getImageHeight()
+					);*/
+					$localfile = $this->QDNet->getCacheFileName($url , 'imgs','');
+					$thumb=getimagesize($localfile);
+					$arr[$k]=array(
+							'url'	=> $url,
+							'w'		=> $thumb[0],
+							'h'		=> $thumb[1]
+					);
+				}
+			}
+
+			//db($arr);
+			//self::$threadArr=array();
+			if(!$scrapper->getCapabilitie('pictureSorted')){
+				$this->sortBySize='desc';
+				uasort($arr,array($this,"sortBySize"));
+			}
+			$arr = array_values($arr);
+			$arr = array_slice($arr,0,$nbPic);
 		}
 	}
 
@@ -171,7 +256,7 @@ class QDMoviesProxy extends QDMediaDBProxy{
 			return 0;
 		}
 		return (($this->sortBySize=='asc')?$as < $bs:$as > $bs) ? -1 : 1;
-		}
+	}
 
 	function svc_checkMoviesPicture() {
 		$path = "m:/___films";
@@ -189,7 +274,7 @@ class QDMoviesProxy extends QDMediaDBProxy{
 					if (array_key_exists('thumbs', $f) && array_key_exists('thumb', $f['thumbs'])) {
 						set_time_limit(90);
 						$poster = is_array($f['thumbs']['thumb']) ? $f['thumbs']['thumb'][0] : $f['thumbs']['thumb'];
-						$t = $this->QDNet->getCacheURL($poster, 'seriesDetail', $this->cacheminutes, $this->cache);
+						$t = $this->QDNet->getCacheURL($poster, 'seriesDetail', $this->cacheminutes, $this->cache,'');
 						file_put_contents($path . '/movie.tbn', $t);
 						file_put_contents($path . '/folder.jpg', $t);
 						print $poster . "<br>";
@@ -290,11 +375,16 @@ class QDMoviesProxy extends QDMediaDBProxy{
 	}
 
 	function cleanMoviesFilename($moviename, $strict = false) {
-		foreach ($this->arrCleanupMoviesRegex as $k => $v) {
-			$moviename = $this->delmulspace(preg_replace('/' . $v['rgx'] . '/i', array_key_exists('rep', $v) ? $v['rep'] : ' ', ' ' . $moviename . ' '));
-		}
 		if ($strict) {
 			foreach ($this->arrCleanupMoviesRegexStrict as $k => $v) {
+				if(!$v['multiple'] && preg_match('/' . $v['rgx'] . '/i',$moviename)){
+					//db($v);
+					$moviename = $this->delmulspace(preg_replace('/' . $v['rgx'] . '/i', array_key_exists('rep', $v) ? $v['rep'] : ' ', ' ' . $moviename . ' '));
+				}
+			}
+		}
+		foreach ($this->arrCleanupMoviesRegex as $k => $v) {
+			if(preg_match('/' . $v['rgx'] . '/i',$moviename)){
 				$moviename = $this->delmulspace(preg_replace('/' . $v['rgx'] . '/i', array_key_exists('rep', $v) ? $v['rep'] : ' ', ' ' . $moviename . ' '));
 			}
 		}
@@ -302,7 +392,6 @@ class QDMoviesProxy extends QDMediaDBProxy{
 	}
 
 	function pri_addFileToGetMoviesFiles($prm){
-		//db($prm);
 		$tmp = array(
 			'rootPath'		=> $prm['rootPath'],
 			'fullpath'		=> $prm['fileDetail']['fullPath'],
@@ -339,6 +428,7 @@ class QDMoviesProxy extends QDMediaDBProxy{
 			}
 		}
 	}
+	
 	private function pri_movieFileIsVisible($file){
 		$hidden = false;
 		foreach($this->arrHiddenmovieRegex as $rule){
@@ -373,6 +463,7 @@ class QDMoviesProxy extends QDMediaDBProxy{
 	}
 
 	function svc_setMoviesFromPath() {
+		header('content-type:text/html');
 		$debug				= false;
 		$forceFileWrite		= true;
 		$scraperObject		= new QDHtmlMovieParser();
@@ -380,7 +471,6 @@ class QDMoviesProxy extends QDMediaDBProxy{
 		$originalFileName	= base64_decode($ref['pathfilename64']);
 		$fullRecord			= json_decode($_REQUEST['record'],true);
 		$compatRecord		= $scraperObject->convertFullRecordToCompatibleRecord($fullRecord);
-
 
 		$newFilename = $this->cleanMoviesFilename($compatRecord['title'],true);
 		if (in_array(trim($newFilename),array('','.','..'))){
@@ -415,18 +505,44 @@ class QDMoviesProxy extends QDMediaDBProxy{
 				return array('corrupted'=>$ref['inFolder'].'-'.__FILE__.' - '.__LINE__);
 			break;
 		}
+		$isMultiple = false;
+		
 		$addStr='';
 		foreach ($this->arrKeepSpecialTag as $tag){
-			if(preg_match('/'.$tag['rgx'].'/i',$originalFileName)){
-				$addStr='-'.$tag['rep'];
+			if(preg_match('/'.$tag['rgx'].'/i',$originalFileName,$m)){
+				$addStr = '-'.$tag['rep'];
+				if($tag['multiple']){
+					$isMultiple = true;
+					$rgxMultiple = $m[1];
+					$repMultiple = $tag['rep'];
+				}
 			}
 		}
-		$newFullFilename = $movieFolder . '/'.$newFilename.$addStr.'.'.strtolower($ref['ext']);
-
-		if(!file_exists($newFullFilename)){
-		//	return array('corrupted'=>'renamed file already exists');
-		//}else{
-			rename($originalFileName,$newFullFilename);
+		$multipleToRemove=array();
+		if($isMultiple){
+			for($num=1;$num<=9;$num++){
+				if (preg_match('/'.$rgxMultiple .'/i',$originalFileName)){
+					$originalFileNameMultiple= preg_replace('/'.$rgxMultiple . 1 . '/i',$rgxMultiple.$num,$originalFileName);
+					
+					$newFullFilenameMultiple = $movieFolder . '/'.$newFilename.$addStr.$num.'.'.strtolower($ref['ext']);
+					//print "=====> $originalFileName , $repMultiple , $originalFileNameMultiple , $newFullFilenameMultiple)<br>";
+					if(!file_exists($newFullFilenameMultiple) && file_exists($originalFileNameMultiple)){
+						//print "rename($originalFileNameMultiple , $newFullFilenameMultiple)<br>";
+						rename($originalFileNameMultiple,$newFullFilenameMultiple);
+						if($num!=1){
+							$multipleToRemove[]=$originalFileNameMultiple;
+						}
+					}
+				}
+			}
+			$newFullFilename = $movieFolder . '/'.$newFilename.$addStr . 1 .'.'.strtolower($ref['ext']);
+		}else{
+			$newFullFilename = $movieFolder . '/'.$newFilename.$addStr.'.'.strtolower($ref['ext']);
+			if(!file_exists($newFullFilename)){
+			//	return array('corrupted'=>'renamed file already exists');
+			//}else{
+				rename($originalFileName,$newFullFilename);
+			}
 		}
 
 		if (!file_exists($movieFolder		. '/info.txt'	) or $forceFileWrite) {
@@ -438,15 +554,15 @@ class QDMoviesProxy extends QDMediaDBProxy{
 		}
 
 		if (!file_exists($movieFolder		. '/movie.tbn'	) or $forceFileWrite) {
-			file_put_contents($movieFolder	. '/movie.tbn'	, $this->QDNet->getCacheURL($compatRecord['poster'], 'imgs', 60*24*365*20,true));
+			file_put_contents($movieFolder	. '/movie.tbn'	, $this->QDNet->getCacheURL($compatRecord['poster'], 'imgs', 60*24*365*20,true,''));
 		}
 
 		if (!file_exists($movieFolder		. '/folder.jpg'	) or $forceFileWrite) {
-			file_put_contents($movieFolder	. '/folder.jpg'	, $this->QDNet->getCacheURL($compatRecord['poster'], 'imgs', 60*24*365*20,true));
+			file_put_contents($movieFolder	. '/folder.jpg'	, $this->QDNet->getCacheURL($compatRecord['poster'], 'imgs', 60*24*365*20,true,''));
 		}
 
 		if (!file_exists($movieFolder		. '/fanart.jpg'	) or $forceFileWrite) {
-			file_put_contents($movieFolder	. '/fanart.jpg'	, $this->QDNet->getCacheURL($compatRecord['backdrop'], 'imgs', 60*24*365*20,true));
+			file_put_contents($movieFolder	. '/fanart.jpg'	, $this->QDNet->getCacheURL($compatRecord['backdrop'], 'imgs', 60*24*365*20,true,''));
 		}
 
 		$fileDetail = CW_Files::pathinfo_utf($newFullFilename);
@@ -458,6 +574,9 @@ class QDMoviesProxy extends QDMediaDBProxy{
 
 		//// rollback
 		//@rename($newFullFilename,$originalFileName);
+		$rec2db = object2array($scraperObject->simpleLoadXbmcMovieNfo($movieFolder	. '/movie.nfo'));
+		$rec2db['fileDetail']=$fileDetail;
+		$this->makeMovieDB($rec2db);
 
 		if($debug){
 			db (array(
@@ -496,10 +615,10 @@ class QDMoviesProxy extends QDMediaDBProxy{
 				if (is_array($tarray['poster']))
 					$tarray['poster'] = $tarray['poster'][0];
 				if (!file_exists($newpath . '/movie.tbn')) {
-					file_put_contents($newpath . '/movie.tbn', $this->QDNet->getCacheURL($tarray['poster'], 'seriesDetail', $this->cacheminutes, $this->cache));
+					file_put_contents($newpath . '/movie.tbn', $this->QDNet->getCacheURL($tarray['poster'], 'seriesDetail', $this->cacheminutes, $this->cache,''));
 				}
 				if (!file_exists($newpath . '/folder.jpg')) {
-					file_put_contents($newpath . '/folder.jpg', $this->QDNet->getCacheURL($tarray['poster'], 'seriesDetail', $this->cacheminutes, $this->cache));
+					file_put_contents($newpath . '/folder.jpg', $this->QDNet->getCacheURL($tarray['poster'], 'seriesDetail', $this->cacheminutes, $this->cache,''));
 				}
 			}
 			file_put_contents($newpath . '/info.txt', 'allocine:' . $id);

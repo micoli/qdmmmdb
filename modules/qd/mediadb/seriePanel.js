@@ -1,5 +1,5 @@
 Ext.define('qd.mediadb.seriePanel', {
-    extend			: 'Ext.Panel',
+	extend			: 'Ext.Panel',
 	alias			: 'widget.qd.mediadb.seriePanel',
 	//requires		: ['Ext.ux.base64'],
 	initComponent	: function() {
@@ -21,7 +21,8 @@ Ext.define('qd.mediadb.seriePanel', {
 				}
 			});
 			that.pathname = pathname;
-		};
+		}
+
 		that.clickOnTreeFolderNode	 = function(view, record, HTMLElement, index, evt, eOpts ){
 			if (Ext.getCmp(that.treeserieid).getSelectionModel().getSelection()[0].data.id == record.data.id){
 				if(record.data.fullname!=-1){
@@ -49,7 +50,7 @@ Ext.define('qd.mediadb.seriePanel', {
 				expanded: true
 			},
 			proxy		: {
-				type		: 'ajax',
+				type		: 'ajaxEx',
 				url			: 'p/QDSeriesProxy.getSeriesTree/'
 			}
 		});
@@ -104,7 +105,7 @@ Ext.define('qd.mediadb.seriePanel', {
 			model				: 'fileModel',
 			pruneModifiedRecords: true,
 			proxy				: {
-				type				: 'ajax',
+				type				: 'ajaxEx',
 				url					: 'p/QDSeriesProxy.getFiles/',
 				reader				: {
 					type				: 'json',
@@ -262,6 +263,7 @@ Ext.define('qd.mediadb.seriePanel', {
 						},{
 							text			: 'Rename',
 							handler			: function(){
+								var w = Ext.MessageBox.wait('Updating....('+Ext.getCmp(that.gridfilesid).getSelectionModel().getSelection().length+')');
 								var arrResult = {};
 								var pathName = Ext.getCmp(that.gridfilesid).pathname;
 								arrResult[Ext.ux.base64.encode(pathName)]={};
@@ -279,12 +281,13 @@ Ext.define('qd.mediadb.seriePanel', {
 									});
 								});
 								console.log(arrResult);
-								Ext.Ajax.request({
+								Ext.AjaxEx.request({
 									url      : 'p/QDSeriesProxy.renameFiles/',
 									params : {
 										modified   : Ext.ux.base64.encode(Ext.JSON.encode(arrResult))
 									},
 									success : function(r){
+										w.hide();
 										that.loadFilesGrid(pathName);
 									}
 								});

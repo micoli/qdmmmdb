@@ -1,9 +1,11 @@
+***multi CD, gérer les cd1, part1
+
+
 mise en base de données
 reprise de nfo géré par xbmc
-gérer les cd1, part1……
-json monitor like firebug + try catch sur eval 
+json monitor like firebug + try catch sur eval
 handle special file tag (vost, R5 dvdscr, ts, part1 part2)
-keys accelerators on differents panels + tooltips 
+keys accelerators on differents panels + tooltips
 postprocessing of nzb created
 tester l'erreur sur retour json
 desactiver le parser des links sur recherche simple full text

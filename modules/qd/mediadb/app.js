@@ -5,6 +5,7 @@ var appItems = [
 	{title		: 'Series'		,xtype	: 'qd.mediadb.seriePanel'								},
 	{title		: 'Movies'		,xtype	: 'qd.mediadb.moviePanel'								}
 ];
+
 Ext.each(QD_GBL_CONF.mediadb.helperSite,function(item){
 	appItems.push({
 		title		: item.title	,
@@ -14,9 +15,26 @@ Ext.each(QD_GBL_CONF.mediadb.helperSite,function(item){
 		closable	: true
 	});
 });
+Ext.globalHandlerCounter = {
+	'image'	: 0,
+	'ajax'	: 0
+}
+Ext.globalAjaxHandler = function(event,request){
+	if(event == 'imagestart'||event == 'imageend'){
+		Ext.globalHandlerCounter['image'] += (event=="imagestart")?1:-1;
+		
+	}else{
+		Ext.globalHandlerCounter['ajax'] += (event=="start")?1:-1;
+	}
+	//console.log(event,request.options.url?request.options.url:request.options.proxy.url);
+	var cmp = Ext.getCmp('qd.mediadb.ajaxCount')
+	if(cmp) cmp.setText(''+Ext.globalHandlerCounter['ajax']+'/'+Ext.globalHandlerCounter['image']);
+}
 Ext.define('qd.mediadb.app', {
 	extend		: 'Ext.container.Viewport',
 	layout		: 'border',
+	id			: 'qd.mediadb.appid',
+	border		: false,
 	requires	: [
 		'Ext.ux.SimpleIFrame',
 		'qd.nzb.NZBPanel',
@@ -29,6 +47,17 @@ Ext.define('qd.mediadb.app', {
 		activeTab	: 4,
 		region		: 'center',
 		items		: appItems
+	},{
+		xtype		: 'toolbar',
+		region		: 'south',
+		frame		: true,
+		border		: false,
+		items		: ['->',{
+			xtype		: 'button',
+			id			: 'qd.mediadb.ajaxCount',
+			text		: '0',
+			value		: 0
+		}]
 	}],
 	listeners	: [{
 		activate	:function(){
