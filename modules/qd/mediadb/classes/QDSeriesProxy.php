@@ -40,7 +40,7 @@ class QDSeriesProxy extends QDMediaDBProxy{
 		}
 		$filename = str_replace("\\'", "'", $path).'/tvdb_all.xml';
 		file_put_contents($filename, $xml);
-		
+
 		return ( array ('results'=> array ('name'=>basename($path), 'title'=>basename($path).' <b>TVDB</b>')));
 	}
 
@@ -86,7 +86,7 @@ class QDSeriesProxy extends QDMediaDBProxy{
 			}
 		}
 	}
-	
+
 	function svc_getSeriesTree() {
 		QDSession::_unset('cacheFolderTree');
 		if (array_key_exists('refresh', $_REQUEST) && $_REQUEST['refresh'] = 1) {
@@ -269,7 +269,7 @@ class QDSeriesProxy extends QDMediaDBProxy{
 	function pri_formatEpisodeFilename($formatName,$serieName,$saison,$episode,$episodeName,$extension){
 		$rtn = '';
 		if (array_key_exists($formatName, $this->episodeFormats)){
-			$rtn = sprintf($this->episodeFormats[$formatName],trim($serieName),trim($saison),trim($episode),$this->cleanFilename($episodeName),trim(extension));
+			$rtn = sprintf($this->episodeFormats[$formatName],trim($serieName),trim($saison),trim($episode),$this->cleanFilename($episodeName),trim($extension));
 		}else{
 			$rtn = '';
 		}
@@ -277,11 +277,14 @@ class QDSeriesProxy extends QDMediaDBProxy{
 		//print "->".$rtn."\n";
 		return $rtn;
 	}
-	
+
 	function isEpisodeFileNameOK($currentFileName,$serieName,$saison,$episode,$episodeName,$extension){
 		$isOk = false;
 		foreach($this->episodeFormats as $formatName=>$formatString){
-			if ($this->pri_formatEpisodeFilename($formatName, $serieName, $saison, $episode, $episodeName, $extension) == $currentFileName){
+			$currentReformatedFilename = $this->pri_formatEpisodeFilename($formatName, $serieName, $saison, $episode, $episodeName, $extension);
+			//print "A1";db(($currentReformatedFilename));
+			//print "A2";db(utf8_decode($currentFileName));
+			if (($currentReformatedFilename == $currentFileName)||($currentReformatedFilename== utf8_decode($currentFileName))){
 				$isOk = true;
 				break;
 			}
@@ -298,8 +301,10 @@ class QDSeriesProxy extends QDMediaDBProxy{
 		$seriePath = $this->getSeriePath($str);
 		if (file_exists($seriePath . '/tvshow.nfo') && !file_exists($seriePath . '/tvdb_all.xml')) {
 			$idSerie = $this->getSeriesIdFromXml($seriePath);
-			die($idSerie);
+			//return($seriePath."/".$idSerie);
+			return array('results'=>array(),'arrSerie'=>array());
 			if($idSerie){
+				print "autodetection serie";
 				$this->pri_setSerieFromPath($seriePath,$idSerie);
 			}
 		}
@@ -330,7 +335,7 @@ class QDSeriesProxy extends QDMediaDBProxy{
 			}*/
 			//db($arr['arrSerie']['Episode']);
 		}
-
+		header('content-type:text/html');
 		foreach ($tmp as $v) {
 			$d = CW_Files::pathinfo_utf($v);
 			if (in_array(strtolower($d['extension']), $this->allowedExt)) {
@@ -341,10 +346,8 @@ class QDSeriesProxy extends QDMediaDBProxy{
 					$episodeName	= $this->extractXQuery($xpath, "/Data/Episode[SeasonNumber='" . $res['saison'] . "' and EpisodeNumber='" . ($res['episode'] * 1) . "']/EpisodeName");
 					$Overview		= $this->extractXQuery($xpath, "/Data/Episode[SeasonNumber='" . $res['saison'] . "' and EpisodeNumber='" . ($res['episode'] * 1) . "']/Overview");
 				}
-				if (!$only2Rename || $this->isEpisodeFileNameOK($d['basename'],$arr['serieName'],$res['saison'],$res['episode'],$episodeName,$d['extension']) ) {
-					//db($episodeName);
-					//db($this->cleanFilename($episodeName));
-
+				$formatOK = $this->isEpisodeFileNameOK($d['basename'],$arr['serieName'],$res['saison'],$res['episode'],$episodeName,$d['extension']);
+				if (!$only2Rename ||  !$formatOK) {
 					$arr['results'][] = array(
 						'filename'		=> $d['basename'],
 						'ext'			=> $d['extension'],
@@ -355,6 +358,7 @@ class QDSeriesProxy extends QDMediaDBProxy{
 						'Overview'		=> $Overview,
 						'serieName'		=> $arr['serieName'],
 						'pathName'		=> $str,
+						'formatOK'		=> $formatOK,
 						'md5'			=> md5(realpath($v))
 					);
 				}
@@ -396,7 +400,7 @@ class QDSeriesProxy extends QDMediaDBProxy{
 		}
 	}
 
-	function makeEpisodeNFO($filename) {
+	function makeEpisodeNFO($filename,$writeFiles=true,$writeDB=false) {
 		$seriePath = $this->getSeriePath(dirname($filename));
 		if (file_exists($seriePath . '/tvdb_all.xml')) {
 			//die($seriePath . '/tvdb_all.xml');
@@ -416,6 +420,7 @@ class QDSeriesProxy extends QDMediaDBProxy{
 				$o['season'			] = $res['saison'];
 				$o['episode'		] = $res['episode'] * 1;
 				$o['plot'			] = $this->extractXQuery($xpath, $pathEpisode . "/Overview");
+				$o['tvdbid'			] = $this->extractXQuery($xpath, $pathEpisode . "/id");
 				$o['credits'		] = $this->extractXQuery($xpath, $pathEpisode . "/Writer");
 				$o['director'		] = $this->extractXQuery($xpath, $pathEpisode . "/Director");
 				$o['aired'			] = $this->extractXQuery($xpath, $pathEpisode . "/FirstAired");
@@ -431,7 +436,6 @@ class QDSeriesProxy extends QDMediaDBProxy{
 				$tbnFilename	= $seriePathD['dirname'] . '/' . $seriePathD['filename'] . '.tbn';
 				$bannerFilename = $seriePathD['dirname'] . '/folder.jpg';
 
-
 				$this->addNFOTextNode($xmldocNFO, $root, "title"	, $o['title'	]);
 				$this->addNFOTextNode($xmldocNFO, $root, "season"	, $o['season'	]);
 				$this->addNFOTextNode($xmldocNFO, $root, "episode"	, $o['episode'	]);
@@ -441,16 +445,61 @@ class QDSeriesProxy extends QDMediaDBProxy{
 				$this->addNFOTextNode($xmldocNFO, $root, "aired"	, $o['aired'	]);
 				$this->addNFOTextNode($xmldocNFO, $root, "thumb"	, $o['thumb'	]);
 				$this->addNFOTextNode($xmldocNFO, $root, "fanart"	, $o['fanart'	]);
-				file_put_contents($nfoFilename, $xmldocNFO->saveXML());
-				//unlink($nfoFilename);
-				if (!file_exists($fanartFilename)) 	file_put_contents($fanartFilename	, $this->QDNet->getURL($o['fanart'	]));
-				if (!file_exists($bannerFilename)) 	file_put_contents($bannerFilename	, $this->QDNet->getURL($o['banner'	]));
-				if (!file_exists($bannerFilename)) 	file_put_contents($bannerFilename	, $this->QDNet->getURL($o['banner'	]));
-				if (!file_exists($tbnFilename	))	file_put_contents($tbnFilename		, $this->QDNet->getURL($o['thumb'	]));
-				////////////////$this->makeEpisodeDB($o);
+				if($writeFiles){
+					file_put_contents($nfoFilename, $xmldocNFO->saveXML());
+					//unlink($nfoFilename);
+					if (!file_exists($fanartFilename)) 	file_put_contents($fanartFilename	, $this->QDNet->getURL($o['fanart'	]));
+					if (!file_exists($bannerFilename)) 	file_put_contents($bannerFilename	, $this->QDNet->getURL($o['banner'	]));
+					if (!file_exists($bannerFilename)) 	file_put_contents($bannerFilename	, $this->QDNet->getURL($o['banner'	]));
+					if (!file_exists($tbnFilename	))	file_put_contents($tbnFilename		, $this->QDNet->getURL($o['thumb'	]));
+				}
+				if($writeDB){
+					$lang='';
+					if(preg_match('! FR$!',dirname($filename))){
+						$lang='FR';
+					}
+					if(preg_match('! VO$!',dirname($filename))){
+						$lang='VO';
+					}
+					if($lang){
+						$o['title'].=' ('.$lang.')';
+					}
+					$this->makeEpisodeDB($o);
+				}
 			}
 		}
 	}
+
+	function svc_updateDatabase() {
+		header('Content-Type: text/html;');
+		$arrDrive = $this->svc_getSeriesTree();
+		//db($arrDrive);die();
+		$nb=0;
+		foreach($arrDrive as $drivePath){
+			if (is_array($drivePath['children'])){
+				foreach($drivePath['children'] as $seriePath){
+					if (is_array($seriePath['children'])){
+						foreach($seriePath['children'] as $saisonPath){
+							db($seriePath['fullname']);
+							db($saisonPath['fullname']);
+							$files = $this->pri_getFiles($saisonPath['fullname'],false);
+							unset($files['arrSerie']);
+							//db($files);
+							set_time_limit(20);
+							foreach($files['results'] as $file){
+								if($file['formatOK']){
+									$fullFileName = $file['pathName'].'/'.$file['filename'];
+									$this->makeEpisodeNFO($fullFileName,false,true);
+								}
+							}
+						}
+					}
+				}
+				//die();//one drive
+			}
+		}
+	}
+
 
 	function svc_extractSeriesFilenameStruct($intern = false) {
 		return $this->extractSeriesFilenameStruct($_REQUEST['filename']);

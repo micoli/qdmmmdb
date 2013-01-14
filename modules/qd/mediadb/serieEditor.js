@@ -1,9 +1,8 @@
 Ext.define('qd.mediadb.serieEditor', {
-    extend			: 'Ext.Window',
+	extend			: 'Ext.Window',
 	alias			: 'widget.qd.mediadb.serieEditor',
 	initComponent	: function() {
 		var that = this;
-
 		Ext.define('chooseserie', {
 			extend	: 'Ext.data.Model',
 			fields	: [
@@ -19,7 +18,7 @@ Ext.define('qd.mediadb.serieEditor', {
 			model				: 'chooseserie',
 			//pruneModifiedRecords: true,
 			proxy				: {
-				type				: 'ajax',
+				type				: 'ajaxEx',
 				url					: 'p/QDSeriesProxy.chooseSerie/',
 				reader				: {
 					type				: 'json',
@@ -62,7 +61,7 @@ Ext.define('qd.mediadb.serieEditor', {
 				selType			: 'checkboxmodel',
 				tbar			: [{
 					xtype			: 'tbtext',
-					text			: 'Serie : '
+					text			: 'Serie : ',
 				},{
 					xtype			: 'textfield',
 					id				: 'textchooseserie',
@@ -97,7 +96,7 @@ Ext.define('qd.mediadb.serieEditor', {
 					var recordSelected = Ext.getCmp('gridchooseserie').getSelectionModel().getSelection();
 					if (recordSelected && recordSelected[0]){
 						var w = Ext.MessageBox.wait('mise à jour');
-						Ext.Ajax.request({
+						Ext.AjaxEx.request({
 							url		: 'p/QDSeriesProxy.setSerieFromPath/',
 							params	: {
 								p		: that.record.get('fullname'),
@@ -128,7 +127,7 @@ Ext.define('qd.mediadb.serieEditor', {
 			}],
 			listeners	:{
 				show : function(){
-					Ext.Ajax.request({
+					Ext.AjaxEx.request({
 						url		: 'p/QDSeriesProxy.getSerieFromPath/',
 						params	: {
 							p		: that.record.get('fullname')

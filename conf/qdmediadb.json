@@ -7,22 +7,21 @@
 		{"rgx" : "sample"			}
 	],
 	"arrKeepSpecialTag":[
-		{"rgx" : "TS"			,"rep":"TS"		},
-		{"rgx" : "screener"		,"rep":"TS"		},
-		{"rgx" : "VO"			,"rep":"VO"		},
-		{"rgx" : "VOST"			,"rep":"VO"		},
-		{"rgx" : "VOSTFR"		,"rep":"VO"		},
-		{"rgx" : "R5"			,"rep":"R5"		},
-		{"rgx" : "(pt|dvd|cd|part)1"	,"rep":"cd1"	},
-		{"rgx" : "(pt|dvd|cd|part)2"	,"rep":"cd2"	},
-		{"rgx" : "(pt|dvd|cd|part)3"	,"rep":"cd3"	},
-		{"rgx" : "(pt|dvd|cd|part)4"	,"rep":"cd4"	},
-		{"rgx" : "(pt|dvd|cd|part)5"	,"rep":"cd5"	},
-		{"rgx" : "(pt|dvd|cd|part)6"	,"rep":"cd6"	},
-		{"rgx" : "(pt|dvd|cd|part)7"	,"rep":"cd7"	}
+		{"rgx" : "TS"						,"rep":"TS"		,"multiple":0},
+		{"rgx" : "screener"					,"rep":"TS"		,"multiple":0},
+		{"rgx" : "VO"						,"rep":"VO"		,"multiple":0},
+		{"rgx" : "VOST"						,"rep":"VO"		,"multiple":0},
+		{"rgx" : "VOSTFR"					,"rep":"VO"		,"multiple":0},
+		{"rgx" : "R5"						,"rep":"R5"		,"multiple":0},
+		{"rgx" : "(pt|dvd|cd|part)([0-9])"	,"rep":"cd"		,"multiple":1}
 	],
-	"arrCleanupMoviesRegexStrict":[
+	"arrCleanupMoviesRegexStrict"	:[
+		{"rgx" : "DVD[0-9]"			},
+		{"rgx" : "DVDRIP"			},
 		{"rgx" : "DVD"				},
+		{"rgx" : "Fwd"				},
+		{"rgx" : "BDRip"			},
+		{"rgx" : "Brrip"			},
 		{"rgx" : " md "				},
 		{"rgx" : " TS "				},
 		{"rgx" : " FR "				},
@@ -34,7 +33,6 @@
 		{"rgx" : " VO "				},
 		{"rgx" : " VOST "			},
 		{"rgx" : " VOSTFR "			},
-		{"rgx" : " CD[0-9] "		},
 		{"rgx" : " screener "		},
 		{"rgx" : "\\?", "rep" : "-"	},
 		{"rgx" : ":", "rep" : "-"	}
@@ -56,6 +54,8 @@
 		{"rgx" : "part4"	, "rep" : "CD4"		},
 		{"rgx" : "repack"						},
 		{"rgx" : "STV"							},
+		{"rgx" : "Hush"							},
+		{"rgx" : "Utt"							},
 		{"rgx" : "AC3"							},
 		{"rgx" : "xvid"							},
 		{"rgx" : "divx"							},
@@ -83,7 +83,8 @@
 		["\b(episode|ep|e)( ?)([0-9]{1,})( ?)(- ?)(series|season)( ?)([0-9]+)"	, 8, 3],
 		["(^|[^a-z])S([0-s9]{2,})([ |\\.|-]?)-([ |\\.|-]?)E([0-9]{1,})[^a-z]"	, 2, 4],
 		["([0-9]{2,})( ?)-( ?)(.*)( ?)-( ?)([0-9]{1,})( ?)-"					, 7, 1],
-		["(.*)([0-9])([0-9]{2,})"												, 2, 3]
+		["(.*)([0-9])([0-9]{2,})"												, 2, 3],
+		["(^|[^a-z])s([0-9]{1,2}) - (ep|e) ([0-9]{2,2})[^a-z]"					, 2, 4]
 	],
 	"testFilenames" : [
 		"aa.2x23.fsdfsdfs"		,

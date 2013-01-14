@@ -1,5 +1,5 @@
 Ext.define('qd.mediadb.moviePanel', {
-    extend			: 'Ext.Panel',
+	extend			: 'Ext.Panel',
 	alias			: 'widget.qd.mediadb.moviePanel',
 	initComponent	: function() {
 		var that = this;
@@ -16,7 +16,7 @@ Ext.define('qd.mediadb.moviePanel', {
 
 		that.groupFilter={};
 
-		
+
 		that.loadMoviesFilesGrid = function(pathname ){
 			Ext.getCmp(that.gridmoviesfilesid).pathname = pathname ;
 			Ext.getCmp(that.gridmoviesfilesid).store.removeAll()
@@ -56,17 +56,17 @@ Ext.define('qd.mediadb.moviePanel', {
 				expanded: true
 			},
 			proxy		: {
-				type		: 'ajax',
+				type		: 'ajaxEx',
 				url			: 'p/QDMoviesProxy.getMoviesTree/'
 			},
-            listeners : {
-                load : function (store){
-                    //debugChoosePanel
-                    //Ext.getCmp(that.gridmoviesfilesid).store.load({	params :{name	: 'F1'}});
-                }
-            }
+			listeners : {
+				load : function (store){
+					//debugChoosePanel
+					//Ext.getCmp(that.gridmoviesfilesid).store.load({	params :{name	: 'F1'}});
+				}
+			}
 		});
-		
+
 		Ext.define('moviefile', {
 			extend	: 'Ext.data.Model',
 			fields	: [
@@ -96,7 +96,7 @@ Ext.define('qd.mediadb.moviePanel', {
 			groupField			: 'inFolder',
 			pruneModifiedRecords: true,
 			proxy				: {
-				type				: 'ajax',
+				type				: 'ajaxEx',
 				url					: 'p/QDMoviesProxy.getMoviesFiles/',
 				params				:{
 					name				: 'M'
@@ -107,15 +107,15 @@ Ext.define('qd.mediadb.moviePanel', {
 					totalProperty		: 'count'
 				}
 			},
-            listeners : {
+			listeners : {
 				load : function (store){
 					//debugChoosePanel
 					tbfilterhandler();
 					setTimeout(function(){
 						//openMovieEditor(store.getAt(0))
 					},500);
-                }
-            }
+				}
+			}
 		});
 
 		var movieStoreFeature = Ext.create('Ext.grid.feature.Grouping',{
@@ -153,13 +153,14 @@ Ext.define('qd.mediadb.moviePanel', {
 			that.moviefilesStore.filter([
 				{filterFn: function(item) {
 					return (that.groupFilter.nfo==-1?true:item.get("nfo")==that.groupFilter.nfo)&&(that.groupFilter.poster==-1?true:item.get("poster")==that.groupFilter.poster);
-				}}				
+				}}
 			]);
 		}
 
 		Ext.apply(this,{
-			layout    : 'border',
-			items     : [{
+			layout		: 'border',
+			border		: false,
+			items		: [{
 				xtype		: 'tabpanel',
 				region		: 'west',
 				activeTab	: 0,
@@ -254,7 +255,7 @@ Ext.define('qd.mediadb.moviePanel', {
 								});
 							});
 							console.log(arrResult);
-							Ext.Ajax.request({
+							Ext.AjaxEx.request({
 								url      : 'p/QDMoviesProxy.renameMoviesFiles/',
 								params : {
 									modified   : Ext.util.base64.encode(Ext.util.JSON.encode(arrResult))

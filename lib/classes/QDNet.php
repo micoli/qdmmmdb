@@ -1,12 +1,13 @@
 <?
 	class QDNet {
+		static $cachedFilesDatas=array();
+
 		function getUrl($url){
 			$useragent="Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.8.1.1) Gecko/20061204 Firefox/2.0.0.1";
 			set_time_limit(126);
 			if($GLOBALS['conf']['qdnet']['usecurl']){
 				$ch = curl_init();
 				$timeout = 30; // set to zero for no timeout
-
 				curl_setopt ($ch, CURLOPT_URL, $url);
 				curl_setopt ($ch, CURLOPT_RETURNTRANSFER, 1);
 				curl_setopt ($ch, CURLOPT_CONNECTTIMEOUT, $timeout);
@@ -27,15 +28,45 @@
 				return @file_get_contents($url,FILE_TEXT,$context);
 			}
 		}
-		function getCacheURL($url,$folder,$cacheminutes,$cache=true,$extension='.xml'){
-			//print $url;
-			$this->lastMimeType = '';
-			$this->lastCacheFile = '';
+
+		function getCacheFileName($url,$folder,$extension='.xml'){
+			$key = md5($folder.'_'.$url.'_'.$extension);
+			if(array_key_exists($key,self::$cachedFilesDatas)){
+				return self::$cachedFilesDatas[$key];
+			}
+			return $this->getLocalFile($url,$folder,$extension);
+		}
+
+		function getCacheFileDate($url,$folder,$extension='.xml'){
+			$key = md5($folder.'_'.$url.'_'.$extension);
+			if(array_key_exists($key,self::$cachedFilesDatas)){
+				return array(
+					'mtime'	=> filemtime(self::$cachedFilesDatas[$key])
+				);
+			}else{
+				return null;
+			}
+		}
+
+		function getLocalFile($url,$folder,$extension='.xml'){
 			$cacheDir = $GLOBALS['conf']['qdnet']['cacheroot'];
 			preg_match("/^(http:\/\/)?([^\/]+)\/(.*)/i",$url , $matches);
 			if (!file_exists($cacheDir.$matches[2])) @mkdir($cacheDir.$matches[2]);
 			if (!file_exists($cacheDir.$matches[2].'/'.$folder)) @mkdir($cacheDir.$matches[2].'/'.$folder);
+			$key = md5($folder.'_'.$url.'_'.$extension);
 			$localfile = $cacheDir.$matches[2]."/".$folder."/".urlencode($matches[3].$extension);
+			self::$cachedFilesDatas[$key]=$localfile;
+			return $localfile;
+		}
+
+		function getCacheURL($url,$folder,$cacheminutes,$cache=true,$extension='.xml'){
+			//print $url;
+			if($extension=='.xml' && preg_match('!jpg!',$url)){
+				//db(debug_print_backtrace());die();
+			}
+			$this->lastMimeType = '';
+			$this->lastCacheFile = '';
+			$localfile=$this->getLocalFile($url,$folder,$extension);
 			$this->lastCacheFile=$localfile;
 			$todownload=false;
 			clearstatcache  ();
@@ -43,9 +74,9 @@
 				//touch($localfile); //create it
 				$todownload=true;
 			}else{
-			if (((time()-filemtime($localfile))/60)>$cacheminutes && $cache && $cacheminutes!=-1) {
-				$todownload=true;
-			}
+				if (((time()-filemtime($localfile))/60)>$cacheminutes && $cache && $cacheminutes!=-1) {
+					$todownload=true;
+				}
 			}
 			if (!$cache){
 				$todownload=true;

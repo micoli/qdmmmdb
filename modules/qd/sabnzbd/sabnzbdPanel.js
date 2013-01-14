@@ -1,25 +1,25 @@
 Ext.define('qd.sabnzbd.sabnzbdPanel', {
-    extend		: 'Ext.grid.Panel',
+	extend		: 'Ext.grid.Panel',
 	alias		: 'widget.qd.sabnzbd.sabnzbdPanel',
 	autoTitle	: false,
 	sendCommand : function(prm,cb){
 		var ob ={
 			url		: 'p/QDSabnzbdProxy.action/',
-            method  : 'POST',
-            params  : {}
+			method  : 'POST',
+			params  : {}
 		};
 		Ext.apply(ob.params,prm);
 		if (cb){
 			ob.success = cb;
 			ob.failure = cb;
 		}
-		Ext.Ajax.request(ob);
+		Ext.AjaxEx.request(ob);
 	},
 	initComponent : function() {
 		var that = this;
 		that.combospeedid = Ext.id();
 		that.statusid = Ext.id();
-		
+
 		Ext.define('queueitem', {
 			extend: 'Ext.data.Model',
 			fields: [
@@ -41,7 +41,7 @@ Ext.define('qd.sabnzbd.sabnzbdPanel', {
 			model		: 'queueitem',
 			autoLoad	: true,
 			proxy		: {
-				type			: 'ajax',
+				type			: 'ajaxEx',
 				url				: 'p/QDSabnzbdProxy.action/',
 				extraParams		: {
 					sab_mode		: 'queue',
@@ -85,7 +85,7 @@ Ext.define('qd.sabnzbd.sabnzbdPanel', {
 							}else{
 								that.setTitle('Sabnzbd&nbsp;'+txt);
 							}
-							
+
 						}
 					}
 					clearTimeout(that.timerTick);
@@ -103,7 +103,7 @@ Ext.define('qd.sabnzbd.sabnzbdPanel', {
 			}),
 			autoLoad	: true,
 			proxy		: {
-				type			: 'ajax',
+				type			: 'ajaxEx',
 				url				: 'p/QDSabnzbdProxy.getSpeeds/',
 				extraParams		: {
 					sab_mode		: 'queue',
@@ -213,7 +213,7 @@ Ext.define('qd.sabnzbd.sabnzbdPanel', {
 						var width = this.columns[0].getWidth();
 						var bar = 4-parseInt(percent/25);
 						meta.style = meta.style+";background-position: "+(percent==0?-120:(width*percent/100)-120)+"px 50%; background-image: url('skins/resources/progressbar/percentImage_back"+bar+".png'); background-repeat:no-repeat;";
-						
+
 						return sprintf('%s - %02d%%',record.data.timeleft,record.data.percentage);
 					}
 				},
@@ -242,7 +242,7 @@ Ext.define('qd.sabnzbd.sabnzbdPanel', {
 						icon	: 'skins/resources/pause_blue.png',
 						getClass: function(value,metadata,record){
 							var closed = record.get('icondwn');
-							  if (closed == 'play' ) {
+							if (closed == 'play' ) {
 								return 'x-hide-display';
 								} else {
 								return 'x-grid-center-icon';
@@ -266,7 +266,7 @@ Ext.define('qd.sabnzbd.sabnzbdPanel', {
 						icon	: 'skins/resources/play_blue.png',
 						getClass: function(value,metadata,record){
 							var closed = record.get('icondwn');
-							  if (closed == 'pause' ) {
+							if (closed == 'pause' ) {
 								return 'x-hide-display';
 								} else {
 								return 'x-grid-center-icon';

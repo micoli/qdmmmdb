@@ -1,5 +1,5 @@
 Ext.define('qd.nzb.feedtab', {
-    extend		: 'Ext.panel.Panel',
+	extend		: 'Ext.panel.Panel',
 	alias		: 'widget.qd.nzb.feedtab',
 	requires	:['qd.nzb.feeditemdesc'],
 	qtipTpl		: new Ext.XTemplate(
@@ -58,7 +58,7 @@ Ext.define('qd.nzb.feedtab', {
 				direction	: 'DESC'
 			}],
 			proxy		: {
-				type			: 'ajax',
+				type			: 'ajaxEx',
 				url				: 'p/QDNzbProxyFeeds.dbfeed/',
 				reader			: {
 					type			: 'json',
@@ -74,7 +74,7 @@ Ext.define('qd.nzb.feedtab', {
 		that.feedgroupStore = Ext.create('Ext.data.Store',{
 			model		: 'feedgroup',
 			proxy		: {
-				type			: 'ajax',
+				type			: 'ajaxEx',
 				url				: 'p/QDNzbProxyFeeds.distinctfeed/',
 				reader			: {
 					type			: 'json',
@@ -168,7 +168,7 @@ Ext.define('qd.nzb.feedtab', {
 					listeners : {
 						click : function(grid,HTMLElement,rowIndex,columnIndex){
 							var record = grid.getStore().getAt(rowIndex);
-							Ext.Ajax.request({
+							Ext.AjaxEx.request({
 								url		: 'p/QDNzbProxyFeeds.setStarred/',
 								params: {
 									ITE_ID		:record.get('ITE_ID'),
@@ -191,7 +191,7 @@ Ext.define('qd.nzb.feedtab', {
 						click : function(grid,HTMLElement,rowIndex,columnIndex){
 							var record = grid.getStore().getAt(rowIndex);
 							Ext.getCmp(that.tplid).setItem(record.data);//tpl.overwrite(Ext.getCmp(that.tplid).body,record.data);
-							Ext.Ajax.request({
+							Ext.AjaxEx.request({
 								url		: 'p/QDNzbProxyFeeds.setRead/',
 								success	: function(r,a){
 									eval('var res='+r.responseText);
@@ -248,7 +248,7 @@ Ext.define('qd.nzb.feedtab', {
 					listeners : {
 						click : function(grid,HTMLElement,rowIndex,columnIndex){
 							var record = grid.getStore().getAt(rowIndex);
-							Ext.Ajax.request({
+							Ext.AjaxEx.request({
 								url		: 'p/QDNzbProxyFeeds.setRead/',
 								success	: function(r,a){
 									eval('var res='+r.responseText);

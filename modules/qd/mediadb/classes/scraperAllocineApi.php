@@ -5,13 +5,15 @@ class scraperAllocineApi extends QDHtmlMovieParser{
 		$this->cacheminutes		= 123*59+59;
 		$this->cache			= true;
 		$this->allocineapikey	= 'aXBhZC12MQ';
+		$this->allocineapikey	= 'YW5kcm9pZC12M3M';
 		$this->scrapengine		= 'allocineapi';
 	}
 
 	function getList($movieName){
-		$url = 'http://api.allocine.fr/rest/v3/search?partner='.$this->allocineapikey.'&filter=movie&count=50&page=1&format=json&q='.urlencode($movieName);
+		$url = 'http://api.allocine.fr/rest/v3/search?partner='.$this->allocineapikey.'&filter=movie&count=50&page=1&format=json&q='.urlencode(str_replace("'"," ",$movieName));
 		$arrResult = object2array(json_decode($this->QDNet->getCacheURL($url,'allocineapi',$this->cacheminutes,$this->cache)));
 		$searchresults = array();
+		//db($arrResult);
 		if (is_array($arrResult) && array_key_exists('feed',$arrResult)&& array_key_exists('totalResults',$arrResult['feed']) && $arrResult['feed']['totalResults']>0){
 			foreach($arrResult['feed']['movie'] as $k=>$v){
 				$searchresults[]=array(
@@ -27,71 +29,78 @@ class scraperAllocineApi extends QDHtmlMovieParser{
 			}
 		}
 		return $searchresults;
-		
+
 	}
 
 	function getDetail($id){
 		$url = 'http://api.allocine.fr/rest/v3/movie?partner='.$this->allocineapikey.'&format=json&profile=large&code='.$id;
-		print $url;
-		$arr = object2array(json_decode($this->QDNet->getCacheURL($url,'allocineapi',$this->cacheminutes,$this->cache)));
-		die($arr);die('---');
+		//print $url;
+		$txt = $this->QDNet->getCacheURL($url,'allocineapi',$this->cacheminutes,$this->cache);
+		$arr = object2array(json_decode($txt));
+		$arr = $arr['movie'];
+		//db($arr);
+		//die($arr);die('---');
 		$res = $this->initBasicResult();
-		$res['type'				]= $arr['movie'];
+		$res['type'				]= 'movie';
 		$res['engine'			]= $this->scrapengine;
-		$res['id'				]= $arr['id'		];
-		$res['title'			]= $arr['name'];
-		$res['originalTitle'	]= $arr['original_name'];
-		$res['year'				]= substr($arr['released'],0,4);
-		$res['dateOut'			]= $arr['released'	];
-		$res['summary'			]= $arr['overview'	];
-		$res['length'			]= $arr['runtime'	];
-		$res['ratings_users'	]= $arr['rating'	];
-		$res['trailer'			]= $arr['trailer'	];
-		$res['votes'			]= $arr['votes'		];
-		$res['certification'	]= $arr['certification'];
-		if(array_key_exists('genres',$arr) && is_array($arr['genres'])){
-			foreach($arr['genres'] as $v){
-				$res['genres'][]=$v['name'];
+		$res['id'				]= $arr['code'		];
+		$res['title'			]= $arr['title'];
+		$res['originalTitle'	]= $arr['originalTitle'];
+		$res['year'				]= $arr['productionYear'];
+		$res['dateOut'			]= $arr['productionYear'	];
+		$res['summary'			]= $arr['synopsis'	];
+		$res['length'			]= 0;//$arr['runtime'	];
+		$res['ratings_users'	]= $arr['statistics']['userRating'	];
+		$res['trailer'			]= $arr['trailer'	]['href'];
+		$res['votes'			]= $arr['userReviewCount'];
+		$res['certification'	]= '';//$arr['certification'];
+
+		if(array_key_exists('genre',$arr) && is_array($arr['genre'])){
+			foreach($arr['genre'] as $v){
+				$res['genres'][]=$v['$'];
 			}
 			$res['genre']=join(' / ',$res['genres']);
 		}
-		if(array_key_exists('countries',$arr) && is_array($arr['countries'])){
-			foreach($arr['countries'] as $v){
-				$res['country'][]=$v['name'];
+		if(array_key_exists('nationality',$arr) && is_array($arr['nationality'])){
+			foreach($arr['nationality'] as $v){
+				$res['country'][]=$v['$'];
 			}
 		}
-		if(array_key_exists('posters',$arr) && is_array($arr['posters'])){
-			$str = ''; $sepa = '';
-			foreach($arr['posters'] as $k=>$v){
-				if($k==0)	$res['poster']=$v['image']['url'];
-				$res['posters'][]=$v['image']['url'];
-			}
+		if(array_key_exists('poster',$arr) && is_array($arr['poster'])){
+			//foreach($arr['posters'] as $k=>$v){
+				if($k==0)	$res['poster']=$arr['poster']['href'];
+				$res['posters'][]=$arr['poster']['href'];
+			//}
 		}
-		if(array_key_exists('backdrops',$arr) && is_array($arr['backdrops'])){
-			foreach($arr['backdrops'] as $k=>$v){
-				$res['backdrops'][]=$v['image']['url'];
+		if(array_key_exists('media',$arr) && is_array($arr['media'])){
+			foreach($arr['media'] as $k=>$v){
+				if($v['class']=='picture'){
+					$res['backdrops'][]=$v['thumbnail']['href'];
+				}
 			}
 		}
 
-		if(array_key_exists('cast',$arr) && is_array($arr['cast'])){
-			foreach($arr['cast'] as $k=>$v){
-				switch (strtolower($v['job'])){
-					case 'director':
-						$res['director'	][]=$v['name'];
+		if(array_key_exists('castMember',$arr) && is_array($arr['castMember'])){
+			foreach($arr['castMember'] as $k=>$v){
+				switch (strtolower($v['activity']['$'])){
+					case 'réalisateur':
+						$res['director'	][]=$v['person']['name'];
 					break;
-					case 'producer':
-						$res['society'	].=($res['society']==''?'':' / ').$v['name'];
+					case 'productrice':
+					case 'producteur':
+						$res['society'	].=($res['society']==''?'':' / ').$v['person']['name'];
 					break;
-					case 'actor':
-						$res['actors'	][]=$v['name'];
+					case 'actrice':
+					case 'acteur':
+						$res['actors'	][]=$v['person']['name'];
 					break;
 				}
 			}
 		}
 		//header('charset=UTF-8');die($this->convertToXbmcMovieNfo($res));
 		return $res;
-    }
+	}
 
-	
+
 }
 ?>

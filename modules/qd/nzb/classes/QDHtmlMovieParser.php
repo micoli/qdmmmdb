@@ -6,6 +6,17 @@
 		function __construct(){
 			$this->QDNet = new QDNet();
 		}
+		function getCapabilities(){
+			return array(
+				'pictureWithDimension'	=> false,
+				'pictureSorted'			=> false
+			);
+		}
+		function getCapabilitie($key){
+			$t = $this->getCapabilities();
+			return $t[$key];
+		}
+
 
 		function initBasicResult(){
 			$arr['id'				]='';
@@ -43,6 +54,19 @@
 			return $arr;
 		}
 
+		function simpleLoadXbmcMovieNfo($file){
+			libxml_use_internal_errors(true);
+			$sxe = simplexml_load_file($file);
+			if (!$sxe) {
+				echo "Erreur lors du chargement du XML\n";
+				foreach(libxml_get_errors() as $error) {
+					echo "\t", $error->message;
+				}
+				return null;
+			}
+			return $sxe;
+
+		}
 		function convertToXbmcMovieNfo($res){
 			//$res = $this->utf8_decode_recurs($res);
 			$doc = new DomDocument('1.0','utf-8');
@@ -61,7 +85,7 @@
 			$root->appendChild($doc->createElement('plot'			,htmlspecialchars($res['summary'])));
 			$root->appendChild($doc->createElement('runtime'		,$res['length']));
 			$root->appendChild($doc->createElement('trailer'		,$res['trailer']));
-			$root->appendChild($doc->createElement('genre'			,$res['genre']));
+			$root->appendChild($doc->createElement('genre'			,htmlspecialchars($res['genre'])));
 			$root->appendChild($doc->createElement('director'		,htmlspecialchars(join(' / ',$res['director']))));
 			$root->appendChild($doc->createElement('mpaa'			,htmlspecialchars($res['certification'])));
 			$root->appendChild($doc->createElement('actors'));
@@ -201,7 +225,7 @@
 						<audio>
 							<codec>ac3</codec>
 							<language>spa</language>
-						   <channels>2</channels>
+						<channels>2</channels>
 						</audio>
 						<subtitle>
 							<language>spa</language>

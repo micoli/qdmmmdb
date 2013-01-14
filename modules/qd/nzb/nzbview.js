@@ -1,5 +1,5 @@
 Ext.define('qd.nzb.nzbview', {
-    extend		: 'Ext.Panel',
+	extend		: 'Ext.Panel',
 	alias		: 'widget.qd.nzb.nzbview',
 	requires	: ['Ext.ux.SimpleIFrame'],
 	initComponent : function() {
@@ -23,7 +23,7 @@ Ext.define('qd.nzb.nzbview', {
 		that.nzbstore = Ext.create('Ext.data.Store',{
 			model	: 'searchnzb',
 			proxy	: {
-				type			: 'ajax',
+				type			: 'ajaxEx',
 				url				: 'p/QDNzbProxyFeeds.search/',
 				reader			: {
 					type			: 'json',
@@ -75,7 +75,7 @@ Ext.define('qd.nzb.nzbview', {
 				split		: false
 			});
 		}
-		
+
 		Ext.apply(this, {
 			layout		: 'border',
 			stateful	: false,
@@ -119,7 +119,7 @@ Ext.define('qd.nzb.nzbview', {
 							});
 							that.ldMask = new Ext.LoadMask(that.getEl(), {msg:"Please wait..."});
 							that.ldMask.show();
-							Ext.Ajax.request({
+							Ext.AjaxEx.request({
 								url		: 'p/QDNzbProxyFeeds.download/',
 								params	: {
 									ids		: idsString,
