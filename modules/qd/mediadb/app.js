@@ -16,19 +16,19 @@ Ext.each(QD_GBL_CONF.mediadb.helperSite,function(item){
 	});
 });
 Ext.globalHandlerCounter = {
-	'image'	: 0,
-	'ajax'	: 0
+	'img'	: 0,
+	'xhr'	: 0
 }
 Ext.globalAjaxHandler = function(event,request){
 	if(event == 'imagestart'||event == 'imageend'){
-		Ext.globalHandlerCounter['image'] += (event=="imagestart")?1:-1;
-		
+		Ext.globalHandlerCounter['img'] += (event=="imagestart")?1:-1;
+
 	}else{
-		Ext.globalHandlerCounter['ajax'] += (event=="start")?1:-1;
+		Ext.globalHandlerCounter['xhr'] += (event=="start")?1:-1;
 	}
 	//console.log(event,request.options.url?request.options.url:request.options.proxy.url);
 	var cmp = Ext.getCmp('qd.mediadb.ajaxCount')
-	if(cmp) cmp.setText(''+Ext.globalHandlerCounter['ajax']+'/'+Ext.globalHandlerCounter['image']);
+	if(cmp) cmp.setText(''+Ext.globalHandlerCounter['xhr']+'/'+Ext.globalHandlerCounter['img']);
 }
 Ext.define('qd.mediadb.app', {
 	extend		: 'Ext.container.Viewport',
