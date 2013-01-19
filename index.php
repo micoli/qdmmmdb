@@ -62,42 +62,28 @@
 		<script type="text/javascript" src="lib/3rd_js/ux/DataView/LabelEditor.js"></script>
 		<script type="text/javascript" src="lib/3rd_js/ux/DataView/DragSelector.js"></script>
 		<script type="text/javascript" src="modules/qd/mediadb/app.js"></script>
+		<script type="text/javascript" src="lib/3rd_js/extjs4.old/src/layout/container/AbstractFit.js"></script>
 		<!--
 		'Ext.util.MixedCollection',
 		'Ext.menu.Menu',
-		'Ext.view.View', // dataview
+		'Ext.view.View',
 		'Ext.window.Window',
-		-->
+		<script type="text/javascript" src="lib/3rd_js/desktop/js/App.js"></script>
+		<script type="text/javascript" src="lib/3rd_js/desktop/js/Desktop.js"></script>
+		<script type="text/javascript" src="lib/3rd_js/desktop/js/FitAllLayout.js"></script>
+		<script type="text/javascript" src="lib/3rd_js/desktop/js/Module.js"></script>
+		<script type="text/javascript" src="lib/3rd_js/desktop/js/ShortcutModel.js"></script>
 		<script type="text/javascript" src="lib/3rd_js/desktop/js/StartMenu.js"></script>
 		<script type="text/javascript" src="lib/3rd_js/desktop/js/TaskBar.js"></script>
 		<script type="text/javascript" src="lib/3rd_js/desktop/js/Wallpaper.js"></script>
-		<script type="text/javascript" src="lib/3rd_js/desktop/js/FitAllLayout.js"></script>
-
+		<script type="text/javascript" src="lib/3rd_js/desktop/App.js"></script>
+		<script type="text/javascript" src="lib/3rd_js/desktop/genericModule.js"></script>
+		<script type="text/javascript" src="lib/3rd_js/desktop/Settings.js"></script>
+		<script type="text/javascript" src="lib/3rd_js/desktop/SystemStatus.js"></script>
+		<script type="text/javascript" src="lib/3rd_js/desktop/VideoWindow.js"></script>
+		<script type="text/javascript" src="lib/3rd_js/desktop/WallpaperModel.js"></script>
+		-->
 		<script>
-		if(false){
-			QD_GBL_CONF.app.mainClass='MyDesktop.App';
-		}
-		Ext.Loader.setConfig({
-			enabled			: true,
-			disableCaching	: false,
-			paths			: {
-				'Ext'			: 'lib/3rd_js/extjs4',
-				'qd'			: 'modules/qd',
-				'Ext.ux'		: 'lib/3rd_js/ux',
-				'Ext.ux.desktop': 'lib/3rd_js/desktop/js',
-				MyDesktop		: 'lib/3rd_js/desktop'
-			}
-		});
-		Ext.require([
-			'Ext.grid.*',
-			'Ext.data.*',
-			'Ext.util.*',
-			'Ext.Action',
-			'Ext.tab.*',
-			'Ext.button.*',
-			'Ext.form.*',
-			'Ext.layout.*'
-		]);
 		</script>
 	</body>
 </html>
