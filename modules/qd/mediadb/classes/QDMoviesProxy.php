@@ -59,7 +59,7 @@ class QDMoviesProxy extends QDMediaDBProxy{
 	}
 	function svc_preloadFolder(){
 		set_time_limit(0);
-		$this->pri_preloadFolder($this->pri_getMoviesFiles('dwn'));
+		$this->pri_preloadFolder($this->pri_getMoviesFiles('F'));
 		//$this->pri_preloadFolder($this->pri_getMoviesFiles('Q'));
 		//$this->pri_preloadFolder($this->pri_getMoviesFiles('K'));
 		/*
@@ -175,6 +175,7 @@ class QDMoviesProxy extends QDMediaDBProxy{
 			if (($k % 4)==$modulo){
 				if(is_array($v)){
 					$url = $v['url'];
+					//$this->QDNet->getCacheURL($url , 'imgs', 60*24*365*20,true,'');
 				}else{
 					$url = $v;
 					$this->QDNet->getCacheURL($url , 'imgs', 60*24*365*20,true,'');
@@ -428,7 +429,7 @@ class QDMoviesProxy extends QDMediaDBProxy{
 			}
 		}
 	}
-	
+
 	private function pri_movieFileIsVisible($file){
 		$hidden = false;
 		foreach($this->arrHiddenmovieRegex as $rule){
@@ -506,7 +507,7 @@ class QDMoviesProxy extends QDMediaDBProxy{
 			break;
 		}
 		$isMultiple = false;
-		
+
 		$addStr='';
 		foreach ($this->arrKeepSpecialTag as $tag){
 			if(preg_match('/'.$tag['rgx'].'/i',$originalFileName,$m)){
@@ -523,7 +524,7 @@ class QDMoviesProxy extends QDMediaDBProxy{
 			for($num=1;$num<=9;$num++){
 				if (preg_match('/'.$rgxMultiple .'/i',$originalFileName)){
 					$originalFileNameMultiple= preg_replace('/'.$rgxMultiple . 1 . '/i',$rgxMultiple.$num,$originalFileName);
-					
+
 					$newFullFilenameMultiple = $movieFolder . '/'.$newFilename.$addStr.$num.'.'.strtolower($ref['ext']);
 					//print "=====> $originalFileName , $repMultiple , $originalFileNameMultiple , $newFullFilenameMultiple)<br>";
 					if(!file_exists($newFullFilenameMultiple) && file_exists($originalFileNameMultiple)){

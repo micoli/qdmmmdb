@@ -213,6 +213,7 @@ Ext.define('qd.mediadb.moviePanel', {
 				region			: 'center',
 				activeTab		: 0,
 				deferredRender	: false,
+				split			: true,
 				items			: [{
 					xtype			: 'grid',
 					id				: that.gridmoviesfilesid,
