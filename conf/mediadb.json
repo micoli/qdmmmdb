@@ -1,5 +1,9 @@
 {
 	"helperSite"	:[{
+		"url"		: "/eXtplorer/",
+		"title"		: "eXtplorer",
+		"iconCls"	: "icon-extplorer"
+	},{
 		"url"		: "/sickbeard/",
 		"title"		: "SickBeard",
 		"iconCls"	: "icon-sickbeard"
@@ -7,8 +11,5 @@
 		"url"		: "/sabnzbd/",
 		"title"		: "SabNZBd",
 		"iconCls"	: "icon-sabnzbd"
-	},{
-		"url"		: "/eXtplorer/",
-		"title"		: "eXtplorer"
 	}]
 }

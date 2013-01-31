@@ -4,9 +4,10 @@ Ext.define('qd.mediadb.seriePanel', {
 	//requires		: ['Ext.ux.base64'],
 	initComponent	: function() {
 		var that = this;
-		that.gridfilesid = Ext.id();
-		that.treeserieid = Ext.id();
-		that.pathname	 = null;
+		that.gridfilesid	= Ext.id();
+		that.treeserieid	= Ext.id();
+		that.gridflatid		= Ext.id();
+		that.pathname		= null;
 
 		that.loadFilesGrid	= function(pathname ){
 			if (!pathname && that.pathname){
@@ -38,7 +39,7 @@ Ext.define('qd.mediadb.seriePanel', {
 
 		Ext.define('serie', {
 			extend: 'Ext.data.Model',
-			fields: ['id', 'text', 'fullname','rootDrive','tvdb']
+			fields: ['id', 'text', 'fullname','rootDrive','tvdb','numbertorename','serieName']
 		});
 
 		that.treeStore = Ext.create('Ext.data.TreeStore',  {
@@ -52,7 +53,41 @@ Ext.define('qd.mediadb.seriePanel', {
 			proxy		: {
 				type		: 'ajaxEx',
 				url			: 'p/QDSeriesProxy.getSeriesTree/'
+			},
+			listeners	: {
+				load		: function( store, records, successful, eOpts ){
+					var arrToLoad=[];
+					var iterateNodes = function(node){
+						if(node.data.serieName){
+							arrToLoad.push({
+								'id'			: node.data['id'],
+								'text'			: node.data['text'],
+								'fullname'		: node.data['fullname']	,
+								'rootDrive'		: node.data['rootDrive'],
+								'tvdb'			: node.data['tvdb'],
+								'serieName'		: node.data['serieName'],
+								'numbertorename': node.data['numbertorename']
+							});
+						}
+						node.eachChild(function(nod){
+							iterateNodes(nod);
+						});
+					}
+					iterateNodes(store.getRootNode());
+					that.flatStore.removeAll();
+					that.flatStore.loadRawData(arrToLoad);
+				}
 			}
+		});
+
+		Ext.define('flatserie', {
+			extend: 'Ext.data.Model',
+			fields: ['id', 'text', 'fullname','rootDrive','tvdb','numbertorename','serieName']
+		});
+
+		that.flatStore = Ext.create('Ext.data.Store',{
+			pruneModifiedRecords	: true,
+			model					: 'flatserie'
 		});
 
 		Ext.define('episodeModel', {
@@ -160,15 +195,37 @@ Ext.define('qd.mediadb.seriePanel', {
 			clicksToEdit: 2
 		});
 
+		var tbflatfilterhandler = function(){
+			that.groupFilter={};
+			Ext.each(Ext.getCmp(that.gridflatid).getDockedItems()[0].items.items,function(v,k){
+				if(v.toggleGroup && v.pressed){
+					that.groupFilter[v.toggleGroup] = v.qdfilter;
+				};
+			});
+			that.flatStore.clearFilter();
+			that.flatStore.filter([{
+				filterFn	: function(item) {
+					return (
+						that.groupFilter.nfo==false?
+						true:
+						item.data.numbertorename>0
+					);
+				}
+			}]);
+		}
+
 
 		Ext.apply(this,{
 			layout		: 'border',
+			border		: false,
 			stateful	: false,
 			items		: [{
 				xtype		: 'tabpanel',
 				region		: 'west',
+				border		: false,
+				split		: true,
 				activeTab	: 0,
-				width		: 300,
+				width		: 500,
 				items		: [{
 					xtype			: 'treepanel',
 					title			: 'folders',
@@ -227,15 +284,67 @@ Ext.define('qd.mediadb.seriePanel', {
 						cbIconCls		: 'tree-icon-edit',
 						callback		: function(tree,node,action){
 							Ext.create('qd.mediadb.movieEditor',{
-								record	: node
+								record		: node
 							}).show();
-							//console.log(tree,node,action);
 						}
+					}]
+				},{
+					xtype		: 'grid',
+					id			: that.gridflatid,
+					layout		: 'fit',
+					title		: 'flat',
+					border		: false,
+					store		: that.flatStore,
+					loadMask	: true,
+					autoFit		: true,
+					tbar		:[{
+						xtype		: 'button',
+						enableToggle:true,
+						toggleGroup	: 'nfo',
+						qdfilter	: true,
+						width		: 30,
+						iconCls		: 'moviegrid-filter-nfoTrue',
+						stateful	: false,
+						handler		: tbflatfilterhandler
+					},{
+						xtype		: 'button',
+						enableToggle:true,
+						toggleGroup	: 'nfo',
+						qdfilter	: false,
+						width		: 30,
+						iconCls		: 'moviegrid-filter-nfoFalse',
+						pressed		: true,
+						stateful	: false,
+						handler		: tbflatfilterhandler
+					}],
+					listeners	: {
+						'itemclick': function( grid, record, item, index, e, eOpts) {
+							var record = grid.getStore().getAt(index);
+							if(record.data.fullname!=-1){
+								that.loadFilesGrid(record.data.fullname);
+							}
+						},
+						rowclick : function(grid,HTMLElement,rowIndex,columnIndex){
+							var record = grid.getStore().getAt(rowIndex);
+							console.log(record);
+						}
+					},
+					columns		: [{
+						header: "path"		, width:  80,flex : 1, dataIndex: 'fullname'		, sortable: true,renderer : function(v,meta,record){
+							return (''+v).replace('/'+record.get('text'),'');
+						}
+					},{
+						header: "Serie"		, width: 140,flex : 0, dataIndex: 'serieName'		, sortable: true
+					},{
+						header: "Dir"		, width:  80,flex : 0, dataIndex: 'text'			, sortable: true
+					},{
+						header: "Miss"		, width:  40,flex : 0, dataIndex: 'numbertorename'	, sortable: true
 					}]
 				}]
 			},{
 				layout		: 'border',
 				region		: 'center',
+				border		: false,
 				items		: [{
 					height		: 100,
 					region		: 'north',
@@ -247,13 +356,14 @@ Ext.define('qd.mediadb.seriePanel', {
 					xtype			: 'tabpanel',
 					region			: 'center',
 					activeTab		: 0,
+					border			: false,
 					deferredRender	: false,
 					items			: [{
 						xtype			: 'grid',
 						id				: that.gridfilesid,
 						stateful		: false,
-						title			: 'Files',
 						loadMask		: true,
+						title			: 'Files',
 						selModel		: Ext.create('Ext.selection.CheckboxModel'),
 						tbar			: [{
 							text			: 'Select all',
@@ -270,23 +380,22 @@ Ext.define('qd.mediadb.seriePanel', {
 								arrResult[Ext.ux.base64.encode(pathName)].modified=[];
 								Ext.each(Ext.getCmp(that.gridfilesid).getSelectionModel().getSelection(),function(v,k){
 									arrResult[Ext.ux.base64.encode(pathName)].modified.push({
-										//'old' : v.data.filename,
-										//'new'    : v.data.episodeName,
-										'new64'  : Ext.ux.base64.encode((v.get('episodeName')+' ').trim()),
-										'saison' : v.get('saison'),
-										'ext'    : v.get('ext'),
-										'episode': v.get('episode'),
-										'md5'    : v.get('md5'),
-										serie    : Ext.ux.base64.encode(Ext.getCmp(that.gridfilesid).SerieName)
+										//'old'		: v.data.filename,
+										//'new'		: v.data.episodeName,
+										'new64'		: Ext.ux.base64.encode((v.get('episodeName')+' ').trim()),
+										'saison'	: v.get('saison'),
+										'ext'		: v.get('ext'),
+										'episode'	: v.get('episode'),
+										'md5'		: v.get('md5'),
+										'serie'		: Ext.ux.base64.encode(Ext.getCmp(that.gridfilesid).SerieName)
 									});
 								});
-								console.log(arrResult);
 								Ext.AjaxEx.request({
-									url      : 'p/QDSeriesProxy.renameFiles/',
-									params : {
+									url		: 'p/QDSeriesProxy.renameFiles/',
+									params	: {
 										modified   : Ext.ux.base64.encode(Ext.JSON.encode(arrResult))
 									},
-									success : function(r){
+									success	: function(r){
 										w.hide();
 										that.loadFilesGrid(pathName);
 									}
@@ -312,6 +421,7 @@ Ext.define('qd.mediadb.seriePanel', {
 								alert('to do');
 							}
 						}],
+						autoFit				: true,
 						clicksToEdit		: 1,
 						store				: that.fileStore,
 						plugins				: [cellEditing],
@@ -325,16 +435,16 @@ Ext.define('qd.mediadb.seriePanel', {
 							},
 							{header: "S"		, width:    30,	dataIndex: 'saison'			, sortable: true},
 							{header: "E"		, width:    30,	dataIndex: 'episode'		, sortable: true},
-							{header: "Name"		, width:   300,	dataIndex: 'filename'		, sortable: true},
+							{header: "Name"		, width:   300,	dataIndex: 'filename'		, sortable: true,flex : 1},
 							{header: "Type"		, width:    40,	dataIndex: 'ext'			, sortable: true},
 							{header: "Size"		, width:    80,	dataIndex: 'filesize'		, sortable: true}
 						]
-					},/*{
+					},{
 						title		: 'Episodes',
 						id			: 'serieHTML',
 						html		: '',
 						autoScroll	: true
-					},*/{
+					},{
 						xtype			: 'grid',
 						id				: 'gridEpisodes',
 						title			: 'Episodes',

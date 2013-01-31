@@ -1,6 +1,7 @@
 Ext.define('qd.mediadb.moviePanel', {
 	extend			: 'Ext.Panel',
 	alias			: 'widget.qd.mediadb.moviePanel',
+
 	initComponent	: function() {
 		var that = this;
 		that.gridmoviesfilesid	= Ext.id();
@@ -74,6 +75,7 @@ Ext.define('qd.mediadb.moviePanel', {
 				'fullpath'		,
 				'newfilename'	,
 				'title'			,
+				{name : 'mtime', type: 'date', dateFormat: 'Y-m-d H:i:s'},
 				'folder'		,
 				'filename'		,
 				'ext'			,
@@ -133,7 +135,7 @@ Ext.define('qd.mediadb.moviePanel', {
 
 		var openMovieEditor = function(record){
 			Ext.getCmp(that.gridmoviesfilesid).getSelectionModel().select(record,true,true);
-			Ext.create('qd.mediadb.movieEditor',{
+			/*Ext.create('qd.mediadb.movieEditor',{
 				referenceRecord	: record,
 				referenceGrid	: Ext.getCmp(that.gridmoviesfilesid),
 				listeners		: {
@@ -141,33 +143,46 @@ Ext.define('qd.mediadb.moviePanel', {
 						console.log(result);
 					}
 				}
-			}).show();
+			}).show();*/
+			var tabMovieEditor = that.items.getAt(1);
+			tabMovieEditor.referenceRecord = record;
+			tabMovieEditor.setEditor(record);
+			that.layout.setActiveItem(tabMovieEditor);
 		}
 		var tbfilterhandler = function(){
+			that.groupFilter={};
 			Ext.each(Ext.getCmp(that.gridmoviesfilesid).getDockedItems()[0].items.items,function(v,k){
 				if(v.toggleGroup && v.pressed){
 					that.groupFilter[v.toggleGroup] = v.qdfilter;
 				};
-			})
+			});
 			that.moviefilesStore.clearFilter();
-			that.moviefilesStore.filter([
-				{filterFn: function(item) {
-					return (that.groupFilter.nfo==-1?true:item.get("nfo")==that.groupFilter.nfo)&&(that.groupFilter.poster==-1?true:item.get("poster")==that.groupFilter.poster);
-				}}
-			]);
+			that.moviefilesStore.filter([{
+				filterFn	: function(item) {
+					return (
+						that.groupFilter.nfo==-1?
+						true:
+						item.get("nfo")==that.groupFilter.nfo
+					)&&(
+						that.groupFilter.poster==-1?
+						true:
+						item.get("poster")==that.groupFilter.poster
+					);
+				}
+			}]);
 		}
 
 		Ext.apply(this,{
-			layout		: 'border',
+			layout		: 'card',
 			border		: false,
+			activeItem	: 0,
 			items		: [{
-				xtype		: 'tabpanel',
-				region		: 'west',
-				activeTab	: 0,
-				width		: 300,
+				layout		: 'border',
+				border		: false,
 				items		: [{
 					xtype			: 'treepanel',
-					title			: 'folders',
+					region			: 'west',
+					width			: 250,
 					id				: that.treemoviesPathid,
 					lines			: true,
 					store			: that.treeStore,
@@ -207,17 +222,11 @@ Ext.define('qd.mediadb.moviePanel', {
 						header		: 'OK',
 						width		: 32
 					}]
-				}]
-			},{
-				xtype			: 'tabpanel',
-				region			: 'center',
-				activeTab		: 0,
-				deferredRender	: false,
-				split			: true,
-				items			: [{
+				},{
 					xtype			: 'grid',
+					region			: 'center',
+					deferredRender	: false,
 					id				: that.gridmoviesfilesid,
-					title			: 'Files',
 					selType			: 'checkboxmodel',
 					clicksToEdit	: 1,
 					store			: that.moviefilesStore,
@@ -345,9 +354,8 @@ Ext.define('qd.mediadb.moviePanel', {
 						xtype		: 'tbseparator'
 					}],
 					listeners	: {
-						rowclick : function(grid,HTMLElement,rowIndex,columnIndex){
-							var record = grid.getStore().getAt(rowIndex);
-							console.log(record);
+						'itemclick': function( grid, record, item, index, e, eOpts) {
+							var record = grid.getStore().getAt(index);
 						}
 					},
 					viewConfig: {
@@ -385,6 +393,7 @@ Ext.define('qd.mediadb.moviePanel', {
 						{header	: "folder/filename"	, width: 280,	dataIndex: 'folder'			,	sortable: true,	flex : 1},
 						{header	: "filename"		, width: 280,	dataIndex: 'filename'		,	sortable: true,	flex : 1},
 						{header	: "ext"				, width:  40,	dataIndex: 'ext'			,	sortable: true,	flex : 0},
+						{header	: "mtime"			, width: 150,	dataIndex: 'mtime'			,	sortable: true,	flex : 0,xtype: 'datecolumn', format:'Y-m-d H:i:s'},
 						{header	: "size"			, width:  80,	dataIndex: 'filesize'		,	sortable: true,	flex : 0},
 						{header	: "mmmdb"			, width:  30,	dataIndex: 'qdmmmdb'		,	sortable: true,	flex : 0,
 							renderer : function(value, metaData, record, rowIndex, colIndex, store, view){
@@ -430,6 +439,15 @@ Ext.define('qd.mediadb.moviePanel', {
 						}
 					]
 				}]
+			},{
+				xtype			: 'qd.mediadb.movieEditor',
+				referenceGrid	: that.gridmoviesfilesid,
+				listeners		: {
+					'close'	:	function(result){
+						console.log(result);
+						that.layout.setActiveItem(that.items.getAt(0));
+					}
+				}
 			}]
 		});
 		this.callParent(arguments);

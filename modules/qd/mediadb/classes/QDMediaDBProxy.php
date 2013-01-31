@@ -516,7 +516,8 @@ class QDMediaDBProxy {
 	}
 
 	function svc_testExtractRegex() {
-		print '<table border=1>';
+		header('content-type:text/html');
+		print '<table border=1 callpadding=0 cellspacing=0 >';
 		foreach ($this->testFilenames as $tst) {
 			$res = $this->extractSeriesFilenameStruct($tst);
 			//print_r($res);
@@ -529,11 +530,11 @@ class QDMediaDBProxy {
 				print '<td>' . $res['episode'] . '&nbsp;</td>';
 				print '<td>' . $res['rgxnum'] . '</td>';
 				print '<td>' . $res['rgx'] . '&nbsp;</td>';
-				print '<td><table border=1><tr>';
+				print '<td><table border=1 callpadding=0 cellspacing=0 ><tr>';
 				if (is_array($res['rgx_match'])) {
 					foreach ($res['rgx_match'] as $k => $v) {
-						print "<td width=\"50\">$k</td>";
-						print "<td >$v&nbsp;</td>";
+						print "<td><span style=\"color:blue;\">$k</span>&nbsp;";
+						print "$v&nbsp;</td>";
 					}
 					print '</tr>';
 				} else {
@@ -635,7 +636,6 @@ class QDMediaDBProxy {
 	function svc_test2() {
 		print $this->xbmcHash('F:\\Videos\\Nosferatu.avi') . '<br>' . '2a6ec78d' . '<br><br>';
 		print $this->xbmcHash('123456789') . '<br>' . '0376e6e7' . '<br><br>';
-		print $this->xbmcHash('F:\\Videos\\Nosferatu.avi') . '<br>' . '2a6ec78d' . '<br><br>';
 		print $this->xbmcHash('smb://user:pass@server/share/directory/') . '<br>' . 'c5559f13' . '<br><br>';
 		print $this->xbmcHash('smb://user:pass@server/share/directory/file.ext') . '<br>' . '8ce36055' . '<br><br>';
 	}
