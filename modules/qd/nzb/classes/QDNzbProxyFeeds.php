@@ -67,7 +67,7 @@ class QDNzbProxyFeeds{
 
 	function svc_search_binsearch() {
 		$url = 'http://www.binsearch.net/?q='.urlencode($_REQUEST['q']).'&max=250&adv_age=1000&server=';
-		$st = $this->QDNet->getURL($url);
+		$st = $this->QDNet->getURL($url,false);
 		$html = new simple_html_dom();
 		$html->load($st);
 		$checkboxes = $html->find('input[type=checkbox]');
@@ -103,7 +103,7 @@ class QDNzbProxyFeeds{
 				$url = $url.'&'.$v.'=on';
 		}
 		$filename=escapeshellcmd($this->normalizeNZBFilename($_REQUEST['q'])).' '.date('YmdHis').'.nzb';
-		if (file_put_contents("/var/nzb/".$filename, $this->QDNet->getURL($url))) {
+		if (file_put_contents("/var/nzb/".$filename, $this->QDNet->getURL($url,false))) {
 			return array( 'success'=>'ok','filename'=>$filename);
 		} else {
 			return array('failure'=>'bad');
@@ -111,16 +111,16 @@ class QDNzbProxyFeeds{
 	}
 
 	function svc_download_newzleech() {
-		
+
 	}
 
-    function normalizeNZBFilename($f){
-        //$f = strtr(
-        //        '#$&;`|*?~<>^{}$,',
-        //        '___________________');
-        //  \x0A et \xFF.' ' et "
-        return $f;
-    }
+	function normalizeNZBFilename($f){
+		//$f = strtr(
+		//        '#$&;`|*?~<>^{}$,',
+		//        '___________________');
+		//  \x0A et \xFF.' ' et "
+		return $f;
+	}
 
 	function svc_search_newzleech() {
 		return  array ('url'=>$url, 'posts'=>$res);
@@ -167,16 +167,16 @@ class QDNzbProxyFeeds{
 						where ITE_ID=".$_REQUEST['id'];
 			break;
 			case 'fullsearch':
-                $arrQ = split(' ',$_REQUEST['q']);
-                $likes = " (ITE_TITLE not like 'A Tous ceux Qui %') ";
-                foreach($arrQ as $qu){
-                    $likes .= " and ( ITE_TITLE like '%".$qu."%') ";
-                }
+				$arrQ = split(' ',$_REQUEST['q']);
+				$likes = " (ITE_TITLE not like 'A Tous ceux Qui %') ";
+				foreach($arrQ as $qu){
+					$likes .= " and ( ITE_TITLE like '%".$qu."%') ";
+				}
 				$sql = "select *
 						from rss.ITE_ITEMS
 						where $likes
 						order by ITE_DATE desc,ITE_ID
-                        desc limit $start,$limit";
+						desc limit $start,$limit";
 			break;
 		}
 		$arr = $this->QDDb->query2array($sql);

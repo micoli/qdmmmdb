@@ -2,11 +2,12 @@ Ext.define('qd.sabnzbd.sabnzbdPanel', {
 	extend		: 'Ext.grid.Panel',
 	alias		: 'widget.qd.sabnzbd.sabnzbdPanel',
 	autoTitle	: false,
+
 	sendCommand : function(prm,cb){
 		var ob ={
 			url		: 'p/QDSabnzbdProxy.action/',
-			method  : 'POST',
-			params  : {}
+			method	: 'POST',
+			params	: {}
 		};
 		Ext.apply(ob.params,prm);
 		if (cb){
@@ -15,6 +16,7 @@ Ext.define('qd.sabnzbd.sabnzbdPanel', {
 		}
 		Ext.AjaxEx.request(ob);
 	},
+
 	initComponent : function() {
 		var that = this;
 		that.combospeedid = Ext.id();
@@ -70,7 +72,6 @@ Ext.define('qd.sabnzbd.sabnzbdPanel', {
 							sab_value2	: prio[record.data.priority]
 						},function(a,b,c){
 							that.queueitemStore.load();
-							//console.log(a,b,c);
 						});
 					}
 					return true;
@@ -85,13 +86,13 @@ Ext.define('qd.sabnzbd.sabnzbdPanel', {
 							}else{
 								that.setTitle('Sabnzbd&nbsp;'+txt);
 							}
-
+							qd.sabnzbd.sabnzbdPanel.statusText = txt;
 						}
 					}
 					clearTimeout(that.timerTick);
 					that.timerTick = setTimeout(function(){
-						//that.queueitemStore.load();
-					}, 10*1000);
+						that.queueitemStore.load();
+					}, 5*1000);
 				}
 			}
 		});
@@ -116,8 +117,8 @@ Ext.define('qd.sabnzbd.sabnzbdPanel', {
 				}
 			},
 			sortInfo		: {
-				field: 's',
-				direction: "ASC"
+				field			: 's',
+				direction		: "ASC"
 			},
 			listeners		: {
 				load			: function(){
@@ -226,14 +227,14 @@ Ext.define('qd.sabnzbd.sabnzbdPanel', {
 						typeAhead		: true,
 						triggerAction	: 'all',
 						selectOnTab		: true,
-						store: [
+						lazyRender		: true,
+						listClass		: 'x-combo-list-small',
+						store			: [
 							['Force'	,'Force'	],
-							['High'	,'High'		],
+							['High'		,'High'		],
 							['Normal'	,'Normal'	],
 							['Low'		,'Low'		]
-						],
-						lazyRender		: true,
-						listClass		: 'x-combo-list-small'
+						]
 					}
 				},{
 					xtype	: 'actioncolumn',

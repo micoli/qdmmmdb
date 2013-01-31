@@ -1,5 +1,5 @@
 Ext.define('qd.nzb.NZBPanel', {
-    extend		: 'Ext.Panel',
+	extend		: 'Ext.Panel',
 	alias		: 'widget.qd.nzb.NZBPanel',
 	requires	: [
 		'qd.nzb.feedtab',

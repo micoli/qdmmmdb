@@ -41,8 +41,10 @@
 		</script>
 		<link rel="stylesheet" type="text/css" href="lib/3rd_js/desktop/css/desktop.css" />
 		<script type="text/javascript" src="lib/3rd_js/commonfunctions.js"></script>
+		<script type="text/javascript" src="lib/3rd_js/css.js"></script>
 		<script type="text/javascript" src="modules/qd/mediadb/serieEditor.js"></script>
 		<script type="text/javascript" src="modules/qd/mediadb/seriePanel.js"></script>
+		<script type="text/javascript" src="modules/qd/mediadb/serieFileSorter.js"></script>
 		<script type="text/javascript" src="lib/3rd_js/ux/Ext.data.ConnectionEx.js"></script>
 		<script type="text/javascript" src="lib/3rd_js/ux/Ext.AjaxEx.js"></script>
 		<script type="text/javascript" src="lib/3rd_js/ux/AjaxEx.js"></script>
