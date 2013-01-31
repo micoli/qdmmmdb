@@ -1,5 +1,5 @@
 Ext.define('qd.mediadb.movieEditor', {
-	extend			: 'Ext.Window',
+	extend			: 'Ext.Panel',
 	alias			: 'widget.qd.mediadb.movieEditor',
 	width			: 800,
 	height			: 270,
@@ -55,7 +55,11 @@ Ext.define('qd.mediadb.movieEditor', {
 		var autoloadfirstingrid	= Ext.id();
 		var previewid			= Ext.id();
 
-		that.addEvents('ok','cancel');
+		if(typeof that.referenceGrid=='string'){
+			that.referenceGrid = Ext.getCmp(that.referenceGrid);
+		}
+
+		that.addEvents('ok','cancel','close');
 
 		Ext.define('choosemovie', {
 			extend	: 'Ext.data.Model',
@@ -95,7 +99,7 @@ Ext.define('qd.mediadb.movieEditor', {
 					if (results.data.items && results.data.items.length>0){
 						Ext.getCmp(gridchoosemoviesid).getSelectionModel().selectRange(0,0,false);
 						if (Ext.getCmp(autoloadfirstingrid).getValue()){
-							setEditor(chooseMovieStore.getAt(0));
+							that.setEditor(chooseMovieStore.getAt(0));
 						}
 					}
 				}
@@ -142,16 +146,15 @@ Ext.define('qd.mediadb.movieEditor', {
 				that.tplPreview.overwrite(detailPanel.body,{display:false});
 			}else{
 				that.tplPreview.overwrite(detailPanel.body,Ext.apply({
-					mainWidth	:detailPanel.getWidth() ,
-					mainHeight	:detailPanel.getHeight()?detailPanel.getHeight():500,
-					display		: true
-				},
-					that.currentRecord
+						mainWidth	:detailPanel.getWidth() ,
+						mainHeight	:detailPanel.getHeight()?detailPanel.getHeight():500,
+						display		: true
+					},that.currentRecord
 				));
 			}
 		};
 
-		var setEditor = function (record){
+		that.setEditor = function (record){
 			disableSave();
 			var loading = Ext.getCmp(tabpanelid).setLoading(true);
 			Ext.AjaxEx.request({
@@ -163,7 +166,6 @@ Ext.define('qd.mediadb.movieEditor', {
 				},
 				success : function(rawRes){
 					loading.hide();
-					//loading.destroy();
 					try{
 						var res = Ext.JSON.decode(rawRes.responseText);
 						//Ext.getCmp(textchoosemoviesid).setValue(res.results.name);
@@ -187,9 +189,8 @@ Ext.define('qd.mediadb.movieEditor', {
 						}
 						disableSave();
 					}catch(E){
-						console.log('exce',E);
+						console.log('exception',E);
 					}
-					//w.hide();
 				},
 				failure : function(res){
 					loading.hide();
@@ -300,9 +301,24 @@ Ext.define('qd.mediadb.movieEditor', {
 			Ext.getCmp('butsavenext').setDisabled(false);
 		}
 
+		var listeners = Ext.apply({
+			show	: function(){
+				setCurrentRecord(that.referenceRecord);
+			}
+		},that.listeners||{})
+
 		Ext.apply(this,{
 			layout			: 'border',
 			tbar			: [{
+				xtype		: 'button',
+				text		: '<<',
+				id			: 'butclose',
+				listeners	: {
+					click		:  function(){
+						that.fireEvent('close');
+					}
+				}
+			},{
 				xtype			: 'tbtext',
 				text			: 'Movies :&nbsp;'
 			},{
@@ -417,7 +433,7 @@ Ext.define('qd.mediadb.movieEditor', {
 				autoFit			: true,
 				listeners		: {
 					itemclick : function( view,record,item,index,e,eOpts){
-						setEditor(record)
+						that.setEditor(record)
 					}
 				},
 				columns		: [
@@ -457,12 +473,16 @@ Ext.define('qd.mediadb.movieEditor', {
 					id			: gridposterid,
 					store		: choosePosterStore,
 					imgPrefix	: 'p/QDMediaDBProxy.proxyImg/?c=150x225&u=',
-					listeners	:{
-						selectimg : function(node){
+					listeners	: {
+						'selectimg' : function(node){
 							that.currentRecord.poster=node[0].get('url');
 							enableSave();
 							Ext.getCmp(tabpanelid).setActiveTab(2);
 							updatePreview();
+						},
+						'refreshed'	: function(store){
+							var obj = Ext.getCmp(gridposterid);
+							obj.setTitle(obj.initialConfig.title+'('+store.getCount()+')');
 						}
 					}
 				},{
@@ -472,11 +492,15 @@ Ext.define('qd.mediadb.movieEditor', {
 					store		: chooseBackdropStore,
 					imgPrefix	: 'p/QDMediaDBProxy.proxyImg/?c=225x150&u=',
 					listeners	:{
-						selectimg : function(node){
+						'selectimg' : function(node){
 							that.currentRecord.backdrop=node[0].get('url');
 							enableSave();
 							Ext.getCmp(tabpanelid).setActiveTab(0);
 							updatePreview();
+						},
+						'refreshed'	: function(store){
+							var obj = Ext.getCmp(gridbackdropid);
+							obj.setTitle(obj.initialConfig.title+'('+store.getCount()+')');
 						}
 					}
 				},{
@@ -485,19 +509,15 @@ Ext.define('qd.mediadb.movieEditor', {
 					title			: 'Preview',
 					id				: previewid
 				}]
-			}],
+			}],/*
 			buttons :[{
 				text	: 'close',
 				handler	: function(){
-					that.close();
-					that.fireEvent('cancel');
+					//that.close();
+					that.fireEvent('close');
 				}
-			}],
-			listeners : {
-				show	: function(){
-					setCurrentRecord(that.referenceRecord);
-				}
-			}
+			}],*/
+			listeners : listeners
 		});
 		/*
 		this.top = 0;

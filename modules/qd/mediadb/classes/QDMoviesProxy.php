@@ -396,6 +396,7 @@ class QDMoviesProxy extends QDMediaDBProxy{
 		$tmp = array(
 			'rootPath'		=> $prm['rootPath'],
 			'fullpath'		=> $prm['fileDetail']['fullPath'],
+			'mtime'			=> $prm['fileDetail']['mtime'],
 			'title'			=> $this->cleanMoviesFilename($prm['fileDetail']['filename'], true),
 			'folder'		=> array_key_exists_assign_default('inFolder', $prm, 'inFolder')=='inFolder'?basename(dirname($prm['fileDetail']['file'])):$prm['fileDetail']['filename'],
 			'newfilename'	=> $this->cleanMoviesFilename($prm['fileDetail']['filename']),
@@ -424,6 +425,7 @@ class QDMoviesProxy extends QDMediaDBProxy{
 				$this->arrMovies['results'][] = $this->pri_addFileToGetMoviesFiles(array(
 					'rootPath'		=> $name,
 					'fileDetail'	=> $fileDetail,
+					'mtime'			=> $fileDetail['mtime'],
 					'inFolder'		=> 'inFolder'
 				));
 			}

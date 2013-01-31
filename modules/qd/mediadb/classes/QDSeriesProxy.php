@@ -1,9 +1,63 @@
 <?
 class QDSeriesProxy extends QDMediaDBProxy{
+	function getPathFromName($name){
+		$path=false;
+		foreach($this->folderSeriesList as $v){
+			if ($v['name']==$name){
+				$path=$v['path'];
+				break;
+			}
+		}
+		return $path;
+	}
+
 	function svc_getSerieFromPath() {
 		$path = $_REQUEST['p'];
 		$path = $this->getSeriePath($path);
 		return( array ('results'=> array ('name'=>basename($path))));
+	}
+
+	function svc_getFolderSeriesList(){
+		return array('results'=> $this->folderSeriesList);
+	}
+
+	function svc_getFileSorterList(){
+		//header('content-type:text/html');print "<table border=1>";
+		$arrResult = array();
+		$path = $this->getPathFromName($_REQUEST['name']);
+		if($path){
+			$this->pri_getFileSorterList($path,$arrResult);
+			$dh = glob($path . '/*', GLOB_ONLYDIR);
+			foreach ($dh as $k => $v) {
+				$this->pri_getFileSorterList($v,$arrResult);
+			}
+		}
+		return array('results'=> $arrResult);
+	}
+
+	function pri_getFileSorterList($path,&$arrResult){
+		$dh = glob($path . '/*.*');
+		foreach ($dh as $k => $v) {
+			$d = CW_Files::pathinfo_utf($v);
+			if (in_array(strtolower($d['extension']), $this->movieExt)) {
+				$res = $this->extractSeriesFilenameStruct($d['filename']);
+				$res['fullfilename']=$v;
+				$arrResult[]=$res;
+				if(false){
+					print "<tr>";
+					print "<td>$v</td>";
+					print "<td>".$res['saison']."</td>";
+					print "<td><span style=color:".($res['episode']==0?'red':'black').">".($res['episode'])."</span></td>";
+					print "<td>".$res['rgxnum']."</td>";
+					print "<td>".$res['rgx']."</td>";
+					//print "<td>".json_encode($res['rgx_match'])."</td>";
+					print "</tr>";
+				}
+				//db($res);
+				//db($v);
+				//db($d);
+			}
+		}
 	}
 
 	function getSeriePath($path) {
@@ -133,8 +187,19 @@ class QDSeriesProxy extends QDMediaDBProxy{
 				$thisDir['tvdb'] = 'serie';
 			}
 			$parentDir = dirname($v);
-			if (($parentDir!=$v) && (file_exists($parentDir . '/tvdb.xml')||file_exists($parentDir . '/tvshow.nfo'))) {
-				$thisDir['tvdb'] = 'season';
+			if (($parentDir!=$v) && (file_exists($parentDir . '/tvdb.xml') || file_exists($parentDir . '/tvshow.nfo'))) {
+				$xpath = $this->getXmlDocFromSeriePath($parentDir);
+				$thisDir['tvdb'				] = 'season';
+				$thisDir['numbertorename'	] = 0;
+				$thisDir['serieName'		] = ($this->cleanFilename($this->extractXQuery($xpath, "/Data/Series/SeriesName")));
+				$arrToRename = $this->pri_getFiles($v, true);
+				if (array_key_exists('results',$arrToRename) && is_array($arrToRename['results']) && count($arrToRename['results'])>0){
+					$thisDir['numbertorename']=count($arrToRename['results']);
+				}
+
+			}
+			if(false && preg_match('!wallander!i',$parentDir)){
+				die(__FILE__." -> ".__LINE__);
 			}
 			//$this->makeSerieNFO($v . '/tvshow.nfo');
 			$subdir = $this->getSeriesDirectory($v, ($level + 1));
@@ -516,6 +581,11 @@ class QDSeriesProxy extends QDMediaDBProxy{
 				$res['rgxnum'	] = $k;
 				$res['rgx_match'] = $match;
 				$res['found'	] = true;
+				$pos = strpos($res['filename'],$res['rgx_match'][0]);
+				if($pos!==false){
+					$res['root_file']=substr($res['filename'],0,$pos);
+					$res['clean_root_file']=preg_replace('! !',' ',ucfirst(strtolower(str_replace(array('.','_'),array(' ',' '),($res['root_file'])))));
+				}
 				break;
 			}
 		}
