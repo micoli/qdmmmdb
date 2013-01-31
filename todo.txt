@@ -1,24 +1,28 @@
 ***multi CD, gérer les cd1, part1
 
+batch dispatcher of tvshow episodes
+finalize flat view of folders
 
+deduplication of file/tvshow
+file explorer
 mise en base de données
 reprise de nfo géré par xbmc
-json monitor like firebug + try catch sur eval
-handle special file tag (vost, R5 dvdscr, ts, part1 part2)
 keys accelerators on differents panels + tooltips
 postprocessing of nzb created
 tester l'erreur sur retour json
 desactiver le parser des links sur recherche simple full text
 filtres sur starred/read
-dedup multi feeds et affichage par type (movie/serie)
+dedup multi feeds on nzb app et affichage par type (movie/serie)
 nzb link collection => recherche
 mysterbin api
-virer newzleech
+remove newzleech
 tag les nzb telecharges sur les ite
 detection tag vostfr/vostf sur ITE
 gerer le captach et le batch de synchro des DESC
 ajouter les favicons des providers de fiche cine
 
+**** json monitor like firebug + try catch sur eval
+**** handle special file tag (vost, R5 dvdscr, ts, part1 part2)
 **** reprise de nfo géré par qdmmmdb
 **** filtre sur les films dans Grid pour selectionner uniquement ceux restant a faire
 **** display fanart & backdrop on overview sur movie selector

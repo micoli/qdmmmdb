@@ -1,8 +1,22 @@
 /*
 // Icon Classes */
+.x-action-col-icon{
+	cursor	: pointer
+}
+.genericIcon16{
+	width 	: 16px;
+	height	: 16px;
+	cursor	: pointer
+}
+.genericIcon48{
+	width 	: 48px;
+	height	: 48px;
+	cursor	: pointer
+}
+
 .icon-view {
 	background-image:url(../resources/magnifier.png) ! important;
-    cursor          : pointer
+	cursor          : pointer
 }
 .icon-better {
 	background-image:url(../resources/award_star_gold_2.png) ! important;
@@ -42,52 +56,52 @@
 }
 .icon-star-yellow {
 	background-image:url(../resources/star_yellow.png) ! important;
-    cursor          : pointer
+	cursor          : pointer
 }
 .icon-star-grey {
 	background-image:url(../resources/star_grey.png) ! important;
-    cursor          : pointer
+	cursor          : pointer
 }
 .icon-unread {
 	background-image:url(../resources/unread.gif) ! important;
-    cursor          : pointer
+	cursor          : pointer
 }
 .icon-read {
 	background-image:url(../resources/read.gif) ! important;
-    cursor          : pointer
+	cursor          : pointer
 }
 .iconToPause {
 	background-image:url(../resources/play_blue.png) ! important;
-    cursor          : pointer
+	cursor          : pointer
 }
 .iconToPlay {
 	background-image:url(../resources/pause_blue.png) ! important;
-    cursor          : pointer
+	cursor          : pointer
 }
 .iconPause {
 	background-image:url(../resources/pause_blue.png) ! important;
-    cursor          : pointer
+	cursor          : pointer
 }
 .iconPlay {
 	background-image:url(../resources/play_blue.png) ! important;
-    cursor          : pointer
+	cursor          : pointer
 }
 .iconStop {
 	background-image:url(../resources/stop_blue.png) ! important;
-    cursor          : pointer
+	cursor          : pointer
 }
 .iconMute {
 	background-image:url(../resources/sound_high.png) ! important;
-    cursor          : pointer
+	cursor          : pointer
 }
 .x-grid-center-icon{
-   display:block;
-   margin:0 auto;
-   text-align:center;
-   cursor:hand;
+display:block;
+margin:0 auto;
+text-align:center;
+cursor:hand;
 }
 .qdBackFrame{
-	 background-color : #D3E1F1
+	background-color : #D3E1F1
 }
 .moviegrid-icon-folder{
 	background:url(../resources/themes/images/default/tree/folder.gif) center left no-repeat ;
@@ -167,10 +181,10 @@
 	list-style		: none ;
 	padding			: 0;	/*margin-top		: -20px;*/
 	max-height		: 50px;
-    overflow		: hidden;
+	overflow		: hidden;
 }
 .divPreview li {
-    list-style	: none outside none;
+	list-style	: none outside none;
 	overflow	: hidden;
 }
 .titleCast{
@@ -337,8 +351,57 @@
 }
 
 .icon-sabnzbd {
-    background-image:url(../resources/sabnzbd.png) !important;
+	background-image:url(../resources/sabnzbd.png) !important;
+}
+
+.icon-win-sickbeard {
+	background-image:url(../resources/icons/sickbeard_16.png) !important;
 }
 .icon-sickbeard {
-    background-image:url(../resources/sickbeard.png) !important;
+	background-image:url(../resources/icons/sickbeard.png) !important;
+}
+
+.icon-win-extplorer {
+	background-image:url(../resources/icons/extplorer_16.png) !important;
+}
+.icon-extplorer {
+	background-image:url(../resources/icons/extplorer.png) !important;
+}
+
+
+.icon-app-win-qd-nzb-NZBPanel{
+	background:url(../resources/icons/qd.nzb.NZBPanel_16.png) center left no-repeat ;
+}
+.icon-app-qd-nzb-NZBPanel{
+	background:url(../resources/icons/qd.nzb.NZBPanel.png) center left no-repeat ;
+}
+.icon-app-win-qd-sabnzbd-sabnzbdPanel{
+	background:url(../resources/icons/qd.sabnzbd.sabnzbdPanel_16.png) center left no-repeat ;
+}
+.icon-app-qd-sabnzbd-sabnzbdPanel{
+	background:url(../resources/icons/qd.sabnzbd.sabnzbdPanel.png) center left no-repeat ;
+}
+.icon-app-win-qd-mediadb-moviePanel{
+	background:url(../resources/icons/qd.mediadb.moviePanel_16.png) center left no-repeat ;
+}
+.icon-app-qd-mediadb-moviePanel{
+	background:url(../resources/icons/qd.mediadb.moviePanel.png) center left no-repeat ;
+}
+.icon-app-win-qd-mediadb-seriePanel{
+	background:url(../resources/icons/qd.mediadb.seriePanel_16.png) center left no-repeat ;
+}
+.icon-app-qd-mediadb-seriePanel{
+	background:url(../resources/icons/qd.mediadb.seriePanel.png) center left no-repeat ;
+}
+.icon-app-qd-win-mediadb-serieFileSorter{
+	background:url(../resources/icons/qd.mediadb.serieFileSorter_16.png) center left no-repeat ;
+}
+.icon-app-qd-mediadb-serieFileSorter{
+	background:url(../resources/icons/qd.mediadb.serieFileSorter.png) center left no-repeat ;
+}
+.icon-app-win-qd-system-SystemStatus{
+	background:url(../resources/icons/MyDesktop.SystemStatus_16.png) center left no-repeat ;
+}
+.icon-app-qd-system-SystemStatus{
+	background:url(../resources/icons/MyDesktop.SystemStatus.png) center left no-repeat ;
 }
