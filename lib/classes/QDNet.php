@@ -2,10 +2,10 @@
 	class QDNet {
 		static $cachedFilesDatas=array();
 
-		function getUrl($url){
+		function getUrl($url,$useCurl=true){
 			$useragent="Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.8.1.1) Gecko/20061204 Firefox/2.0.0.1";
 			set_time_limit(126);
-			if($GLOBALS['conf']['qdnet']['usecurl']){
+			if($GLOBALS['conf']['qdnet']['usecurl'] && $useCurl){
 				$ch = curl_init();
 				$timeout = 30; // set to zero for no timeout
 				curl_setopt ($ch, CURLOPT_URL, $url);
