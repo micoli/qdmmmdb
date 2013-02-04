@@ -121,7 +121,7 @@ Ext.define('qd.mediadb.moviePanel', {
 		});
 
 		var movieStoreFeature = Ext.create('Ext.grid.feature.Grouping',{
-			groupHeaderTpl: 'Type: {name} ({rows.length} items{[values.rows.length > 1 ? "s" : ""]})'
+			groupHeaderTpl: 'Type: {name} ({rows.length} item{[values.rows.length > 1 ? "s" : ""]})'
 		});
 
 		that.ctxMenu = Ext.create('Ext.menu.Menu', {

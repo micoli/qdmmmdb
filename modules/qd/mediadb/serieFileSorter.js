@@ -5,7 +5,16 @@ Ext.define('qd.mediadb.serieFileSorter', {
 		var that = this;
 		that.rootdriveid		= Ext.id();
 		that.filetosortid		= Ext.id();
+		that.filetorenameid		= Ext.id();
 		that.fieldforlderid		= Ext.id();
+
+		that.fieldlangid		= Ext.id();
+		that.fieldsaisonid		= Ext.id();
+
+		that.fieldchklangid		= Ext.id();
+		that.fieldchksaisonid	= Ext.id();
+		that.fieldlbllangid		= Ext.id();
+		that.fieldlblsaisonid	= Ext.id();
 
 		Ext.define('rootDrive', {
 			extend	: 'Ext.data.Model',
@@ -34,23 +43,42 @@ Ext.define('qd.mediadb.serieFileSorter', {
 		});
 
 		Ext.define('fileToSort', {
-			extend	: 'Ext.data.Model',
-			fields	: [
+			extend		: 'Ext.data.Model',
+			idProperty	: 'fullfilename',
+			fields		: [
+				'selected'			,
 				'found'				,
 				'filename'			,
 				'saison'			,
 				'episode'			,
 				'rgx'				,
 				'fullfilename'		,
+				'inFolder'			,
+				'folder'			,
+				'root'				,
+				'subPath'			,
+				'renamed'			,
 				'clean_root_file'	,
 				'root_file'
-			]
+			]/*,
+			sorters				: [{
+				property			: 'folder',
+				direction			: 'ASC'
+			},{
+				property			: 'fullfilename',
+				direction			: 'ASC'
+			}]*/
+		});
+
+		that.fileToSortFeature = Ext.create('Ext.grid.feature.Grouping',{
+			groupHeaderTpl: 'Type: {name} ({rows.length} item{[values.rows.length > 1 ? "s" : ""]})'
 		});
 
 		that.fileToSortStore = Ext.create('Ext.data.Store',{
 			pruneModifiedRecords: true,
 			model				: 'fileToSort',
 			autoLoad			: false,
+			groupField			: 'folder',
 			proxy				: {
 				type				: 'ajaxEx',
 				url					: 'p/QDSeriesProxy.getFileSorterList/',
@@ -59,21 +87,168 @@ Ext.define('qd.mediadb.serieFileSorter', {
 					root				: 'results'
 				}
 			},
-			sorters		: [{
-				property	: 'fullfilename',
-				direction	: 'ASC'
-			}]
+			sorters				: [{
+				property			: 'fullfilename',
+				direction			: 'ASC'
+			}],
+			listeners	: {
+				load		: function( store, records, successful, eOpts ){
+					//console.log( store, records, successful, eOpts);
+					Ext.each(records,function(v,k){
+						//v.beginEdit();
+					})
+				}
+			}
 		});
 
 		that.saisonStore = Ext.create('Ext.data.ArrayStore', {
 			fields	: ['saison'],
-			data	: [['1'],['2'],['3'],['4'],['5'],['6'],['7'],['8'],['9'],['10'],['11'],['12'],['13'],['14'],['15']]
+			data	: [[''],[1],[2],[3],[4],[5],[6],[7],[8],[9],[10],[11],[12],[13],[14],[15]]
 		});
 
 		that.languageStore = Ext.create('Ext.data.ArrayStore', {
 			fields	: ['lang'],
-			data	: [['FR'],['VO']]
+			data	: [[''],['FR'],['VO']]
 		});
+
+		that.updateSelected = function(){
+			console.log(Ext.getCmp(that.fieldforlderid).getValue());
+			console.log(Ext.getCmp(that.fieldlangid).getValue());
+			console.log(Ext.getCmp(that.fieldsaisonid).getValue());
+
+			var disabled = !Ext.getCmp(that.fieldchklangid).getValue();
+			Ext.getCmp(that.fieldlangid).setDisabled(disabled);
+			Ext.getCmp(that.fieldlbllangid)[disabled?'addCls':'removeCls']('lbl-disabled');
+
+			var disabled = !Ext.getCmp(that.fieldchksaisonid).getValue();
+			Ext.getCmp(that.fieldsaisonid).setDisabled(disabled);
+			Ext.getCmp(that.fieldlblsaisonid)[disabled?'addCls':'removeCls']('lbl-disabled');
+			that.selectionChangedHolder();
+		}
+
+		that.selectionChangedHolder = function (event,idx,value,checkbox){
+			// /*selModel, selected, eOpts*/ ){
+			console.group("a title") ;
+			var time = +new Date() ;
+
+			console.log(+new Date() -time,"134");
+			if(idx){
+				//that.fileToSortStore.getAt(idx).commit();
+			}
+			var selected=[];
+			console.log(+new Date() -time,"139");
+			that.fileToSortStore.each(function(v,k){
+				if(v.get('selected')!=''){
+					selected.push(v);
+				}
+			});
+			console.log(+new Date() -time,"145");
+
+			var pattern = '';
+			/*if(selected.length==0){
+				return;
+			}
+			if(selected.length==1){
+				Ext.getCmp(that.fieldforlderid	).setValue('');
+				Ext.getCmp(that.fieldlangid		).setValue('');
+				Ext.getCmp(that.fieldsaisonid	).setValue('');
+			}*/
+
+			if(selected && selected.length>1){
+				console.log(+new Date() -time,"153");
+				var clean_root_file = selected[0].get('clean_root_file');
+				if(clean_root_file!=''){
+					var allIdentical = true;
+					for (j=1;j<selected.length;j++){
+						if(clean_root_file != selected[j].get('clean_root_file')){
+							allIdentical = false;
+						}
+					}
+				}
+				console.log(+new Date() -time,"163");
+				if(allIdentical){
+					pattern = clean_root_file;
+				}else{
+					var length = selected[0].get('filename').length;
+					for (var i=length;i>0;i--){
+						var lastSub = selected[0].get('filename').substr(0,i);
+						var identical = true;
+						for (j=1;j<selected.length;j++){
+							if(lastSub!=selected[j].get('filename').substr(0,i)){
+								identical=false;
+							}
+						}
+						if(identical){
+							pattern = lastSub;
+							break;
+						}
+					}
+					console.log(+new Date() -time,"181");
+				}
+			}else if(selected && selected.length==1){
+				pattern = selected[0].get('clean_root_file')==''?selected[0].get('filename'):selected[0].get('clean_root_file');
+			}else{
+				pattern = '';
+			}
+
+			if(pattern && selected && selected.length>=1){
+				var saison=selected[0].get('saison');
+				console.log(+new Date() -time,"191");
+				for (j=1;j<selected.length;j++){
+					if(saison != selected[j].get('saison')){
+						saison=-1;
+					}
+				}
+				console.log(+new Date() -time,"197");
+			}
+
+			Ext.getCmp(that.fieldforlderid).setValue(pattern);
+
+			if(saison!=-1 && saison !=''){
+				Ext.getCmp(that.fieldsaisonid ).setValue(saison);
+			}
+
+			console.log(+new Date() -time,"202");
+			that.fileToSortStore.each(function(v,k){
+				v.set('renamed','');
+				//if(v.isDirty()) v.commit();
+			});
+			console.log(+new Date() -time,"207");
+
+			var foldername	= Ext.getCmp(that.fieldforlderid	).getValue();
+			var withsaison	= Ext.getCmp(that.fieldchksaisonid	).getValue();
+			var saison		= Ext.getCmp(that.fieldsaisonid		).getValue();
+			var withlang	= Ext.getCmp(that.fieldchklangid	).getValue();
+			var lang		= Ext.getCmp(that.fieldlangid		).getValue();
+			console.log(+new Date() -time,"214");
+			for (j=0;j<selected.length;j++){
+				var str = '';
+				if(!selected[j].get('inFolder')){
+					str = str + foldername +'/';
+				}
+				var withSeparator = false;
+				if(withsaison && saison){
+					str = str + 'S' + saison;
+					withSeparator = true;
+				}
+				if(withlang && lang){
+					str = str + ((withsaison && saison)?' ':'') + lang;
+					withSeparator = true;
+				}
+				if(withSeparator){
+					str = str + '/';
+				}
+				str = str + selected[j].get('filename');
+				console.log(str);
+				var rec = that.fileToSortStore.getById(selected[j].getId());
+				rec.beginEdit();
+				rec.set('renamed',str);
+				rec.endEdit();
+				//rec.commit();
+			}
+			console.log(+new Date() -time,"234");
+			console.groupEnd();
+		}
 
 		Ext.apply(this,{
 			layout		: 'border',
@@ -117,66 +292,143 @@ Ext.define('qd.mediadb.serieFileSorter', {
 					store		: that.fileToSortStore,
 					loadMask	: true,
 					autoFit		: true,
-					selModel	: Ext.create('Ext.selection.CheckboxModel',{
+					/*selModel	: Ext.create('Ext.selection.CheckboxModel',{
 						listeners	: {
-							selectionchange	: function ( selModel, selected, eOpts ){
-								//console.log(selModel, selected, eOpts);
-								var pattern = '';
-								if(selected.length==0){
-									return;
-								}
-								if(selected && selected.length>1){
-									var clean_root_file = selected[0].get('clean_root_file');
-									if(clean_root_file!=''){
-										var allIdentical = true;
-										for (j=1;j<selected.length;j++){
-											if(clean_root_file != selected[j].get('clean_root_file')){
-												allIdentical = false;
-											}
-										}
-									}
-									if(allIdentical){
-										pattern = clean_root_file;
-									}else{
-										var length = selected[0].get('filename').length;
-										for (var i=length;i>0;i--){
-											var lastSub = selected[0].get('filename').substr(0,i);
-											var identical = true;
-											for (j=1;j<selected.length;j++){
-												if(lastSub!=selected[j].get('filename').substr(0,i)){
-													identical=false;
-												}
-											}
-											if(identical){
-												pattern = lastSub;
-												break;
-											}
-										}
-									}
-								}else{
-									pattern = selected[0].get('clean_root_file')==''?selected[0].get('filename'):selected[0].get('clean_root_file');
-								}
-								Ext.getCmp(that.fieldforlderid).setValue(pattern);
-								console.log(pattern);
+							selectionchange	: function( selModel, selected, eOpts ){
+								Ext.Function.defer(that.selectionChangedHolder,200,that,[selModel, selected, eOpts]);
 							}
 						}
-					}),
+					}),*/
+					features	: [that.fileToSortFeature],
+					lines		: false,
+					useArrows	: true,
+					tbar		: [{
+						xtype		: 'button',
+						text		: 'Select All',
+						handler		: function(){
+							that.fileToSortStore.each(function(v,k){
+								v.set('selected',true);
+							});
+						}
+					},{
+						xtype		: 'button',
+						text		: 'unselect All',
+						handler		: function(){
+							that.fileToSortStore.each(function(v,k){
+								v.set('selected',false);
+							});
+						}
+					},{
+						xtype		: 'button',
+						text		: 'invert Select',
+						handler		: function(){
+							that.fileToSortStore.each(function(v,k){
+								v.set('selected',!v.get('selected'));
+							});
+						}
+					},{
+						xtype		: 'tbseparator'
+					},'Folder Name',{
+						xtype			: 'textfield',
+						name			: 'folder',
+						id				: that.fieldforlderid,
+						labelWidth		: 90,
+						width			: 300,
+						allowBlank		: false,
+						enableKeyEvents: true,
+						listeners		: {
+							keypress		: that.updateSelected
+						}
+					},{
+						xtype			: 'label',
+						text			: 'Saison',
+						id				: that.fieldlblsaisonid,
+					},{
+						xtype			: 'combobox',
+						name			: 'saison',
+						labelWidth		: 40,
+						width			: 50,
+						id				: that.fieldsaisonid,
+						store			: that.saisonStore,
+						valueField		: 'saison',
+						displayField	: 'saison',
+						typeAhead		: true,
+						queryMode		: 'local',
+						allowBlank		: false,
+						forceSelection	: true,
+						listeners		: {
+							select			: that.updateSelected
+						}
+					},{
+						xtype			: 'checkbox',
+						name			: 'withsaison',
+						checked			: true,
+						width			: 20,
+						id				: that.fieldchksaisonid,
+						listeners		: {
+							change			: that.updateSelected
+						}
+					},{
+						xtype			: 'label',
+						text			: 'Lang',
+						id				: that.fieldlbllangid,
+					},{
+						xtype			: 'combobox',
+						name			: 'lang',
+						labelWidth		: 40,
+						width			: 50,
+						id				: that.fieldlangid,
+						store			: that.languageStore,
+						valueField		: 'lang',
+						displayField	: 'lang',
+						typeAhead		: true,
+						queryMode		: 'local',
+						allowBlank		: false,
+						forceSelection	: true,
+						listeners		: {
+							select			: that.updateSelected
+						}
+					},{
+						xtype			: 'checkbox',
+						name			: 'withlang',
+						checked			: true,
+						width			: 20,
+						id				: that.fieldchklangid,
+						listeners		: {
+							change			: that.updateSelected
+						}
+					},'->',{
+						xtype			: 'button',
+						text			: 'rename',
+						handler			: function(){
+							var selected=[];
+							that.fileToSortStore.each(function(v,k){
+								if(v.get('selected')!=''){
+									selected.push(v);
+								}
+							});
+							if(selected && selected.length>0){
+								Ext.create('qd.mediadb.serieFileSorterConfirmation',{
+									records	: selected
+								}).show();
+							}
+						}
+					}],
 					listeners	: {
-						'itemclick'	: function( grid, record, item, index, e, eOpts) {
+						itemclick	: function( grid, record, item, index, e, eOpts) {
 							var record = grid.getStore().getAt(index);
 							//Ext.getCmp(that.filetosortid).getSelectionModel().getSelection()
-						}
+						},
 					},
-					/*
-					'found'			,
-					'filename'		,
-					'saison'		,
-					'episode'		,
-					'rgx'			,
-					'fullfilename'	,
-					*/
 					columns		: [{
-						header: "fullfilename"	, width:  80,flex : 1, dataIndex: 'fullfilename'	, sortable: true,renderer : function(v,meta,record){
+							header: "&nbsp"			, width:  30,flex : 0, dataIndex: 'selected'		, sortable: true,xtype: 'checkcolumn',listeners : {
+									checkchange : function(event,idx,value,checkbox){
+								//console.log(arguments);
+								that.selectionChangedHolder.call(that,event,idx,value,checkbox);
+							}
+						}
+					},{
+						header: "Full Filename"	, width:  80,flex : 1, dataIndex: 'fullfilename'	, sortable: true,renderer : function(v,meta,record){
 							if (record.get('found')){
 								meta.style='color:green;'
 							}else{
@@ -185,74 +437,26 @@ Ext.define('qd.mediadb.serieFileSorter', {
 							return v;
 						}
 					},{
+						header: "&nbsp;"		, width:  30,flex : 0, dataIndex: 'inFolder'		, sortable: true,renderer :function(v,meta,record){
+							var icon = v?'icon-folder-open':'icon-folder-close';
+							return '<span class="genericIcon16 '+icon+'">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>';
+						}
+					},{
 						header: "S"				, width:  30,flex : 0, dataIndex: 'saison'			, sortable: true
 					},{
 						header: "E"				, width:  30,flex : 0, dataIndex: 'episode'			, sortable: true
 					},{
-						header: "Pattern"		, width:  80,flex : 1, dataIndex: 'clean_root_file'	, sortable: true
+						header: "Pattern"		, width: 130,flex : 0, dataIndex: 'clean_root_file'	, sortable: true
 					},{
-						header: "renamed"		, width:  80,flex : 1, dataIndex: 'renamed'			, sortable: true
+						header: "Renamed"		, width: 240,flex : 1, dataIndex: 'renamed'			, sortable: true, renderer:function(v,meta,record){
+							var str = '';
+							str = str + '<span class="sorter-folder"	>'+record.data.folder+'</span>';
+							str = str + '<span class="sorter-separator"	>'+'/'+'</span>';
+							str = str + '<span class="sorter-renamed"	>'+record.data.renamed+'</span>';
+							return str;
+						}
 					}]
-				},{
-					region	: 'south',
-					height	: 150,
-					xtype	: 'form',
-					items	: [{
-						xtype		: 'fieldset',
-						title		: 'update datas',
-						defaultType	: 'textfield',
-						layout		: 'anchor',
-						frame		: true,
-						defaults	: {
-							anchor: '100%'
-						},
-						items		: [{
-							xtype			: 'fieldcontainer',
-							fieldLabel		: 'dispatch',
-							layout			: 'hbox',
-							combineErrors	: true,
-							defaultType		: 'textfield',
-							defaults		: {
-								hideLabel		: 'true'
-							},
-							items		: [{
-								xtype		: 'textfield',
-								fieldLabel	: 'Folder Name',
-								name		: 'folder',
-								id			: that.fieldforlderid,
-								labelWidth	: 50,
-								width		: 300,
-								allowBlank	: false
-							},{
-								xtype			: 'combobox',
-								name			: 'lang',
-								fieldLabel		: 'lang',
-								labelWidth		: 50,
-								width			: 50,
-								store			: that.languageStore,
-								valueField		: 'lang',
-								displayField	: 'lang',
-								typeAhead		: true,
-								queryMode		: 'local',
-								allowBlank		: false,
-								forceSelection	: true
-							},{
-								xtype			: 'combobox',
-								name			: 'saison',
-								fieldLabel		: 'saison',
-								labelWidth		: 50,
-								width			: 50,
-								store			: that.saisonStore,
-								valueField		: 'saison',
-								displayField	: 'saison',
-								typeAhead		: true,
-								queryMode		: 'local',
-								allowBlank		: false,
-								forceSelection	: true
-							}]
-						}]
-					}]
-				}]
+				},]
 			}]
 		});
 		this.callParent(this);

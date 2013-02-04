@@ -34,7 +34,7 @@ Ext.define('qd.mediadb.TraySabnzbd', {
 				me.setText(text);
 				me.lastText = text;
 			}
-			me.timer = Ext.Function.defer(me.updateTime, 5*1000, me);
+			/////////me.timer = Ext.Function.defer(me.updateTime, 5*1000, me);
 		}
 		var ob ={
 			url		: 'p/QDSabnzbdProxy.action/',
