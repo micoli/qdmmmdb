@@ -26,22 +26,28 @@ class QDSeriesProxy extends QDMediaDBProxy{
 		$arrResult = array();
 		$path = $this->getPathFromName($_REQUEST['name']);
 		if($path){
-			$this->pri_getFileSorterList($path,$arrResult);
+			$this->pri_getFileSorterList($path,$arrResult,false,$path,'');
 			$dh = glob($path . '/*', GLOB_ONLYDIR);
 			foreach ($dh as $k => $v) {
-				$this->pri_getFileSorterList($v,$arrResult);
+				$this->pri_getFileSorterList($v,$arrResult,true,$path,str_replace($path.'/','',$v));
 			}
 		}
 		return array('results'=> $arrResult);
 	}
 
-	function pri_getFileSorterList($path,&$arrResult){
+	function pri_getFileSorterList($path,&$arrResult,$inFolder,$root,$subPath){
 		$dh = glob($path . '/*.*');
 		foreach ($dh as $k => $v) {
 			$d = CW_Files::pathinfo_utf($v);
 			if (in_array(strtolower($d['extension']), $this->movieExt)) {
 				$res = $this->extractSeriesFilenameStruct($d['filename']);
-				$res['fullfilename']=$v;
+				$res['fullfilename'	]=$v;
+				$res['folder'		]=$path;
+				$res['inFolder'		]=$inFolder;
+				$res['renamed'		]='';
+				$res['root'			]=$root;
+				$res['subPath'		]=$subPath;
+				$res['selected'		]=false;
 				$arrResult[]=$res;
 				if(false){
 					print "<tr>";
@@ -50,12 +56,8 @@ class QDSeriesProxy extends QDMediaDBProxy{
 					print "<td><span style=color:".($res['episode']==0?'red':'black').">".($res['episode'])."</span></td>";
 					print "<td>".$res['rgxnum']."</td>";
 					print "<td>".$res['rgx']."</td>";
-					//print "<td>".json_encode($res['rgx_match'])."</td>";
 					print "</tr>";
 				}
-				//db($res);
-				//db($v);
-				//db($d);
 			}
 		}
 	}
