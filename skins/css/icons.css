@@ -393,7 +393,7 @@ cursor:hand;
 .icon-app-qd-mediadb-seriePanel{
 	background:url(../resources/icons/qd.mediadb.seriePanel.png) center left no-repeat ;
 }
-.icon-app-qd-win-mediadb-serieFileSorter{
+.icon-app-win-qd-mediadb-serieFileSorter{
 	background:url(../resources/icons/qd.mediadb.serieFileSorter_16.png) center left no-repeat ;
 }
 .icon-app-qd-mediadb-serieFileSorter{
@@ -404,4 +404,22 @@ cursor:hand;
 }
 .icon-app-qd-system-SystemStatus{
 	background:url(../resources/icons/MyDesktop.SystemStatus.png) center left no-repeat ;
+}
+.icon-folder-open{
+	background:url(../resources/folder-green-open-icon.png) center left no-repeat ;
+}
+.icon-folder-close{
+	background:url(../resources/folder-blue-icon.png) center left no-repeat ;
+}
+.lbl-disabled{
+	opacity			: 0.3;
+}
+.sorter-folder{
+	color			: blue;
+}
+.sorter-separator{
+	color			: green;
+}
+.sorter-renamed{
+	color			: red;
 }
