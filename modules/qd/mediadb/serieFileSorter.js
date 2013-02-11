@@ -6,6 +6,7 @@ Ext.define('qd.mediadb.serieFileSorter', {
 		that.rootdriveid		= Ext.id();
 		that.filetosortid		= Ext.id();
 		that.filetorenameid		= Ext.id();
+		that.fieldlblforlderid	= Ext.id();
 		that.fieldforlderid		= Ext.id();
 
 		that.fieldlangid		= Ext.id();
@@ -15,6 +16,7 @@ Ext.define('qd.mediadb.serieFileSorter', {
 		that.fieldchksaisonid	= Ext.id();
 		that.fieldlbllangid		= Ext.id();
 		that.fieldlblsaisonid	= Ext.id();
+		that.currentDrive		= null;
 
 		Ext.define('rootDrive', {
 			extend	: 'Ext.data.Model',
@@ -24,6 +26,15 @@ Ext.define('qd.mediadb.serieFileSorter', {
 			]
 		});
 
+		that.reloadFiles = function(){
+			if(that.currentDrive){
+				that.fileToSortStore.load({
+					params	: {
+						name	: that.currentDrive
+					}
+				});
+			}
+		}
 		that.rootDriveStore = Ext.create('Ext.data.Store',{
 			pruneModifiedRecords: true,
 			model				: 'rootDrive',
@@ -53,6 +64,7 @@ Ext.define('qd.mediadb.serieFileSorter', {
 				'episode'			,
 				'rgx'				,
 				'fullfilename'		,
+				'extension'			,
 				'inFolder'			,
 				'folder'			,
 				'root'				,
@@ -60,18 +72,12 @@ Ext.define('qd.mediadb.serieFileSorter', {
 				'renamed'			,
 				'clean_root_file'	,
 				'root_file'
-			]/*,
-			sorters				: [{
-				property			: 'folder',
-				direction			: 'ASC'
-			},{
-				property			: 'fullfilename',
-				direction			: 'ASC'
-			}]*/
+			]
 		});
 
-		that.fileToSortFeature = Ext.create('Ext.grid.feature.Grouping',{
-			groupHeaderTpl: 'Type: {name} ({rows.length} item{[values.rows.length > 1 ? "s" : ""]})'
+		that.localFolderStore = Ext.create('Ext.data.Store', {
+			fields	: ['folder'],
+			data	: []
 		});
 
 		that.fileToSortStore = Ext.create('Ext.data.Store',{
@@ -93,81 +99,79 @@ Ext.define('qd.mediadb.serieFileSorter', {
 			}],
 			listeners	: {
 				load		: function( store, records, successful, eOpts ){
-					//console.log( store, records, successful, eOpts);
-					Ext.each(records,function(v,k){
-						//v.beginEdit();
-					})
+					//console.log(store , records, successful, eOpts);
+					//console.log(store.proxy.reader.jsonData.folders);
+					that.localFolderStore.removeAll();
+					Ext.each(store.proxy.reader.jsonData.folders,function(v,k){
+						that.localFolderStore.add({folder:v});
+					});
+					that.selectionChangedHolder();
+					//console.log(that.localFolderStore);
 				}
 			}
 		});
 
 		that.saisonStore = Ext.create('Ext.data.ArrayStore', {
 			fields	: ['saison'],
-			data	: [[''],[1],[2],[3],[4],[5],[6],[7],[8],[9],[10],[11],[12],[13],[14],[15]]
+			data	: [[1],[2],[3],[4],[5],[6],[7],[8],[9],[10],[11],[12],[13],[14],[15]]
 		});
 
 		that.languageStore = Ext.create('Ext.data.ArrayStore', {
 			fields	: ['lang'],
-			data	: [[''],['FR'],['VO']]
+			data	: [['FR'],['VO']]
 		});
 
-		that.updateSelected = function(){
-			console.log(Ext.getCmp(that.fieldforlderid).getValue());
-			console.log(Ext.getCmp(that.fieldlangid).getValue());
-			console.log(Ext.getCmp(that.fieldsaisonid).getValue());
-
-			var disabled = !Ext.getCmp(that.fieldchklangid).getValue();
-			Ext.getCmp(that.fieldlangid).setDisabled(disabled);
-			Ext.getCmp(that.fieldlbllangid)[disabled?'addCls':'removeCls']('lbl-disabled');
-
-			var disabled = !Ext.getCmp(that.fieldchksaisonid).getValue();
-			Ext.getCmp(that.fieldsaisonid).setDisabled(disabled);
-			Ext.getCmp(that.fieldlblsaisonid)[disabled?'addCls':'removeCls']('lbl-disabled');
-			that.selectionChangedHolder();
-		}
-
-		that.selectionChangedHolder = function (event,idx,value,checkbox){
-			// /*selModel, selected, eOpts*/ ){
-			console.group("a title") ;
-			var time = +new Date() ;
-
-			console.log(+new Date() -time,"134");
-			if(idx){
-				//that.fileToSortStore.getAt(idx).commit();
-			}
+		that.getSelectedItems = function(){
 			var selected=[];
-			console.log(+new Date() -time,"139");
 			that.fileToSortStore.each(function(v,k){
 				if(v.get('selected')!=''){
 					selected.push(v);
 				}
 			});
-			console.log(+new Date() -time,"145");
+			return selected;
+		}
+
+		that.selectionChangedHolder = function (event,idx,value,checkbox){
+			// /*selModel, selected, eOpts*/ ){
+			if(idx){
+				//that.fileToSortStore.getAt(idx).commit();
+			}
+			var selected=that.getSelectedItems();
 
 			var pattern = '';
-			/*if(selected.length==0){
-				return;
-			}
-			if(selected.length==1){
-				Ext.getCmp(that.fieldforlderid	).setValue('');
-				Ext.getCmp(that.fieldlangid		).setValue('');
-				Ext.getCmp(that.fieldsaisonid	).setValue('');
-			}*/
+			var allInFolder = false;
 
 			if(selected && selected.length>1){
-				console.log(+new Date() -time,"153");
+				//console.log(+new Date() -time,"153");
 				var clean_root_file = selected[0].get('clean_root_file');
+				var allFolder		= selected[0].get('folder');
+				allInFolder			= selected[0].get('inFolder');
 				if(clean_root_file!=''){
 					var allIdentical = true;
 					for (j=1;j<selected.length;j++){
 						if(clean_root_file != selected[j].get('clean_root_file')){
 							allIdentical = false;
 						}
+						if(allInFolder && !selected[j].get('inFolder')){
+							allIinFolder = false;
+						}
 					}
 				}
-				console.log(+new Date() -time,"163");
+				if(allInFolder){
+					var allIdenticalInFolder = true;
+					for (j=1;j<selected.length;j++){
+						if(allFolder != selected[j].get('folder')){
+							allIdenticalInFolder = false;
+						}
+						if(!selected[j].get('inFolder')){
+							allIdenticalInFolder = false;
+						}
+					}
+				}
 				if(allIdentical){
 					pattern = clean_root_file;
+				}else if(allIdenticalInFolder){
+					pattern = allFolder;
 				}else{
 					var length = selected[0].get('filename').length;
 					for (var i=length;i>0;i--){
@@ -183,44 +187,71 @@ Ext.define('qd.mediadb.serieFileSorter', {
 							break;
 						}
 					}
-					console.log(+new Date() -time,"181");
+					//console.log(+new Date() -time,"181");
 				}
 			}else if(selected && selected.length==1){
-				pattern = selected[0].get('clean_root_file')==''?selected[0].get('filename'):selected[0].get('clean_root_file');
+				allInFolder		= selected[0].get('inFolder');
+				pattern			= selected[0].get('clean_root_file')==''?selected[0].get('filename'):selected[0].get('clean_root_file');
 			}else{
-				pattern = '';
+				pattern			= '';
 			}
 
 			if(pattern && selected && selected.length>=1){
 				var saison=selected[0].get('saison');
-				console.log(+new Date() -time,"191");
+				//console.log(+new Date() -time,"191");
 				for (j=1;j<selected.length;j++){
 					if(saison != selected[j].get('saison')){
 						saison=-1;
 					}
 				}
-				console.log(+new Date() -time,"197");
+				//console.log(+new Date() -time,"197");
 			}
 
-			Ext.getCmp(that.fieldforlderid).setValue(pattern);
+			if(!allInFolder && selected.length>0){
+				Ext.getCmp(that.fieldforlderid).setValue(pattern);
+				Ext.getCmp(that.fieldforlderid).setDisabled(false);
+				Ext.getCmp(that.fieldlblforlderid).setDisabled(false);
+			}else{
+				Ext.getCmp(that.fieldforlderid).setValue('----');
+				Ext.getCmp(that.fieldforlderid).setDisabled(true);
+				Ext.getCmp(that.fieldlblforlderid).setDisabled(true);
+			}
 
 			if(saison!=-1 && saison !=''){
 				Ext.getCmp(that.fieldsaisonid ).setValue(saison);
 			}
 
-			console.log(+new Date() -time,"202");
+			//console.log(+new Date() -time,"202");
 			that.fileToSortStore.each(function(v,k){
 				v.set('renamed','');
-				//if(v.isDirty()) v.commit();
 			});
-			console.log(+new Date() -time,"207");
+			//console.log(+new Date() -time,"207");
 
+			that.updateSelectedItems();
+		}
+
+		that.updateControls = function(){
+			//console.log(Ext.getCmp(that.fieldforlderid).getValue());
+			//console.log(Ext.getCmp(that.fieldlangid).getValue());
+			//console.log(Ext.getCmp(that.fieldsaisonid).getValue());
+
+			var disabled = !Ext.getCmp(that.fieldchklangid).getValue();
+			Ext.getCmp(that.fieldlangid).setDisabled(disabled);
+			Ext.getCmp(that.fieldlbllangid)[disabled?'addCls':'removeCls']('lbl-disabled');
+
+			var disabled = !Ext.getCmp(that.fieldchksaisonid).getValue();
+			Ext.getCmp(that.fieldsaisonid).setDisabled(disabled);
+			Ext.getCmp(that.fieldlblsaisonid)[disabled?'addCls':'removeCls']('lbl-disabled');
+		}
+
+		that.updateSelectedItems = function (){
+			that.updateControls();
+			var selected=that.getSelectedItems();
 			var foldername	= Ext.getCmp(that.fieldforlderid	).getValue();
 			var withsaison	= Ext.getCmp(that.fieldchksaisonid	).getValue();
 			var saison		= Ext.getCmp(that.fieldsaisonid		).getValue();
 			var withlang	= Ext.getCmp(that.fieldchklangid	).getValue();
 			var lang		= Ext.getCmp(that.fieldlangid		).getValue();
-			console.log(+new Date() -time,"214");
 			for (j=0;j<selected.length;j++){
 				var str = '';
 				if(!selected[j].get('inFolder')){
@@ -239,16 +270,36 @@ Ext.define('qd.mediadb.serieFileSorter', {
 					str = str + '/';
 				}
 				str = str + selected[j].get('filename');
-				console.log(str);
 				var rec = that.fileToSortStore.getById(selected[j].getId());
 				rec.beginEdit();
 				rec.set('renamed',str);
 				rec.endEdit();
-				//rec.commit();
 			}
-			console.log(+new Date() -time,"234");
-			console.groupEnd();
 		}
+
+		that.setSelectedByFolderGroup = function (groupName,value){
+			that.fileToSortStore.each(function(v,k){
+				if(v.get('folder')==groupName){
+					v.beginEdit();
+					v.set('selected',value);
+					v.endEdit();
+				}
+			});
+		}
+
+		that.fileToSortFeature = Ext.create('Ext.ux.SelectGrouping',{
+			groupHeaderTpl: '{name} ({rows.length} item{[values.rows.length > 1 ? "s" : ""]})',
+			listeners : {
+				groupselectall : function(feature,groupname){
+					that.setSelectedByFolderGroup(groupname,true);
+					that.selectionChangedHolder();
+				},
+				groupselectnone : function(feature,groupname){
+					that.setSelectedByFolderGroup(groupname,false);
+					that.selectionChangedHolder();
+				}
+			}
+		});
 
 		Ext.apply(this,{
 			layout		: 'border',
@@ -268,11 +319,12 @@ Ext.define('qd.mediadb.serieFileSorter', {
 				listeners	: {
 					'itemclick': function( grid, record, item, index, e, eOpts) {
 						var record = grid.getStore().getAt(index);
+						that.currentDrive = record.get('name');
 						that.fileToSortStore.load({
 							params	: {
-								name	: record.get('name')
+								name	: that.currentDrive
 							}
-						})
+						});
 					}
 				},
 				columns		: [{
@@ -286,20 +338,13 @@ Ext.define('qd.mediadb.serieFileSorter', {
 				items	:[{
 					xtype		: 'grid',
 					region		: 'center',
-					id			: that.filetosortid,
 					layout		: 'fit',
-					border		: false,
+					id			: that.filetosortid,
 					store		: that.fileToSortStore,
+					features	: [that.fileToSortFeature],
+					border		: false,
 					loadMask	: true,
 					autoFit		: true,
-					/*selModel	: Ext.create('Ext.selection.CheckboxModel',{
-						listeners	: {
-							selectionchange	: function( selModel, selected, eOpts ){
-								Ext.Function.defer(that.selectionChangedHolder,200,that,[selModel, selected, eOpts]);
-							}
-						}
-					}),*/
-					features	: [that.fileToSortFeature],
 					lines		: false,
 					useArrows	: true,
 					tbar		: [{
@@ -328,7 +373,7 @@ Ext.define('qd.mediadb.serieFileSorter', {
 						}
 					},{
 						xtype		: 'tbseparator'
-					},'Folder Name',{
+					},/*{
 						xtype			: 'textfield',
 						name			: 'folder',
 						id				: that.fieldforlderid,
@@ -338,6 +383,37 @@ Ext.define('qd.mediadb.serieFileSorter', {
 						enableKeyEvents: true,
 						listeners		: {
 							keypress		: that.updateSelected
+						}
+					}*/{
+						xtype			: 'label',
+						text			: 'Folder Name',
+						id				: that.fieldlblforlderid,
+					},{
+						xtype			: 'combobox',
+						id				: that.fieldforlderid,
+						queryMode		: 'local',
+						valueField		: 'folder',
+						displayField	: 'folder',
+						width			: 200,
+						typeAhead		: true,
+						minChars		: 2,
+						store			: that.localFolderStore,
+						enableKeyEvents	: true,
+						listeners		: {
+							keypress		: that.updateSelectedItems
+						},
+						listeners: {
+							buffer: 50,
+							change: function() {
+								var store = this.store;
+								store.clearFilter();
+								store.filter({
+									property: 'folder',
+									anyMatch: true,
+									value	: this.getValue()
+								});
+								that.updateSelectedItems();
+							}
 						}
 					},{
 						xtype			: 'label',
@@ -354,10 +430,10 @@ Ext.define('qd.mediadb.serieFileSorter', {
 						displayField	: 'saison',
 						typeAhead		: true,
 						queryMode		: 'local',
-						allowBlank		: false,
+						allowBlank		: true,
 						forceSelection	: true,
 						listeners		: {
-							select			: that.updateSelected
+							select			: that.updateSelectedItems
 						}
 					},{
 						xtype			: 'checkbox',
@@ -366,7 +442,7 @@ Ext.define('qd.mediadb.serieFileSorter', {
 						width			: 20,
 						id				: that.fieldchksaisonid,
 						listeners		: {
-							change			: that.updateSelected
+							change			: that.updateSelectedItems
 						}
 					},{
 						xtype			: 'label',
@@ -383,10 +459,10 @@ Ext.define('qd.mediadb.serieFileSorter', {
 						displayField	: 'lang',
 						typeAhead		: true,
 						queryMode		: 'local',
-						allowBlank		: false,
+						allowBlank		: true,
 						forceSelection	: true,
 						listeners		: {
-							select			: that.updateSelected
+							select			: that.updateSelectedItems
 						}
 					},{
 						xtype			: 'checkbox',
@@ -395,7 +471,7 @@ Ext.define('qd.mediadb.serieFileSorter', {
 						width			: 20,
 						id				: that.fieldchklangid,
 						listeners		: {
-							change			: that.updateSelected
+							change			: that.updateSelectedItems
 						}
 					},'->',{
 						xtype			: 'button',
@@ -409,7 +485,19 @@ Ext.define('qd.mediadb.serieFileSorter', {
 							});
 							if(selected && selected.length>0){
 								Ext.create('qd.mediadb.serieFileSorterConfirmation',{
-									records	: selected
+									records	: selected,
+									sorter	: that,
+									onError	: function(error){
+										Ext.create('widget.uxNotification', {
+											title			: 'Renaming error',
+											position		: 'br',
+											manager			: 'demo1',
+											iconCls			: 'ux-notification-icon-information',
+											autoCloseDelay	: 9000,
+											spacing			: 20,
+											html			: error
+										}).show();
+									}
 								}).show();
 							}
 						}
@@ -460,5 +548,15 @@ Ext.define('qd.mediadb.serieFileSorter', {
 			}]
 		});
 		this.callParent(this);
+		that.fileToSortStore.load({
+			params	: {
+				name	: 'F'
+			}
+		});
 	}
 });
+
+
+
+//<tpl if="typeof rows !== 'undefined'"><tr id="{groupHeaderId}" class="x-grid-group-hd {hdCollapsedCls} {collapsibleClass}"><td class="x-grid-cell" colspan="7" {[this.indentByDepth(values)]}><div class="x-grid-cell-inner"><div class="x-grid-group-title">{collapsed}{[this.renderGroupHeaderTpl(values, parent)]}</div></div></td></tr><tr id="{groupBodyId}" class="x-grid-group-body {collapsedCls}"><td colspan="7">{[this.recurse(values)]}</td></tr></tpl>
+//<tpl if="typeof rows !== 'undefined'"><tr                      class="x-grid-group-hd {hdCollapsedCls}"                   ><td class="x-grid-cell" colspan="7" {[this.indentByDepth(values)]}><div class="x-grid-cell-inner"><div class="x-grid-group-title">{collapsed}Type: {name} ({rows.length} item{[values.rows.length > 1 ? "s" : ""]})</div></div></td></tr><tr id="{viewId}-gp-{name}" class="x-grid-group-body  {collapsedCls}"><td colspan="7">{[this.recurse(values)]}</td></tr></tpl>

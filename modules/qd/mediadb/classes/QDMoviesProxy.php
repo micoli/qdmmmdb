@@ -1,6 +1,7 @@
 <?php
 class QDMoviesProxy extends QDMediaDBProxy{
 	static $threadArr;
+
 	function svc_updateDatabase(){
 		header('content-type:text/html');
 		$sc = new QDHtmlMovieParser;

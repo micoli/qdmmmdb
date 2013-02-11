@@ -1,13 +1,13 @@
 <?
-  class QDServiceLocatorQD implements QDLocator{
-    protected $base = '.';
-    public function __construct($directory='.')    {
-      $this->base = (string) $directory;
-    }
-    public function canLocate($class)    {
-      $path = $this->getPath($class);
-      return file_exists($path);  
-    }
+class QDServiceLocatorQD implements QDLocator{
+	protected $base = '.';
+	public function __construct($directory='.')    {
+	  $this->base = (string) $directory;
+	}
+	public function canLocate($class)    {
+	  $path = $this->getPath($class);
+	  return file_exists($path);
+	}
 	function recursPath($path){
 		//print $path.'<br>';
 		$t = glob($path.'/*',GLOB_ONLYDIR);
@@ -19,7 +19,7 @@
 			}
 		}
 	}
-    public function getPath($class)    {
+	public function getPath($class)    {
 		$this->arrModules = array();
 		$this->recursPath($this->base.'/modules');
 		//$this->arrModules=glob($this->base.'/modules/*',GLOB_ONLYDIR);
@@ -38,7 +38,7 @@
 		}
 		return $rtn;
 	}
-  }
-  QDServiceLocator::attachLocator(new QDServiceLocatorQD(), 'QD');
+}
+QDServiceLocator::attachLocator(new QDServiceLocatorQD(), 'QD');
 
 ?>

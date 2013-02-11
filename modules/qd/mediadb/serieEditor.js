@@ -3,6 +3,10 @@ Ext.define('qd.mediadb.serieEditor', {
 	alias			: 'widget.qd.mediadb.serieEditor',
 	initComponent	: function() {
 		var that = this;
+		that.textchooseserieid = Ext.id();
+		that.gridchooseserieid = Ext.id();
+		that.butchooseserieid = Ext.id();
+
 		Ext.define('chooseserie', {
 			extend	: 'Ext.data.Model',
 			fields	: [
@@ -28,11 +32,11 @@ Ext.define('qd.mediadb.serieEditor', {
 			listeners :{
 				load : function (r){
 					if (this.proxy.reader.jsonData.seriesid){
-						var resQuery = Ext.getCmp('gridchooseserie').store.queryBy(function(record,id){
+						var resQuery = Ext.getCmp(that.gridchooseserieid).store.queryBy(function(record,id){
 							return record.get('seriesid') == this.proxy.reader.jsonData.seriesid;
 						});
 						if(resQuery.length>0){
-							Ext.getCmp('gridchooseserie').getSelectionModel().select(resQuery.items)
+							Ext.getCmp(that.gridchooseserieid).getSelectionModel().select(resQuery.items)
 						}
 					}
 				}
@@ -40,9 +44,9 @@ Ext.define('qd.mediadb.serieEditor', {
 		})
 
 		var searchSerie = function(){
-			Ext.getCmp('gridchooseserie').store.load({
+			Ext.getCmp(that.gridchooseserieid).store.load({
 				params	: {
-					s		: Ext.getCmp('textchooseserie').getValue(),
+					s		: Ext.getCmp(that.textchooseserieid).getValue(),
 					p		: that.record.get('fullname')
 				}
 			});
@@ -56,7 +60,7 @@ Ext.define('qd.mediadb.serieEditor', {
 			items	: [{
 				xtype			: 'grid',
 				region			: 'center',
-				id				: 'gridchooseserie',
+				id				: that.gridchooseserieid,
 				store			: that.chooseserieStore,
 				selType			: 'checkboxmodel',
 				tbar			: [{
@@ -64,7 +68,7 @@ Ext.define('qd.mediadb.serieEditor', {
 					text			: 'Serie : ',
 				},{
 					xtype			: 'textfield',
-					id				: 'textchooseserie',
+					id				: that.textchooseserieid,
 					label			: 'serie',
 					width			: 250,
 					value			: '',
@@ -79,7 +83,7 @@ Ext.define('qd.mediadb.serieEditor', {
 				},{
 					xtype		: 'button',
 					text		: 'search',
-					id			: 'butchooseserie',
+					id			: that.butchooseserieid,
 					listeners	: {
 						click		:  searchSerie
 					}
@@ -93,7 +97,7 @@ Ext.define('qd.mediadb.serieEditor', {
 			buttons :[{
 				text	: 'ok',
 				handler	: function(){
-					var recordSelected = Ext.getCmp('gridchooseserie').getSelectionModel().getSelection();
+					var recordSelected = Ext.getCmp(that.gridchooseserieid).getSelectionModel().getSelection();
 					if (recordSelected && recordSelected[0]){
 						var w = Ext.MessageBox.wait('mise à jour');
 						Ext.AjaxEx.request({
@@ -104,14 +108,14 @@ Ext.define('qd.mediadb.serieEditor', {
 							},
 							success : function(res){
 								var r = Ext.JSON.decode(res.responseText)
-								Ext.getCmp('textchooseserie').setValue(r.results.name);
+								Ext.getCmp(that.textchooseserieid).setValue(r.results.name);
 								that.record.set('tvdb','serie');
 								that.record.expand();
 								Ext.each(that.record.childNodes,function(v){
 									v.set('tvdb','season');
 								});
 								w.hide();
-								refreshNodeColumns(that.record);
+								//refreshNodeColumns(that.record);
 							}
 						});
 						that.hide();
@@ -134,7 +138,7 @@ Ext.define('qd.mediadb.serieEditor', {
 						},
 						success : function(res){
 							var r = Ext.JSON.decode(res.responseText)
-							Ext.getCmp('textchooseserie').setValue(r.results.name);
+							Ext.getCmp(that.textchooseserieid).setValue(r.results.name);
 							searchSerie();
 						}
 					});
