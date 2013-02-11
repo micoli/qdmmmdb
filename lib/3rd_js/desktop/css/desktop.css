@@ -325,3 +325,9 @@
 .user-suit {
     background-image:url(../../shared/icons/fam/user_suit.gif) !important;
 }
+
+.ux-notification-window .x-window-body {
+	text-align: center;
+	padding: 15px 5px 15px 5px;
+	width: 200px;
+}

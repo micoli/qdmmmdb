@@ -1,6 +1,7 @@
 ***multi CD, gérer les cd1, part1
 
-batch dispatcher of tvshow episodes
+file explorer
+settings window
 finalize flat view of folders
 
 deduplication of file/tvshow
@@ -21,6 +22,7 @@ detection tag vostfr/vostf sur ITE
 gerer le captach et le batch de synchro des DESC
 ajouter les favicons des providers de fiche cine
 
+**** batch dispatcher of tvshow episodes
 **** json monitor like firebug + try catch sur eval
 **** handle special file tag (vost, R5 dvdscr, ts, part1 part2)
 **** reprise de nfo géré par qdmmmdb

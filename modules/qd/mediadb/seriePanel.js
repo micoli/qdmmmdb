@@ -52,7 +52,8 @@ Ext.define('qd.mediadb.seriePanel', {
 			},
 			proxy		: {
 				type		: 'ajaxEx',
-				url			: 'p/QDSeriesProxy.getSeriesTree/'
+				url			: 'p/QDSeriesProxy.getSeriesTree/',
+				timeout		: 240*1000
 			},
 			listeners	: {
 				load		: function( store, records, successful, eOpts ){

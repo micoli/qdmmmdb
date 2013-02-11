@@ -43,18 +43,25 @@
 		<link rel="stylesheet" type="text/css" href="skins/css/CheckHeader.css" />
 		<script type="text/javascript" src="lib/3rd_js/commonfunctions.js"></script>
 		<script type="text/javascript" src="lib/3rd_js/css.js"></script>
-		<script type="text/javascript" src="modules/qd/mediadb/serieEditor.js"></script>
-		<script type="text/javascript" src="modules/qd/mediadb/seriePanel.js"></script>
-		<script type="text/javascript" src="modules/qd/mediadb/serieFileSorter.js"></script>
-		<script type="text/javascript" src="modules/qd/mediadb/serieFileSorterConfirmation.js"></script>
+		<script type="text/javascript" src="lib/3rd_js/ux/SelectGrouping.js"></script>
 		<script type="text/javascript" src="lib/3rd_js/ux/Ext.data.ConnectionEx.js"></script>
 		<script type="text/javascript" src="lib/3rd_js/ux/Ext.AjaxEx.js"></script>
 		<script type="text/javascript" src="lib/3rd_js/ux/AjaxEx.js"></script>
 		<script type="text/javascript" src="lib/3rd_js/ux/SimpleIFrame.js"></script>
-		<script type="text/javascript" src="modules/qd/sabnzbd/sabnzbdPanel.js"></script>
 		<script type="text/javascript" src="lib/3rd_js/ux/thumbnailSelector.js"></script>
 		<script type="text/javascript" src="lib/3rd_js/ux/CheckColumn.js"></script>
 		<script type="text/javascript" src="lib/3rd_js/ux/QTPreview.js"></script>
+		<script type="text/javascript" src="lib/3rd_js/ux/base64.js"></script>
+		<script type="text/javascript" src="lib/3rd_js/ux/ImageSelector.js"></script>
+		<script type="text/javascript" src="lib/3rd_js/ux/DataView/LabelEditor.js"></script>
+		<script type="text/javascript" src="lib/3rd_js/ux/DataView/DragSelector.js"></script>
+		<script type="text/javascript" src="lib/3rd_js/ux/Notification.js"></script>
+		<script type="text/javascript" src="lib/3rd_js/extjs4.old/src/layout/container/AbstractFit.js"></script>
+		<script type="text/javascript" src="modules/qd/mediadb/serieEditor.js"></script>
+		<script type="text/javascript" src="modules/qd/mediadb/seriePanel.js"></script>
+		<script type="text/javascript" src="modules/qd/mediadb/serieFileSorter.js"></script>
+		<script type="text/javascript" src="modules/qd/mediadb/serieFileSorterConfirmation.js"></script>
+		<script type="text/javascript" src="modules/qd/sabnzbd/sabnzbdPanel.js"></script>
 		<script type="text/javascript" src="modules/qd/mediadb/movieQTPreview.js"></script>
 		<script type="text/javascript" src="modules/qd/mediadb/movieEditor.js"></script>
 		<script type="text/javascript" src="modules/qd/mediadb/moviePanel.js"></script>
@@ -62,12 +69,7 @@
 		<script type="text/javascript" src="modules/qd/nzb/feeditemdesc.js"></script>
 		<script type="text/javascript" src="modules/qd/nzb/feedtab.js"></script>
 		<script type="text/javascript" src="modules/qd/nzb/NZBPanel.js"></script>
-		<script type="text/javascript" src="lib/3rd_js/ux/base64.js"></script>
-		<script type="text/javascript" src="lib/3rd_js/ux/ImageSelector.js"></script>
-		<script type="text/javascript" src="lib/3rd_js/ux/DataView/LabelEditor.js"></script>
-		<script type="text/javascript" src="lib/3rd_js/ux/DataView/DragSelector.js"></script>
 		<script type="text/javascript" src="modules/qd/mediadb/app.js"></script>
-		<script type="text/javascript" src="lib/3rd_js/extjs4.old/src/layout/container/AbstractFit.js"></script>
 		<!--
 		'Ext.util.MixedCollection',
 		'Ext.menu.Menu',

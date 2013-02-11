@@ -9,7 +9,8 @@ Ext.define('qd.mediadb.serieFileSorterConfirmation', {
 			fields	: [
 				'fullfilename'	,
 				'folder'		,
-				'renamed'
+				'renamed'		,
+				'extension'		,
 			]
 		});
 
@@ -46,21 +47,37 @@ Ext.define('qd.mediadb.serieFileSorterConfirmation', {
 				text	: 'Ok',
 				handler	: function(){
 					var toRename =[];
-
 					that.originaltorenamedStore.each(function(v,k){
-						toRename.push(v.data);
+						toRename.push({
+							'fullfilename'	: Ext.ux.base64.encode(v.data.fullfilename	),
+							'folder'		: Ext.ux.base64.encode(v.data.folder		),
+							'renamed'		: Ext.ux.base64.encode(v.data.renamed		),
+							'extension'		: Ext.ux.base64.encode(v.data.extension		)
+						});
 					});
-
 					if(toRename.length>0){
 						var w = Ext.MessageBox.wait('mise à jour');
 						Ext.AjaxEx.request({
 							url		: 'p/QDSeriesProxy.serieBulkRename/',
+							method	: 'POST',
 							params	: {
 								d		: Ext.JSON.encode(toRename)
 							},
 							success : function(res){
+								res = Ext.JSON.decode(res.responseText);
+								if(!res.ok){
+									var str='';
+									for(k in res.details){
+										k=parseInt(k);
+										if(!res.details[k].ok){
+											str = str+res.details[k].error+'<br/>';
+										}
+									}
+									that.onError.call(that.sorter,str);
+								}
 								w.hide();
 								that.hide();
+								that.sorter.reloadFiles();
 							}
 						});
 					}else{
