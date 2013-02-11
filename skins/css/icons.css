@@ -423,3 +423,15 @@ cursor:hand;
 .sorter-renamed{
 	color			: red;
 }
+.icon-check-all{
+	background:url(./border_all.png) center left no-repeat ;
+	width  : 20px;
+	height : 16px;
+	display: inline-block;
+}
+.icon-check-none{
+	background:url(./border_remove.png) center left no-repeat ;
+	width  : 20px;
+	height : 16px;
+	display: inline-block;
+}
