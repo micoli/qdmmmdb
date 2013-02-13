@@ -2,6 +2,7 @@ Ext.define('qd.mediadb.SettingsPanels.SettingFoo', {
 	extend		: 'MyDesktop.SettingsPanels',
 	settingId	: 'settingfoo',
 	title		: 'Setting Foo',
+	disabled	: true,
 
 	onBarSubItemsSelect:  function(tree, record) {
 		var that = this;
