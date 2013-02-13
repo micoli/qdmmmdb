@@ -1,5 +1,5 @@
 {
 	"mainClass"		: "qd.mediadb.app",
-	"title"			: "Movie Manager",
+	"title"			: "qdmmmdb - <i>M</i>edia <i>M</i>anager",
 	"loaderImg"		: "skins/resources/125.png"
 }
