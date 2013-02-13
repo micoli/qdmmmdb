@@ -21,7 +21,11 @@ class QDMediaDBProxy {
 		$this->arrHiddenmovieRegex			= $GLOBALS['conf']['qdmediadb']['arrHiddenmovie'];
 		$this->arrRegex						= $GLOBALS['conf']['qdmediadb']['arrRegex'];
 		$this->testFilenames				= $GLOBALS['conf']['qdmediadb']['testFilenames'];
-		$this->episodeFormats				= $GLOBALS['conf']['qdmediadb']['episodeFormats'];
+		$episodeFormatsTmp					= $GLOBALS['conf']['qdmediadb']['episodeFormats'];
+		$this->episodeFormats = array();
+		foreach($episodeFormatsTmp as $k=>$v){
+			$this->episodeFormats[$v['rgx']]=$this->episodeFormats[$v['rep']];
+		}
 		$this->arrKeepSpecialTag			= $GLOBALS['conf']['qdmediadb']['arrKeepSpecialTag'];
 
 		$this->folderSeriesList				= $GLOBALS['conf']['qdmediadb_serie']['folderSeriesList'];

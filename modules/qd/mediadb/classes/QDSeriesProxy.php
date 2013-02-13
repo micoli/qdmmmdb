@@ -632,10 +632,10 @@ class QDSeriesProxy extends QDMediaDBProxy{
 		$res['found'] = false;
 		foreach ($this->arrRegex as $k => $rgx) {
 			$res['filename'] = $filename;
-			if (preg_match('`' . $rgx[0] . '`i', $filename, $match)) {
-				$res['saison'	] = ($match[$rgx[1]] * 1);
-				$res['episode'	] = ($match[$rgx[2]] * 1);
-				$res['rgx'		] = $rgx[0];
+			if (preg_match('`' . $rgx['rgx'] . '`i', $filename, $match)) {
+				$res['saison'	] = ($match[$rgx['s']] * 1);
+				$res['episode'	] = ($match[$rgx['e']] * 1);
+				$res['rgx'		] = $rgx['rgx'];
 				$res['rgxnum'	] = $k;
 				$res['rgx_match'] = $match;
 				$res['found'	] = true;

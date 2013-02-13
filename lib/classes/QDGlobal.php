@@ -1,6 +1,7 @@
 <?php
 	define ('QD_PATH_CLASSES'	,dirname(__FILE__).'/');
 	define ('QD_PATH_3RD_PHP'	,realpath(dirname(__FILE__).'/../3rd_php').'/');
+	define ('QD_PATH_3RD_JS'	,realpath(dirname(__FILE__).'/../3rd_js').'/');
 	define ('QD_PATH_ROOT'		,realpath(dirname(__FILE__).'/../../').'/');
 	define ('QD_PATH_MODULES'	,realpath(dirname(__FILE__).'/../../modules').'/');
 
@@ -17,9 +18,9 @@
 	}
 
 	function db($v){
-		print '<pre>';
+		print '<pre>'."\n";
 		print_r($v);
-		print '</pre>';
+		print '</pre>'."\n";
 	}
 
 	function loadConf($path){

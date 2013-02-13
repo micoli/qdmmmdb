@@ -55,7 +55,7 @@ class QDMoviesProxy extends QDMediaDBProxy{
 		}
 		$filename = str_replace("\\'", "'", $path).'/tvdb_all.xml';
 		file_put_contents($filename, $xml);
-		
+
 		return ( array ('results'=> array ('name'=>basename($path), 'title'=>basename($path).' <b>TVDB</b>')));
 	}
 
@@ -101,7 +101,7 @@ class QDMoviesProxy extends QDMediaDBProxy{
 			}
 		}
 	}
-	
+
 	function svc_checkMoviesPicture() {
 		$path = "m:/___films";
 		$paths = glob($path . "/*", GLOB_ONLYDIR);
@@ -879,28 +879,28 @@ class QDMoviesProxy extends QDMediaDBProxy{
 			)
 		);
 		/*
-		  select *
-		  from tvshow
-		  join tvshowlinkpath on tvshow.idShow=tvshowlinkpath.idShow
-		  join path on path.idpath=tvshowlinkpath.idPath
-		  left outer join (
-		  select tvshow.idShow as idShow,count(1) as totalcount,count(files.playCount) as watchedcount
-		  from tvshow
-		  join tvshowlinkepisode on tvshow.idShow = tvshowlinkepisode.idShow
-		  join episode on episode.idEpisode = tvshowlinkepisode.idEpisode
-		  join files on files.idFile = episode.idFile
-		  group by tvshow.idShow)
-		  counts on tvshow.idShow = counts.idShow;
+		select *
+		from tvshow
+		join tvshowlinkpath on tvshow.idShow=tvshowlinkpath.idShow
+		join path on path.idpath=tvshowlinkpath.idPath
+		left outer join (
+		select tvshow.idShow as idShow,count(1) as totalcount,count(files.playCount) as watchedcount
+		from tvshow
+		join tvshowlinkepisode on tvshow.idShow = tvshowlinkepisode.idShow
+		join episode on episode.idEpisode = tvshowlinkepisode.idEpisode
+		join files on files.idFile = episode.idFile
+		group by tvshow.idShow)
+		counts on tvshow.idShow = counts.idShow;
 		 */
 		/*
-		  select *
-		  from tvshow
-		  join tvshowlinkpath on tvshow.idShow=tvshowlinkpath.idShow
-		  join path on path.idpath=tvshowlinkpath.idPath
-		  join tvshowlinkepisode on tvshow.idShow = tvshowlinkepisode.idShow
-		  join episode on episode.idEpisode = tvshowlinkepisode.idEpisode
-		  join files on files.idFile = episode.idFile
-		  where tvshow.c00 like 'Dead%'
+		select *
+		from tvshow
+		join tvshowlinkpath on tvshow.idShow=tvshowlinkpath.idShow
+		join path on path.idpath=tvshowlinkpath.idPath
+		join tvshowlinkepisode on tvshow.idShow = tvshowlinkepisode.idShow
+		join episode on episode.idEpisode = tvshowlinkepisode.idEpisode
+		join files on files.idFile = episode.idFile
+		where tvshow.c00 like 'Dead%'
 		 */
 		//die();
 	}
@@ -969,10 +969,10 @@ class QDMoviesProxy extends QDMediaDBProxy{
 		$res['found'] = false;
 		foreach ($this->arrRegex as $k => $rgx) {
 			$res['filename'] = $filename;
-			if (preg_match('`' . $rgx[0] . '`i', $filename, $match)) {
-				$res['saison'] = ($match[$rgx[1]] * 1);
-				$res['episode'] = ($match[$rgx[2]] * 1);
-				$res['rgx'] = $rgx[0];
+			if (preg_match('`' . $rgx['rgx'] . '`i', $filename, $match)) {
+				$res['saison'] = ($match[$rgx['s']] * 1);
+				$res['episode'] = ($match[$rgx['e']] * 1);
+				$res['rgx'] = $rgx['rgx'];
 				$res['rgxnum'] = $k;
 				$res['rgx_match'] = $match;
 				$res['found'] = true;

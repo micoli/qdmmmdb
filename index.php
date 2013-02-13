@@ -30,17 +30,18 @@
 		<link rel="stylesheet" type="text/css" href="skins/resources/css/ext-all.css" />
 		<link rel="stylesheet" type="text/css" href="skins/css/icons.css" />
 		<link rel="stylesheet" type="text/css" href="skins/css/body.css" />
+		<link rel="stylesheet" type="text/css" href="lib/3rd_js/desktop/css/desktop.css" />
+		<link rel="stylesheet" type="text/css" href="skins/css/CheckHeader.css" />
 		<script type="text/javascript">
 			document.getElementById('loading-msg').innerHTML = 'Loading Core API...';
 		</script>
 		<script type="text/javascript" src="lib/3rd_js/extjs4/bootstrap.js"></script>
 		<script type="text/javascript" src="lib/3rd_js/startup.js"></script>
 		<script type="text/javascript">
-			document.getElementById('loading-msg').innerHTML = 'Loading Application';
-			var QD_GBL_CONF =<?php print json_encode($GLOBALS['conf']);?>;
+			document.getElementById('loading-msg').innerHTML = 'Loading Extensions';
+			var QD_GBL_CONF				=<?php print json_encode($GLOBALS['conf']);?>;
+			var QD_GBL_SETTING_PANELS	=<?php print json_encode(QDSettingPanels::init());?>
 		</script>
-		<link rel="stylesheet" type="text/css" href="lib/3rd_js/desktop/css/desktop.css" />
-		<link rel="stylesheet" type="text/css" href="skins/css/CheckHeader.css" />
 		<script type="text/javascript" src="lib/3rd_js/commonfunctions.js"></script>
 		<script type="text/javascript" src="lib/3rd_js/css.js"></script>
 		<script type="text/javascript" src="lib/3rd_js/ux/SelectGrouping.js"></script>
@@ -57,6 +58,9 @@
 		<script type="text/javascript" src="lib/3rd_js/ux/DataView/DragSelector.js"></script>
 		<script type="text/javascript" src="lib/3rd_js/ux/Notification.js"></script>
 		<script type="text/javascript" src="lib/3rd_js/extjs4.old/src/layout/container/AbstractFit.js"></script>
+		<script type="text/javascript">
+			document.getElementById('loading-msg').innerHTML = 'Loading Application';
+		</script>
 		<script type="text/javascript" src="modules/qd/mediadb/serieEditor.js"></script>
 		<script type="text/javascript" src="modules/qd/mediadb/seriePanel.js"></script>
 		<script type="text/javascript" src="modules/qd/mediadb/serieFileSorter.js"></script>
@@ -70,27 +74,5 @@
 		<script type="text/javascript" src="modules/qd/nzb/feedtab.js"></script>
 		<script type="text/javascript" src="modules/qd/nzb/NZBPanel.js"></script>
 		<script type="text/javascript" src="modules/qd/mediadb/app.js"></script>
-		<!--
-		'Ext.util.MixedCollection',
-		'Ext.menu.Menu',
-		'Ext.view.View',
-		'Ext.window.Window',
-		<script type="text/javascript" src="lib/3rd_js/desktop/js/App.js"></script>
-		<script type="text/javascript" src="lib/3rd_js/desktop/js/Desktop.js"></script>
-		<script type="text/javascript" src="lib/3rd_js/desktop/js/FitAllLayout.js"></script>
-		<script type="text/javascript" src="lib/3rd_js/desktop/js/Module.js"></script>
-		<script type="text/javascript" src="lib/3rd_js/desktop/js/ShortcutModel.js"></script>
-		<script type="text/javascript" src="lib/3rd_js/desktop/js/StartMenu.js"></script>
-		<script type="text/javascript" src="lib/3rd_js/desktop/js/TaskBar.js"></script>
-		<script type="text/javascript" src="lib/3rd_js/desktop/js/Wallpaper.js"></script>
-		<script type="text/javascript" src="lib/3rd_js/desktop/App.js"></script>
-		<script type="text/javascript" src="lib/3rd_js/desktop/genericModule.js"></script>
-		<script type="text/javascript" src="lib/3rd_js/desktop/Settings.js"></script>
-		<script type="text/javascript" src="lib/3rd_js/desktop/SystemStatus.js"></script>
-		<script type="text/javascript" src="lib/3rd_js/desktop/VideoWindow.js"></script>
-		<script type="text/javascript" src="lib/3rd_js/desktop/WallpaperModel.js"></script>
-		-->
-		<script>
-		</script>
 	</body>
 </html>
