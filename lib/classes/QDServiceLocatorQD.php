@@ -2,11 +2,11 @@
 class QDServiceLocatorQD implements QDLocator{
 	protected $base = '.';
 	public function __construct($directory='.')    {
-	  $this->base = (string) $directory;
+	$this->base = (string) $directory;
 	}
 	public function canLocate($class)    {
-	  $path = $this->getPath($class);
-	  return file_exists($path);
+	$path = $this->getPath($class);
+	return file_exists($path);
 	}
 	function recursPath($path){
 		//print $path.'<br>';
