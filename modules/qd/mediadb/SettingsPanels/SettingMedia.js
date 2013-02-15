@@ -3,7 +3,7 @@ Ext.define('qd.mediadb.SettingsPanels.SettingMedia', {
 	settingId	: 'Settingmedia',
 	title		: 'Media',
 
-	onBarSubItemsSelect:  function(tree, record) {
+	onBarSubItemsSelect	: function(tree, record) {
 		var that = this;
 		var panels = Ext.getCmp(that.mainid);
 		panels.items.each(function(v,k){
