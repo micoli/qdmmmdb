@@ -33,7 +33,9 @@ class QDSettingPanels{
 		$aRoot	= explode('.',$root);
 		$file	= array_shift($aRoot);
 		$prms = json_decode(file_get_contents(QD_PATH_ROOT.'conf/'.$file.'.json'));
-
+		header('content-type:text/html');
+		print "<pre>";
+print CW_String::prettyPrint(json_encode(json_decode(file_get_contents(QD_PATH_ROOT.'conf/'.$file.'.json'))));
 		foreach($aRoot as $k){
 			$prms=$prms->$k;
 		}
