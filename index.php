@@ -57,7 +57,15 @@
 		<script type="text/javascript" src="lib/3rd_js/ux/DataView/LabelEditor.js"></script>
 		<script type="text/javascript" src="lib/3rd_js/ux/DataView/DragSelector.js"></script>
 		<script type="text/javascript" src="lib/3rd_js/ux/Notification.js"></script>
+		<script type="text/javascript" src="lib/3rd_js/ux/FileBrowser.js"></script>
+		<script type="text/javascript" src="lib/3rd_js/ux/grid/feature/Tileview.js"></script>
+		<script type="text/javascript" src="lib/3rd_js/ux/grid/plugin/DragSelector.js"></script>
+		<script type="text/javascript" src="lib/3rd_js/ux/container/ButtonSegment.js"></script>
+		<script type="text/javascript" src="lib/3rd_js/ux/container/SwitchButtonSegment.js"></script>
 		<script type="text/javascript" src="lib/3rd_js/extjs4.old/src/layout/container/AbstractFit.js"></script>
+
+		<link rel="stylesheet" type="text/css" href="lib/3rd_js/ux/grid/feature/Tileview.css"></link>
+		<link rel="stylesheet" type="text/css" href="lib/3rd_js/ux/container/ButtonSegment.css"></link>
 		<script type="text/javascript">
 			document.getElementById('loading-msg').innerHTML = 'Loading Application';
 		</script>

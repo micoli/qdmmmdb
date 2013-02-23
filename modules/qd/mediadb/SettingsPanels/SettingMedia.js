@@ -3,7 +3,7 @@ Ext.define('qd.mediadb.SettingsPanels.SettingMedia', {
 	settingId	: 'Settingmedia',
 	title		: 'Media',
 
-	onBarSubItemsSelect	: function(tree, record) {
+	onBarSubItemsSelect:  function(tree, record) {
 		var that = this;
 		var panels = Ext.getCmp(that.mainid);
 		panels.items.each(function(v,k){
@@ -22,16 +22,32 @@ Ext.define('qd.mediadb.SettingsPanels.SettingMedia', {
 		var that					= this;
 		that.mainid					= Ext.id();
 
+		Ext.define('folderPicker',{
+			extend		:'Ext.form.field.Picker',
+			alias		: 'widget.folderPicker',
+			editable	:false,
+			createPicker: function() {
+				return Ext.create('Ext.panel.Panel', {
+				});
+			}
+		});
+
 		Ext.define('config.qdmediadb_movie.folderMoviesList', {
 			extend	: 'Ext.data.Model',
 			config	: {
 				configType	: 'object',
 				columns		: [{
-					header: "name"		,width:  70,	dataIndex: 'name'		, flex	:1	,sortable: true
+					header: "name"		,width:  70,	dataIndex: 'name'		, flex	:1	,sortable: true,editor: {
+						allowBlank	: false
+					}
 				},{
-					header: "path"		,width: 200,	dataIndex: 'path'		, flex	:1	,sortable: true
+					header: "path"		,width: 200,	dataIndex: 'path'		, flex	:1	,sortable: true,editor: {
+						xtype		: 'folderPicker'
+					}
 				},{
-					header: "xbmcpath"	,width: 200,	dataIndex: 'xbmcpath'	, flex	:1	,sortable: true
+					header: "xbmcpath"	,width: 200,	dataIndex: 'xbmcpath'	, flex	:1	,sortable: true,editor: {
+						allowBlank	: false
+					}
 				}]
 			},
 			fields	: [
@@ -46,11 +62,17 @@ Ext.define('qd.mediadb.SettingsPanels.SettingMedia', {
 			config	: {
 				configType	: 'object',
 				columns		: [{
-					header: "name"		,width:  70,	dataIndex: 'name'		, flex	:1	,sortable: true
+					header: "name"		,width:  70,	dataIndex: 'name'		, flex	:1	,sortable: true,editor: {
+						allowBlank: false
+					}
 				},{
-					header: "path"		,width: 200,	dataIndex: 'path'		, flex	:1	,sortable: true
+					header: "path"		,width: 200,	dataIndex: 'path'		, flex	:1	,sortable: true,editor: {
+						allowBlank: false
+					}
 				},{
-					header: "xbmcpath"	,width: 200,	dataIndex: 'xbmcpath'	, flex	:1	,sortable: true
+					header: "xbmcpath"	,width: 200,	dataIndex: 'xbmcpath'	, flex	:1	,sortable: true,editor: {
+						allowBlank: false
+					}
 				}]
 			},
 			fields	: [
@@ -138,7 +160,7 @@ Ext.define('qd.mediadb.SettingsPanels.SettingMedia', {
 			config	: {
 				configType	: 'object',
 				columns		: [{
-					header: "Regex"			,width:  70,	dataIndex: 'rgx'		, flex	:1	,sortable: true
+					header: "Regex"		,width:  70,	dataIndex: 'rgx'		, flex	:1	,sortable: true
 				},{
 					header: "Sea.Pos"	,width:  40,	dataIndex: 's'			, flex	:0	,sortable: true
 				},{
@@ -166,7 +188,6 @@ Ext.define('qd.mediadb.SettingsPanels.SettingMedia', {
 		that.configsId		= {};
 		that.configCards	= [];
 
-
 		for(var k in Ext.ModelManager.types){
 			var mdl = Ext.ModelManager.types[k];
 			var modelName = mdl.getName();
@@ -179,7 +200,8 @@ Ext.define('qd.mediadb.SettingsPanels.SettingMedia', {
 					region			: 'center',
 					id				: that.configsId[cardName],
 					store			: that.createConfigStore(cardName),
-					columns			: mdl.prototype.config.columns
+					columns			: mdl.prototype.config.columns,
+					plugins			: [{ptype: 'cellediting', clicksToEdit: 1}]
 				});
 			}
 		}

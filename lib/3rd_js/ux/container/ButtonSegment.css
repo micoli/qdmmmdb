@@ -1,0 +1,179 @@
+.icon-default {
+	background-attachment: scroll;
+	background-clip: border-box;
+	background-color: transparent;
+	background-image: url("switch.png");
+	background-origin: padding-box;
+	background-position: 0 0 !important;
+	background-repeat: no-repeat;
+	background-size: auto auto;
+}
+.icon-tile {
+	background-attachment: scroll;
+	background-clip: border-box;
+	background-color: transparent;
+	background-image: url("switch.png");
+	background-origin: padding-box;
+	background-position: -16px 0 !important;
+	background-repeat: no-repeat;
+	background-size: auto auto;
+}
+.icon-medium {
+	background-attachment: scroll;
+	background-clip: border-box;
+	background-color: transparent;
+	background-image: url("switch.png");
+	background-origin: padding-box;
+	background-position: -32px 0 !important;
+	background-repeat: no-repeat;
+	background-size: auto auto;
+}
+.ux-explorerview-medium-icon-row {
+	border: medium none;
+	float: left;
+	height: 120px;
+	padding: 1px;
+	width: 114px;
+}
+.x-grid-table.thumbnails .x-grid-row-over .ux-explorerview-medium-icon-row {
+	background: none repeat scroll 0 0 #EFEFEF;
+	border: 1px solid #DDDDDD;
+	padding: 0;
+}
+.ux-explorerview-medium-icon-row .x-grid-row-table {
+	width: 100%;
+}
+.ux-explorerview-medium-icon-row .x-grid-row-table td {
+	text-align: center;
+}
+.ux-explorerview-medium-icon-row .x-grid-row-table td.ux-explorerview-icon {
+	height: 100px;
+	text-align: center;
+	vertical-align: bottom;
+}
+.ux-explorerview-detailed-icon-row {
+	border: 0 solid #FFFFFF;
+	float: left;
+	height: 53px;
+	padding: 1px;
+	width: 200px;
+}
+.x-grid-table.thumbnails .x-grid-row-over .ux-explorerview-detailed-icon-row {
+	background: none repeat scroll 0 0 #EFEFEF;
+	border: 1px solid #DDDDDD;
+	padding: 0;
+}
+.ux-explorerview-detailed-icon-row .x-grid-row-table {
+	width: 100%;
+}
+.ux-explorerview-detailed-icon-row .x-grid-row-table td {
+	vertical-align: bottom;
+}
+.ux-explorerview-detailed-icon-row .x-grid-row-table td.ux-explorerview-icon {
+	height: 50px;
+	text-align: center;
+	vertical-align: middle;
+	width: 56px;
+}
+.ux-explorerview-detailed-icon-row .x-grid-row-table td span {
+	color: #AAAAAA;
+}
+
+.x-sbtn .x-btn
+{
+	margin-right: 0px;
+	margin-left: 0px;
+}
+
+.x-sbtn .x-sbtn-first
+{
+	-moz-border-radius: 3px 0px 0px 3px;
+	-webkit-border-radius: 3px 0px 0px 3px;
+	-o-border-radius: 3px 0px 0px 3px;
+	-ms-border-radius: 3px 0px 0px 3px;
+	-khtml-border-radius: 3px 0px 0px 3px;
+	border-radius: 3px 0px 0px 3px;
+
+	margin-left: 0px;
+}
+
+.x-sbtn .x-sbtn-last
+{
+	-moz-border-radius: 0px 3px 3px 0px;
+	-webkit-border-radius: 0px 3px 3px 0px;
+	-o-border-radius: 0px 3px 3px 0px;
+	-ms-border-radius: 0px 3px 3px 0px;
+	-khtml-border-radius: 0px 3px 3px 0px;
+	border-radius: 0px 3px 3px 0px;
+
+	border-left: none;
+	margin-right: 0px;
+}
+
+.x-sbtn .x-sbtn-item
+{
+	-moz-border-radius: 0px;
+	-webkit-border-radius: 0px;
+	-o-border-radius: 0px;
+	-ms-border-radius: 0px;
+	-khtml-border-radius: 0px;
+	border-radius: 0px;
+
+	border-left: none;
+}
+
+
+.x-sbtn .x-sbtn-item td.x-frame-tl,
+.x-sbtn .x-sbtn-item td.x-frame-ml,
+.x-sbtn .x-sbtn-item td.x-frame-bl,
+.x-sbtn .x-sbtn-item td.x-frame-tr,
+.x-sbtn .x-sbtn-item td.x-frame-mr,
+.x-sbtn .x-sbtn-item td.x-frame-br
+{
+	display: none;
+}
+.x-sbtn .x-sbtn-item td.x-frame-tc,
+.x-sbtn .x-sbtn-item td.x-frame-mc,
+.x-sbtn .x-sbtn-item td.x-frame-bc
+{
+	padding-right: 3px;
+	padding-left: 3px;
+	border-right: 1px solid #D1D1D1;
+}
+
+
+.x-sbtn .x-sbtn-last td.x-frame-tl,
+.x-sbtn .x-sbtn-last td.x-frame-ml,
+.x-sbtn .x-sbtn-last td.x-frame-bl
+{
+	display: none;
+
+}
+.x-sbtn .x-sbtn-last td.x-frame-tc,
+.x-sbtn .x-sbtn-last td.x-frame-mc,
+.x-sbtn .x-sbtn-last td.x-frame-bc
+{
+	padding-left: 3px;
+}
+
+
+
+.x-sbtn .x-sbtn-first td.x-frame-tr,
+.x-sbtn .x-sbtn-first td.x-frame-mr,
+.x-sbtn .x-sbtn-first td.x-frame-br
+{
+	display: none;
+}
+.x-sbtn .x-sbtn-first td.x-frame-tc,
+.x-sbtn .x-sbtn-first td.x-frame-mc,
+.x-sbtn .x-sbtn-first td.x-frame-bc
+{
+	padding-right: 3px;
+	border-right: 1px solid #D1D1D1;
+}
+
+
+.x-sbtn .x-sbtn-single
+{
+
+}
