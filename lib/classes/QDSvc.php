@@ -14,6 +14,7 @@ class QDSvc{
 
 	static function run(){
 		global $argv;
+		date_default_timezone_set('Europe/Paris');
 		if(isset($argv)){
 			$_SERVER['SERVER_NAME']='local';
 			foreach ($argv as $k=>$arg){

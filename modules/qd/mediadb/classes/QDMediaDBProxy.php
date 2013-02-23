@@ -643,5 +643,29 @@ class QDMediaDBProxy {
 		print $this->xbmcHash('smb://user:pass@server/share/directory/') . '<br>' . 'c5559f13' . '<br><br>';
 		print $this->xbmcHash('smb://user:pass@server/share/directory/file.ext') . '<br>' . '8ce36055' . '<br><br>';
 	}
+
+	function svc_copyDevTreeStruct(){
+		$this->copyStruct('/volumes/MOVIES_1TOA'		,'/Users/o.michaud/Documents/tmpStruct.qdmmmdb/I',0);
+		$this->copyStruct('/volumes/MOVIES_1TOB'		,'/Users/o.michaud/Documents/tmpStruct.qdmmmdb/J',0);
+		//$this->copyStruct('/volumes/Desktop_USB3_0_Drive_1'	,'/Users/o.michaud/Documents/tmpStruct.qdmmmdb/Q',0);
+	}
+	function copyStruct($from,$to,$level){
+		$aFrom = glob($from.'/*');
+		foreach($aFrom as $f){
+			$f2 = str_replace($from.'/','',$f);
+			if(is_dir($f)){
+				db(str_repeat("\t", $level+1)."|[D]|".$to.'/'.$f2);
+				mkdir($to.'/'.$f2);
+				$this->copyStruct($from.'/'.$f2,$to.'/'.$f2,$level+1);
+			}else{
+				db(str_repeat("\t", $level+1)."|[F]|".$to.'/'.$f2);
+				if(preg_match('!(xml|jpg|png|tbn|nfo)$!',$f2)){
+					copy($f,$to.'/'.$f2);
+				}else{
+					file_put_contents($to.'/'.$f2, '');
+				}
+			}
+		}
+	}
 }
 ?>
