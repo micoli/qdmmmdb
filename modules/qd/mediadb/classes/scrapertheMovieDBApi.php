@@ -141,7 +141,7 @@ class scrapertheMovieDBApi extends QDHtmlMovieParser{
 		}
 		$arr = object2array(json_decode($this->QDNet->getCacheURL($url,'themoviedbapiv3',$this->cacheminutes,$this->cache)));
 		//db($arr);
-		if(array_key_exists('posters',$arr) && is_array($arr['posters'])){
+		if(is_array($arr) && array_key_exists('posters',$arr) && is_array($arr['posters'])){
 			$str = ''; $sepa = '';
 			foreach($arr['posters'] as $k=>$v){
 				if($k==0)	$res['poster']=$v['image']['url'];
@@ -153,14 +153,13 @@ class scrapertheMovieDBApi extends QDHtmlMovieParser{
 			}
 		}
 
-		if(array_key_exists('backdrops',$arr) && is_array($arr['backdrops'])){
+		if(is_array($arr) && array_key_exists('backdrops',$arr) && is_array($arr['backdrops'])){
 			foreach($arr['backdrops'] as $k=>$v){
 				$res['backdrops'][]=array(
 						'url'		=> 'http://cf2.imgobject.com/t/p/original'.$v['file_path'],
 						'width'		=> $v['width'],
 						'height'	=> $v['height']
 				);
-				;
 			}
 		}
 	}

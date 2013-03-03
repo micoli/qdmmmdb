@@ -1,4 +1,5 @@
 RewriteEngine on
 RewriteRule ^p/(.*)/$  proxy.php?exw_action=$1  [QSA,L]
+RewriteRule ^h/(.*)/$  proxy.php?exw_action=$1&output_mode=html  [QSA,L]
 
 #LimitRequestFieldSize 16380

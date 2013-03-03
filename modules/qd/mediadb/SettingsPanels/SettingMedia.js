@@ -22,7 +22,7 @@ Ext.define('qd.mediadb.SettingsPanels.SettingMedia', {
 		var that					= this;
 		that.mainid					= Ext.id();
 
-		Ext.define('folderPicker',{
+		/*Ext.define('folderPicker',{
 			extend		:'Ext.form.field.Picker',
 			alias		: 'widget.folderPicker',
 			editable	:false,
@@ -30,7 +30,7 @@ Ext.define('qd.mediadb.SettingsPanels.SettingMedia', {
 				return Ext.create('Ext.panel.Panel', {
 				});
 			}
-		});
+		});*/
 
 		Ext.define('config.qdmediadb_movie.folderMoviesList', {
 			extend	: 'Ext.data.Model',
@@ -42,7 +42,7 @@ Ext.define('qd.mediadb.SettingsPanels.SettingMedia', {
 					}
 				},{
 					header: "path"		,width: 200,	dataIndex: 'path'		, flex	:1	,sortable: true,editor: {
-						xtype		: 'folderPicker'
+						xtype		: 'folderpicker'
 					}
 				},{
 					header: "xbmcpath"	,width: 200,	dataIndex: 'xbmcpath'	, flex	:1	,sortable: true,editor: {
