@@ -368,7 +368,20 @@ cursor:hand;
 	background-image:url(../resources/icons/extplorer.png) !important;
 }
 
+.icon-app-win-qd-mediadb-indexer {
+	background-image:url(../resources/icons/qd.mediadb.indexer_16.png) !important;
+}
+.icon-app-qd-mediadb-indexer {
+	background-image:url(../resources/icons/qd.mediadb.indexer.png) !important;
+}
 
+
+.icon-app-win-qd-system-fileExplorer {
+	background-image:url(../resources/icons/extplorer_16.png) !important;
+}
+.icon-app-qd-system-fileExplorer {
+	background-image:url(../resources/icons/extplorer.png) !important;
+}
 .icon-app-win-qd-nzb-NZBPanel{
 	background:url(../resources/icons/qd.nzb.NZBPanel_16.png) center left no-repeat ;
 }

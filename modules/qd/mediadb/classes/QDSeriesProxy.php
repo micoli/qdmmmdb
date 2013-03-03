@@ -315,7 +315,6 @@ class QDSeriesProxy extends QDMediaDBProxy{
 		$debug = false;
 		$t = utf8_decode(base64_decode($_REQUEST['modified']));
 		$arr = json_decode($t, true);
-		//db($arr);die();
 		foreach ($arr as $SeriePath => $Modified) {
 			$SeriePath = base64_decode($SeriePath);
 			$tmp = glob($SeriePath . '/*.*');

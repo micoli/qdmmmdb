@@ -53,6 +53,7 @@
 		<script type="text/javascript" src="lib/3rd_js/ux/CheckColumn.js"></script>
 		<script type="text/javascript" src="lib/3rd_js/ux/QTPreview.js"></script>
 		<script type="text/javascript" src="lib/3rd_js/ux/base64.js"></script>
+		<script type="text/javascript" src="lib/3rd_js/ux/array.js"></script>
 		<script type="text/javascript" src="lib/3rd_js/ux/ImageSelector.js"></script>
 		<script type="text/javascript" src="lib/3rd_js/ux/DataView/LabelEditor.js"></script>
 		<script type="text/javascript" src="lib/3rd_js/ux/DataView/DragSelector.js"></script>
@@ -63,6 +64,7 @@
 		<script type="text/javascript" src="lib/3rd_js/ux/container/ButtonSegment.js"></script>
 		<script type="text/javascript" src="lib/3rd_js/ux/container/SwitchButtonSegment.js"></script>
 		<script type="text/javascript" src="lib/3rd_js/extjs4.old/src/layout/container/AbstractFit.js"></script>
+		<script type="text/javascript" src="lib/3rd_js/ux/folderPicker.js"></script>
 
 		<link rel="stylesheet" type="text/css" href="lib/3rd_js/ux/grid/feature/Tileview.css"></link>
 		<link rel="stylesheet" type="text/css" href="lib/3rd_js/ux/container/ButtonSegment.css"></link>
@@ -82,5 +84,7 @@
 		<script type="text/javascript" src="modules/qd/nzb/feedtab.js"></script>
 		<script type="text/javascript" src="modules/qd/nzb/NZBPanel.js"></script>
 		<script type="text/javascript" src="modules/qd/mediadb/app.js"></script>
+		<script type="text/javascript" src="modules/qd/system/fileExplorer.js"></script>
+		<script type="text/javascript" src="modules/qd/mediadb/indexer.js"></script>
 	</body>
 </html>

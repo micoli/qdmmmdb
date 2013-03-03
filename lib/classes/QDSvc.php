@@ -29,22 +29,34 @@ class QDSvc{
 			$arrArg		= split('\.',$_REQUEST['exw_action']);
 			$objId		= $arrArg[0];
 			$methodName	= $arrArg[1];
-			//if (!array_key_exists($objId,self::$object)){
-			//	die(json_encode(call_user_func(array($t,'svc_'.$methodName))));
-				//print 'object '.$objId.' not in session';
-				//return;
-			//}else{
+
 			self::$object[$objId] = new $objId();
+
 			if (!in_array('svc_'.$methodName,get_class_methods (get_class  (self::$object[$objId])))){
-				print 'method svc_'.$methodName.' not in session object '.$objId.' of class '.get_class  ($objId);
+				print 'method <b>svc_'.$methodName.'</b> not in session object <b>'.$objId.'</b> of class <b>'.get_class  ($objId).'</b>';
 				return;
 			}
-			header("Content-Type: application/json; charset: UTF-8",true);
+			$output_mode = strtolower(array_key_exists_assign_default('output_mode', $_REQUEST, 'json'));
+
+			switch ($output_mode){
+				case 'json' :
+					header("Content-Type: application/json; charset: UTF-8",true);
+				break;
+				case 'html' :
+					header('content-type:text/html');
+				break;
+			}
+
 			$result = call_user_func(array(self::$object[$objId],'svc_'.$methodName));
-			$result = json_encode($result);
-			//$result = strtr ($result, '’', '\'');
+
+			switch ($output_mode){
+				case 'json' :
+					$result = json_encode($result);
+				break;
+				case 'html' :
+				break;
+			}
 			die($result);
-			//}
 		}
 	}
 }
