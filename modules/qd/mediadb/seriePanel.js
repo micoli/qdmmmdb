@@ -45,10 +45,10 @@ Ext.define('qd.mediadb.seriePanel', {
 		that.treeStore = Ext.create('Ext.data.TreeStore',  {
 			model		: 'serie',
 			folderSort	: true,
-			root: {
-				text	: 'Series',
-				id		: 'SeriesRoot',
-				expanded: true
+			root		: {
+				text		: 'Series',
+				id			: 'SeriesRoot',
+				expanded	: true
 			},
 			proxy		: {
 				type		: 'ajaxEx',
@@ -188,6 +188,28 @@ Ext.define('qd.mediadb.seriePanel', {
 					Ext.create('qd.mediadb.serieEditor',{
 						record	: node
 					}).show();
+				}
+			},{
+				text	: 'refresh',
+				handler	: function(a,b){
+					var node = Ext.getCmp(that.treeserieid).getSelectionModel().getSelection()[0];
+					var parent=node;
+					while(parent && !/^::/.test(parent.data.id)){
+						parent=parent.parentNode;
+					}
+					node.removeAll();
+
+					that.treeStore.load({
+						node		: node,
+						params		:{
+							rootDrive	: parent.data.id,
+							refresh		: 1
+						},
+						callback:function(){
+							Ext.getCmp(that.treeserieid).getView().refreshNode(node);
+						}
+					});
+
 				}
 			}]
 		});
