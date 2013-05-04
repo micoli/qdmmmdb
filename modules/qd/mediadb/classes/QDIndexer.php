@@ -122,7 +122,7 @@ class QDIndexer extends QDMediaDBProxy{
 			}else{
 				$d = CW_Files::pathinfo_utf($f);
 				if (preg_match($this->match, $f)){
-					print $from.'/'.$f2."\n";
+					//print $from.'/'.$f2."\n";
 					$sql = 'insert into qdmmmdb.FIL_FILES values("'.addslashes($from).'","'.addslashes($f2).'");';
 					mysql_query($sql);
 					print mysql_error();

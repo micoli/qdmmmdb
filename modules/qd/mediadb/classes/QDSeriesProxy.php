@@ -12,6 +12,17 @@ class QDSeriesProxy extends QDMediaDBProxy{
 		return $path;
 	}
 
+	function getDriveFromName($name){
+		$path=false;
+		foreach($this->folderSeriesList as $v){
+			if ($v['name']==$name){
+				$path=$v;
+				break;
+			}
+		}
+		return $path;
+	}
+
 	function svc_getSerieFromPath() {
 		$path = $_REQUEST['p'];
 		$path = $this->getSeriePath($path);
@@ -208,17 +219,39 @@ class QDSeriesProxy extends QDMediaDBProxy{
 		if (QDSession::_isset('cacheFolderTreeSeries')) {
 			$res = QDSession::_get('cacheFolderTreeSeries');
 		} else {
-			$this->nodeId = 10000;
+			$id=array_key_exists_assign_default('id', $_REQUEST, false);
 			$res = array();
-			foreach ($this->folderSeriesList as $v) {
-				$res[] = array(
-					'text'		=> $v['name'],
-					'fullname'	=> $v['path'],
-					'rootDrive'	=> 1,
-					'children'	=> $this->getSeriesDirectory($v['path'])
-				);
+			if(!$id || $id=='SeriesRoot'){
+				$n=0;
+				foreach ($this->folderSeriesList as $v) {
+					$res[] = array(
+						'text'		=> $v['name'],
+						'fullname'	=> $v['path'],
+						'rootDrive'	=> 1,
+						'leaf'		=> false,
+						'id'		=> '::'.$v['name'],
+						'children'	=> $n==0?$this->getSeriesDirectory($v['path']):array()
+					);
+					$n++;
+				}
+				QDSession::_set('cacheFolderTreeSeries', $res);
+			}else{
+				if(substr($id,0,2)=='::'){
+					$rootDrive=1;
+					$v = $this->getDriveFromName(substr($id,2));
+					$v['id']='::'.$v['name'];
+				}else{
+					$rootDrive=0;
+					$v=array('name'=>basename($id),'path'=>$id,'id'=>$id);
+				}
+				$res = /*array(
+						'text'		=> $v['name'],
+						'fullname'	=> $v['path'],
+						'rootDrive'	=> $rootDrive,
+						'id'		=> $v['id'],
+						'children'	=>*/ $this->getSeriesDirectory($v['path']);
+				//);
 			}
-			QDSession::_set('cacheFolderTreeSeries', $res);
 		}
 		//DB($res);
 		return ($res);
@@ -233,7 +266,7 @@ class QDSeriesProxy extends QDMediaDBProxy{
 				'text'		=> basename($v),
 				'fullname'	=> $v,
 				'rootDrive'	=> 0,
-				'id'		=> $this->nodeId++,
+				'id'		=> $v,
 				'uiProvider'=> 'col',
 				'leaf'		=> false,
 				'tvdb'		=> '',
