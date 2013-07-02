@@ -2,9 +2,9 @@
 /**
  * Classe d'exception QDException
  *
- * Classe étandant la classe Exception native.
- * Permet de récupérer les erreurs et exceptions, et de les traiter (affichage personnalisé,
- * écriture des fichiers de logs XML...)
+ * Classe ��tandant la classe Exception native.
+ * Permet de r��cup��rer les erreurs et exceptions, et de les traiter (affichage personnalis��,
+ * ��criture des fichiers de logs XML...)
  *
  * @author Jb
  */
@@ -51,7 +51,7 @@ class QDException extends Exception
 		*/
 		public $isErreur = -1;
 		/**
-		* Trace personnalisée (au cas où l'on récupère une trace faite par une autre exception pour l'afficher
+		* Trace personnalis��e (au cas o�� l'on r��cup��re une trace faite par une autre exception pour l'afficher
 		*
 		* @var Array
 		*/
@@ -107,7 +107,7 @@ class QDException extends Exception
 		}
 
 		/**
-		 * Retourne la trace personnalisée de l'exception
+		 * Retourne la trace personnalis��e de l'exception
 		 *
 		 * @return integer
 		 */
@@ -235,7 +235,7 @@ class QDException extends Exception
 		if(is_array($Value)){
 			$ReturnValue=' array=>['.$this->Array2String($Value).']';
 		}else{
-			if (!is_object($Value)){
+			if (is_scalar($Value)){
 				$ReturnValue=(strlen($Value)>0)?$Value:$NullValue;
 			}else{
 				$ReturnValue=" Object ";
@@ -247,12 +247,13 @@ class QDException extends Exception
 	}//Array2String
 
 	/**
-	 * Retourne un résumé de l'erreur, avec un bouton pour cacher/voir le corps de l'erreur
+	 * Retourne un r��sum�� de l'erreur, avec un bouton pour cacher/voir le corps de l'erreur
 	 *
 	 * @return string
 	 */
 		public function getSummary()
 		{
+			return "<pre>".print_r($this->getTrace(),true)."</pre>" ;
 	//   if ($this->isErreur != -1 or is_array($this->getQDTrace())){
 				// en cas d'erreur
 				$arrTrace =  ($this->isErreur == -1 ? $this->getQDTrace() : array_reverse($this->getTrace()));
@@ -272,7 +273,7 @@ class QDException extends Exception
 						}
 						print_r($fileArgsStr);
 						$strFunctions.="\n\n\n<br>(<pre>".($fileArgsStr)."</pre>)</b> dans ";
-						$strFunctions.=$file['file']." à la ligne ".$file['line']."<br>";
+						$strFunctions.=$file['file']." �� la ligne ".$file['line']."<br>";
 						$strFunctions.="\n<i>Extrait de la ligne</i> : ";
 						$strFunctions.=highlight_string(trim($extract),true)."<hr>";
 					}
@@ -282,7 +283,7 @@ class QDException extends Exception
 				}
 				$tmpfile=file($this->file);
 				$extrait=$tmpfile[$this->line-1];
-				$string  = "\n<big><font color='red'>".($this->isErreur?"Erreur PHP ".$this->getLevelAsString()." ":"Exception lev�e ")."</font></big>";
+				$string  = "\n<big><font color='red'>".($this->isErreur?"Erreur PHP ".$this->getLevelAsString()." ":"Exception lev���e ")."</font></big>";
 				$string .= "\n(<a href=# onClick='if(document.getElementById(1).style.display== \"block\")document.getElementById(1).style.display=\"none\";else{document.getElementById(1).style.display=\"block\"}'>Voir</a>)<br />\r\n";
 				$string .= "\n<div id=1 style='display:block'><strong>Attention</strong> : ".$this->getMessage().".<br />\r\n";
 				$string.=$strFunctions;
@@ -299,7 +300,7 @@ class QDException extends Exception
  */
 function error_handler($level, $message, $file, $line)
 {
-	// En cas d'erreur que l'on souhaite récupérer, on déclenche une exception
+	// En cas d'erreur que l'on souhaite r��cup��rer, on d��clenche une exception
 			throw new QDException($level, $message, $file, $line, 1);
 
 }
@@ -311,7 +312,7 @@ function error_handler($level, $message, $file, $line)
  */
 function exception_handler($exception)
 {
-		// test de la présence de la méthode getSummary, qui atteste de la présence de la classe QDException
+		// test de la pr��sence de la m��thode getSummary, qui atteste de la pr��sence de la classe QDException
 		if (method_exists($exception, 'getSummary')){
 			//echo "<pre>";print_r(debug_backtrace());
 			// rajouter le test sur la variable blobal
@@ -323,21 +324,21 @@ function exception_handler($exception)
 			}else{
 				die(strip_tags($exception->getSummary()));
 			}
-			
+
 		}
 		else
 		{
-			// En cas de passage ici, cela signifie que notre classe d'exception n'est pas chargée ou qu'une exception
-			// autre que QDException n'a pas été récuperèe
+			// En cas de passage ici, cela signifie que notre classe d'exception n'est pas charg��e ou qu'une exception
+			// autre que QDException n'a pas ��t�� r��cuper��e
 			// donc on lance une exception classique
 			die($exception->getMessage());
 		}
 }
-	// Récupérer la variable globale error_reporting, et la mettre en paramètre de la fonction
+	// R��cup��rer la variable globale error_reporting, et la mettre en param��tre de la fonction
 
 	set_exception_handler("exception_handler");
-	// L'error handler n'est pris que pour les erreurs définis dans le error_reporting
-	set_error_handler("error_handler", error_reporting(E_ERROR | E_WARNING | E_PARSE | E_NOTICE));
+	// L'error handler n'est pris que pour les erreurs d��finis dans le error_reporting
+	set_error_handler("error_handler", error_reporting(E_ERROR | E_WARNING | E_PARSE ));
 
 
 ?>

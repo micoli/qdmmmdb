@@ -14,6 +14,7 @@ class QDSvc{
 
 	static function run(){
 		global $argv;
+		$smfCompatible=true;
 		date_default_timezone_set('Europe/Paris');
 		if(isset($argv)){
 			$_SERVER['SERVER_NAME']='local';
@@ -27,13 +28,18 @@ class QDSvc{
 		error_reporting(E_ERROR | E_WARNING | E_PARSE );
 		if ($_REQUEST['exw_action']){
 			$arrArg		= split('\.',$_REQUEST['exw_action']);
-			$objId		= $arrArg[0];
-			$methodName	= $arrArg[1];
+			if($smfCompatible){
+				$objId		= 'svc'.ucfirst($arrArg[1]);
+				$methodName	= $arrArg[2];
+			}else{
+				$objId		= $arrArg[0];
+				$methodName	= $arrArg[1];
+			}
 
 			self::$object[$objId] = new $objId();
 
-			if (!in_array('svc_'.$methodName,get_class_methods (get_class  (self::$object[$objId])))){
-				print 'method <b>svc_'.$methodName.'</b> not in session object <b>'.$objId.'</b> of class <b>'.get_class  ($objId).'</b>';
+			if (!in_array(($smfCompatible?'pub_':'svc_').$methodName,get_class_methods (get_class  (self::$object[$objId])))){
+				print 'method <b>'.($smfCompatible?'pub_':'svc_').$methodName.'</b> not in session object <b>'.$objId.'</b> of class <b>'.get_class  ($objId).'</b>';
 				return;
 			}
 			$output_mode = strtolower(array_key_exists_assign_default('output_mode', $_REQUEST, 'json'));
@@ -47,7 +53,11 @@ class QDSvc{
 				break;
 			}
 
-			$result = call_user_func(array(self::$object[$objId],'svc_'.$methodName));
+			if($smfCompatible){
+				$result = call_user_func(array(self::$object[$objId],($smfCompatible?'pub_':'svc_').$methodName),$_REQUEST);
+			}else{
+				$result = call_user_func(array(self::$object[$objId],($smfCompatible?'pub_':'svc_').$methodName));
+			}
 
 			switch ($output_mode){
 				case 'json' :

@@ -1,9 +1,9 @@
 <?php
-	define ('QD_PATH_CLASSES'	,dirname(__FILE__).'/');
-	define ('QD_PATH_3RD_PHP'	,realpath(dirname(__FILE__).'/../3rd_php').'/');
-	define ('QD_PATH_3RD_JS'	,realpath(dirname(__FILE__).'/../3rd_js').'/');
-	define ('QD_PATH_ROOT'		,realpath(dirname(__FILE__).'/../../').'/');
-	define ('QD_PATH_MODULES'	,realpath(dirname(__FILE__).'/../../modules').'/');
+	if(!defined('QD_PATH_CLASSES'	))	define ('QD_PATH_CLASSES'	,dirname(__FILE__).'/');
+	if(!defined('QD_PATH_3RD_PHP'	))	define ('QD_PATH_3RD_PHP'	,realpath(dirname(__FILE__).'/../3rd_php').'/');
+	if(!defined('QD_PATH_3RD_JS'	))	define ('QD_PATH_3RD_JS'	,realpath(dirname(__FILE__).'/../3rd_js').'/');
+	if(!defined('QD_PATH_ROOT'		))	define ('QD_PATH_ROOT'		,realpath(dirname(__FILE__).'/../../').'/');
+	if(!defined('QD_PATH_MODULES'	))	define ('QD_PATH_MODULES'	,realpath(dirname(__FILE__).'/../../modules').'/');
 
 	//include "sessions.php";
 	require QD_PATH_CLASSES.'QDServiceLocator.php';
@@ -20,6 +20,7 @@
 	function db($v){
 		print '<pre>'."\n";
 		print_r($v);
+		//print htmlentities(print_r($v,true));
 		print '</pre>'."\n";
 	}
 
