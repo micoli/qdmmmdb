@@ -189,6 +189,7 @@ include('QDException.php');;
 					$arrValues = array_merge($arrValues, $arrWhere);
 				}
 				foreach ($arrValues as $Vkey=> &$Value){
+					if ($this->v['debug']==1) echo '<br/>/bindParam: '.($Vkey) ."  " .htmlentities($Value).'<br/>';//.'/arrWhere:'.implode(',',$arrWhere);
 					if (($Value == 'NULL') or is_null($Value)){
 						$Value = NULL;
 						$this->v['sth']->bindParam($Vkey+1, $Value, PDO::PARAM_NULL);
@@ -227,7 +228,7 @@ include('QDException.php');;
 		 * @return boolean
 		 */
 		function dbInsert($tablename, $arrKeys, $arrValues,$secure=true){
-			if ($secure && !$GLOBALS['gblQD']->isStandAlone()){
+			if ($secure && array_key_exists('gblQD',$GLOBALS) && !$GLOBALS['gblQD']->isStandAlone()){
 				if (!$GLOBALS['gblQD']->v['QDSec']->getUserTableRights($tablename,'I')) return -2;
 			}
 			return $this->dbInsertOrUpdate('INSERT', $tablename, $arrKeys, $arrValues,'','',$secure);
