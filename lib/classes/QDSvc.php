@@ -14,7 +14,11 @@ class QDSvc{
 
 	static function run(){
 		global $argv;
-		$smfCompatible=true;
+		if(defined('SMF_COMPATIBLE')&&SMF_COMPATIBLE){
+			$smfCompatible=true;
+		}else{
+			$smfCompatible=false;
+		}
 		date_default_timezone_set('Europe/Paris');
 		if(isset($argv)){
 			$_SERVER['SERVER_NAME']='local';
