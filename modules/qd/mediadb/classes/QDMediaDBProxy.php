@@ -24,7 +24,7 @@ class QDMediaDBProxy {
 		$episodeFormatsTmp					= $GLOBALS['conf']['qdmediadb']['episodeFormats'];
 		$this->episodeFormats = array();
 		foreach($episodeFormatsTmp as $k=>$v){
-			$this->episodeFormats[$v['rgx']]=$this->episodeFormats[$v['rep']];
+			$this->episodeFormats[$v['rgx']]=$v['rep'];
 		}
 		$this->arrKeepSpecialTag			= $GLOBALS['conf']['qdmediadb']['arrKeepSpecialTag'];
 
