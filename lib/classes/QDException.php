@@ -253,6 +253,7 @@ class QDException extends Exception
 	 */
 		public function getSummary()
 		{
+			print $this->getMessage();
 			return "<pre>".print_r($this->getTrace(),true)."</pre>" ;
 	//   if ($this->isErreur != -1 or is_array($this->getQDTrace())){
 				// en cas d'erreur
