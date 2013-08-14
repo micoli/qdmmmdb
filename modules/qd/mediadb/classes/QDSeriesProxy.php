@@ -231,6 +231,7 @@ class QDSeriesProxy extends QDMediaDBProxy{
 						'leaf'		=> false,
 						'id'		=> '::'.$v['name'],
 						'children'	=> $n==0?$this->getSeriesDirectory($v['path']):array()
+						//'children'	=> $this->getSeriesDirectory($v['path'])
 					);
 					$n++;
 				}
@@ -423,11 +424,15 @@ class QDSeriesProxy extends QDMediaDBProxy{
 
 	function pri_formatEpisodeFilename($formatName,$serieName,$saison,$episode,$episodeName,$extension){
 		$rtn = '';
+		//db($formatName);
+		//db($this->episodeFormats[$formatName]);
 		if (array_key_exists($formatName, $this->episodeFormats)){
 			$rtn = sprintf($this->episodeFormats[$formatName],trim($serieName),trim($saison),trim($episode),$this->cleanFilename($episodeName),trim($extension));
 		}else{
 			$rtn = '';
 		}
+		//db(func_get_args());
+		//db($formatName);
 		//db($this->episodeFormats[$formatName]);
 		//print "->".$rtn."\n";
 		return $rtn;
@@ -435,6 +440,8 @@ class QDSeriesProxy extends QDMediaDBProxy{
 
 	function isEpisodeFileNameOK($currentFileName,$serieName,$saison,$episode,$episodeName,$extension){
 		$isOk = false;
+		//db($this->episodeFormats);
+		//print "AAA<br>";
 		foreach($this->episodeFormats as $formatName=>$formatString){
 			$currentReformatedFilename = $this->pri_formatEpisodeFilename($formatName, $serieName, $saison, $episode, $episodeName, $extension);
 			//print "A1";db(($currentReformatedFilename));
