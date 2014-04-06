@@ -1,4 +1,4 @@
-<?
+<?php
 class QDServiceLocatorQD implements QDLocator{
 	protected $base = '.';
 	public function __construct($directory='.')    {
@@ -37,6 +37,7 @@ class QDServiceLocatorQD implements QDLocator{
 		array_unshift($this->arrModules,realpath($this->base.'/3rd_php'));
 		$rtn='';
 		foreach ($this->arrModules as $k){
+			//db($class."####".$k.'/'.$class.'.php'."####".file_exists($k.'/'.$class.'.php'));
 			if (file_exists($k.'/'.$class.'.php')){
 				$rtn = $k.'/'.$class.'.php';
 				break;
