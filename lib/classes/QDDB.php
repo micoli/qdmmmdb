@@ -12,8 +12,8 @@ include('QDException.php');;
 		/**
 		* [EN]constructor of the main class, nothing to specifie,
 		* [EN]all variables to blank or default
-		* [FR]Constructeur de la classe. Rien √† sp√©cifier,
-		* [FR]toutes les variables initialis√©es √† blank ou par d√©faut
+		* [FR]Constructeur de la classe. Rien ������ sp�����cifier,
+		* [FR]toutes les variables initialis�����es ������ blank ou par d�����faut
 		*
 		* @access public
 		*/
@@ -37,6 +37,7 @@ include('QDException.php');;
 
 			}
 			catch (PDOException $e){
+				print  $e->getMessage();
 				throw new QDException("-1", str_replace($username, "***", $e->getMessage()), $e->getFile(), $e->getLine(), -1, array());
 			}
 		}// }}}
@@ -48,7 +49,7 @@ include('QDException.php');;
 		function __sleep(){
 			unset($this->v['pdoDB']);
 			unset($this->v['sth']);
-			return( array_keys( get_object_vars( &$this ) ) );
+			return( array_keys( get_object_vars( $this ) ) );
 		}
 
 		function __wakeup(){
@@ -58,7 +59,7 @@ include('QDException.php');;
 		}
 
 		/**
-		 * R√©cup√®re le moteur de BD utilis√© avec l'objet en cours
+		 * R�����cup�����re le moteur de BD utilis����� avec l'objet en cours
 		 *
 		 * @return string
 		 */
@@ -67,9 +68,9 @@ include('QDException.php');;
 		}// getDbEngine
 
 		/**
-		 * Execute une requete sur la BD (ne renvoie pas de jeux de r√©sultat, mais le nombre d'enregistrements touch√©es)
+		 * Execute une requete sur la BD (ne renvoie pas de jeux de r�����sultat, mais le nombre d'enregistrements touch�����es)
 		 *
-		 * @param query : requ√™te √† √©xecuter
+		 * @param query : requ������te ������ �����xecuter
 		 *
 		 * @return int
 		 */
@@ -86,7 +87,7 @@ include('QDException.php');;
 					if ($this->v["debug"]==1){
 						$arrError = $this->v["pdoDB"]->errorInfo();
 						throw new QDException ("<b>Erreur SQL ".$arrError[0]."</b> : ".$arrError[2]
-							." <br> Lors de la requÔøΩte : <i>".$query."</i>");
+							." <br> Lors de la requ������te : <i>".$query."</i>");
 					}
 					else
 						return -1;
@@ -105,8 +106,8 @@ include('QDException.php');;
 		 * Effectue la manipulation BD pour effacer un enregistrement
 		 *
 		 * @param tablename : Nom de la table
-		 * @param sqlWhere : Chaine de la clause WHERE (peut √™tre parametr√©e ou non)
-		 * @param arrWhere : En cas de sqlWhere parametr√©e, doit contenir les valeurs correspondantes (avec marqueur de positionnement '?')
+		 * @param sqlWhere : Chaine de la clause WHERE (peut ������tre parametr�����e ou non)
+		 * @param arrWhere : En cas de sqlWhere parametr�����e, doit contenir les valeurs correspondantes (avec marqueur de positionnement '?')
 		 *
 		 * @return boolean
 		 */
@@ -123,7 +124,7 @@ include('QDException.php');;
 					if ($this->v["debug"]==1){
 						$arrError = $this->v['sth']->errorInfo();
 						throw new QDException ('<b>Erreur SQL '.$arrError[0].'</b> : '.$arrError[2]
-							.' <br> Lors de la requÔøΩte : <i>'.$query.'</i>');
+							.' <br> Lors de la requ������te : <i>'.$query.'</i>');
 					}
 					else
 						return -1;
@@ -138,14 +139,14 @@ include('QDException.php');;
 		} // dbDelete
 
 		/**
-		 * Effectue la manipulation BD pour insÔøΩrer/mettre ÔøΩ jour un enregistrement
+		 * Effectue la manipulation BD pour ins������rer/mettre ������ jour un enregistrement
 		 *
 		 * @param action  : INSERT ou UPDATE
 		 * @param tablename : Nom de la table
 		 * @param arrKeys : Tableau contenant la liste des champs
-		 * @param arrValues : Tableau contenant la liste des valeurs (doit √™tre ordonn√© de la m√™me fa√ßon que la liste des champs)
-		 * @param sqlWhere : Chaine de la clause WHERE (peut √™tre parametr√©e ou non)
-		 * @param arrWhere : En cas de sqlWhere parametr√©e, doit contenir les valeurs correspondantes (avec marqueur de positionnement "?")
+		 * @param arrValues : Tableau contenant la liste des valeurs (doit ������tre ordonn����� de la m������me fa�����on que la liste des champs)
+		 * @param sqlWhere : Chaine de la clause WHERE (peut ������tre parametr�����e ou non)
+		 * @param arrWhere : En cas de sqlWhere parametr�����e, doit contenir les valeurs correspondantes (avec marqueur de positionnement "?")
 		 *
 		 * @return boolean
 		 */
@@ -161,7 +162,7 @@ include('QDException.php');;
 					}else{
 						$strKeys='';
 					}
-					// Je cr√©√© la chaine de caract√™res contenant autant de ? que de champs √† ins√©rer
+					// Je cr���������� la chaine de caract������res contenant autant de ? que de champs ������ ins�����rer
 					$strValues = str_pad(' ? ', 3*(count($arrValues)-1)+3, ',? ');
 					$query='INSERT INTO '.$tablename.' '.$strKeys.' VALUES ('.$strValues.')';
 					//print "\n".$query."<br>\n";
@@ -178,14 +179,14 @@ include('QDException.php');;
 				$arrError = $this->v['pdoDB']->errorInfo();
 				if (($arrError[0]+0)>0){
 						throw new QDException ('<b>Erreur SQL '.$arrError[0].'</b> : '.$arrError[2]
-							.' <br> Lors de la requÔøΩte : <i>'.$query.'</i>');
+							.' <br> Lors de la requ������te : <i>'.$query.'</i>');
 
 				}
 				if ($this->v['debug']==1) echo $query . '/arrKeys: '.implode(',',$arrKeys) .'/arrValues:'.implode(',',$arrValues).'/sqlWhere:'.$sqlWhere;//.'/arrWhere:'.implode(',',$arrWhere);
-				// Rajout d'un √©l√©ment vide en t√™te de tableau, car les index de ces tableaux doivent commencer √† 1, et non √† 0
+				// Rajout d'un �����l�����ment vide en t������te de tableau, car les index de ces tableaux doivent commencer ������ 1, et non ������ 0
 				if (is_array($arrWhere)){
 					//array_unshift(&$arrValues, ' ');
-					// Si arrWhere est pr√©sent, on fusionne les deux tableaux
+					// Si arrWhere est pr�����sent, on fusionne les deux tableaux
 					$arrValues = array_merge($arrValues, $arrWhere);
 				}
 				foreach ($arrValues as $Vkey=> &$Value){
@@ -200,11 +201,11 @@ include('QDException.php');;
 				$this->v['sth']->execute();
 				$arrError = $this->v['sth']->errorInfo();
 				if (($arrError[0]+0)>0){
-					//print "<b>Erreur SQL ".$arrError[0]."</b> : ".$arrError[2]." <br> Lors de la requÔøΩte : <i>".$query."</i>";
+					//print "<b>Erreur SQL ".$arrError[0]."</b> : ".$arrError[2]." <br> Lors de la requ������te : <i>".$query."</i>";
 					if ($this->v['debug']==1){
 						$arrError = $this->v['sth']->errorInfo();
 						throw new QDException ('<b>Erreur SQL '.$arrError[0].'</b> : '.$arrError[2]
-							.' <br> Lors de la requÔøΩte : <i>'.$query.'</i>');
+							.' <br> Lors de la requ������te : <i>'.$query.'</i>');
 					}else{
 						return -1;
 					}
@@ -219,11 +220,11 @@ include('QDException.php');;
 		} // dbInsertorUpdate
 
 		/**
-		 * Effectue la manipulation BD pour ins√©rer un enregistrement
+		 * Effectue la manipulation BD pour ins�����rer un enregistrement
 		 *
 		 * @param tablename : Nom de la table
 		 * @param arrKeys : Tableau contenant la liste des champs
-		 * @param arrValues : Tableau contenant la liste des valeurs (doit √™tre ordonn√© de la m√™me fa√ßon que la liste des champs)
+		 * @param arrValues : Tableau contenant la liste des valeurs (doit ������tre ordonn����� de la m������me fa�����on que la liste des champs)
 		 *
 		 * @return boolean
 		 */
@@ -235,25 +236,25 @@ include('QDException.php');;
 		}
 
 		/**
-		 * Effectue la manipulation BD pour mettre ÔøΩ jour un enregistrement
+		 * Effectue la manipulation BD pour mettre ������ jour un enregistrement
 		 *
 		 * @param tablename : Nom de la table
 		 * @param arrKeys : Tableau contenant la liste des champs
-		 * @param arrValues : Tableau contenant la liste des valeurs (doit ÔøΩtre ordonnÔøΩ de la mÔøΩme faÔøΩon que la liste des champs)
-		 * @param sqlWhere : Chaine de la clause WHERE (peut ÔøΩtre parametrÔøΩe ou non)
-		 * @param arrWhere : En cas de sqlWhere parametrÔøΩe, doit contenir les valeurs correspondantes (avec marqueur de positionnement '?')
+		 * @param arrValues : Tableau contenant la liste des valeurs (doit ������tre ordonn������ de la m������me fa������on que la liste des champs)
+		 * @param sqlWhere : Chaine de la clause WHERE (peut ������tre parametr������e ou non)
+		 * @param arrWhere : En cas de sqlWhere parametr������e, doit contenir les valeurs correspondantes (avec marqueur de positionnement '?')
 		 *
 		 * @return boolean
 		 */
 		function dbUpdate($tablename, $arrKeys, $arrValues, $sqlWhere='1', $arrWhere='',$secure=true){
-			if (!$GLOBALS['gblQD']->isStandAlone()){
+			/*if (!$GLOBALS['gblQD']->isStandAlone()){
 				if (!$GLOBALS['gblQD']->v['QDSec']->getUserTableRights($tablename,'U')) return -2;
-			}
+			}*/
 			return $this->dbInsertOrUpdate('UPDATE', $tablename, $arrKeys, $arrValues, $sqlWhere, $arrWhere,$secure);
 		}
 
 		/**
-		 * Retourne le dernier ID inser√©
+		 * Retourne le dernier ID inser�����
 		 *
 		 * @return string
 		 */
@@ -270,12 +271,12 @@ include('QDException.php');;
 		} // getLastId
 
 		/**
-		 * ExÔøΩcute une requete SQL, et renvie un tableau
+		 * Ex������cute une requete SQL, et renvie un tableau
 		 *
-		 * @param query : String contenant la requete parametr√©e
-		 * @param sqlWhere : Chaine de la clause WHERE (peut ÔøΩtre parametrÔøΩe ou non)
-		 * @param arrWhere : Tableau contenant  les valeurs correspondantes (avec marqueur de positionnement '?' ou emplacement nommÔøΩs)
-		 * @param mode : contenu du tableau (par d√©faut √† PDO::FETCH_ASSOC
+		 * @param query : String contenant la requete parametr�����e
+		 * @param sqlWhere : Chaine de la clause WHERE (peut ������tre parametr������e ou non)
+		 * @param arrWhere : Tableau contenant  les valeurs correspondantes (avec marqueur de positionnement '?' ou emplacement nomm������s)
+		 * @param mode : contenu du tableau (par d�����faut ������ PDO::FETCH_ASSOC
 		 *
 		 * @return boolean
 		 */
@@ -286,7 +287,7 @@ include('QDException.php');;
 				$this->v['sth'] = $this->v['pdoDB']->prepare($query);
 				//QDSajax_add_returned_error('query2Array',$query);
 				if (!$this->v['sth']){
-					print $query . '  s\'est mal d√©roul√©e QDDB.php';
+					print $query . '  s\'est mal d�����roul�����e QDDB.php';
 					return array();
 				}
 				if ($this->v['sth']->execute($arrWhere)){
@@ -294,7 +295,7 @@ include('QDException.php');;
 				}else{
 					if ($this->v["debug"]==0){
 						$arrError = $this->v['sth']->errorInfo();
-						throw new QDException ("<b>Erreur SQL ".$arrError[0]."</b> : ".$arrError[2]." <br> Lors de la requ√™te : <i>".$query."</i>");
+						throw new QDException ("<b>Erreur SQL ".$arrError[0]."</b> : ".$arrError[2]." <br> Lors de la requ������te : <i>".$query."</i>");
 					}else{
 						return -1;
 
@@ -304,13 +305,13 @@ include('QDException.php');;
 		}// query2Array
 
 		/**
-		 * ExÔøΩcute une requete SQL, et renvie un tableau
+		 * Ex������cute une requete SQL, et renvie un tableau
 		 *
-		 * @param query : String contenant la requÔøΩte parametrÔøΩe
-		 * @param UnikKey : champ servant de clÔøΩ unique
-		 * @param sqlWhere : Chaine de la clause WHERE (peut ÔøΩtre parametrÔøΩe ou non)
-		 * @param arrWhere : Tableau contenant  les valeurs correspondantes (avec marqueur de positionnement '?' ou emplacement nommÔøΩs)
-		 * @param mode : contenu du tableau (par dÔøΩfaut ÔøΩ PDO::FETCH_ASSOC
+		 * @param query : String contenant la requ������te parametr������e
+		 * @param UnikKey : champ servant de cl������ unique
+		 * @param sqlWhere : Chaine de la clause WHERE (peut ������tre parametr������e ou non)
+		 * @param arrWhere : Tableau contenant  les valeurs correspondantes (avec marqueur de positionnement '?' ou emplacement nomm������s)
+		 * @param mode : contenu du tableau (par d������faut ������ PDO::FETCH_ASSOC
 		 *
 		 * @return boolean
 		 */
@@ -323,14 +324,14 @@ include('QDException.php');;
 		}// query2ArrayUnikKey
 
 		/**
-		 * ExÔøΩcute une requete SQL, et renvie un tableau
+		 * Ex������cute une requete SQL, et renvie un tableau
 		 *
 		 * @param $table : String contenant la table
 		 * @param $ColValue : String contenant le champ de la valeur
-		 * @param UnikKey : champ servant de clÔøΩ unique
-		 * @param sqlWhere : Chaine de la clause WHERE (peut ÔøΩtre parametrÔøΩe ou non)
-		 * @param arrWhere : Tableau contenant  les valeurs correspondantes (avec marqueur de positionnement '?' ou emplacement nommÔøΩs)
-		 * @param mode : contenu du tableau (par dÔøΩfaut ÔøΩ PDO::FETCH_ASSOC
+		 * @param UnikKey : champ servant de cl������ unique
+		 * @param sqlWhere : Chaine de la clause WHERE (peut ������tre parametr������e ou non)
+		 * @param arrWhere : Tableau contenant  les valeurs correspondantes (avec marqueur de positionnement '?' ou emplacement nomm������s)
+		 * @param mode : contenu du tableau (par d������faut ������ PDO::FETCH_ASSOC
 		 *
 		 * @return boolean
 		 */
@@ -342,12 +343,12 @@ include('QDException.php');;
 		}// query2TwoColUnikKey
 
 		/**
-		 * ExÔøΩcute une requete SQL, et stocke un objet PDoStatement
+		 * Ex������cute une requete SQL, et stocke un objet PDoStatement
 		 *
-		 * @param query : String contenant la requÔøΩte parametrÔøΩe
-		 * @param sqlWhere : Chaine de la clause WHERE (peut ÔøΩtre parametrÔøΩe ou non)
-		 * @param arrWhere : Tableau contenant  les valeurs correspondantes (avec marqueur de positionnement '?' ou emplacement nommÔøΩs)
-		 * @param mode : contenu du tableau (par dÔøΩfaut ÔøΩ PDO::FETCH_ASSOC
+		 * @param query : String contenant la requ������te parametr������e
+		 * @param sqlWhere : Chaine de la clause WHERE (peut ������tre parametr������e ou non)
+		 * @param arrWhere : Tableau contenant  les valeurs correspondantes (avec marqueur de positionnement '?' ou emplacement nomm������s)
+		 * @param mode : contenu du tableau (par d������faut ������ PDO::FETCH_ASSOC
 		 *
 		 * @return bool
 		 */
@@ -371,7 +372,7 @@ include('QDException.php');;
 					}
 					if ($this->v['debug']==0){
 						throw new QDException ('<b>Erreur SQL '.$arrError[0].'</b> : '.$arrError[2]
-							.' <br> Lors de la requÔøΩte : <i>'.$query.'</i>');
+							.' <br> Lors de la requ������te : <i>'.$query.'</i>');
 					}
 					else{
 						$this->v['error']=$arrError;
@@ -388,9 +389,9 @@ include('QDException.php');;
 		}// query2Array
 
 		/**
-		 * ExÔøΩcute Fetch sur le PDO Statement stockÔøΩ dans l'objet
+		 * Ex������cute Fetch sur le PDO Statement stock������ dans l'objet
 		 *
-		 * @param mode : mode d'execution du fetch (par dÔøΩfaut rÔøΩcupÔøΩre le mode stockÔøΩ)
+		 * @param mode : mode d'execution du fetch (par d������faut r������cup������re le mode stock������)
 		 *
 		 * @return array
 		 */
@@ -399,7 +400,7 @@ include('QDException.php');;
 				if (!$mode)
 					$mode = $this->v['mode'];
 				if (!$this->v['sth'])
-					throw new QDException('ExÔøΩcution de la fonction QDDB->Fetch() sans avoir prÔøΩ-ÔøΩxÔøΩcutÔøΩ de requÔøΩte', -1);
+					throw new QDException('Ex������cution de la fonction QDDB->Fetch() sans avoir pr������-������x������cut������ de requ������te', -1);
 				return $this->v['sth']->fetch($mode);
 			}
 			catch(PDOException $e){
@@ -413,10 +414,10 @@ include('QDException.php');;
 		/**
 		 * Retourne la valeur de la colonne choisie
 		 *
-		 * @param columnName : String contenant le nom de la colonne cherchÔøΩe
-		 * @param tableName : String contenant le nom de la table concernÔøΩe
-		 * @param sqlWhere : String contenant la chaine WHERE, paramÔøΩtrÔøΩe ou non
-		 * @param arrWhere : Tableau contenant  les valeurs correspondantes (avec marqueur de positionnement "?" ou emplacement nommÔøΩs)
+		 * @param columnName : String contenant le nom de la colonne cherch������e
+		 * @param tableName : String contenant le nom de la table concern������e
+		 * @param sqlWhere : String contenant la chaine WHERE, param������tr������e ou non
+		 * @param arrWhere : Tableau contenant  les valeurs correspondantes (avec marqueur de positionnement "?" ou emplacement nomm������s)
 		 *
 		 * @return string
 		 */
@@ -430,7 +431,7 @@ include('QDException.php');;
 				//print_r(debug_backtrace());
 				$this->v['sth'] = $this->v['pdoDB']->prepare($query);
 				if ($this->v['sth'] == null){
-					throw new QDException("Erreur lors de le requÔøΩte QDFormDB :<br>".$query, -1, array());
+					throw new QDException("Erreur lors de le requ������te QDFormDB :<br>".$query, -1, array());
 				}
 				if ($this->v['sth']->execute($arrWhere)){
 					return $this->v['sth']->fetchColumn();
@@ -449,10 +450,10 @@ include('QDException.php');;
 		/**
 		 * Retourne la moyenne de la colonne choisie
 		 *
-		 * @param columnName : String contenant le nom de la colonne cherchÔøΩe
-		 * @param tableName : String contenant le nom de la table concernÔøΩe
-		 * @param sqlWhere : String contenant la chaine WHERE, paramÔøΩtrÔøΩe ou non
-		 * @param arrWhere : Tableau contenant  les valeurs correspondantes (avec marqueur de positionnement '?' ou emplacement nommÔøΩs)
+		 * @param columnName : String contenant le nom de la colonne cherch������e
+		 * @param tableName : String contenant le nom de la table concern������e
+		 * @param sqlWhere : String contenant la chaine WHERE, param������tr������e ou non
+		 * @param arrWhere : Tableau contenant  les valeurs correspondantes (avec marqueur de positionnement '?' ou emplacement nomm������s)
 		 *
 		 * @return string
 		 */
@@ -470,10 +471,10 @@ include('QDException.php');;
 		/**
 		 * Retourne le minimum de la colonne choisie
 		 *
-		 * @param columnName : String contenant le nom de la colonne cherchÔøΩe
-		 * @param tableName : String contenant le nom de la table concernÔøΩe
-		 * @param sqlWhere : String contenant la chaine WHERE, paramÔøΩtrÔøΩe ou non
-		 * @param arrWhere : Tableau contenant  les valeurs correspondantes (avec marqueur de positionnement '?' ou emplacement nommÔøΩs)
+		 * @param columnName : String contenant le nom de la colonne cherch������e
+		 * @param tableName : String contenant le nom de la table concern������e
+		 * @param sqlWhere : String contenant la chaine WHERE, param������tr������e ou non
+		 * @param arrWhere : Tableau contenant  les valeurs correspondantes (avec marqueur de positionnement '?' ou emplacement nomm������s)
 		 *
 		 * @return string
 		 */
@@ -491,10 +492,10 @@ include('QDException.php');;
 		/**
 		 * Retourne le maximum de la colonne choisie
 		 *
-		 * @param columnName : String contenant le nom de la colonne cherchÔøΩe
-		 * @param tableName : String contenant le nom de la table concernÔøΩe
-		 * @param sqlWhere : String contenant la chaine WHERE, paramÔøΩtrÔøΩe ou non
-		 * @param arrWhere : Tableau contenant  les valeurs correspondantes (avec marqueur de positionnement '?' ou emplacement nommÔøΩs)
+		 * @param columnName : String contenant le nom de la colonne cherch������e
+		 * @param tableName : String contenant le nom de la table concern������e
+		 * @param sqlWhere : String contenant la chaine WHERE, param������tr������e ou non
+		 * @param arrWhere : Tableau contenant  les valeurs correspondantes (avec marqueur de positionnement '?' ou emplacement nomm������s)
 		 *
 		 * @return string
 		 */
@@ -513,10 +514,10 @@ include('QDException.php');;
 		/**
 		 * Retourne la somme des valeurs de la colonne choisie
 		 *
-		 * @param columnName : String contenant le nom de la colonne cherchÔøΩe
-		 * @param tableName : String contenant le nom de la table concernÔøΩe
-		 * @param sqlWhere : String contenant la chaine WHERE, paramÔøΩtrÔøΩe ou non
-		 * @param arrWhere : Tableau contenant  les valeurs correspondantes (avec marqueur de positionnement '?' ou emplacement nommÔøΩs)
+		 * @param columnName : String contenant le nom de la colonne cherch������e
+		 * @param tableName : String contenant le nom de la table concern������e
+		 * @param sqlWhere : String contenant la chaine WHERE, param������tr������e ou non
+		 * @param arrWhere : Tableau contenant  les valeurs correspondantes (avec marqueur de positionnement '?' ou emplacement nomm������s)
 		 *
 		 * @return string
 		 */
@@ -535,9 +536,9 @@ include('QDException.php');;
 		/**
 		 * Retourne le nombre de ligne
 		 *
-		 * @param tableName : String contenant le nom de la table concernÔøΩe
-		 * @param sqlWhere : String contenant la chaine WHERE, paramÔøΩtrÔøΩe ou non
-		 * @param arrWhere : Tableau contenant  les valeurs correspondantes (avec marqueur de positionnement '?' ou emplacement nommÔøΩs)
+		 * @param tableName : String contenant le nom de la table concern������e
+		 * @param sqlWhere : String contenant la chaine WHERE, param������tr������e ou non
+		 * @param arrWhere : Tableau contenant  les valeurs correspondantes (avec marqueur de positionnement '?' ou emplacement nomm������s)
 		 *
 		 * @return string
 		 */
@@ -610,7 +611,7 @@ include('QDException.php');;
 		}
 
 		/**
-		 * Renvoie un tableau associatif contentnant le dÔøΩtail de la table passÔøΩ en paramÔøΩtre
+		 * Renvoie un tableau associatif contentnant le d������tail de la table pass������ en param������tre
 		 *
 		 * @param tablename : nom de la table voulue
 		 *
@@ -647,7 +648,7 @@ include('QDException.php');;
 		} // DDLGetFields
 
 		/**
-		 * Renvoie un tableau associatif contentnant la liste des tables de la base sur laquelle on est connectÔøΩ
+		 * Renvoie un tableau associatif contentnant la liste des tables de la base sur laquelle on est connect������
 		 *
 		 * @return array
 		 */
@@ -674,7 +675,7 @@ include('QDException.php');;
 			}
 		} // DDLGetTables
 		/**
-		 * Renvoie un tableau associatif contentnant la liste des tables de la base sur laquelle on est connectÔøΩ
+		 * Renvoie un tableau associatif contentnant la liste des tables de la base sur laquelle on est connect������
 		 *
 		 * @return array
 		 */

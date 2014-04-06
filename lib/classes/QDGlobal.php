@@ -134,6 +134,10 @@
 		return $d;
 	}
 
+	function akead($k,$o,$d){
+		return array_key_exists_assign_default($k,$o,$d);
+	}
+
 	/**
 	 * Converts a simpleXML element into an array. Preserves attributes.<br/>
 	 * You can choose to get your elements either flattened, or stored in a custom
