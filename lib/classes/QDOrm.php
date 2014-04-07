@@ -50,6 +50,11 @@ class QDOrm{
 	 * @throws Exception
 	 */
 	public function get($o){
+		$debugsql=false;
+		if(akead('debugsql',$o,false)){
+			$debugsql=true;
+			unset($o['debugsql']);
+		}
 		$o = array_merge(array(
 				'cols'	=> array('*'),
 				'where'	=> array()
@@ -110,7 +115,9 @@ class QDOrm{
 				$stmt->bindValue($key, $val);
 			}
 		}
-		//db($query);
+		if($debugsql){
+			db($query);
+		}
 		//db($aVal);
 
 		$this->getConnection()->setAttribute(PDO::ATTR_CASE,PDO::CASE_LOWER);
