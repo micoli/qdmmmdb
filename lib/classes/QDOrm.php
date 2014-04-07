@@ -1,4 +1,9 @@
 <?php
+/**
+select group_concat(concat("'",c.COLUMN_NAME,"'") order by c.ORDINAL_POSITION separator "\t\t\t\t\t,\n")
+from information_schema.COLUMNS c
+where c.TABLE_NAME='client' and c.TABLE_SCHEMA='test'
+ */
 class QDOrm{
 	static $dbCnxs=array();
 
