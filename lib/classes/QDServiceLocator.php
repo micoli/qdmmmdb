@@ -83,7 +83,7 @@
 	 * @author Chris Corbyn
 	 * @param string class
 	 */
-	function __autoload($class){
+	function qd__autoload($class){
 		if (!QDServiceLocator::$locatorsLoaded){
 			foreach(glob(dirname(__FILE__).'/QDServiceLocator*.php') as $k){
 				if (basename($k)!=basename(__FILE__)){
@@ -95,5 +95,5 @@
 		$locator = new QDServiceLocator();
 		$locator->load($class);
 	}
-
+	spl_autoload_register('qd__autoload');
 ?>

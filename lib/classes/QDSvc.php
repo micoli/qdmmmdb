@@ -55,6 +55,9 @@ class QDSvc{
 				case 'html' :
 					header('content-type:text/html');
 				break;
+				case 'htmltable' :
+					header('content-type:text/html');
+				break;
 			}
 
 			if($smfCompatible){
@@ -68,6 +71,9 @@ class QDSvc{
 					$result = json_encode($result);
 				break;
 				case 'html' :
+				break;
+				case 'htmltable' :
+					$result = QDMisc::array2htmltable(array_key_exists('htmltablekey',$_REQUEST)?$result[$_REQUEST['htmltablekey']]:$result);
 				break;
 			}
 			die($result);

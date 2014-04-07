@@ -8,6 +8,7 @@
 	//include "sessions.php";
 	require QD_PATH_CLASSES.'QDServiceLocator.php';
 	require QD_PATH_CLASSES.'QDSvc.php';
+	require QD_PATH_3RD_PHP.'FirePHPCore/fb.php';
 
 	function url_exists($url){
 		if(!strstr($url, "http://")) {
