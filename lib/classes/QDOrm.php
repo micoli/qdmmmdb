@@ -3,6 +3,34 @@
 select group_concat(concat("'",c.COLUMN_NAME,"'") order by c.ORDINAL_POSITION separator "\t\t\t\t\t,\n")
 from information_schema.COLUMNS c
 where c.TABLE_NAME='client' and c.TABLE_SCHEMA='test'
+
+function pub_testOrm($o){
+	header('Content-Type: text/html, charset=utf-8');
+
+	$oIPR = new IPR_IMPORTED_PROSPECT();
+	$r = $oIPR->set(array(
+		'IPR_COMPANY_NAME'		=> "eezeze",
+		'IPR_COMPANY_NUMBER'	=> "eezeze"
+	));
+	db($r);
+	$r = $oIPR->set(array(
+		'IPR_ID'				=> 3,
+		'IPR_COMPANY_NAME'		=> "aaa",
+		'IPR_COMPANY_NUMBER'	=> "bbb"
+	));
+	db($r);
+	$r = $oIPR->get(array(
+		'cols'	=> array('*'),
+		'where'	=> array(
+			'IPR_COMPANY_NAME'		=> array('IN',array("aaa")),
+			'OPE1'					=> array("SQL","IPR_COMPANY_NAME like '%a%'"),
+		),
+		'start' => 0,
+		'limit' => 2,
+	));
+	db($r);
+}
+
  */
 class QDOrm{
 	static $dbCnxs=array();
@@ -17,6 +45,11 @@ class QDOrm{
 
 	public function getConnectionName(){}
 
+	/**
+	 *
+	 * @param array $arr
+	 * @return boolean
+	 */
 	private function isIndexedArray($arr){
 		return array_keys($arr) == range(0, count($arr) - 1);
 	}
@@ -68,8 +101,8 @@ class QDOrm{
 		$cols='';
 		$sepa='';
 		foreach($o['cols'] as $k=>$v){
-			$cols.=$this->_map($v);
-			$sepa=' , ';
+			$cols.= $sepa.$this->_map($v);
+			$sepa =' , ';
 		}
 
 		$query= sprintf("SELECT %s \nFROM %s TFROM \nWHERE ",$cols,$this->table);
