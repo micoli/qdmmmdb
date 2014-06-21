@@ -42,6 +42,14 @@ class QDServiceLocatorQD implements QDLocator{
 				$rtn = $k.'/'.$class.'.php';
 				break;
 			}
+			//namespaceClassName
+			$simpleClass=explode('\\',$class);
+			$simpleClass=array_pop($simpleClass);
+			//db(array_pop(explode('\\',$class))."####".$k.'/'.$class.'.php'."####".file_exists($k.'/'.$class.'.php'));
+			if (file_exists($k.'/'.$simpleClass.'.php')){
+				$rtn = $k.'/'.$simpleClass.'.php';
+				break;
+			}
 		}
 		return $rtn;
 	}

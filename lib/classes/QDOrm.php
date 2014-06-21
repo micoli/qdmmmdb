@@ -1,5 +1,5 @@
 <?php
-/**
+/*
 select group_concat(concat("'",c.COLUMN_NAME,"'") order by c.ORDINAL_POSITION separator "\t\t\t\t\t,\n")
 from information_schema.COLUMNS c
 where c.TABLE_NAME='client' and c.TABLE_SCHEMA='test'
@@ -47,9 +47,8 @@ function pub_testOrm($o){
 		'limit'		=> 2,
 	));
 }
-
  */
-class QDOrm{
+class QDOrm {
 	static $dbCnxs=array();
 
 	public $table	= null;
@@ -84,6 +83,9 @@ class QDOrm{
 		$this->map=array();
 		foreach($this->fields as $col){
 			$this->map[strtolower($col)]=$col;
+		}
+		if(!is_array($this->pk)){
+			$this->pk=array($this->pk);
 		}
 	}
 
@@ -127,6 +129,14 @@ class QDOrm{
 					$operator=false;
 				}
 
+				if($operator== 'BETWEEN' ){
+					$tmp=sprintf('%s BETWEEN :prm_col_%s and :prm_col_%s',$this->_map($col),count($aVal),count($aVal)+1);
+					$aVal[':prm_col_'.count($aVal)] = $val[1];
+					$aVal[':prm_col_'.count($aVal)] = $val[2];
+					$val[1] = $tmp;
+					$operator=false;
+				}
+
 				if($operator){
 					$query .= sprintf("%s %s(%s %s :prm_col_%s) ",$sepa,$indent,$this->_map($col),$operator,count($aVal));
 					$aVal[':prm_col_'.count($aVal)] = $val[1];
@@ -143,7 +153,7 @@ class QDOrm{
 	 * @param unknown $o
 	 * @throws Exception
 	 */
-	public function get($o){
+	public function get($o,$options=array()){
 		$debugsql=false;
 		if(akead('debugsql',$o,false)){
 			$debugsql=true;
@@ -204,9 +214,18 @@ class QDOrm{
 		$this->getConnection()->setAttribute(PDO::ATTR_CASE,PDO::CASE_LOWER);
 
 		if ($stmt->execute()){
-			return $stmt->fetchAll(PDO::FETCH_ASSOC);
+			if(akead('uniqKey',$options,false)){
+				$tmp		= $stmt->fetchAll(PDO::FETCH_ASSOC);
+				$aResult	= array();
+				foreach($tmp as $v){
+					$aResult[$v[strtolower($options['uniqKey'])]]=$v;
+				}
+				return $aResult;
+			}else{
+				return $stmt->fetchAll(PDO::FETCH_ASSOC);
+			}
 		}else{
-			throw new Exception(json_encode($stmt->errorInfo()),1);
+			throw new Exception($query.'; / '.json_encode($stmt->errorInfo()),1);
 		}
 	}
 
@@ -231,28 +250,45 @@ class QDOrm{
 		}
 		$this->getConnection()->setAttribute(PDO::ATTR_EMULATE_PREPARES, true);
 		$o=array_change_key_case($o,CASE_LOWER);
-		$pk=strtolower($this->pk);
-		if(array_key_exists($pk,$o) && !is_null($o[$pk])){
+		$bAllPkPresent=true;
+		$pkVal=array();
+		$aPk=array();
+		foreach($this->pk as $key){
+			$aPk[]=strtolower($key);
+			$key=strtolower($key);
+			if(!array_key_exists($key,$o) || is_null($o[$key])){
+				$bAllPkPresent=false;
+			}else{
+				$pkVal[$key] = $o[$key];
+			}
+		}
+		$duplicateQuery='';
+		if($bAllPkPresent){
 			$mode	='update';
-			$query	= sprintf("UPDATE %s  \nSET ",$this->table);
-			$pkVal	= $o[$pk];
+			$query	= sprintf("INSERT INTO %s  \nSET ",$this->table);
 		}else{
-			$mode='insert';
+			$mode	='insert';
 			$query	= sprintf("INSERT INTO  %s \nSET ",$this->table);
 		}
 
 		$sepa	= '';
 		foreach($o as $col=>$val){
-			if ($mode=='insert'|| ($mode=='update' && $col!=$pk)){
-				$query .= sprintf("%s \n%s=:%s ",$sepa,$this->_map($col),strtolower($col));
-				$sepa	= ',';
+			$query .= sprintf("%s \n\t%s=:%s ",$sepa,$this->_map($col),strtolower($col));
+			$duplicateQuery .= sprintf("%s \n\t%s=:%s ",$sepa,$this->_map($col),strtolower($col));
+			$sepa	= ',';
+			if ($mode=='insert'|| ($mode=='update' && !in_array($col,$aPk))){
 			}
 		}
 
 		if ($mode=='update'){
-			$query .= sprintf(" \nwhere \n%s=:%s ",$this->_map($pk),$pk);
+			/*$query .= sprintf(" \nWHERE ");
+			$sepa='';
+			foreach($pkVal as $key=>$val){
+				$query .= sprintf(" \n  %s \n\t(%s=:%s) ",$sepa,$this->_map($key),$key);
+				$sepa=' AND ';
+			}*/
+			$query .= "\n\nON DUPLICATE KEY UPDATE \n".$duplicateQuery;
 		}
-
 		$stmt = $this->getConnection()->prepare($query);
 		foreach($o as $col=>$val){
 			if (($val == 'NULL') or is_null($val)){
@@ -262,13 +298,13 @@ class QDOrm{
 				$stmt->bindValue(':'.$col, $val);
 			}
 		}
-
+		//db($query);//die();
 		if($debugsql){
 			fb($query);
 		}
 		if ($stmt->execute()){
 			if($mode=='update'){
-				return $pkVal;
+				return count($pkVal)==1?array_pop($pkVal):$pkVal;
 			}else{
 				return $this->getConnection()->lastInsertId();
 			}
