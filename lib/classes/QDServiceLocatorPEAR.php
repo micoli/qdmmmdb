@@ -1,17 +1,20 @@
 <?php
 class QDServiceLocatorPEAR implements QDLocator{
 	protected $base = '.';
+
 	public function __construct($directory='.')  {
-	  $this->base = (string) $directory;
+		$this->base = (string) $directory;
 	}
+
 	public function canLocate($class)  {
-	  $path = $this->getPath($class);
-	  if (file_exists($path)) return true;
-	  else return false;
+		$path = $this->getPath($class);
+		if (file_exists($path)) return true;
+		else return false;
 	}
+
 	public function getPath($class)  {
-	  return $this->base . '/' . str_replace('_', '/', $class) . '.php';
+		return $this->base . '/' . str_replace('_', '/', $class) . '.php';
 	}
 }
-QDServiceLocator::attachLocator(new QDServiceLocatorPEAR(), 'PEAR');
+QDServiceLocator::attachLocator(new QDServiceLocatorPEAR('/usr/local/pear/share/pear'), 'PEAR');
 ?>

@@ -19,10 +19,14 @@
 	}
 
 	function db($v){
-		print '<pre>'."\n";
+		if(php_sapi_name()!='cli') print '<pre>'."\n";
 		print_r($v);
 		//print htmlentities(print_r($v,true));
-		print '</pre>'."\n";
+		if(php_sapi_name()!='cli'){
+			print '</pre>'."\n";
+		}else{
+			print "\n";
+		}
 	}
 
 	function loadConf($path){
