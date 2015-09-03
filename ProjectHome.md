@@ -1,0 +1,1 @@
+Movies/Series file manager, automatical nzb download, rss updater and parser/formater, scrappers and sabnzbd integration. xbmc updater
