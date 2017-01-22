@@ -8,6 +8,10 @@ strong{
 font-weight:bold;
 }
 
-.tree-icon-edit {  height:10px; width:8px; background-image:url(../resources/application_edit.png) ! important;}
-.tree-icon-application-go {  background-image:url(./application_go.png) ! important;}
-.tree-icon-view-movie {  background-image:url(./application_side_expand.png) ! important;}
+.tree-icon-edit {  height:10px; width:8px; background-image:url(../resources/application_edit.png) !important;}
+.tree-icon-application-go {  background-image:url(./application_go.png) !important;}
+.tree-icon-view-movie {  background-image:url(./application_side_expand.png) !important;}
+
+.seasonHeight{
+	height:40px;
+}

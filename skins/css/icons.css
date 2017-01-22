@@ -412,6 +412,12 @@ cursor:hand;
 .icon-app-qd-mediadb-serieFileSorter{
 	background:url(../resources/icons/qd.mediadb.serieFileSorter.png) center left no-repeat ;
 }
+.icon-app-win-qd-mediadb-xbmcDB{
+	background:url(../resources/icons/qd.mediadb.xbmcDB_16.png) center left no-repeat ;
+}
+.icon-app-qd-mediadb-xbmcDB{
+	background:url(../resources/icons/qd.mediadb.xbmcDB.png) center left no-repeat ;
+}
 .icon-app-win-qd-system-SystemStatus{
 	background:url(../resources/icons/MyDesktop.SystemStatus_16.png) center left no-repeat ;
 }
