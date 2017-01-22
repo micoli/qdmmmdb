@@ -37,6 +37,7 @@
 		<link rel="stylesheet" type="text/css" href="skins/css/body.css" />
 		<link rel="stylesheet" type="text/css" href="lib/3rd_js/desktop/css/desktop.css" />
 		<link rel="stylesheet" type="text/css" href="skins/css/CheckHeader.css" />
+		<link rel="stylesheet" type="text/css" href="skins/flags/language-flags/icons.css" />
 		<script type="text/javascript">
 			document.getElementById('loading-msg').innerHTML = 'Loading Core API...';
 		</script>
@@ -71,6 +72,10 @@
 		<script type="text/javascript" src="lib/3rd_js/extjs4.old/src/layout/container/AbstractFit.js"></script>
 		<script type="text/javascript" src="lib/3rd_js/ux/folderPicker.js"></script>
 
+		<script type="text/javascript" src="lib/3rd_js/stomp/ReconnectingSockJS.js"></script>
+		<script type="text/javascript" src="lib/3rd_js/stomp/sockjs-0.3.min.js"></script>
+		<script type="text/javascript" src="lib/3rd_js/stomp/stomp.js"></script>
+
 		<link rel="stylesheet" type="text/css" href="lib/3rd_js/ux/grid/feature/Tileview.css"></link>
 		<link rel="stylesheet" type="text/css" href="lib/3rd_js/ux/container/ButtonSegment.css"></link>
 		<script type="text/javascript">
@@ -91,5 +96,7 @@
 		<script type="text/javascript" src="modules/qd/mediadb/app.js"></script>
 		<script type="text/javascript" src="modules/qd/system/fileExplorer.js"></script>
 		<script type="text/javascript" src="modules/qd/mediadb/indexer.js"></script>
+		<script type="text/javascript" src="modules/qd/mediadb/xbmcDB.js"></script>
+		<script type="text/javascript" src="modules/qd/mediadb/xbmcDBSeriesPanel.js"></script>
 	</body>
 </html>
