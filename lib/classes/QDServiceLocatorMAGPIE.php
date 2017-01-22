@@ -1,4 +1,4 @@
-<?php
+<?
 class QDServiceLocatorMAGPIE implements QDLocator{
 	protected $base = '.';
 	public function __construct($directory='.')  {

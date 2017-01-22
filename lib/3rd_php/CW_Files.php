@@ -17,9 +17,9 @@ class CW_Files {
 
 		if (strpos($basename, '.') !== false && is_file($path)){
 			$extension		= end(explode('.', $path));
-			$filename		= substr($basename, 0, strlen($basename) - strlen($extension) - 1);
+			 $filename		= substr($basename, 0, strlen($basename) - strlen($extension) - 1);
 		}else{
-			$extension		= '';
+			 $extension		= '';
 			$filename		= $basename;
 		}
 
@@ -32,14 +32,6 @@ class CW_Files {
 			'extension'	=> $extension,
 			'filename'	=> $filename
 		);
-	}
-	static function rglob($pattern='*', $path='', $flags = 0) {
-		$paths=glob($path.'*', GLOB_MARK|GLOB_ONLYDIR|GLOB_NOSORT);
-		$files=glob($path.$pattern, $flags);
-		foreach ($paths as $path) {
-			$files=array_merge($files,self::rglob($pattern, $path, $flags));
-		}
-		return $files;
 	}
 }
 ?>

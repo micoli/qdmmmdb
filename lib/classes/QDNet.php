@@ -7,10 +7,12 @@
 			set_time_limit(126);
 			if($GLOBALS['conf']['qdnet']['usecurl'] && $useCurl){
 				$ch = curl_init();
-				$timeout = 30; // set to zero for no timeout
+				$timeout = 10; // set to zero for no timeout
 				curl_setopt ($ch, CURLOPT_URL, $url);
+				curl_setopt ($ch, CURLOPT_FOLLOWLOCATION, 1);
 				curl_setopt ($ch, CURLOPT_RETURNTRANSFER, 1);
 				curl_setopt ($ch, CURLOPT_CONNECTTIMEOUT, $timeout);
+				curl_setopt ($ch, CURLOPT_TRANSFERTTIMEOUT, $timeout);
 				curl_setopt ($ch, CURLOPT_USERAGENT, $useragent);
 				$f = curl_exec($ch);
 				curl_close($ch);
@@ -67,6 +69,13 @@
 			$this->lastMimeType = '';
 			$this->lastCacheFile = '';
 			$localfile=$this->getLocalFile($url,$folder,$extension);
+			$p=dirname($localfile);
+			if(!file_exists(dirname($p))){
+				mkdir(dirname($p));
+			}
+			if(!file_exists($p)){
+				mkdir($p);
+			}
 			$this->lastCacheFile=$localfile;
 			$todownload=false;
 			clearstatcache  ();

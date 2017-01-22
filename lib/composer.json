@@ -1,0 +1,8 @@
+{
+    "require": {
+        "symfony/dom-crawler": "^2.7",
+        "symfony/css-selector": "^2.7",
+        "symfony/expression-language": "^2.7",
+        "symfony/process": "^2.7"
+    }
+}

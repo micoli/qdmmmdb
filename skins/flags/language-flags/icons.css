@@ -1,0 +1,216 @@
+.genericLanguageIcon16{
+	width 	: 16px;
+	height	: 16px;
+	display	: inline-block;
+}
+.genericLanguageIcon32{
+	width 	: 32px;
+	height	: 32px;
+	display	: inline-block;
+}
+.genericLanguageIcon64{
+	width 	: 64px;
+	height	: 64px;
+	display	: inline-block;
+}
+.genericLanguageIcon128{
+	width 	: 128px;
+	height	: 128px;
+	display	: inline-block;
+}
+
+.icon-32-language-CN {
+	background-image:url(./32x32/_CN.png) !important;
+}
+.icon-32-language-DE {
+	background-image:url(./32x32/_DE.png) !important;
+}
+.icon-32-language-DU {
+	background-image:url(./32x32/_DU.png) !important;
+}
+.icon-32-language-EN {
+	background-image:url(./32x32/_EN.png) !important;
+}
+.icon-32-language-FR {
+	background-image:url(./32x32/_FR.png) !important;
+}
+.icon-32-language-GR {
+	background-image:url(./32x32/_GR.png) !important;
+}
+.icon-32-language-IN {
+	background-image:url(./32x32/_IN.png) !important;
+}
+.icon-32-language-IT {
+	background-image:url(./32x32/_IT.png) !important;
+}
+.icon-32-language-JP {
+	background-image:url(./32x32/_JP.png) !important;
+}
+.icon-32-language-KR {
+	background-image:url(./32x32/_KR.png) !important;
+}
+.icon-32-language-PL {
+	background-image:url(./32x32/_PL.png) !important;
+}
+.icon-32-language-PT {
+	background-image:url(./32x32/_PT.png) !important;
+}
+.icon-32-language-RU {
+	background-image:url(./32x32/_RU.png) !important;
+}
+.icon-32-language-SP {
+	background-image:url(./32x32/_SP.png) !important;
+}
+.icon-32-language-TK {
+	background-image:url(./32x32/_TK.png) !important;
+}
+.icon-32-language-WD {
+	background-image:url(./32x32/_WD.png) !important;
+}
+
+.icon-32-language-rotate-CN {
+	background-image:url(./32x32/CN.png) !important;
+}
+.icon-32-language-rotate-DE {
+	background-image:url(./32x32/DE.png) !important;
+}
+.icon-32-language-rotate-DU {
+	background-image:url(./32x32/DU.png) !important;
+}
+.icon-32-language-rotate-EN {
+	background-image:url(./32x32/EN.png) !important;
+}
+.icon-32-language-rotate-FR {
+	background-image:url(./32x32/FR.png) !important;
+}
+.icon-32-language-rotate-GR {
+	background-image:url(./32x32/GR.png) !important;
+}
+.icon-32-language-rotate-IN {
+	background-image:url(./32x32/IN.png) !important;
+}
+.icon-32-language-rotate-IT {
+	background-image:url(./32x32/IT.png) !important;
+}
+.icon-32-language-rotate-JP {
+	background-image:url(./32x32/JP.png) !important;
+}
+.icon-32-language-rotate-KR {
+	background-image:url(./32x32/KR.png) !important;
+}
+.icon-32-language-rotate-PL {
+	background-image:url(./32x32/PL.png) !important;
+}
+.icon-32-language-rotate-PT {
+	background-image:url(./32x32/PT.png) !important;
+}
+.icon-32-language-rotate-RU {
+	background-image:url(./32x32/RU.png) !important;
+}
+.icon-32-language-rotate-SP {
+	background-image:url(./32x32/SP.png) !important;
+}
+.icon-32-language-rotate-TK {
+	background-image:url(./32x32/TK.png) !important;
+}
+.icon-32-language-rotate-WD {
+	background-image:url(./32x32/WD.png) !important;
+}
+
+.icon-16-language-CN {
+	background-image:url(./16x16/_CN.png) !important;
+}
+.icon-16-language-DE {
+	background-image:url(./16x16/_DE.png) !important;
+}
+.icon-16-language-DU {
+	background-image:url(./16x16/_DU.png) !important;
+}
+.icon-16-language-EN {
+	background-image:url(./16x16/_EN.png) !important;
+}
+.icon-16-language-FR {
+	background-image:url(./16x16/_FR.png) !important;
+}
+.icon-16-language-GR {
+	background-image:url(./16x16/_GR.png) !important;
+}
+.icon-16-language-IN {
+	background-image:url(./16x16/_IN.png) !important;
+}
+.icon-16-language-IT {
+	background-image:url(./16x16/_IT.png) !important;
+}
+.icon-16-language-JP {
+	background-image:url(./16x16/_JP.png) !important;
+}
+.icon-16-language-KR {
+	background-image:url(./16x16/_KR.png) !important;
+}
+.icon-16-language-PL {
+	background-image:url(./16x16/_PL.png) !important;
+}
+.icon-16-language-PT {
+	background-image:url(./16x16/_PT.png) !important;
+}
+.icon-16-language-RU {
+	background-image:url(./16x16/_RU.png) !important;
+}
+.icon-16-language-SP {
+	background-image:url(./16x16/_SP.png) !important;
+}
+.icon-16-language-TK {
+	background-image:url(./16x16/_TK.png) !important;
+}
+.icon-16-language-WD {
+	background-image:url(./16x16/_WD.png) !important;
+}
+
+.icon-16-language-rotate-CN {
+	background-image:url(./16x16/CN.png) !important;
+}
+.icon-16-language-rotate-DE {
+	background-image:url(./16x16/DE.png) !important;
+}
+.icon-16-language-rotate-DU {
+	background-image:url(./16x16/DU.png) !important;
+}
+.icon-16-language-rotate-EN {
+	background-image:url(./16x16/EN.png) !important;
+}
+.icon-16-language-rotate-FR {
+	background-image:url(./16x16/FR.png) !important;
+}
+.icon-16-language-rotate-GR {
+	background-image:url(./16x16/GR.png) !important;
+}
+.icon-16-language-rotate-IN {
+	background-image:url(./16x16/IN.png) !important;
+}
+.icon-16-language-rotate-IT {
+	background-image:url(./16x16/IT.png) !important;
+}
+.icon-16-language-rotate-JP {
+	background-image:url(./16x16/JP.png) !important;
+}
+.icon-16-language-rotate-KR {
+	background-image:url(./16x16/KR.png) !important;
+}
+.icon-16-language-rotate-PL {
+	background-image:url(./16x16/PL.png) !important;
+}
+.icon-16-language-rotate-PT {
+	background-image:url(./16x16/PT.png) !important;
+}
+.icon-16-language-rotate-RU {
+	background-image:url(./16x16/RU.png) !important;
+}
+.icon-16-language-rotate-SP {
+	background-image:url(./16x16/SP.png) !important;
+}
+.icon-16-language-rotate-TK {
+	background-image:url(./16x16/TK.png) !important;
+}
+.icon-16-language-rotate-WD {
+	background-image:url(./16x16/WD.png) !important;
+}

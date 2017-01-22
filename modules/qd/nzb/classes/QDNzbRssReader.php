@@ -2,12 +2,12 @@
 define ('MAGPIE_CACHE_DIR','/var/www/cache/magpie');
 define ('MAGPIE_CACHE_ON',true);
 define ('MAGPIE_CACHE_AGE',60*15);
-include QDBASE."/lib/3rd_php/magpierss/rss_fetch.inc";
+include QDBASE."/3rd_php/magpierss/rss_fetch.inc";
 class QDNzbRssReader {
 	function __construct(){
 		$this->AllRes = array();
 	}
-    function dumpIte2Sql(){
+	function dumpIte2Sql(){
 		$this->QDDb = new QDDB();
 		mysql_connect("localhost", $GLOBALS['conf']['qddb']['username'],$GLOBALS['conf']['qddb']['password'] ) or
 		die("Impossible de se connecter : " . mysql_error());
@@ -45,7 +45,7 @@ class QDNzbRssReader {
 					}
 				}
 			}
-			 
+
 		}
 	}
 }

@@ -548,11 +548,11 @@ Ext.define('qd.mediadb.serieFileSorter', {
 			}]
 		});
 		this.callParent(this);
-		that.fileToSortStore.load({
+		/*that.fileToSortStore.load({
 			params	: {
 				name	: 'F'
 			}
-		});
+		});*/
 	}
 });
 

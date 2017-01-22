@@ -2,6 +2,13 @@
 include  QD_PATH_3RD_PHP."simple_html_dom.php";
 class QDMediaDBProxy {
 	var $QDNet;
+	static $XbmcDBPDO=null;
+
+	function initdb(){
+		if(is_null(self::$XbmcDBPDO)){
+			self::$XbmcDBPDO = new PDO($this->xbmcDB,$this->xbmcDBUser,$this->xbmcDBPass);
+		}
+	}
 
 	function __construct() {
 		$this->QDNet		= new QDNet();
@@ -9,6 +16,7 @@ class QDMediaDBProxy {
 		$this->cache		= true;
 
 		$this->thetvdbkey					= $GLOBALS['conf']['qdmediadb']['thetvdbkey'];
+		$this->fanarttvdbkey				= $GLOBALS['conf']['qdmediadb']['fanarttvdbkey'];
 		$this->xbmcPath						= $GLOBALS['conf']['qdmediadb_xbmc']['xbmcPath'];
 		$this->xbmcDB						= $GLOBALS['conf']['qdmediadb_xbmc']['xbmcDB'];
 		$this->xbmcDBUser					= $GLOBALS['conf']['qdmediadb_xbmc']['xbmcDBUser'];
@@ -16,6 +24,7 @@ class QDMediaDBProxy {
 
 		$this->allowedExt 					= $GLOBALS['conf']['qdmediadb']['allowedExt'];;
 		$this->movieExt						= $GLOBALS['conf']['qdmediadb']['movieExt'];
+		$this->subtitlesExt					= $GLOBALS['conf']['qdmediadb']['subtitlesExt'];
 		$this->arrCleanupMoviesRegexStrict 	= $GLOBALS['conf']['qdmediadb']['arrCleanupMoviesRegexStrict'];
 		$this->arrCleanupMoviesRegex		= $GLOBALS['conf']['qdmediadb']['arrCleanupMoviesRegex'];
 		$this->arrHiddenmovieRegex			= $GLOBALS['conf']['qdmediadb']['arrHiddenmovie'];
@@ -82,6 +91,7 @@ class QDMediaDBProxy {
 				die(file_get_contents($cacheFile));
 			}else{
 				$sizes=split('x',$_REQUEST['c']);
+				//die($this->QDNet->lastCacheFile);
 				$thumb=new Imagick($this->QDNet->lastCacheFile);
 				list($newX,$newY)=$this->scaleImage(
 						$thumb->getImageWidth(),
@@ -101,19 +111,41 @@ class QDMediaDBProxy {
 		}
 	}
 
+	function mb_trim( $string )
+	{
+		$string = preg_replace( "/(^\s+)/", "", $string );
+		$string = preg_replace( "/(\s+$)/", "", $string );
+
+		return $string;
+	}
+
+	function mb_str_replace($needle, $replacement, $haystack)
+	{
+		$needle_len = mb_strlen($needle);
+		$replacement_len = mb_strlen($replacement);
+		$pos = mb_strpos($haystack, $needle);
+		while ($pos !== false)
+		{
+			$haystack = mb_substr($haystack, 0, $pos) . $replacement
+			. mb_substr($haystack, $pos + $needle_len);
+			$pos = mb_strpos($haystack, $needle, $pos + $replacement_len);
+		}
+		return $haystack;
+	}
+
 	function delmulspace($str) {
 		do {
-			$str = str_replace("  ", " ", $str);
-		} while (strpos($str, "  ") > 0);
+			$str = $this->mb_str_replace("  ", " ", $str);
+		} while (mb_strpos($str, "  ") > 0);
 		return $str;
 	}
 
 	function cleanFilename($a) {
-		$a = str_replace('?', ' ', $a);
-		$a = str_replace(':', ' ', $a);
-		$a = str_replace('/', ' ', $a);
-		$a = str_replace('\\', ' ', $a);
-		return trim($this->delmulspace($a));
+		$a = $this->mb_str_replace('?', ' ', $a);
+		$a = $this->mb_str_replace(':', ' ', $a);
+		$a = $this->mb_str_replace('/', ' ', $a);
+		$a = $this->mb_str_replace('\\', ' ', $a);
+		return $this->mb_trim($this->delmulspace($a));
 	}
 
 	function extractXQuery($xpath, $xpathQ) {
@@ -149,8 +181,8 @@ class QDMediaDBProxy {
 		}
 	}
 
-	function xbmcDBSQLInsertOrUpdate($db, $table, $colId, $datas, $dbg = false) {
-		$dbg=false;
+	function xbmcDBSQLInsertOrUpdate($table, $colId, $datas, $dbg = false) {
+		$dbg	=false;
 		$where = '';
 		$swhere = '';
 		$scomma = '';
@@ -161,9 +193,11 @@ class QDMediaDBProxy {
 		$ucomma = '';
 		foreach ($datas as $k => $v) {
 			$unesc = (str_replace("'", "''", $v['val']));
+			$unesc = addslashes($v['val']);
 			if ($v['isKey']) {
-				if ($dbg)
+				if ($dbg){
 					print_r($v);
+				}
 				$where = $where . $swhere . $v['col'] . "='" . $unesc . "'";
 				$swhere = ' and ';
 			}
@@ -178,15 +212,16 @@ class QDMediaDBProxy {
 		if ($colId != '') {
 			$sqlSearch = "select $colId as searchID from $table where $where";
 			$cnt = 0;
-			if ($dbg)
-				print $sqlSearch;
-			foreach ($db->query($sqlSearch) as $row) {
+			if ($dbg){
+				print "\n".$sqlSearch;
+			}
+			foreach (self::$XbmcDBPDO->query($sqlSearch) as $row) {
 				$cnt++;
 				$id = $row['searchID'];
-				if ($dbg)
-					print "#$cnt -- $id#";
-				if ($dbg)
+				if ($dbg){
+					print "\n#$cnt -- $id#";
 					print_r($row);
+				}
 			}
 		} else {
 			$cnt = 0;
@@ -194,16 +229,20 @@ class QDMediaDBProxy {
 
 		if ($cnt == 0) {
 			$insertstr = "insert into $table ($istrcol) values($istrval)";
-			if ($dbg)
+			if ($dbg){
+				print "\n";
 				print_r($insertstr);
-			$db->exec($insertstr);
-			$id = $db->lastInsertId();
+			}
+			self::$XbmcDBPDO->exec($insertstr);
+			$id = self::$XbmcDBPDO->lastInsertId();
 		} else {
 			if ($colId != ''){
 				$updatestr = "update $table set $ustr where $colId=" . $id;
-				if ($dbg)
+				if ($dbg){
+					print "\n";
 					print_r($updatestr);
-				$db->exec($updatestr);
+				}
+				self::$XbmcDBPDO->exec($updatestr);
 			}
 		}
 
@@ -211,95 +250,138 @@ class QDMediaDBProxy {
 	}
 
 	function makeEpisodeDB($data) {
-		print "<pre>" . $data['filename'] . '\n';
-		$xbmcpath = $this->getXbmcpath($data['filename']);
+		//print "" . $data['filename'] . "\n";
+		$seriePath = $data['saisonpath'];
+		$xbmcPathShow = $this->getXbmcpath($seriePath);
+		$xbmcPathFile = $this->getXbmcpath($data['filename']);
+		/*
+		select pashow.strPath,fi.idFile,sh.c00,sh.c16,epi.c12,epi.c13,epi.c00,pa.strPath,fi.strFilename,group_concat(concat(art_show.type,':',art_show.url)),group_concat(concat(art_epi.type,':',art_epi.url))
+		from tvshow sh
+		inner join  tvshowlinkpath tvslp on tvslp.idShow=sh.idShow
+		inner join  path pashow on pashow.idPath=tvslp.idPath
+		inner join  episode epi on epi.idShow=sh.idShow
+		inner join  files fi on fi.idFile=epi.idFile
+		inner join  path pa on pa.idPath=fi.idPath
+		left join   art art_show on art_show.media_type='tvshow' and art_show.media_id=sh.idShow
+		left join   art art_epi on art_epi.media_type='episode' and art_epi.media_id=epi.idEpisode
+		#where sh.c00 like 'Nikita'
+		group by fi.idFile
+		order by sh.c00,epi.c12,epi.c13*1;
+		 */
+
+		//db($xbmcPathShow);
+		//db($xbmcPathFile);
+		//db($data);
+
 		/*"xbmcDB" 		: "sqlite://bigone/userdata/Database/MyVideos34.db"*/
-		$db = new PDO($this->xbmcDB,$this->xbmcDBUser,$this->xbmcDBPass);
-		$idPath = $this->xbmcDBSQLInsertOrUpdate(
-				$db,
-				'path',
-				'idPath',
-				array(
-					array('col' => 'strPath'		, 'isKey'=>true	, 'val'=> utf8_decode($xbmcpath['path'])							),
-					array('col' => 'strContent'		, 'isKey'=>false, 'val'=> 'tvshows'									),
-					array('col' => 'StrScraper'		, 'isKey'=>false, 'val'=> 'tvdb.xml'								),
-					array('col' => 'useFolderNames'	, 'isKey'=>false, 'val'=> '1'										),
-					array('col' => 'strSettings'	, 'isKey'=>false, 'val'=> ''										),
-					array('col' => 'strHash'		, 'isKey'=>false, 'val'=> $this->xbmcHash(utf8_decode($xbmcpath['path']))		)
-					//<settings><setting id="dvdorder" value="false" /><setting id="absolutenumber" value="false" /><setting id="fanart" value="true" /><setting id="posters" value="false" /><setting id="override" value="false" /><setting id="language" value="en" /></settings>
-				)
+		$this->initdb();
+		$idPathShow = $this->xbmcDBSQLInsertOrUpdate(
+			'path',
+			'idPath',
+			array(
+				array('col' => 'strPath'		, 'isKey'=>true	, 'val'=> utf8_decode($xbmcPathShow['path'])					),
+				array('col' => 'strContent'		, 'isKey'=>false, 'val'=> 'tvshows'												),
+				array('col' => 'StrScraper'		, 'isKey'=>false, 'val'=> 'tvdb.xml'											),
+				array('col' => 'useFolderNames'	, 'isKey'=>false, 'val'=> '1'													),
+				array('col' => 'strSettings'	, 'isKey'=>false, 'val'=> ''													),
+				array('col' => 'strHash'		, 'isKey'=>false, 'val'=> $this->xbmcHash(utf8_decode($xbmcPathShow['path']))	)
+			)
 		);
+		$idPathSeason = $this->xbmcDBSQLInsertOrUpdate(
+			'path',
+			'idPath',
+			array(
+				array('col' => 'strPath'		, 'isKey'=>true	, 'val'=> utf8_decode($xbmcPathFile['path'])					),
+				array('col' => 'strContent'		, 'isKey'=>false, 'val'=> ''													),
+				array('col' => 'StrScraper'		, 'isKey'=>false, 'val'=> ''													),
+				array('col' => 'useFolderNames'	, 'isKey'=>false, 'val'=> null													),
+				array('col' => 'strSettings'	, 'isKey'=>false, 'val'=> ''													),
+				array('col' => 'strHash'		, 'isKey'=>false, 'val'=> null													)
+			)
+		);
+		//<settings><setting id="dvdorder" value="false" /><setting id="absolutenumber" value="false" /><setting id="fanart" value="true" /><setting id="posters" value="false" /><setting id="override" value="false" /><setting id="language" value="en" /></settings>
 		$idFile = $this->xbmcDBSQLInsertOrUpdate(
-				$db,
-				'files',
-				'idFile',
-				array(
-					array('col' => 'idPath'			, 'isKey'=>true, 'val'=> $idPath									),
-					array('col' => 'strFilename'	, 'isKey'=>true, 'val'=> utf8_decode($data['sfilename'])							),
-					array('col' => 'dateAdded'		, 'isKey'=>false,'val'=> date('Y-m-d H:i:s')						,'notUpdated'=>true)
-				)
+			'files',
+			'idFile',
+			array(
+				array('col' => 'idPath'			, 'isKey'=>true, 'val'=> $idPathSeason													),
+				array('col' => 'strFilename'	, 'isKey'=>true, 'val'=> utf8_decode($data['sfilename'])								),
+				array('col' => 'dateAdded'		, 'isKey'=>false,'val'=> date('Y-m-d H:i:s')						,'notUpdated'=>true	)
+			)
 		);
 		$idShow = $this->xbmcDBSQLInsertOrUpdate(
-				$db,
-				'tvshow',
-				'idShow',
-				array(
-					array('col' => 'c00'			, 'isKey'=>true	, 'val'=> ($data['serieName'])			),
-					array('col' => 'c01'			, 'isKey'=>false, 'val'=> ($data['serieOverview'])		),
-					array('col' => 'c05'			, 'isKey'=>false, 'val'=> ($data['seriePremiered'])		),
-					array('col' => 'c12'			, 'isKey'=>false, 'val'=> ($data['tvdbid'])				),
-					array('col' => 'c16'			, 'isKey'=>true	, 'val'=> ($data['seriepath'])			),
-					array('col' => 'c17'			, 'isKey'=>false, 'val'=> ($idPath)						)
-				)
-				, true);
+			'tvshow',
+			'idShow',
+			array(
+				array('col' => 'c00'			, 'isKey'=>false	, 'val'=> ($data['serieName'])						),
+				array('col' => 'c01'			, 'isKey'=>false	, 'val'=> ($data['serieOverview'])					),
+				array('col' => 'c05'			, 'isKey'=>false	, 'val'=> ($data['seriePremiered'])					),
+				array('col' => 'c12'			, 'isKey'=>true		, 'val'=> ($data['tvdbidshow'])						),
+				array('col' => 'c16'			, 'isKey'=>true		, 'val'=> (utf8_decode($xbmcPathShow['path']))		),
+				array('col' => 'c17'			, 'isKey'=>false	, 'val'=> ($idPathShow)								),
+				array('col' => 'c06'			, 'isKey'=>false	, 'val'=> ($data['posters'])						),
+				array('col' => 'c11'			, 'isKey'=>false	, 'val'=> ($data['backdrops'])						)
+			)
+		);
 		$idSeason = $this->xbmcDBSQLInsertOrUpdate(
-				$db,
-				'seasons',
-				'idSeason',
-				array(
-					array('col' => 'idShow'			, 'isKey'=>true	, 'val'=> ($idShow)			),
-					array('col' => 'season'			, 'isKey'=>true, 'val'=> ($data['season'])	)
-				)
-				, true);
+			'seasons',
+			'idSeason',
+			array(
+				array('col' => 'idShow'			, 'isKey'=>true	, 'val'=> ($idShow)									),
+				array('col' => 'season'			, 'isKey'=>true , 'val'=> ($data['season'])							)
+			)
+		);
 		$idEpisode = $this->xbmcDBSQLInsertOrUpdate(
-				$db,
-				'episode',
-				'idEpisode',
-				array(
-					array('col' => 'c00'			, 'isKey'=>true	, 'val'=> $data['title']							),
-					array('col' => 'c01'			, 'isKey'=>false, 'val'=> $data['plot']								),
-					array('col' => 'c03'			, 'isKey'=>false, 'val'=> '0.000000'								),
-					array('col' => 'c05'			, 'isKey'=>false, 'val'=> $data['aired']							),
-					array('col' => 'c06'			, 'isKey'=>false, 'val'=> '<thumb>' . $data['thumb'] . '</thumb>'	),
-					array('col' => 'c12'			, 'isKey'=>false, 'val'=> $data['season']							),
-					array('col' => 'c13'			, 'isKey'=>false, 'val'=> $data['episode']							),
-					array('col' => 'c15'			, 'isKey'=>false, 'val'=> -1										),
-					array('col' => 'c16'			, 'isKey'=>false, 'val'=> -1										),
-					array('col' => 'c17'			, 'isKey'=>false, 'val'=> -1										),
-					array('col' => 'c18'			, 'isKey'=>false, 'val'=> utf8_decode($xbmcpath['path'].$data['sfilename'])		),
-					array('col' => 'c19'			, 'isKey'=>false, 'val'=> $idShow									),
-					array('col' => 'idFile'			, 'isKey'=>true	, 'val'=> $idFile									),
-					array('col' => 'idShow'			, 'isKey'=>false, 'val'=> $idShow									)
-				)
+			'episode',
+			'idEpisode',
+			array(
+				array('col' => 'c00'			, 'isKey'=>true	, 'val'=> $data['title']										),
+				array('col' => 'c01'			, 'isKey'=>false, 'val'=> $data['plot']											),
+				array('col' => 'c03'			, 'isKey'=>false, 'val'=> '0.000000'											),
+				array('col' => 'c05'			, 'isKey'=>false, 'val'=> $data['aired']										),
+				array('col' => 'c06'			, 'isKey'=>false, 'val'=> '<thumb>' . $data['thumb'] . '</thumb>'				),
+				array('col' => 'c12'			, 'isKey'=>false, 'val'=> $data['season']										),
+				array('col' => 'c13'			, 'isKey'=>false, 'val'=> $data['episode']										),
+				array('col' => 'c15'			, 'isKey'=>false, 'val'=> -1													),
+				array('col' => 'c16'			, 'isKey'=>false, 'val'=> -1													),
+				array('col' => 'c17'			, 'isKey'=>false, 'val'=> -1													),
+				array('col' => 'c18'			, 'isKey'=>false, 'val'=> utf8_decode($xbmcPathFile['path'].$data['sfilename'])	),
+				array('col' => 'c19'			, 'isKey'=>false, 'val'=> $idShow												),
+				array('col' => 'idFile'			, 'isKey'=>true	, 'val'=> $idFile												),
+				array('col' => 'idShow'			, 'isKey'=>false, 'val'=> $idShow												)
+			)
 		);
-		/*$this->xbmcDBSQLInsertOrUpdate(
-				$db,
-				'tvshowlinkepisode',
-				'',
-				array(
-					array('col' => 'idEpisode'		, 'isKey'=>true	, 'val'=> $idEpisode								),
-					array('col' => 'idShow'			, 'isKey'=>false, 'val'=> $idShow									)
-				)
-		);*/
 		$this->xbmcDBSQLInsertOrUpdate(
-				$db,
-				'tvshowlinkpath',
-				'',
-				array(
-					array('col' => 'idShow'			, 'isKey'=>true	, 'val'=> $idShow									),
-					array('col' => 'idPath'			, 'isKey'=>false, 'val'=> $idPath									)
-				)
+			'tvshowlinkpath',
+			'',
+			array(
+				array('col' => 'idShow'			, 'isKey'=>true	, 'val'=> $idShow									),
+				array('col' => 'idPath'			, 'isKey'=>true	, 'val'=> $idPathShow								)
+			)
 		);
+		foreach($data['art'] as $f){
+			//db($f);
+			switch ($f['table']){
+				case 'sho':
+					$this->addMediaToMedia($idShow		, 'tvshow'		,$f['art_type'], $this->getXbmcpath(utf8_decode($f['file']),false));
+				break;
+				case 'sea':
+					$this->addMediaToMedia($idSeason	, 'season'		,$f['art_type'], $this->getXbmcpath(utf8_decode($f['file']),false));
+				break;
+				case 'epi':
+					$this->addMediaToMedia($idEpisode	, 'episode'		,$f['art_type'], $this->getXbmcpath(utf8_decode($f['file']),false));
+				break;
+			}
+		}
+		/*
+		$this->xbmcDBSQLInsertOrUpdate(
+			'tvshowlinkepisode',
+			'',
+			array(
+				array('col' => 'idEpisode'		, 'isKey'=>true	, 'val'=> $idEpisode								),
+				array('col' => 'idShow'			, 'isKey'=>false, 'val'=> $idShow									)
+			)
+		);*/
 		/*
 		c06
 		<thumbs>
@@ -348,9 +430,8 @@ class QDMediaDBProxy {
 	function makeMovieDB(&$data) {
 		$xbmcpath = $this->getXbmcMoviesPath($data['fileDetail']['file']);
 
-		$db = new PDO($this->xbmcDB,$this->xbmcDBUser,$this->xbmcDBPass);
+		$this->initdb();
 		$idPath = $this->xbmcDBSQLInsertOrUpdate(
-			$db,
 			'path',
 			'idPath',
 			array(
@@ -369,7 +450,6 @@ class QDMediaDBProxy {
 			}
 		}
 		$idFile = $this->xbmcDBSQLInsertOrUpdate(
-			$db,
 			'files',
 			'idFile',
 			array(
@@ -382,14 +462,12 @@ class QDMediaDBProxy {
 		$thumbStr = '';
 		$thumbOk = false;
 		if (is_array($data['thumb']) && count($data['thumb'])>0){
-			$thumbOk = true;
 			$thumbStr = sprintf('<thumb>%s</thumb>',$data['thumb'][0]);
 		}
 
 		$fanartStr = '<fanart>';
 		$fanartOk=false;
 		if (is_array($data['fanart']) && array_key_exists('thumb',$data['fanart']) && is_array($data['fanart']['thumb'])){
-			$fanartOk=true;
 			foreach($data['fanart']['thumb'] as $thumb){
 				$fanartStr .= sprintf('<thumb>%s</thumb>',$thumb);
 			}
@@ -397,7 +475,6 @@ class QDMediaDBProxy {
 		$fanartStr.='</fanart>';
 
 		$idMovie = $this->xbmcDBSQLInsertOrUpdate(
-			$db,
 			'movie',
 			'idMovie',
 			array(
@@ -427,18 +504,17 @@ class QDMediaDBProxy {
 				array('col' => 'idFile'	, 'isKey'=>true		, 'val'=> $idFile										),
 			)
 		);
-		if($thumbOk){
-			$idArt = $this->addMediaToMedia($db, $idMovie, 'movie','poster', utf8_decode($xbmcpath['path'].'folder.jpg'));
+		if(file_exists($data['fileDetail']['fullPath'].'/folder.jpg')){
+			$idArt = $this->addMediaToMedia($idMovie, 'movie','poster', utf8_decode($xbmcpath['path'].'folder.jpg'));
 		}
-		if($fanartOk){
-			$idArt = $this->addMediaToMedia($db, $idMovie, 'movie','fanart', utf8_decode($xbmcpath['path'].'fanart.jpg'));
+		if(file_exists($data['fileDetail']['fullPath'].'/fanart.jpg')){
+			$idArt = $this->addMediaToMedia($idMovie, 'movie','fanart', utf8_decode($xbmcpath['path'].'fanart.jpg'));
 		}
-		$this->addGenreToMedia($db,$idMovie,$data['genre'],'genrelinkmovie','idMovie');
+		$this->addGenreToMedia($idMovie,$data['genre'],'genrelinkmovie','idMovie');
 	}
 
-	function addMediaToMedia($db,$idMedia,$mediaType,$type,$picture){
+	function addMediaToMedia($idMedia,$mediaType,$type,$picture){
 		$idArt = $this->xbmcDBSQLInsertOrUpdate(
-			$db,
 			'art',
 			'art_id',
 			array(
@@ -450,14 +526,13 @@ class QDMediaDBProxy {
 		);
 	}
 
-	function addGenreToMedia($db,$idMedia,$genreStr,$tableLink,$colLink){
+	function addGenreToMedia($idMedia,$genreStr,$tableLink,$colLink){
 		$arrGenre = preg_split('!\/|\|!',$genreStr);
 		if (is_array($arrGenre)){
 			foreach($arrGenre as $genre){
 				$genre = trim($genre);
 				if($genre=='') return;
 				$idGenre = $this->xbmcDBSQLInsertOrUpdate(
-						$db,
 						'genre',
 						'idGenre',
 						array(
@@ -465,7 +540,6 @@ class QDMediaDBProxy {
 						)
 				);
 				$this->xbmcDBSQLInsertOrUpdate(
-						$db,
 						$tableLink,
 						'',
 						array(
@@ -477,18 +551,49 @@ class QDMediaDBProxy {
 		}
 	}
 
-	function getXbmcpath($filename) {
+	function getXbmcpath($filename,$returnArray=true) {
 		$res = null;
 		foreach ($this->folderSeriesList as $k => $v) {
 			//db( $v['path']);
 			//db(addslashes($data['filename']));
-			if (eregi('^' . addslashes($v['path']), ($filename))) {
+			if (eregi('^' . addslashes($v['path']), $filename)) {
 				$res = str_ireplace($v['path'], $v['xbmcpath'], $filename);
 				$res = str_replace('\\', '/', $res);
 				preg_match('|(^.*/)(.*)|', $res, $r);
 				$res = array();
-				$res['path'] = $r[1];
-				$res['filename'] = $r[2];
+				if($returnArray){
+					$res['path'		] = $r[1];
+					$res['filename'	] = $r[2];
+					return $res;
+				}else{
+					return $r[1].$r[2];
+				}
+				break;
+			}
+		}
+		return $res;
+	}
+
+	function getLocalpath($filename,$returnArray=true) {
+		$res = null;
+		//db($filename);
+		foreach ($this->folderSeriesList+$this->folderMoviesList as $k => $v) {
+			//db( $v['path']);
+			//db(addslashes($data['filename']));
+			//db(addslashes($v['xbmcpath']));
+			if (eregi('^' . addslashes($v['xbmcpath']), $filename)) {
+				$res = str_ireplace($v['xbmcpath'], $v['path'], $filename);
+				$res = str_replace('\\', '/', $res);
+				preg_match('|(^.*/)(.*)|', $res, $r);
+				$res = array();
+				if($returnArray){
+					$res['path'		] = $r[1];
+					$res['filename'	] = $r[2];
+					$res['key'		] = $v['name'];
+					return $res;
+				}else{
+					return $r[1].$r[2];
+				}
 				break;
 			}
 		}
@@ -638,6 +743,41 @@ class QDMediaDBProxy {
 		//return exec("$dir/perl.exe $dir/xbmchash.pl \"$hashInput\"");
 	}
 
+	function svc_cleanupDatabase(){
+		$this->initdb();
+		$sqlSearch="select distinct concat(strpath,strFilename) as filename,fi.idFile,pa.idPath
+					from path pa
+					inner join files fi on fi.idPath=pa.idPath
+					where
+					strFilename regexp '(avi|mkv|ogm|mp4|divx|iso|mpg|srt|sub|idx)$'
+					order by filename
+					;";
+		$allMedias = self::$XbmcDBPDO->query($sqlSearch);
+		foreach ($allMedias as $k=>$row) {
+			if($k%200==0){
+				db(sprintf('%s/%s %s',$k,$nb,$row['filename']));
+			}
+			$localFilename=$this->getLocalpath($row['filename'],false);
+			if(!file_exists(utf8_encode($localFilename))&& !file_exists(utf8_encode($localFilename)) && utf8_encode($localFilename) && $localFilename!=''){
+				print sprintf("%s => %s\n",$localFilename,$row['filename']);
+				self::$XbmcDBPDO->query("delete from files where idFile=".$row['idFile']);
+			}
+		}
+
+		$aSqlDel=array(
+			//"not to do delete from episode	where idFile in (select idFile from files where strFilename regexp '\\.(srt|sub|idx)\$');",
+			//"not to do delete from movie		where idFile in (select idFile from files where strFilename regexp '\\.(srt|sub|idx)\$');",
+			//"not to do delete from path		where idPath not in (select distinct idPath from files);"
+			"delete from files		where strFilename regexp '\\.(srt|sub|idx)\$');",
+		);
+
+		foreach ($aSqlDel as $sqlDel) {
+			db($sqlDel);
+			db(self::$XbmcDBPDO->query($sqlDel));
+		}
+
+	}
+
 	function svc_test2() {
 		print $this->xbmcHash('F:\\Videos\\Nosferatu.avi') . '<br>' . '2a6ec78d' . '<br><br>';
 		print $this->xbmcHash('123456789') . '<br>' . '0376e6e7' . '<br><br>';
@@ -646,9 +786,9 @@ class QDMediaDBProxy {
 	}
 
 	function svc_copyDevTreeStruct(){
-		$this->copyStruct('/volumes/MOVIES_1TOA'		,'/Users/o.michaud/Documents/tmpStruct.qdmmmdb/I',0);
-		$this->copyStruct('/volumes/MOVIES_1TOB'		,'/Users/o.michaud/Documents/tmpStruct.qdmmmdb/J',0);
-		//$this->copyStruct('/volumes/Desktop_USB3_0_Drive_1'	,'/Users/o.michaud/Documents/tmpStruct.qdmmmdb/Q',0);
+		$this->copyStruct('/mnt/I/__Series'			,'/mnt/ztest/U/__Series',0);
+		$this->copyStruct('/mnt/J/__Series'			,'/mnt/ztest/V/__Series',0);
+		//$this->copyStruct('/volumes/MOVIES_1TOB'	,'/Users/o.michaud/Documents/tmpStruct.qdmmmdb/J',0);
 	}
 	function copyStruct($from,$to,$level){
 		$aFrom = glob($from.'/*');
@@ -668,5 +808,22 @@ class QDMediaDBProxy {
 			}
 		}
 	}
+	function getLangFromPath($path){
+		if(substr($path,-1)=='/'){
+			$path=substr($path,0,-1);
+		}
+		$lang='WD';
+		if(preg_match('! FR$!',$path)){
+			$lang='FR';
+		}
+		if(preg_match('! VF$!',$path)){
+			$lang='FR';
+		}
+		if(preg_match('! VO$!',$path)){
+			$lang='EN';
+		}
+		return $lang;
+	}
+
 }
 ?>

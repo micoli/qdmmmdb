@@ -2,6 +2,9 @@
 class QDMoviesProxy extends QDMediaDBProxy{
 	static $threadArr;
 
+	function svc_publish(){
+		QDLogger::log('test '.date('Ymd His'));
+	}
 	function svc_updateDatabase(){
 		header('content-type:text/html');
 		$sc = new QDHtmlMovieParser;
@@ -14,20 +17,17 @@ class QDMoviesProxy extends QDMediaDBProxy{
 				if(file_exists($movieNFO)){
 					$o = $sc->simpleLoadXbmcMovieNfo($movieNFO);
 					if($o){
-						db($movieData['fileDetail']['fullPath']);
+						QDLogger::log($movieData['fileDetail']['fullPath']);
 						set_time_limit(20);
 						$o = object2array($o);
 						$o['fileDetail']=$movieData['fileDetail'];
 						$this->makeMovieDB($o);
-						//db($o);
-						if($nb>2){
-							//die();
-						}
 					}
 				}
 			}
 		}
 	}
+
 	function svc_convertXBMCNfoToQdMmmDb(){
 		$this->pri_convertXBMCNfoToQdMmmDb($this->pri_getMoviesFiles('G','*'));
 	}
@@ -111,10 +111,13 @@ class QDMoviesProxy extends QDMediaDBProxy{
 		$sc = null;
 		switch ($prm['e']){
 			case 'allocineapi':
-				$sc = new scraperAllocineApi;
+				$sc = new scraperAllocineApi();
 			break;
 			case 'themoviedb':
-				$sc = new scrapertheMovieDBApi;
+				$sc = new scrapertheMovieDBApi();
+			break;
+			case 'senscritique':
+				$sc = new scrapersenscritique();
 			break;
 		}
 		$res = array ();
@@ -142,6 +145,9 @@ class QDMoviesProxy extends QDMediaDBProxy{
 			break;
 			case 'themoviedb':
 				$sc = new scrapertheMovieDBApi;
+			break;
+			case 'senscritiques':
+				$sc = new scrapersenscritique();
 			break;
 		}
 		$res = array ('data'=>array());

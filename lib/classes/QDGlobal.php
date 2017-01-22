@@ -8,8 +8,17 @@
 	//include "sessions.php";
 	require QD_PATH_CLASSES.'QDServiceLocator.php';
 	require QD_PATH_CLASSES.'QDSvc.php';
-	require QD_PATH_3RD_PHP.'FirePHPCore/fb.php';
+	require dirname(__FILE__).'/../vendor/autoload.php';
 
+	QDLogger::init(array(
+		'cli'=>array(),
+		/*'mom'=>array(
+			'uri'=>"tcp://network.home.micoli.org:61613",
+			'user'=>'guest',
+			'password'=>'guest',
+			'queue'=>'/topic/qdmmmdb'
+		),*/
+	));
 	function url_exists($url){
 		if(!strstr($url, "http://")) {
 			$url = "http://".$url;
@@ -19,14 +28,11 @@
 	}
 
 	function db($v){
-		if(php_sapi_name()!='cli') print '<pre>'."\n";
+		if(php_sapi_name() != "cli") print '<pre>'."\n";
 		print_r($v);
+		if(php_sapi_name() == "cli") print "\n";
 		//print htmlentities(print_r($v,true));
-		if(php_sapi_name()!='cli'){
-			print '</pre>'."\n";
-		}else{
-			print "\n";
-		}
+		if(php_sapi_name() != "cli") print '</pre>'."\n";
 	}
 
 	function loadConf($path){
@@ -137,10 +143,6 @@
 		if(!is_array($o)) return $d;
 		if (array_key_exists($k,$o)) return $o[$k];
 		return $d;
-	}
-
-	function akead($k,$o,$d){
-		return array_key_exists_assign_default($k,$o,$d);
 	}
 
 	/**

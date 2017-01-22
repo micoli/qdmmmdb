@@ -12,6 +12,18 @@
 class QDIndexer extends QDMediaDBProxy{
 	static $id=0;
 
+	function svc_showDisks(){
+		$t = new Imagick();
+		print sprintf("Series : \n");
+		foreach($this->folderSeriesList as $k=>$disk){
+			print sprintf("%7s [%7s] %s\n",$k,$disk['name'],$disk['path']);
+		}
+		print sprintf("Movies : \n");
+		foreach($this->folderMoviesList as $k=>$disk){
+			print sprintf("%7s [%7s] %s\n",$k,$disk['name'],$disk['path']);
+		}
+	}
+
 	function svc_index(){
 		return file_get_contents(dirname(__FILE__).'/../templates/'.str_replace('::svc_','_',__METHOD__).'.tpl');
 	}

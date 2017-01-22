@@ -25,6 +25,9 @@ Ext.define('qd.mediadb.seriePanel', {
 		}
 
 		that.clickOnTreeFolderNode	 = function(view, record, HTMLElement, index, evt, eOpts ){
+			if(Ext.getCmp(that.treeserieid).getSelectionModel().getSelection().length==0){
+				Ext.getCmp(that.treeserieid).getSelectionModel().doSelect([record])
+			}
 			if (Ext.getCmp(that.treeserieid).getSelectionModel().getSelection()[0].data.id == record.data.id){
 				if(record.data.fullname!=-1){
 					that.loadFilesGrid(record.data.fullname);
@@ -303,13 +306,25 @@ Ext.define('qd.mediadb.seriePanel', {
 						}
 					},{
 						header			: 'action',
+						xtype			: 'actioncolumn',
 						width			: 100,
-						cbIconCls		: 'tree-icon-edit',
-						callback		: function(tree,node,action){
-							Ext.create('qd.mediadb.movieEditor',{
-								record		: node
-							}).show();
-						}
+						items			: [{
+							icon		: 'skins/resources/application_edit.png',
+							handler		: function(tree,nodeIdx,action){
+								var record = tree.getStore().getAt(nodeIdx);
+								if(tree.getSelectionModel().getSelection().length==0){
+									tree.getSelectionModel().doSelect([record]);
+								}
+								Ext.create('qd.mediadb.serieEditor',{
+									record	: record
+								}).show();
+							},
+							getClass: function(v, meta, rec) {
+									if(rec.data.rootDrive || rec.data.id=="SeriesRoot") {
+											return 'x-hide-display';
+									}
+							}
+						}]
 					}]
 				},{
 					xtype		: 'grid',
@@ -415,12 +430,16 @@ Ext.define('qd.mediadb.seriePanel', {
 								});
 								Ext.AjaxEx.request({
 									url		: 'p/QDSeriesProxy.renameFiles/',
+									timeout	: 600*1000,
 									params	: {
 										modified   : Ext.ux.base64.encode(Ext.JSON.encode(arrResult))
 									},
 									success	: function(r){
 										w.hide();
 										that.loadFilesGrid(pathName);
+									},
+									error:function(){
+										w.hide();
 									}
 								});
 							}

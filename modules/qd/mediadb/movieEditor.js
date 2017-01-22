@@ -232,29 +232,36 @@ Ext.define('qd.mediadb.movieEditor', {
 			var w = Ext.MessageBox.wait('Updating....');
 			Ext.AjaxEx.request({
 				url		: 'p/QDMoviesProxy.setMoviesFromPath/',
+				timeout	: 600*1000,
 				params	: {
 					ref		: Ext.JSON.encode(that.referenceRecord.data),
 					engine	: Ext.getCmp(combomoviesearchid).getValue(),
 					record	: Ext.JSON.encode(that.currentRecord)
 				},
 				success : function(res){
-					var data = Ext.JSON.decode(res.responseText);
-					if(data.corrupted){
-						console.log('corrupted');
-						Ext.MessageBox.alert('error','Filename empty or invalid ...');
-						return;
-					}
-					that.referenceRecord.beginEdit();
-					for(var k in data){
-						if (k && that.referenceRecord.fields.map[k]){
-							that.referenceRecord.set(k,data[k]);
+					try{
+						var data = Ext.JSON.decode(res.responseText);
+						if(data.corrupted){
+							console.log('corrupted');
+							Ext.MessageBox.alert('error','Filename empty or invalid ...');
+							return;
 						}
-					}
-					that.referenceRecord.endEdit();
-					that.referenceRecord.commit();
-					if(that.afterSave){
-						that.afterSave();
-						that.afterSave=null;
+						that.referenceRecord.beginEdit();
+						for(var k in data){
+							if (k && that.referenceRecord.fields.map[k]){
+								that.referenceRecord.set(k,data[k]);
+							}
+						}
+						that.referenceRecord.endEdit();
+						that.referenceRecord.commit();
+						if(that.afterSave){
+							that.afterSave();
+							that.afterSave=null;
+						}
+						w.hide();
+					}catch(e){
+						w.hide();
+						Ext.MessageBox.alert('error',e);
 					}
 					//Ext.getCmp(textchoosemoviesid).setValue(r.results.name);
 					//Ext.getCmp('butchoosemovies').events.click.listeners[0].fn();
@@ -266,7 +273,6 @@ Ext.define('qd.mediadb.movieEditor', {
 						engine	: Ext.getCmp(combomoviesearchid).getValue(),
 						record	: that.referenceRecord
 					});*/
-					w.hide();
 				}
 			});
 		}
@@ -343,7 +349,7 @@ Ext.define('qd.mediadb.movieEditor', {
 				store			: {
 					xtype			: 'store',
 					fields			: ['it'],
-					data			: [{it : 'allocineapi'},{it : 'themoviedb'}]
+					data			: [{it : 'allocineapi'},{it : 'themoviedb'},{it : 'senscritique'}]
 				},
 				queryMode		: 'local',
 				displayField	: 'it',

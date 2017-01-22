@@ -45,7 +45,7 @@ Ext.define('qd.mediadb.app', {
 		'qd.sabnzbd.sabnzbdPanel'	,
 		'qd.mediadb.seriePanel'		,
 		'qd.mediadb.serieFileSorter',
-		'qd.mediadb.moviePanel'		
+		'qd.mediadb.moviePanel'		,
 	],
 	items	:[{
 		xtype		: 'tabpanel',

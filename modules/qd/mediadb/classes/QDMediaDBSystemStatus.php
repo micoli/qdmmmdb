@@ -62,9 +62,9 @@ class QDMediaDBSystemStatus {
 		}
 		foreach($aDisks as $k=>$v){
 			$aDisks[$k]['totalSize'	]	= disk_total_space($v['mountPoint']);
-			$aDisks[$k]['totalSizeH']	= CW_Tools::getSymbolByQuantity(disk_total_space($v['mountPoint']));
+			$aDisks[$k]['totalSizeH']	= CW_Tools::getSymbolByQuantity($aDisks[$k]['totalSize'	]);
 			$aDisks[$k]['freeSpace'	]	= disk_free_space($v['mountPoint']);
-			$aDisks[$k]['freeSpaceH']	= CW_Tools::getSymbolByQuantity(disk_free_space($v['mountPoint']));
+			$aDisks[$k]['freeSpaceH']	= CW_Tools::getSymbolByQuantity($aDisks[$k]['freeSpace']);
 			$aDisks[$k]['percent'	]	= sprintf("%0.2f",($aDisks[$k]['freeSpace']/1024)/($aDisks[$k]['totalSize']/1024)*100);
 		}
 		return $aDisks;

@@ -1,4 +1,4 @@
-<?php
+<?
 //session_start();
 
 class QDSvc{
@@ -24,14 +24,14 @@ class QDSvc{
 			$_SERVER['SERVER_NAME']='local';
 			foreach ($argv as $k=>$arg){
 				if ($k>0){
-					$t = explode("=",$arg,2);
+					$t = split("=",$arg,2);
 					$_REQUEST[$t[0]]=$t[1];
 				}
 			}
 		}
 		error_reporting(E_ERROR | E_WARNING | E_PARSE );
 		if ($_REQUEST['exw_action']){
-			$arrArg		= explode('.',$_REQUEST['exw_action']);
+			$arrArg		= split('\.',$_REQUEST['exw_action']);
 			if($smfCompatible){
 				$objId		= 'svc'.ucfirst($arrArg[1]);
 				$methodName	= $arrArg[2];
@@ -55,9 +55,6 @@ class QDSvc{
 				case 'html' :
 					header('content-type:text/html');
 				break;
-				case 'htmltable' :
-					header('content-type:text/html');
-				break;
 			}
 
 			if($smfCompatible){
@@ -71,9 +68,6 @@ class QDSvc{
 					$result = json_encode($result);
 				break;
 				case 'html' :
-				break;
-				case 'htmltable' :
-					$result = QDMisc::array2htmltable(array_key_exists('htmltablekey',$_REQUEST)?$result[$_REQUEST['htmltablekey']]:$result);
 				break;
 			}
 			die($result);

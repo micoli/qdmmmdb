@@ -2,19 +2,27 @@ Ext.define('qd.system.systemStatus', {
 	extend		: 'Ext.Panel',
 	alias		: 'widget.qd.system.systemStatus',
 	timer		: null,
-	
+
 	afterRender: function () {
 		var that = this;
 		Ext.Function.defer(that.refresh, 500, that);
 		that.callParent();
 	},
-
-	onDestroy: function () {
+	closeTimer : function(){
 		var that = this;
 		if (that.timer) {
 			window.clearTimeout(that.timer);
 			that.timer = null;
 		}
+	},
+	onClose: function () {
+		var that = this;
+		that.closeTimer();
+		that.callParent();
+	},
+	onDestroy: function () {
+		var that = this;
+		that.closeTimer();
 		that.callParent();
 	},
 
@@ -233,11 +241,11 @@ Ext.define('qd.system.systemStatus', {
 						return record.data.device;
 					}
 				},{
-					header: "type"			, width:  80, dataIndex: 'type'				, sortable: true
+					header: "type"	, width:  80, dataIndex: 'type'				, sortable: true
 				},{
-					header: "freeSpaceH"	, width: 100, dataIndex: 'freeSpaceH'		, sortable: true
+					header: "free"	, width: 100, dataIndex: 'freeSpaceH'		, sortable: true
 				},{
-					header: "totalSizeH"	, width: 100, dataIndex: 'totalSizeH'		, sortable: true
+					header: "size"	, width: 100, dataIndex: 'totalSizeH'		, sortable: true
 				}]
 			},{
 				layout	: 'border',
