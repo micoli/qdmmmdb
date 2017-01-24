@@ -1,4 +1,4 @@
-<?
+<?php
 include "BEncode.php";
 use Bhutanio\BEncode\BEncode;
 

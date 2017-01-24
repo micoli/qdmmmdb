@@ -1,4 +1,4 @@
-<?
+<?php
 class scraperAllocineApi extends QDHtmlMovieParser{
 	function __construct(){
 		$this->QDNet			= new QDNet();

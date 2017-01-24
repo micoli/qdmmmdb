@@ -1,4 +1,4 @@
-<?
+<?php
 include  QD_PATH_3RD_PHP."simple_html_dom.php";
 class QDMediaDBProxy {
 	var $QDNet;

@@ -1,4 +1,4 @@
-<?
+<?php
 /*
 select media_type,count(*) from art group by  media_type;
 delete from art where url like '/mnt/%';

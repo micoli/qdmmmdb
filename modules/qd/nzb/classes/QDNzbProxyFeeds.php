@@ -1,4 +1,4 @@
-<?
+<?php
 include_once QD_PATH_3RD_PHP."simple_html_dom.php";
 
 class QDNzbProxyFeeds{

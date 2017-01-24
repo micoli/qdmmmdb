@@ -1,4 +1,4 @@
-<?
+<?php
 use Symfony\Component\DomCrawler\Crawler;
 
 class scrapersenscritique extends QDHtmlMovieParser{
