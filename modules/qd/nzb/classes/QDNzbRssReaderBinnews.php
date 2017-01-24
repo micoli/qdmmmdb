@@ -1,4 +1,4 @@
-<?
+<?php
 class QDNzbRssReaderBinnews extends  QDNzbRssReader{
 	function svc_readAllFeeds(){
 		$this->svc_readFeed(6);
