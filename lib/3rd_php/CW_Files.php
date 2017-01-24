@@ -15,17 +15,17 @@ class CW_Files {
 
 		$dirname = substr($path, 0, strlen($path) - strlen($basename) - 1);
 
-		if (strpos($basename, '.') !== false && is_file($path)){
+		if (strpos($basename, '.') !== false){// && is_file($path)){
 			$extension		= end(explode('.', $path));
-			 $filename		= substr($basename, 0, strlen($basename) - strlen($extension) - 1);
+			$filename		= substr($basename, 0, strlen($basename) - strlen($extension) - 1);
 		}else{
-			 $extension		= '';
+			$extension		= '';
 			$filename		= $basename;
 		}
 
 		return array(
 			'fullPath'	=> dirname($path),
-			'mtime'		=> date('Y-m-d H:i:s',filemtime($path)),
+			'mtime'		=> file_exists($path)?date('Y-m-d H:i:s',filemtime($path)):0,
 			'file'		=> $path,
 			'dirname'	=> $dirname,
 			'basename'	=> $basename,
@@ -34,4 +34,3 @@ class CW_Files {
 		);
 	}
 }
-?>

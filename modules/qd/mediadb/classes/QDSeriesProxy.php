@@ -334,9 +334,6 @@ class QDSeriesProxy extends QDMediaDBProxy{
 					$thisDir['numbertorename']=count($arrToRename['results']);
 				}
 			}
-			if(false && preg_match('!wallander!i',$parentDir)){
-				die(__FILE__." -> ".__LINE__);
-			}
 			//$this->makeSerieNFO($v . '/tvshow.nfo');
 			$subdir = $this->getSeriesDirectory($v, ($level + 1));
 			if (count($subdir) > 0) {
@@ -346,7 +343,10 @@ class QDSeriesProxy extends QDMediaDBProxy{
 			}
 			$arr[] = $thisDir;
 		}
-		return $arr;
+		uasort($arr,function($a,$b){
+			return strcasecmp($a['text'],$b['text']);
+		});
+		return array_values($arr);
 	}
 
 	private function getBannersXml($seriesid) {
@@ -396,12 +396,17 @@ class QDSeriesProxy extends QDMediaDBProxy{
 		}
 		if (file_exists($seriePath . '/tvdb.xml')) {
 			$xml = $this->getUpdateUrlOrXmlFromSeriePath($seriePath, 'xml');
-			$xml = $this->mb_str_replace('’', "\'", $xml);
-			$doc = new DomDocument;
-			$doc->loadXML($xml);
-			$xpath = new DOMXPath($doc);
+			$xpath = $this->getXpathFromXmlDoc($xml);
 			self::$tvdbxpath[$seriePath]=$xpath;
 		}
+		return $xpath;
+	}
+
+	function getXpathFromXmlDoc($xml){
+		$xml = $this->mb_str_replace('’', "\'", $xml);
+		$doc = new DomDocument;
+		$doc->loadXML($xml);
+		$xpath = new DOMXPath($doc);
 		return $xpath;
 	}
 
@@ -1054,8 +1059,12 @@ class QDSeriesProxy extends QDMediaDBProxy{
 		foreach ($this->arrRegex as $k => $rgx) {
 			$res['filename'] = $filename;
 			if (preg_match('`' . $rgx['rgx'] . '`i', $filename, $match)) {
+				if($rgx['tyear'] && preg_match('!(19|20)[0-9]{2}!',$filename)){
+					continue;
+				}
 				$res['saison'	] = ($match[$rgx['s']] * 1);
 				$res['episode'	] = ($match[$rgx['e']] * 1);
+				$res['serie'	] = $match[$rgx['n']];
 				$res['rgx'		] = $rgx['rgx'];
 				$res['rgxnum'	] = $k;
 				$res['rgx_match'] = $match;

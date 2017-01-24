@@ -44,8 +44,12 @@ class QDMediaDBProxy {
 		foreach($arrTmp as $k=>$v){
 			$this->folderMoviesList[$v['name']]=$v;
 		}
-
 	}
+
+	protected function removeTrailingYear($v){
+		return preg_replace('! \([1-2][0-9]{3}\)$!','',$v);
+	}
+
 	/**
 	 * Calculate new image dimensions to new constraints
 	 * http://www.php.net/manual/fr/function.imagick-thumbnailimage.php
@@ -145,17 +149,18 @@ class QDMediaDBProxy {
 		$a = $this->mb_str_replace(':', ' ', $a);
 		$a = $this->mb_str_replace('/', ' ', $a);
 		$a = $this->mb_str_replace('\\', ' ', $a);
+		$a = preg_replace('!^\[\s*(.+\.)*(.+\..+)\s*\] !','',$a);
 		return $this->mb_trim($this->delmulspace($a));
 	}
 
-	function extractXQuery($xpath, $xpathQ) {
+	function extractXQuery($xpath, $xpathQ,$utf8=false) {
 		$val = '';
 		if (!$xpath) {
 			return '';
 		}
 		$arts = $xpath->query($xpathQ);
 		foreach ($arts as $k => $art) {
-			$val = utf8_decode($art->nodeValue);
+			$val = ($utf8)?$art->nodeValue:utf8_decode($art->nodeValue);
 			break;
 		}
 		return $val;
