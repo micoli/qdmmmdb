@@ -45,13 +45,14 @@ class QDSeriesBatch extends QDSeriesProxy{
 					$this->addIfNotPresent($aPaths,$sSerieName,$v);
 					$this->addIfNotPresent($aPaths,$this->removeTrailingYear($sSerieName),$v);
 					$this->addIfNotPresent($aPaths,$this->removeLongTitle($sSerieName),$v);
-
-					$urlen	= sprintf('http://www.thetvdb.com/api/%s/series/%s/en.xml',$this->thetvdbkey,$sSerieId);
-					$xpathen = $this->getXpathFromXmlDoc($this->QDNet->getCacheURL($urlen, 'seriesDetail', $this->cacheminutes, $this->cache));
-					$sSerieName = $this->extractXQuery($xpathen, "/Data/Series/SeriesName",true);
-					$this->addIfNotPresent($aPaths,$sSerieName,$v);
-					$this->addIfNotPresent($aPaths,$this->removeTrailingYear($sSerieName),$v);
-					$this->addIfNotPresent($aPaths,$this->removeLongTitle($sSerieName),$v);
+					if($sSerieId){
+						$urlen	= sprintf('http://www.thetvdb.com/api/%s/series/%s/en.xml',$this->thetvdbkey,$sSerieId);
+						$xpathen = $this->getXpathFromXmlDoc($this->QDNet->getCacheURL($urlen, 'seriesDetail', $this->cacheminutes, $this->cache));
+						$sSerieName = $this->extractXQuery($xpathen, "/Data/Series/SeriesName",true);
+						$this->addIfNotPresent($aPaths,$sSerieName,$v);
+						$this->addIfNotPresent($aPaths,$this->removeTrailingYear($sSerieName),$v);
+						$this->addIfNotPresent($aPaths,$this->removeLongTitle($sSerieName),$v);
+					}
 				}
 			}
 		}
