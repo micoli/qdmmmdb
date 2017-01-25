@@ -831,4 +831,3 @@ class QDMediaDBProxy {
 	}
 
 }
-?>
