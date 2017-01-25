@@ -48,7 +48,7 @@ include('QDException.php');;
 		function __sleep(){
 			unset($this->v['pdoDB']);
 			unset($this->v['sth']);
-			return( array_keys( get_object_vars( &$this ) ) );
+			return( array_keys( get_object_vars( $this ) ) );
 		}
 
 		function __wakeup(){
@@ -698,4 +698,3 @@ include('QDException.php');;
 			}
 		} // DDLGetFieldsMeta
 	}//end class
-?>

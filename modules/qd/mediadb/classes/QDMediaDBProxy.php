@@ -38,7 +38,6 @@ class QDMediaDBProxy {
 		$this->arrKeepSpecialTag			= $GLOBALS['conf']['qdmediadb']['arrKeepSpecialTag'];
 
 		$this->folderSeriesList				= $GLOBALS['conf']['qdmediadb_serie']['folderSeriesList'];
-		//$this->folderSeriesList				= array_slice($GLOBALS['conf']['qdmediadb_serie']['folderSeriesList'],0,1);
 		$arrTmp								= $GLOBALS['conf']['qdmediadb_movie']['folderMoviesList'];
 		$this->folderMoviesList				= array();
 		foreach($arrTmp as $k=>$v){

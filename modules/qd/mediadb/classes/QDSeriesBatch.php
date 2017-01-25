@@ -38,6 +38,7 @@ class QDSeriesBatch extends QDSeriesProxy{
 			foreach ($dh as $k => $v) {
 				$seriePath = $this->getSeriePath($v);
 				if (file_exists($seriePath . '/tvdb.xml') || file_exists($seriePath . '/tvshow.nfo') ) {
+					db($seriePath);
 					$xpath = $this->getXmlDocFromSeriePath($seriePath);
 					$sSerieId = $this->extractXQuery($xpath, "/Data/Series/id",true);
 					$sSerieName = $this->extractXQuery($xpath, "/Data/Series/SeriesName",true);
