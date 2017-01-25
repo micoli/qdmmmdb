@@ -1,4 +1,4 @@
-<?
+<?php
 class QDNzbRssReaderNG4Y extends  QDNzbRssReader{
 	function svc_readAllFeeds(){
 		$this->svc_readFeed(101);

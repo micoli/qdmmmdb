@@ -1,4 +1,4 @@
-<?
+<?php
 	class QDNet {
 		static $cachedFilesDatas=array();
 
@@ -124,4 +124,3 @@
 			return $contents;
 		}
 	}
-?>

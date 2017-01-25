@@ -1,4 +1,4 @@
-<?
+<?php
 class QDFilesProxy{
 	static $arrPaths=array();
 	function init(){
@@ -44,7 +44,7 @@ class QDFilesProxy{
 			// Lien symbolique
 			$info = 'l';
 		} elseif (($perms & 0x8000) == 0x8000) {
-			// RŽgulier
+			// Rï¿½gulier
 			$info = '-';
 		} elseif (($perms & 0x6000) == 0x6000) {
 			// Block special
@@ -53,7 +53,7 @@ class QDFilesProxy{
 			// Dossier
 			$info = 'd';
 		} elseif (($perms & 0x2000) == 0x2000) {
-			// Caractre spŽcial
+			// Caractï¿½re spï¿½cial
 			$info = 'c';
 		} elseif (($perms & 0x1000) == 0x1000) {
 			// pipe FIFO

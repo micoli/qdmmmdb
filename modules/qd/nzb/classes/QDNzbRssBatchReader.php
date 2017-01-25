@@ -1,4 +1,4 @@
-<?
+<?php
 class QDNzbRssBatchReader {
 	function svc_run(){
 		$qddb = new QDDB();

@@ -1,4 +1,4 @@
-<?
+<?php
 class QDServiceLocatorQD implements QDLocator{
 	protected $base = '.';
 	public function __construct($directory='.')    {
@@ -46,5 +46,3 @@ class QDServiceLocatorQD implements QDLocator{
 	}
 }
 QDServiceLocator::attachLocator(new QDServiceLocatorQD(), 'QD');
-
-?>

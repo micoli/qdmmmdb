@@ -1,4 +1,4 @@
-<?
+<?php
 class QDMoviesProxy extends QDMediaDBProxy{
 	var $QDNet;
 

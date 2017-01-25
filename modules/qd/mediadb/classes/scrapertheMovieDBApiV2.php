@@ -1,4 +1,4 @@
-<?
+<?php
 
 class scrapertheMovieDBApiV2 extends QDHtmlMovieParser{
 	function __construct(){

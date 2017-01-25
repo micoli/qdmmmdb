@@ -1,4 +1,4 @@
-<?
+<?php
 class QDMediaDBSystemStatus {
 	var $QDNet;
 

@@ -1,4 +1,4 @@
-<?
+<?php
 class QDServiceLocatorMAGPIE implements QDLocator{
 	protected $base = '.';
 	public function __construct($directory='.')  {
@@ -23,4 +23,3 @@ class QDServiceLocatorMAGPIE implements QDLocator{
 	}
 }
 QDServiceLocator::attachLocator(new QDServiceLocatorMAGPIE(), 'MAGPIE');
-?>

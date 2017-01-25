@@ -1,4 +1,4 @@
-<?
+<?php
 //session_start();
 
 class QDSvc{
@@ -48,13 +48,15 @@ class QDSvc{
 			}
 			$output_mode = strtolower(array_key_exists_assign_default('output_mode', $_REQUEST, 'json'));
 
-			switch ($output_mode){
-				case 'json' :
-					header("Content-Type: application/json; charset: UTF-8",true);
-				break;
-				case 'html' :
-					header('content-type:text/html');
-				break;
+			if(!(defined('SMF_CLI') && SMF_CLI)){
+				switch ($output_mode){
+					case 'json' :
+						header("Content-Type: application/json; charset: UTF-8",true);
+					break;
+					case 'html' :
+						header('content-type:text/html');
+					break;
+				}
 			}
 
 			if($smfCompatible){
@@ -74,4 +76,3 @@ class QDSvc{
 		}
 	}
 }
-?>
