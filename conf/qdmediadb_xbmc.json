@@ -1,4 +1,6 @@
 {
-	"xbmcPath" 		: "//bigone/userdata/",
-	"xbmcDB" 		: "//bigone/userdata/Database/MyVideos34.db"
+	"xbmcPath" 	: "//bigone/userdata/",
+	"xbmcDB" 	: "mysql:host=db.home.micoli.org;dbname=xbmc_video75",
+	"xbmcDBUser" 	: "root",
+	"xbmcDBPass" 	: "toor"
 }

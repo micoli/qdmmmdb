@@ -189,6 +189,7 @@ Ext.define('qd.mediadb.seriePanel', {
 				handler	: function(a,b){
 					var node = Ext.getCmp(that.treeserieid).getSelectionModel().getSelection()[0];
 					Ext.create('qd.mediadb.serieEditor',{
+						displayMode	: 'edit',
 						record	: node
 					}).show();
 				}
@@ -213,6 +214,15 @@ Ext.define('qd.mediadb.seriePanel', {
 						}
 					});
 
+				}
+			},'-',{
+				text	: 'create path',
+				handler	: function(a,b){
+					var node = Ext.getCmp(that.treeserieid).getSelectionModel().getSelection()[0];
+					Ext.create('qd.mediadb.serieEditor',{
+						displayMode	: 'create',
+						record	: node
+					}).show();
 				}
 			}]
 		});
@@ -316,6 +326,7 @@ Ext.define('qd.mediadb.seriePanel', {
 									tree.getSelectionModel().doSelect([record]);
 								}
 								Ext.create('qd.mediadb.serieEditor',{
+									displayMode : 'edit',
 									record	: record
 								}).show();
 							},

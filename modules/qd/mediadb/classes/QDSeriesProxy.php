@@ -184,17 +184,27 @@ class QDSeriesProxy extends QDMediaDBProxy{
 	}
 
 	function svc_setSerieFromPath() {
-		return $this->pri_setSerieFromPath($_REQUEST['p'],$_REQUEST['i']);
+		return $this->pri_setSerieFromPath($_REQUEST['m'],$_REQUEST['p'],$_REQUEST['i']);
 	}
 
-	function pri_setSerieFromPath($path,$id) {
-		$path	= $this->getSeriePath($path);
+	function pri_setSerieFromPath($mode,$path,$id) {
 		$urlvo	= sprintf('http://www.thetvdb.com/api/%s/series/%s/fr.xml',$this->thetvdbkey,$id);
 		$urlen	= sprintf('http://www.thetvdb.com/api/%s/series/%s/en.xml',$this->thetvdbkey,$id);
 		$xml	= $this->QDNet->getCacheURL($urlvo, 'seriesDetail', $this->cacheminutes, $this->cache);
 		if ($xml == '') {
 			$xml = $this->QDNet->getCacheURL($urlen, 'seriesDetail', $this->cacheminutes, $this->cache);
 		}
+
+		if($mode=='create'){
+			$xpath = $this->getXpathFromXmlDoc($xml);
+			$serieName = $this->cleanFilename($this->extractXQuery($xpath, "/Data/Series/SeriesName"));
+			$path = $path.'/'.utf8_encode($serieName);
+			if(file_exists($path)){
+				return array('ok'=>false	,'error'=>utf8_decode(sprintf('File %s does exists',$path)));
+			}
+			mkdir($path,0777,true);
+		}
+		$path	= $this->getSeriePath($path);
 		$filename = str_replace("\\'", "'", $path).'/tvdb.xml';
 		file_put_contents($filename, $xml);
 
@@ -553,7 +563,7 @@ class QDSeriesProxy extends QDMediaDBProxy{
 			return array('results'=>array(),'arrSerie'=>array());
 			if($idSerie){
 				print "autodetection serie";
-				$this->pri_setSerieFromPath($seriePath,$idSerie);
+				$this->pri_setSerieFromPath('edit',$seriePath,$idSerie);
 			}
 		}
 		if(is_null($xpath)){
@@ -875,7 +885,7 @@ class QDSeriesProxy extends QDMediaDBProxy{
 							db("missing ".$path);
 							$tvdbid=$this->getTvDbIdFromPath($path);
 							if($tvdbid){
-								$this->pri_setSerieFromPath($path,$tvdbid);
+								$this->pri_setSerieFromPath('edit',$path,$tvdbid);
 							}
 						}
 					}

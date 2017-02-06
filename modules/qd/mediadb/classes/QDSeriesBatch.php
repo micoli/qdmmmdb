@@ -38,7 +38,6 @@ class QDSeriesBatch extends QDSeriesProxy{
 			foreach ($dh as $k => $v) {
 				$seriePath = $this->getSeriePath($v);
 				if (file_exists($seriePath . '/tvdb.xml') || file_exists($seriePath . '/tvshow.nfo') ) {
-					db($seriePath);
 					$xpath = $this->getXmlDocFromSeriePath($seriePath);
 					$sSerieId = $this->extractXQuery($xpath, "/Data/Series/id",true);
 					$sSerieName = $this->extractXQuery($xpath, "/Data/Series/SeriesName",true);
@@ -133,7 +132,6 @@ class QDSeriesBatch extends QDSeriesProxy{
 		foreach ($dh as $k => $v) {
 			$d = CW_Files::pathinfo_utf($v);
 			if (in_array(strtolower($d['extension']), $this->movieExt)) {
-
 				$d['filename'] = $this->cleanFilename($d['filename']);
 				$res = $this->extractSeriesFilenameStruct($d['filename']);
 				$this->findSeriesPath($aSeriesPaths,$d['filename']);

@@ -42,7 +42,7 @@ Ext.define('qd.mediadb.serieEditor', {
 
 					return rank1 > rank2 ? -1 : 1;
 				}
-				}],
+			}],
 			listeners :{
 				load : function (r){
 					if (this.proxy.reader.jsonData.seriesid){
@@ -126,11 +126,22 @@ Ext.define('qd.mediadb.serieEditor', {
 						Ext.AjaxEx.request({
 							url		: 'p/QDSeriesProxy.setSerieFromPath/',
 							params	: {
+								m		: that.displayMode,
 								p		: that.record.get('fullname'),
 								i		: recordSelected[0].get('seriesid')
 							},
 							success : function(res){
 								var r = Ext.JSON.decode(res.responseText)
+								if(that.displayMode=='create'){
+									if(r.ok==false){
+										return;
+									}
+									that.record = that.record.appendChild({
+										text : r.results.name,
+										tvdb : 'series',
+										leaf : false
+									})
+								}
 								Ext.getCmp(that.textchooseserieid).setValue(r.results.name);
 								that.record.set('tvdb','serie');
 								that.record.expand();
@@ -160,6 +171,7 @@ Ext.define('qd.mediadb.serieEditor', {
 							Ext.AjaxEx.request({
 								url		: 'p/QDSeriesProxy.setSerieFromPath/',
 								params	: {
+									m		: that.displayMode,
 									p		: that.record.get('fullname'),
 									i		: text
 								},
@@ -183,17 +195,19 @@ Ext.define('qd.mediadb.serieEditor', {
 			}],
 			listeners	:{
 				show : function(){
-					Ext.AjaxEx.request({
-						url		: 'p/QDSeriesProxy.getSerieFromPath/',
-						params	: {
-							p		: that.record.get('fullname')
-						},
-						success : function(res){
-							var r = Ext.JSON.decode(res.responseText)
-							Ext.getCmp(that.textchooseserieid).setValue(r.results.name);
-							searchSerie();
-						}
-					});
+					if(that.displayMode=='edit'){
+						Ext.AjaxEx.request({
+							url		: 'p/QDSeriesProxy.getSerieFromPath/',
+							params	: {
+								p		: that.record.get('fullname')
+							},
+							success : function(res){
+								var r = Ext.JSON.decode(res.responseText)
+								Ext.getCmp(that.textchooseserieid).setValue(r.results.name);
+								searchSerie();
+							}
+						});
+					}
 				}
 			}
 		});

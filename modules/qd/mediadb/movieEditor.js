@@ -129,9 +129,10 @@ Ext.define('qd.mediadb.movieEditor', {
 		});
 
 		var searchMovie = function(){
+			var title = Ext.getCmp(textchoosemoviesid).getValue();
 			Ext.getCmp(gridchoosemoviesid).store.load({
 				params	: {
-					m		: Ext.getCmp(textchoosemoviesid).getValue(),
+					m		: title,
 					e		: Ext.getCmp(combomoviesearchid).getValue()
 				}
 			});
