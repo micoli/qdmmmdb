@@ -87,8 +87,17 @@ class QDSeriesBatch extends QDSeriesProxy{
 	private function findSeriesPath($aSeriesPaths,$serieFilename){
 		$serieFilename = $this->cleanupSaisonTitleForMatch($serieFilename);
 		foreach($aSeriesPaths as $k=>$v){
-			if($serieFilename == $this->cleanupSaisonTitleForMatch($k)){
+			if(strcasecmp($serieFilename,$this->cleanupSaisonTitleForMatch($k))==0){
 				return $v;
+			}
+		}
+		$serieFilenameWithoutYear = preg_replace('! [0-9]{4}$!','',$serieFilename);
+		if ($serieFilename!=$serieFilenameWithoutYear){
+			$serieFilename=$serieFilenameWithoutYear;
+			foreach($aSeriesPaths as $k=>$v){
+				if(strcasecmp($serieFilename,$this->cleanupSaisonTitleForMatch($k))==0){
+					return $v;
+				}
 			}
 		}
 		return false;
@@ -126,39 +135,91 @@ class QDSeriesBatch extends QDSeriesProxy{
 		return $tags;
 	}
 
-	public function svc_test2($dh){
-		$aSeriesPaths = $this->getSeriesAvailablePaths(array('/mnt/###dwn/__Series','/mnt/###dwn/__transmission/_fakeSeries'));
+	private function getIncomingFiles($path){
+		$aResult = [];
+		$aFiles = glob($path.'/*');
+		foreach($aFiles as $file){
+			if(!is_dir($file)){
+				$d = CW_Files::pathinfo_utf($file);
+				if (in_array(strtolower($d['extension']), $this->movieExt)) {
+					$aResult[]=$file;
+				}
+			}else{
+				foreach(glob($file.'/*') as $file){
+					$d = CW_Files::pathinfo_utf($file);
+					if (in_array(strtolower($d['extension']), $this->movieExt)) {
+						$aResult[]=$file;
+					}
+				}
+			}
+		}
+		return $aResult;
+	}
 
+	public function svc_renameIncoming(){
+		$aError = [];
+
+		if(array_key_exists('path',$_REQUEST) && $_REQUEST['path']!='test'){
+			$dh = $this->getIncomingFiles($_REQUEST['path']);
+		}else{
+			$dh = array_map(function($p){
+				return '/mnt/dwn/'.$p;
+			},json_decode(file_get_contents('/mnt/###dwn/torrents.json'),true));
+		}
+
+		if(!array_key_exists('seriePaths',$_REQUEST)){
+			return array(
+				'success'=>false,
+				'error'=>'no path specified'
+			);
+		}
+
+		$aSeriesPaths = $this->getSeriesAvailablePaths(explode(',',$_REQUEST['seriePaths']));
+		$arrResult = [];
 		foreach ($dh as $k => $v) {
 			$d = CW_Files::pathinfo_utf($v);
 			if (in_array(strtolower($d['extension']), $this->movieExt)) {
+				//is a video file
 				$d['filename'] = $this->cleanFilename($d['filename']);
 				$res = $this->extractSeriesFilenameStruct($d['filename']);
-				$this->findSeriesPath($aSeriesPaths,$d['filename']);
 				if ($res['found']) {
+					//series found
 					$seriePath = $this->findSeriesPath($aSeriesPaths, $res['serie']);
 					if($seriePath){
 						$xpath = $this->getXmlDocFromSeriePath($seriePath);
 						if($xpath){
-							$tags = $this->extractLanguage($d['filename']);
-							$serieName = utf8_encode($this->cleanFilename($this->extractXQuery($xpath, "/Data/Series/SeriesName")));
-							$episodeName = $this->extractXQuery($xpath, "/Data/Episode[SeasonNumber='" . $res['saison'] . "' and EpisodeNumber='" . ($res['episode'] * 1) . "']/EpisodeName");
-							db(sprintf(
-								"%50s [[]] %s [[]] %s",
-								$d['filename'],
-								sprintf("%s/S%d %s", $seriePath, $res['saison'], $tags['short_language']),
-								sprintf("%s [%dx%02d] %s.%s", $serieName, $res['saison'], $res['episode'], $episodeName, strtolower($d['extension']))
-							));
-							$arrResult[]=$res;
+							$tags			= $this->extractLanguage($d['filename']);
+							$serieName		= utf8_encode($this->cleanFilename($this->extractXQuery($xpath, "/Data/Series/SeriesName")));
+							$episodeName	= utf8_encode($this->extractXQuery($xpath, "/Data/Episode[SeasonNumber='" . $res['saison'] . "' and EpisodeNumber='" . ($res['episode'] * 1) . "']/EpisodeName"));
+							$renamedPath	= sprintf("%s/S%d %s", $seriePath, $res['saison'], $tags['short_language']);
+							$renamedFile	= sprintf("%s [%dx%02d] %s", $serieName, $res['saison'], $res['episode'], $episodeName);
+							//db(sprintf("%-80s :: %s :: %s",$d['filename'],$renamedPath,$renamedFile));
+							$arrResult[] = array(
+								'originalFile'	=> $d['file'],
+								'renamedPath'	=> $renamedPath,
+								'renamedFile'	=> $renamedFile,
+								'renamedExt'	=> strtolower($d['extension'])
+							);
+						}
+					}else{
+						$msg = sprintf('Error : Can\'t find a path for [%s]',$this->mb_str_replace('.', ' ', $res['serie']));
+						if(!in_array($msg,$aError)){
+							$aError[]=$msg;
+							db($msg);
 						}
 					}
 				}
 			}
 		}
-die();
+
 		asort($arrResult);
-		db(array_map(function($v){
-			return $v['filename'];
-		},array_values($arrResult)));
+		$arrResult = array_values($arrResult);
+		foreach($arrResult as $file){
+			if(array_key_exists('dryRun',$_REQUEST) && $_REQUEST['dryRun']){
+				print_r(sprintf("%-80s :: %s :: %s",$file['originalFile'],$file['renamedPath'],$file['renamedFile'].'.'.$file['renamedExt']));
+			}else{
+				$this->pri_renameSerieEpisode($file['originalFile'],$file['renamedPath'].'/'.$file['renamedFile'],$file['renamedExt']);
+			}
+		}
 	}
 }

@@ -12,7 +12,7 @@ class QDNet {
 			curl_setopt ($ch, CURLOPT_FOLLOWLOCATION, 1);
 			curl_setopt ($ch, CURLOPT_RETURNTRANSFER, 1);
 			curl_setopt ($ch, CURLOPT_CONNECTTIMEOUT, $timeout);
-			curl_setopt ($ch, CURLOPT_TRANSFERTTIMEOUT, $timeout);
+			curl_setopt ($ch, CURLOPT_TIMEOUT, $timeout);
 			curl_setopt ($ch, CURLOPT_USERAGENT, $useragent);
 			$f = curl_exec($ch);
 			curl_close($ch);
