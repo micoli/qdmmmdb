@@ -432,6 +432,7 @@ class QDMediaDBProxy {
 	}
 
 	function makeMovieDB(&$data) {
+		return;
 		$xbmcpath = $this->getXbmcMoviesPath($data['fileDetail']['file']);
 
 		$this->initdb();

@@ -11,6 +11,17 @@ class QDSvc{
 	function getObj($id){
 		return self::$object[$id];
 	}
+	static function utf8ize($mixed) {
+		//return $mixed;
+		if (is_array($mixed)) {
+			    foreach ($mixed as $key => $value) {
+					        $mixed[$key] = self::utf8ize($value);
+							    }
+		} else if (is_string ($mixed)) {
+			    return utf8_encode($mixed);
+		}
+		return $mixed;
+	}
 
 	static function run(){
 		global $argv;
@@ -67,7 +78,9 @@ class QDSvc{
 
 			switch ($output_mode){
 				case 'json' :
-					$result = json_encode($result);
+					$result = json_encode(self::utf8ize($result));
+					//$result = json_encode($result);
+					//print json_last_error() ;
 				break;
 				case 'html' :
 				break;
