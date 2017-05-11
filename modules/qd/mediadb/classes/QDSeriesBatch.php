@@ -8,6 +8,7 @@ class QDSeriesBatch extends QDSeriesProxy{
 		'language'	=> ['VOSTFR','TRUEFRENCH','FRENCH','french','jmt','FASTSUB','SUBFRENCH','Vostfr','TVRip'],
 		'year'		=> []
 	);
+	static $cleanedFilenameCache=array();
 
 	public function svc_testTorrent(){
 		$aFiles = [];
@@ -26,7 +27,7 @@ class QDSeriesBatch extends QDSeriesProxy{
 
 	public function svc_test(){
 		/*
- 		$aFiles = array_map(function($p){
+		$aFiles = array_map(function($p){
 			return '/mnt/dwn/'.$p;
 		},json_decode(file_get_contents('/mnt/###dwn/torrents.json'),true));
 		 */
@@ -46,7 +47,7 @@ class QDSeriesBatch extends QDSeriesProxy{
 					$sSerieName = $this->extractXQuery($xpath, "/Data/Series/SeriesName",true);
 					$this->addIfNotPresent($aPaths,$sSerieName,$v);
 					$this->addIfNotPresent($aPaths,$this->cleanupSaisonTitleForMatch($sSerieName),$v);
-					$aFilters=['removeTrailingYear','removeLongTitle','removeUS','removeApo','removeProvider'];
+					$aFilters=['removeTrailingYear','removeLongTitle','removeCountry','removeApo','removeProvider'];
 					foreach($aFilters as $sFilterName){
 						$this->addIfNotPresent($aPaths,$this->$sFilterName($sSerieName),$v);
 						foreach($aFilters as $sFilterName2){
@@ -91,12 +92,12 @@ class QDSeriesBatch extends QDSeriesProxy{
 		return $s;
 	}
 
-	public function removeUS($s){
+	public function removeCountry($s){
 		$m = [];
-		if(preg_match('!(.*?) us$!i',$s,$m)){
+		if(preg_match('!(.*?) (us|uk)$!i',$s,$m)){
 			return $m[1];
 		}
-		if(preg_match('!(.*?) \(us\)$!i',$s,$m)){
+		if(preg_match('!(.*?) \(us|uk\)$!i',$s,$m)){
 			return $m[1];
 		}
 		return $s;
@@ -117,7 +118,10 @@ class QDSeriesBatch extends QDSeriesProxy{
 	}
 
 	private function cleanupSaisonTitleForMatch($serieFilename){
-		$aFilters=['removeTrailingYear','removeLongTitle','removeUS','removeApo','removeProvider'];
+		if(array_key_exists($serieFilename,self::$cleanedFilenameCache)){
+			return self::$cleanedFilenameCache[$serieFilename];
+		}
+		$aFilters=['removeTrailingYear','removeLongTitle','removeCountry','removeApo','removeProvider'];
 		$serieFilename = str_replace('.'	,' ',$serieFilename);
 		$serieFilename = str_replace('\''	,' ',$serieFilename);
 		$serieFilename = str_replace('"'	,' ',$serieFilename);
@@ -126,19 +130,20 @@ class QDSeriesBatch extends QDSeriesProxy{
 		foreach($aFilters as $sFilterName){
 			$serieFilename= $this->$sFilterName($serieFilename);
 		}
-		$serieFilename = strtolower($serieFilename);
+		$serieFilename = trim(strtolower($serieFilename));
+		self::$cleanedFilenameCache[$serieFilename] = $serieFilename;
 		return $serieFilename;
 	}
 
 	private function findSeriesPath($aSeriesPaths,$serieFilename){
 		$serieFilename = $this->cleanupSaisonTitleForMatch($serieFilename);
-		#print $serieFilename."\n";
 		foreach($aSeriesPaths as $k=>$v){
 			if(strcasecmp($serieFilename,$this->cleanupSaisonTitleForMatch($k))==0){
 				return $v;
 			}
 		}
 		$serieFilenameWithoutYear = preg_replace('! [0-9]{4}$!','',$serieFilename);
+
 		if ($serieFilename!=$serieFilenameWithoutYear){
 			$serieFilename=$serieFilenameWithoutYear;
 			foreach($aSeriesPaths as $k=>$v){
@@ -203,6 +208,88 @@ class QDSeriesBatch extends QDSeriesProxy{
 		return $aResult;
 	}
 
+	public function svc_renameExisting(){
+		$fName = '/tmp/seriesa.json';
+		if(file_exists($fName) && filesize($fName)){
+			$aRoots = unserialize(file_get_contents($fName));
+		}else{
+			$aRoots = $this->svc_getSeriesTree();
+			file_put_contents($fName,serialize($aRoots));
+		}
+
+		$aFiles=[];
+		foreach($aRoots as $aRoot){
+			if(is_array($aRoot) && array_key_exists('children',$aRoot)){
+				foreach($aRoot['children'] as $aSerie){
+					if(is_array($aSerie) && array_key_exists('children',$aSerie)){
+						foreach($aSerie['children'] as $aFolder){
+							if($aFolder['numbertorename']){
+								db($aFolder['fullname']);
+								$arrToRename = $this->pri_getFiles($aFolder['fullname'], true);
+								if (array_key_exists('results',$arrToRename) && is_array($arrToRename['results']) && count($arrToRename['results'])>0){
+									foreach($arrToRename['results'] as $aFile){
+										if($aFile['formattedfilename']!=''){
+											$aFile = array_merge($aFile,[
+												'originalFile'	=> $aFolder['fullname'].'/'.$aFile['filename'],
+												'renamedPath'	=> $aFile['pathName'],
+												'renamedFile'	=> $aFile['pathName'].'/'.$aFile['formattedfilename'],
+												'renamedExt'	=> strtolower($aFile['ext'])
+											]);
+											$aFiles[] = $aFile;
+											$this->pri_renameSerieEpisode($aFile['originalFile'],$aFile['renamedFile'],$aFile['renamedExt']);
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+		db($aFiles);
+		// $aFile['pathName'].'/'.$aFile['filename']
+		die();
+	}
+
+	private function pri_getRenamedFile($aSeriesPaths,$v){
+		$d = CW_Files::pathinfo_utf($v);
+		if (in_array(strtolower($d['extension']), $this->movieExt)) {
+			//is a video file
+			$d['filename'] = $this->cleanFilename($d['filename']);
+			$res = $this->extractSeriesFilenameStruct($d['filename']);
+			if ($res['found']) {
+				//series found
+				$seriePath = $this->findSeriesPath($aSeriesPaths, $res['serie']);
+				if($seriePath){
+					$xpath = $this->getXmlDocFromSeriePath($seriePath);
+					if($xpath){
+						$tags			= $this->extractLanguage($d['filename']);
+						$serieName		= utf8_encode($this->cleanFilename($this->extractXQuery($xpath, "/Data/Series/SeriesName")));
+						$episodeName	= utf8_encode($this->extractXQuery($xpath, "/Data/Episode[SeasonNumber='" . $res['saison'] . "' and EpisodeNumber='" . ($res['episode'] * 1) . "']/EpisodeName"));
+
+						$renamedPath	= sprintf("%s/S%d %s", $seriePath, $res['saison'], $tags['short_language']);
+						$renamedFile	= sprintf("%s [%dx%02d] %s", $serieName, $res['saison'], $res['episode'], $episodeName);
+
+						//db(sprintf("%-80s :: %s :: %s",$d['filename'],$renamedPath,$renamedFile));
+						return array(
+							'success'		=> true,
+							'originalFile'	=> $d['file'],
+							'renamedPath'	=> $renamedPath,
+							'renamedFile'	=> $renamedFile,
+							'renamedExt'	=> strtolower($d['extension'])
+						);
+					}
+				}else{
+					$msg = sprintf('Error : Can\'t find a path for [%s]',$this->mb_str_replace('.', ' ', $res['serie']));
+					return array(
+						'success'		=> false,
+						'error'			=> $msg
+					);
+				}
+			}
+		}
+	}
+
 	public function svc_renameIncoming(){
 		$aError = [];
 
@@ -223,39 +310,13 @@ class QDSeriesBatch extends QDSeriesProxy{
 
 		print_r( $dh);
 		$aSeriesPaths = $this->getSeriesAvailablePaths(explode(',',$_REQUEST['seriePaths']));
-		print_r( $aSeriesPaths);
+		//db($aSeriesPaths);die();
+
 		$arrResult = [];
 		foreach ($dh as $k => $v) {
-			$d = CW_Files::pathinfo_utf($v);
-			if (in_array(strtolower($d['extension']), $this->movieExt)) {
-				//is a video file
-				$d['filename'] = $this->cleanFilename($d['filename']);
-				$res = $this->extractSeriesFilenameStruct($d['filename']);
-				if ($res['found']) {
-					//series found
-					$seriePath = $this->findSeriesPath($aSeriesPaths, $res['serie']);
-					if($seriePath){
-						$xpath = $this->getXmlDocFromSeriePath($seriePath);
-						if($xpath){
-							$tags			= $this->extractLanguage($d['filename']);
-							$serieName		= utf8_encode($this->cleanFilename($this->extractXQuery($xpath, "/Data/Series/SeriesName")));
-							$episodeName	= utf8_encode($this->extractXQuery($xpath, "/Data/Episode[SeasonNumber='" . $res['saison'] . "' and EpisodeNumber='" . ($res['episode'] * 1) . "']/EpisodeName"));
-							$renamedPath	= sprintf("%s/S%d %s", $seriePath, $res['saison'], $tags['short_language']);
-							$renamedFile	= sprintf("%s [%dx%02d] %s", $serieName, $res['saison'], $res['episode'], $episodeName);
-							//db(sprintf("%-80s :: %s :: %s",$d['filename'],$renamedPath,$renamedFile));
-							$arrResult[] = array(
-								'originalFile'	=> $d['file'],
-								'renamedPath'	=> $renamedPath,
-								'renamedFile'	=> $renamedFile,
-								'renamedExt'	=> strtolower($d['extension'])
-							);
-						}
-					}else{
-						$msg = sprintf('Error : Can\'t find a path for [%s]',$this->mb_str_replace('.', ' ', $res['serie']));
-						if(!in_array($msg,$aError)){
-							$aError[]=$msg;
-					}
-				}
+			$a = $this->pri_getRenamedFile($aSeriesPaths,$v);
+			if($a['success']){
+				$arrResult[]=$a;
 			}
 		}
 
@@ -268,6 +329,5 @@ class QDSeriesBatch extends QDSeriesProxy{
 				$this->pri_renameSerieEpisode($file['originalFile'],$file['renamedPath'].'/'.$file['renamedFile'],$file['renamedExt']);
 			}
 		}
-	}
 	}
 }

@@ -113,6 +113,7 @@ class QDSeriesProxy extends QDMediaDBProxy{
 				$idx++;
 				$destFile = sprintf('%s(%s).%s',$new,$idx,$ext);
 			}
+//db(array($old,$destFile));return array('ok'=>true		,'error'=>'');
 			if (rename($old,$destFile)){
 				$this->makeEpisodeNFO($destFile,true,true,false);
 				return array('ok'=>true		,'error'=>'');
@@ -266,7 +267,7 @@ class QDSeriesProxy extends QDMediaDBProxy{
 	}
 
 	function svc_getSeriesTree() {
-		QDSession::_unset('cacheFolderTree');
+		##QDSession::_unset('cacheFolderTree');
 		if (array_key_exists('refresh', $_REQUEST) && $_REQUEST['refresh'] = 1) {
 			QDSession::_unset('cacheFolderTreeSeries');
 		}
@@ -611,17 +612,18 @@ class QDSeriesProxy extends QDMediaDBProxy{
 				$formatOK = $this->isEpisodeFileNameOK($d['basename'],$arr['serieName'],$res['saison'],$res['episode'],$episodeName,$d['extension']);
 				if (!$only2Rename ||  !$formatOK) {
 					$arr['results'][] = array(
-						'filename'		=> $d['basename'],
-						'ext'			=> $d['extension'],
-						'filesize'		=> size_readable(filesize($v)),
-						'saison'		=> $res['found'] ? $res['saison'] : '--',
-						'episode'		=> $res['found'] ? $res['episode'] : '--',
-						'episodeName'	=> utf8_encode($this->cleanFilename($episodeName)),
-						'Overview'		=> $Overview,
-						'serieName'		=> $arr['serieName'],
-						'pathName'		=> $str,
-						'formatOK'		=> $formatOK,
-						'md5'			=> md5(realpath($v))
+						'filename'			=> $d['basename'],
+						'formattedfilename'	=> $res['found'] ? sprintf("%s [%dx%02d] %s",$arr['serieName'],$res['saison'],$res['episode'],utf8_encode($this->cleanFilename($episodeName))):'',
+						'ext'				=> $d['extension'],
+						'filesize'			=> size_readable(filesize($v)),
+						'saison'			=> $res['found'] ? $res['saison'] : '--',
+						'episode'			=> $res['found'] ? $res['episode'] : '--',
+						'episodeName'		=> utf8_encode($this->cleanFilename($episodeName)),
+						'Overview'			=> $Overview,
+						'serieName'			=> $arr['serieName'],
+						'pathName'			=> $str,
+						'formatOK'			=> $formatOK,
+						'md5'				=> md5(realpath($v))
 					);
 				}
 			}
