@@ -42,6 +42,7 @@ where true;
 class QDSeriesProxy extends QDMediaDBProxy{
 	static $tvdbxpath=array();
 	static $tvdbxpathId=array();
+
 	function getPathFromName($name){
 		$path=false;
 		foreach($this->folderSeriesList as $v){
@@ -84,7 +85,7 @@ class QDSeriesProxy extends QDMediaDBProxy{
 			$folder			= base64_decode($v->folder			);
 			$renamed		= base64_decode($v->renamed			);
 			$extension		= base64_decode($v->extension		);
-			$arr[$k]		= $this->pri_renameSerieEpisode($fullfilename,$folder.'/'.$renamed,$extension);
+			$arr[$k]		= $this->renameSerieEpisode($fullfilename,$folder.'/'.$renamed,$extension);
 			$arr[$k]['old']	= $fullfilename;
 			$arr[$k]['new']	= $folder.'/'.$renamed;
 			$arr[$k]['ext']	= $extension;
@@ -98,7 +99,7 @@ class QDSeriesProxy extends QDMediaDBProxy{
 		);
 	}
 
-	function pri_renameSerieEpisode($old,$new,$ext){
+	function renameSerieEpisode($old,$new,$ext){
 		$folder = dirname($new);
 		if(!file_exists($old)){
 			return array('ok'=>false	,'error'=>utf8_decode(sprintf('File %s does not exists',$old)));
@@ -113,7 +114,7 @@ class QDSeriesProxy extends QDMediaDBProxy{
 				$idx++;
 				$destFile = sprintf('%s(%s).%s',$new,$idx,$ext);
 			}
-//db(array($old,$destFile));return array('ok'=>true		,'error'=>'');
+			//db(array($old,$destFile));return array('ok'=>true		,'error'=>'');
 			if (rename($old,$destFile)){
 				$this->makeEpisodeNFO($destFile,true,true,false);
 				return array('ok'=>true		,'error'=>'');
@@ -127,7 +128,6 @@ class QDSeriesProxy extends QDMediaDBProxy{
 	}
 
 	function svc_getFileSorterList(){
-		//header('content-type:text/html');print "<table border=1>";
 		$arrResult = array();
 		$path = $this->getPathFromName($_REQUEST['name']);
 		if($path){
@@ -140,7 +140,6 @@ class QDSeriesProxy extends QDMediaDBProxy{
 			foreach ($dh as $k => $v) {
 				$dh2[]=str_replace($path.'/','',$v);
 			}
-			//db($dh2);die();
 		}
 		return array('results'=> $arrResult,'folders'=>$dh2);
 	}
