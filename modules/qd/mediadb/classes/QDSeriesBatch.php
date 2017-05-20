@@ -45,7 +45,7 @@ class QDSeriesBatch extends QDSeriesProxy{
 					$sSerieId = $this->extractXQuery($xpath, "/Data/Series/id",true);
 					$sSerieName = $this->extractXQuery($xpath, "/Data/Series/SeriesName",true);
 					$this->addIfNotPresent($aPaths,$sSerieName,$v);
-					$this->addIfNotPresent($aPaths,self::cleanupSaisonTitleForMatch($sSerieName),$v);
+					$this->addIfNotPresent($aPaths,serieTools::cleanupSaisonTitleForMatch($sSerieName),$v);
 					foreach(serieTools::crossedCleanupSaisonTitleForMatch($sSerieName) as $s){
 						$this->addIfNotPresent($aPaths,$sSerieName,$s);
 					}
@@ -54,7 +54,7 @@ class QDSeriesBatch extends QDSeriesProxy{
 						$xpathen = $this->getXpathFromXmlDoc($this->QDNet->getCacheURL($urlen, 'seriesDetail', $this->cacheminutes, $this->cache));
 						$sSerieName = $this->extractXQuery($xpathen, "/Data/Series/SeriesName",true);
 						$this->addIfNotPresent($aPaths,$sSerieName,$v);
-						$this->addIfNotPresent($aPaths,self::cleanupSaisonTitleForMatch($sSerieName),$v);
+						$this->addIfNotPresent($aPaths,serieTools::cleanupSaisonTitleForMatch($sSerieName),$v);
 						foreach(serieTools::crossedCleanupSaisonTitleForMatch($sSerieName) as $s){
 							$this->addIfNotPresent($aPaths,$sSerieName,$s);
 						}
@@ -75,9 +75,9 @@ class QDSeriesBatch extends QDSeriesProxy{
 	}
 
 	private function findSeriesPath($aSeriesPaths,$serieFilename){
-		$serieFilename = self::cleanupSaisonTitleForMatch($serieFilename);
+		$serieFilename = serieTools::cleanupSaisonTitleForMatch($serieFilename);
 		foreach($aSeriesPaths as $k=>$v){
-			if(strcasecmp($serieFilename,self::cleanupSaisonTitleForMatch($k))==0){
+			if(strcasecmp($serieFilename,serieTools::cleanupSaisonTitleForMatch($k))==0){
 				return $v;
 			}
 		}
@@ -86,7 +86,7 @@ class QDSeriesBatch extends QDSeriesProxy{
 		if ($serieFilename!=$serieFilenameWithoutYear){
 			$serieFilename=$serieFilenameWithoutYear;
 			foreach($aSeriesPaths as $k=>$v){
-				if(strcasecmp($serieFilename,self::cleanupSaisonTitleForMatch($k))==0){
+				if(strcasecmp($serieFilename,serieTools::cleanupSaisonTitleForMatch($k))==0){
 					return $v;
 				}
 			}
@@ -94,7 +94,7 @@ class QDSeriesBatch extends QDSeriesProxy{
 		return false;
 	}
 
-	private function addIfIsMovie(&$aList,$s){
+	private function addIfIsMovie(&$aList,$file){
 		$d = CW_Files::pathinfo_utf($file);
 		if (in_array(strtolower($d['extension']), $this->movieExt)) {
 			$aList[]=$file;

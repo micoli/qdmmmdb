@@ -11,7 +11,7 @@ class serieTools{
 			$aResult[]=$s;
 			foreach($aFilters as $sFilterName2){
 				if($sFilterName!= $sFilterName2){
-					$aResult[]=$this->$sFilterName2($s);
+					$aResult[]=self::$sFilterName2($s);
 				}
 			}
 		}
@@ -71,15 +71,15 @@ class serieTools{
 	public static function extractLanguage($sTitle){
 		$tags=[];
 
-		if(!array_key_exists('year', self::$aAllTags)){
+		if(!array_key_exists('year', QDSeriesbatch::$aAllTags)){
 			for($i=1990;$i<=2050;$i++){
-				self::$aAllTags['year'][]=$i;
+				QDSeriesbatch::$aAllTags['year'][]=$i;
 			}
 		}
 
 		$sTitle	= ' '.preg_replace('!\.!',' ',$sTitle).' ';
 
-		foreach(self::$aAllTags as $sTagType=>$aTag){
+		foreach(QDSeriesbatch::$aAllTags as $sTagType=>$aTag){
 			foreach($aTag as $sTag){
 				if (preg_match('! '.preg_quote($sTag,'!').' !',$sTitle)){
 					$tags[$sTagType][]=$sTag;
