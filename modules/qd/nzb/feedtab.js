@@ -59,7 +59,7 @@ Ext.define('qd.nzb.feedtab', {
 			}],
 			proxy		: {
 				type			: 'ajaxEx',
-				url				: 'p/QDNzbProxyFeeds.dbfeed/',
+				url				: 'api/NzbProxyFeeds/dbfeed',
 				reader			: {
 					type			: 'json',
 					root			: 'feeds',
@@ -75,7 +75,7 @@ Ext.define('qd.nzb.feedtab', {
 			model		: 'feedgroup',
 			proxy		: {
 				type			: 'ajaxEx',
-				url				: 'p/QDNzbProxyFeeds.distinctfeed/',
+				url				: 'api/NzbProxyFeeds/distinctfeed',
 				reader			: {
 					type			: 'json',
 					root			: 'res',
@@ -169,7 +169,7 @@ Ext.define('qd.nzb.feedtab', {
 						click : function(grid,HTMLElement,rowIndex,columnIndex){
 							var record = grid.getStore().getAt(rowIndex);
 							Ext.AjaxEx.request({
-								url		: 'p/QDNzbProxyFeeds.setStarred/',
+								url		: 'api/NzbProxyFeeds/setStarred',
 								params: {
 									ITE_ID		:record.get('ITE_ID'),
 									ITE_STARRED	: (record.get('ITE_STARRED')=='0'?1:0)
@@ -192,7 +192,7 @@ Ext.define('qd.nzb.feedtab', {
 							var record = grid.getStore().getAt(rowIndex);
 							Ext.getCmp(that.tplid).setItem(record.data);//tpl.overwrite(Ext.getCmp(that.tplid).body,record.data);
 							Ext.AjaxEx.request({
-								url		: 'p/QDNzbProxyFeeds.setRead/',
+								url		: 'api/NzbProxyFeeds/setRead',
 								success	: function(r,a){
 									eval('var res='+r.responseText);
 									if (res.ok){
@@ -249,7 +249,7 @@ Ext.define('qd.nzb.feedtab', {
 						click : function(grid,HTMLElement,rowIndex,columnIndex){
 							var record = grid.getStore().getAt(rowIndex);
 							Ext.AjaxEx.request({
-								url		: 'p/QDNzbProxyFeeds.setRead/',
+								url		: 'api/NzbProxyFeeds/setRead',
 								success	: function(r,a){
 									eval('var res='+r.responseText);
 									if (res.ok){

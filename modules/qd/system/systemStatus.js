@@ -50,7 +50,7 @@ Ext.define('qd.system.systemStatus', {
 			autoLoad	: true,
 			proxy		: {
 				type			: 'ajaxEx',
-				url				: 'p/QDMediaDBSystemStatus.diskStatus/',
+				url				: 'api/MediaDBSystemStatus/diskStatus',
 				reader			: {
 					type			: 'json',
 					root			: 'data'
@@ -114,7 +114,7 @@ Ext.define('qd.system.systemStatus', {
 			autoLoad	: true,
 			proxy		: {
 				type			: 'ajaxEx',
-				url				: 'p/QDMediaDBSystemStatus.processes/',
+				url				: 'api/MediaDBSystemStatus/processes',
 				reader			: {
 					type			: 'json',
 					root			: 'processes'
@@ -141,7 +141,7 @@ Ext.define('qd.system.systemStatus', {
 			autoLoad	: false,
 			proxy		: {
 				type			: 'ajaxEx',
-				url				: 'p/QDMediaDBSystemStatus.cpuStatus/',
+				url				: 'api/MediaDBSystemStatus/cpuStatus',
 				reader			: {
 					type			: 'json',
 					root			: 'data'
@@ -151,7 +151,7 @@ Ext.define('qd.system.systemStatus', {
 
 		that.refresh = function(){
 			Ext.Ajax.request({
-				url		: 'p/QDMediaDBSystemStatus.status/',
+				url		: 'api/MediaDBSystemStatus/status',
 				method	: 'GET',
 				scope	: this,
 				success	: function(response, opts) {

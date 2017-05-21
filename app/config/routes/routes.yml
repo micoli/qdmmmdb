@@ -1,0 +1,39 @@
+slashApiSeries:
+  prefix: /api/Series
+  resource: '@App\Controllers\QDmmmDB\Mediadb\SeriesController'
+  type: annotation
+  
+slashApiMovies:
+  prefix: /api/Movies
+  resource: '@App\Controllers\QDmmmDB\Mediadb\MoviesController'
+  type: annotation
+
+slashApiIndexer:
+  prefix: /api/Indexer
+  resource: '@App\Controllers\QDmmmDB\Mediadb\IndexerController'
+  type: annotation
+
+slashApiMediaDB:
+  prefix: /api/MediaDB
+  resource: '@App\Controllers\QDmmmDB\Mediadb\MediaDBController'
+  type: annotation
+
+slashApiMediaDBSystemStatus:
+  prefix: /api/MediaDBSystemStatus
+  resource: '@App\Controllers\QDmmmDB\Mediadb\MediaDBSystemStatusController'
+  type: annotation
+
+slashApiNzbProxyFeeds:
+  prefix: /api/NzbProxyFeeds
+  resource: '@App\Controllers\QDmmmDB\Mediadb\NzbProxyFeedsController'
+  type: annotation
+
+slashApiXbmcSeries:
+  prefix: /api/XbmcSeries
+  resource: '@App\Controllers\QDmmmDB\Mediadb\XbmcSeriesController'
+  type: annotation
+
+slashApiSabnzbd:
+  prefix: /api/Sabnzbd
+  resource: '@App\Controllers\QDmmmDB\Mediadb\SabnzbdController'
+  type: annotation

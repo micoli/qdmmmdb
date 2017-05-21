@@ -58,7 +58,7 @@ Ext.define('qd.mediadb.moviePanel', {
 			},
 			proxy		: {
 				type		: 'ajaxEx',
-				url			: 'p/QDMoviesProxy.getMoviesTree/'
+				url			: 'api/Movies/getMoviesTree'
 			},
 			listeners : {
 				load : function (store){
@@ -99,7 +99,7 @@ Ext.define('qd.mediadb.moviePanel', {
 			pruneModifiedRecords: true,
 			proxy				: {
 				type				: 'ajaxEx',
-				url					: 'p/QDMoviesProxy.getMoviesFiles/',
+				url					: 'api/Movies/getMoviesFiles',
 				params				:{
 					name				: 'M'
 				},
@@ -266,7 +266,7 @@ Ext.define('qd.mediadb.moviePanel', {
 							});
 							console.log(arrResult);
 							Ext.AjaxEx.request({
-								url      : 'p/QDMoviesProxy.renameMoviesFiles/',
+								url      : 'api/Movies/renameMoviesFiles',
 								params : {
 									modified   : Ext.util.base64.encode(Ext.util.JSON.encode(arrResult))
 								},
@@ -457,7 +457,7 @@ Ext.define('qd.mediadb.moviePanel', {
 renderer : function(value, metaData, record, rowIndex, colIndex, store, view){
 	if(record.get('poster')){
 		metaData.style = "height:50px;";
-		return '<img style="height:50px" src="p/QDMoviesProxy.proxyPosterImg/?i64='+record.get('poster')+'">';
+		return '<img style="height:50px" src="api/Movies/proxyPosterImg/?i64='+record.get('poster')+'">';
 	}else{
 		return "&nbsp;";
 	}

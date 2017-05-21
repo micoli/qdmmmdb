@@ -26,7 +26,7 @@ Ext.define('qd.mediadb.indexer', {
 			pruneModifiedRecords: true,
 			proxy				: {
 				type				: 'ajaxEx',
-				url					: 'p/QDIndexer.getFiles/',
+				url					: 'api/Indexer/getFiles',
 				reader				: {
 					type				: 'json',
 					root				: 'results',
@@ -42,7 +42,7 @@ Ext.define('qd.mediadb.indexer', {
 			proxy		: {
 				type		: 'memory',
 				/*type		: 'ajax',
-				url			: 'p/QDIndexer.getFiles/?mode=tree',
+				url			: 'api/Indexer/getFiles?mode=tree',
 				reader		: {
 					type		: 'json',
 				}*/
@@ -60,7 +60,7 @@ Ext.define('qd.mediadb.indexer', {
 			//*/
 			that.treeFileStore.setRootNode({text:''});
 			Ext.Ajax.request({
-				url		: 'p/QDIndexer.getFiles/?mode=tree&search='+txt,
+				url		: 'api/Indexer/getFiles?mode=tree&search='+txt,
 				success	: function(response, opts) {
 					var obj = Ext.decode(response.responseText);
 					that.treeFileStore.setRootNode(obj.root);

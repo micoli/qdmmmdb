@@ -24,7 +24,7 @@ Ext.define('qd.mediadb.serieEditor', {
 			//pruneModifiedRecords: true,
 			proxy				: {
 				type				: 'ajaxEx',
-				url					: 'p/QDSeriesProxy.chooseSerie/',
+				url					: 'api/Series/chooseSerie',
 				reader				: {
 					type				: 'json',
 					root				: 'results'
@@ -112,7 +112,7 @@ Ext.define('qd.mediadb.serieEditor', {
 					{header: "year",	width:  80,	dataIndex: 'year',	sortable: true},
 					{header: "banner",	width:  205,	dataIndex: 'banner',	sortable: false,
 						renderer:function(v){
-							if(v!='') return '<img  style="height:35px;width:190px;border: 1px solid #AAAAAA;float: left; margin: 2px; " src="p/QDMediaDBProxy.proxyImg/?u=http://thetvdb.com/banners/'+v+'">'
+							if(v!='') return '<img  style="height:35px;width:190px;border: 1px solid #AAAAAA;float: left; margin: 2px; " src="api/MediaDB/proxyImg/?u=http://thetvdb.com/banners/'+v+'">'
 						}
 					}
 				]
@@ -124,7 +124,7 @@ Ext.define('qd.mediadb.serieEditor', {
 					if (recordSelected && recordSelected[0]){
 						var w = Ext.MessageBox.wait('mise à jour');
 						Ext.AjaxEx.request({
-							url		: 'p/QDSeriesProxy.setSerieFromPath/',
+							url		: 'api/Series/setSerieFromPath',
 							params	: {
 								m		: that.displayMode,
 								p		: that.record.get('fullname'),
@@ -169,7 +169,7 @@ Ext.define('qd.mediadb.serieEditor', {
 						if(btn=='ok'){
 							var w = Ext.MessageBox.wait('mise à jour');
 							Ext.AjaxEx.request({
-								url		: 'p/QDSeriesProxy.setSerieFromPath/',
+								url		: 'api/Series/setSerieFromPath',
 								params	: {
 									m		: that.displayMode,
 									p		: that.record.get('fullname'),
@@ -197,7 +197,7 @@ Ext.define('qd.mediadb.serieEditor', {
 				show : function(){
 					if(that.displayMode=='edit'){
 						Ext.AjaxEx.request({
-							url		: 'p/QDSeriesProxy.getSerieFromPath/',
+							url		: 'api/Series/getSerieFromPath',
 							params	: {
 								p		: that.record.get('fullname')
 							},

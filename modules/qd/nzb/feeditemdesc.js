@@ -24,7 +24,7 @@ Ext.define('qd.nzb.feeditemdesc', {
 				tpl			: new Ext.XTemplate(
 					'<div style="padding:5px;background-color:#D3E1F1;">',
 					'	<tpl if="DESC_POSTER">',
-					'		<img height="120" src="p/QDMediaDBProxy.proxyImg/?u={DESC_POSTER}"/>',
+					'		<img height="120" src="api/MediaDB/proxyImg/?u={DESC_POSTER}"/>',
 					'	</tpl>',
 					'</div>'
 				)
@@ -70,7 +70,7 @@ Ext.define('qd.nzb.feeditemdesc', {
 				'	<tr style="vertical-align:top;">',
 				'		<td style="padding:5px;">',
 				'			<tpl if="DESC_POSTER">',
-				'				<img height="120" src="p/QDMediaDBProxy.proxyImg/?u={DESC_POSTER}"/>',
+				'				<img height="120" src="api/MediaDB/proxyImg/?u={DESC_POSTER}"/>',
 				'			</tpl>',
 				'		</td>',
 				'		<td style="padding:5px;">',

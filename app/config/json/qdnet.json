@@ -1,0 +1,4 @@
+{
+	"cacheroot"		: "/var/www/cache/",
+	"usecurl"		: 1
+}

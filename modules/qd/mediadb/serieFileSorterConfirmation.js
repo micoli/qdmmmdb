@@ -58,7 +58,7 @@ Ext.define('qd.mediadb.serieFileSorterConfirmation', {
 					if(toRename.length>0){
 						var w = Ext.MessageBox.wait('mise à jour');
 						Ext.AjaxEx.request({
-							url		: 'p/QDSeriesProxy.serieBulkRename/',
+							url		: 'api/Series/serieBulkRename',
 							method	: 'POST',
 							params	: {
 								d		: Ext.JSON.encode(toRename)

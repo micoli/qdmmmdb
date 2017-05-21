@@ -41,7 +41,7 @@ Ext.define('qd.mediadb.serieFileSorter', {
 			autoLoad			: true,
 			proxy				: {
 				type				: 'ajaxEx',
-				url					: 'p/QDSeriesProxy.getFolderSeriesList/',
+				url					: 'api/Series/getFolderSeriesList',
 				reader				: {
 					type				: 'json',
 					root				: 'results'
@@ -87,7 +87,7 @@ Ext.define('qd.mediadb.serieFileSorter', {
 			groupField			: 'folder',
 			proxy				: {
 				type				: 'ajaxEx',
-				url					: 'p/QDSeriesProxy.getFileSorterList/',
+				url					: 'api/Series/getFileSorterList',
 				reader				: {
 					type				: 'json',
 					root				: 'results'

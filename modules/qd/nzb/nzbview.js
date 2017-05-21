@@ -24,7 +24,7 @@ Ext.define('qd.nzb.nzbview', {
 			model	: 'searchnzb',
 			proxy	: {
 				type			: 'ajaxEx',
-				url				: 'p/QDNzbProxyFeeds.search/',
+				url				: 'api/NzbProxyFeeds/search',
 				reader			: {
 					type			: 'json',
 					root			: 'posts',
@@ -120,7 +120,7 @@ Ext.define('qd.nzb.nzbview', {
 							that.ldMask = new Ext.LoadMask(that.getEl(), {msg:"Please wait..."});
 							that.ldMask.show();
 							Ext.AjaxEx.request({
-								url		: 'p/QDNzbProxyFeeds.download/',
+								url		: 'api/NzbProxyFeeds/download',
 								params	: {
 									ids		: idsString,
 									q		: that.q,

@@ -37,7 +37,7 @@ Ext.define('qd.mediadb.TraySabnzbd', {
 			/////////me.timer = Ext.Function.defer(me.updateTime, 5*1000, me);
 		}
 		var ob ={
-			url		: 'p/QDSabnzbdProxy.action/',
+			url		: 'api/Sabnzbd/action',
 			method	: 'POST',
 			success	: cb,
 			failure	: cb,

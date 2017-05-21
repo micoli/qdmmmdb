@@ -11,7 +11,7 @@ Ext.define('qd.mediadb.movieEditor', {
 	title			: 'Select Movie',
 	tplPreview		: new Ext.XTemplate(
 		'<tpl if="display">',
-		'<div class="divPreview" style="width:100%;height:{mainHeight}px;background:url(p/QDMediaDBProxy.proxyImg/?u={backdrop})  center center no-repeat;border:2px solid #AAAAAA">',
+		'<div class="divPreview" style="width:100%;height:{mainHeight}px;background:url(p/QDMediaDB/proxyImg/?u={backdrop})  center center no-repeat;border:2px solid #AAAAAA">',
 			'<table class="heightPreviewBottom" style="width:100%;position:absolute;bottom:0;" cellspacing="0">',
 				'<tr>',
 					'<td style="width:200px;"></td>',
@@ -31,7 +31,7 @@ Ext.define('qd.mediadb.movieEditor', {
 				'</tr>',
 			'</table>',
 			'<div style="position:absolute;bottom:20px;left:30px;width:160px;height:240px;">',
-				'<img src="p/QDMediaDBProxy.proxyImg/?c=154x0&u={poster}" style="width:154px;border:2px solid #ffffff" />',
+				'<img src="api/MediaDB/proxyImg/?c=154x0&u={poster}" style="width:154px;border:2px solid #ffffff" />',
 			'</div>',
 		'</div>',
 		'</tpl>'
@@ -87,7 +87,7 @@ Ext.define('qd.mediadb.movieEditor', {
 			pruneModifiedRecords: true,
 			proxy				: {
 				type				: 'ajaxEx',
-				url					: 'p/QDMoviesProxy.chooseMovie/',
+				url					: 'api/Movies/chooseMovie',
 				reader				: {
 					type				: 'json',
 					root				: 'results',
@@ -159,7 +159,7 @@ Ext.define('qd.mediadb.movieEditor', {
 			disableSave();
 			var loading = Ext.getCmp(tabpanelid).setLoading(true);
 			Ext.AjaxEx.request({
-				url		: 'p/QDMoviesProxy.chooseMoviesDetail/',
+				url		: 'api/Movies/chooseMoviesDetail',
 				params	: {
 					i		: record.get('id'),
 					e		: record.get('engine'),
@@ -232,7 +232,7 @@ Ext.define('qd.mediadb.movieEditor', {
 		var saveDetails = function (){
 			var w = Ext.MessageBox.wait('Updating....');
 			Ext.AjaxEx.request({
-				url		: 'p/QDMoviesProxy.setMoviesFromPath/',
+				url		: 'api/Movies/setMoviesFromPath',
 				timeout	: 600*1000,
 				params	: {
 					ref		: Ext.JSON.encode(that.referenceRecord.data),
@@ -447,7 +447,7 @@ Ext.define('qd.mediadb.movieEditor', {
 					{header: "poster"	, dataIndex: 'poster'	, sortable: true, width :  95, flex : 0,
 						renderer : function(val,style,record){
 							style.style.height=(val)?90:45;
-							return (val)?'<img src="p/QDMediaDBProxy.proxyImg/?c=90x90&u='+val+'" />':'';
+							return (val)?'<img src="api/MediaDB/proxyImg/?c=90x90&u='+val+'" />':'';
 						}
 					},
 					{header: "title"	              , dataIndex: 'title'	, sortable: true, width : 200,flex : 0,
@@ -479,7 +479,7 @@ Ext.define('qd.mediadb.movieEditor', {
 					xtype		: 'ImageSelector',
 					id			: gridposterid,
 					store		: choosePosterStore,
-					imgPrefix	: 'p/QDMediaDBProxy.proxyImg/?c=150x225&u=',
+					imgPrefix	: 'api/MediaDB/proxyImg/?c=150x225&u=',
 					listeners	: {
 						'selectimg' : function(node){
 							that.currentRecord.poster=node[0].get('url');
@@ -497,7 +497,7 @@ Ext.define('qd.mediadb.movieEditor', {
 					xtype		: 'ImageSelector',
 					id			: gridbackdropid,
 					store		: chooseBackdropStore,
-					imgPrefix	: 'p/QDMediaDBProxy.proxyImg/?c=225x150&u=',
+					imgPrefix	: 'api/MediaDB/proxyImg/?c=225x150&u=',
 					listeners	:{
 						'selectimg' : function(node){
 							that.currentRecord.backdrop=node[0].get('url');

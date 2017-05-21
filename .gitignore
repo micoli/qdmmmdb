@@ -5,3 +5,4 @@ nbproject
 .htaccess
 /conf
 /graph
+vendor/

@@ -55,7 +55,7 @@ Ext.define('qd.mediadb.seriePanel', {
 			},
 			proxy		: {
 				type		: 'ajaxEx',
-				url			: 'p/QDSeriesProxy.getSeriesTree/',
+				url			: 'api/Series/getSeriesTree',
 				timeout		: 240*1000
 			},
 			listeners	: {
@@ -145,7 +145,7 @@ Ext.define('qd.mediadb.seriePanel', {
 			pruneModifiedRecords: true,
 			proxy				: {
 				type				: 'ajaxEx',
-				url					: 'p/QDSeriesProxy.getFiles/',
+				url					: 'api/Series/getFiles',
 				reader				: {
 					type				: 'json',
 					root				: 'results',
@@ -157,7 +157,7 @@ Ext.define('qd.mediadb.seriePanel', {
 					var str = "";
 					var jsonData = r.proxy.reader.jsonData;
 					if (r.proxy.reader.jsonData.bannerImg){
-						str = str + '<img style="border: 1px solid #AAAAAA;float: left; margin: 2px; " src="p/QDMediaDBProxy.proxyImg/?u=http://thetvdb.com/banners/_cache/'+jsonData.bannerImg+'">';
+						str = str + '<img style="border: 1px solid #AAAAAA;float: left; margin: 2px; " src="api/MediaDB/proxyImg/?u=http://thetvdb.com/banners/_cache/'+jsonData.bannerImg+'">';
 					}
 					if (r.proxy.reader.jsonData.bannerText){
 						str = str + r.proxy.reader.jsonData.bannerText;
@@ -440,7 +440,7 @@ Ext.define('qd.mediadb.seriePanel', {
 									});
 								});
 								Ext.AjaxEx.request({
-									url		: 'p/QDSeriesProxy.renameFiles/',
+									url		: 'api/Series/renameFiles',
 									timeout	: 600*1000,
 									params	: {
 										modified   : Ext.ux.base64.encode(Ext.JSON.encode(arrResult))
@@ -509,7 +509,7 @@ Ext.define('qd.mediadb.seriePanel', {
 							{header	: "Picture"	, width	:  80,	dataIndex: 'filename'		, sortable: true	,flex	: 0,	resizable	: false,
 								renderer : function(val,style,record){
 									style.style="height:50px";
-									return (typeof(val)=='object'&&(val instanceof Array))?'':'<img width="78" src="p/QDMediaDBProxy.proxyImg/?u=http://thetvdb.com/banners/_cache/'+val+'" />';
+									return (typeof(val)=='object'&&(val instanceof Array))?'':'<img width="78" src="api/MediaDB/proxyImg/?u=http://thetvdb.com/banners/_cache/'+val+'" />';
 								}
 							},
 							{header	: "Episode"	, width	: 280,	dataIndex: 'EpisodeName'	, sortable: true	,flex	: 1,	resizable	: true,

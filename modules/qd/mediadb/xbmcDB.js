@@ -26,7 +26,7 @@ Ext.define('qd.mediadb.xbmcDB', {
 			autoLoad			: true,
 			proxy				: {
 				type				: 'ajaxEx',
-				url					: 'p/QDXbmcSeries.getShows/',
+				url					: 'api/XbmcSeries/getShows',
 				reader				: {
 					type				: 'json',
 					root				: 'data'

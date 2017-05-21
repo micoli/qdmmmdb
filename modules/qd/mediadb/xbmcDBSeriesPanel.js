@@ -44,7 +44,7 @@ Ext.define('qd.mediadb.xbmcDBSeriesPanel', {
 			autoLoad			: false,
 			proxy				: {
 				type				: 'ajaxEx',
-				url					: 'p/QDXbmcSeries.getShowsSeasons/',
+				url					: 'api/XbmcSeries/getShowsSeasons',
 				reader				: {
 					type				: 'json',
 					root				: 'data'
@@ -58,7 +58,7 @@ Ext.define('qd.mediadb.xbmcDBSeriesPanel', {
 			autoLoad			: false,
 			proxy				: {
 				type				: 'ajaxEx',
-				url					: 'p/QDXbmcSeries.getEpisodeList/',
+				url					: 'api/XbmcSeries/getEpisodeList',
 				reader				: {
 					type				: 'json',
 					root				: 'data'
@@ -90,7 +90,7 @@ Ext.define('qd.mediadb.xbmcDBSeriesPanel', {
 			}
 			that.mask('loading conf');
 			Ext.Ajax.request({
-				url		: 'p/QDXbmcSeries.preGetShowSeasons/?tvdbid='+that.tvdbid,
+				url		: 'api/XbmcSeries/preGetShowSeasons?tvdbid='+that.tvdbid,
 				success	: function(response, opts) {
 					var serieData			= JSON.parse(response.responseText)
 					var model				= Ext.apply([],episodeSeasonBasicFields);

@@ -5,7 +5,7 @@ Ext.define('qd.sabnzbd.sabnzbdPanel', {
 
 	sendCommand : function(prm,cb){
 		var ob ={
-			url		: 'p/QDSabnzbdProxy.action/',
+			url		: 'api/Sabnzbd/action',
 			method	: 'POST',
 			params	: {}
 		};
@@ -44,7 +44,7 @@ Ext.define('qd.sabnzbd.sabnzbdPanel', {
 			autoLoad	: true,
 			proxy		: {
 				type			: 'ajaxEx',
-				url				: 'p/QDSabnzbdProxy.action/',
+				url				: 'api/Sabnzbd/action',
 				extraParams		: {
 					sab_mode		: 'queue',
 					obj_return		: 'queue'
@@ -105,7 +105,7 @@ Ext.define('qd.sabnzbd.sabnzbdPanel', {
 			autoLoad	: true,
 			proxy		: {
 				type			: 'ajaxEx',
-				url				: 'p/QDSabnzbdProxy.getSpeeds/',
+				url				: 'api/Sabnzbd/getSpeeds',
 				extraParams		: {
 					sab_mode		: 'queue',
 					obj_return		: 'queue'
