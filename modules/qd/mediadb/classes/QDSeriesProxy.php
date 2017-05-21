@@ -99,7 +99,7 @@ class QDSeriesProxy extends QDMediaDBProxy{
 		);
 	}
 
-	function renameSerieEpisode($old,$new,$ext){
+	function renameSerieEpisode($old,$new,$ext,$findNextIndex=true){
 		$folder = dirname($new);
 		if(!file_exists($old)){
 			return array('ok'=>false	,'error'=>utf8_decode(sprintf('File %s does not exists',$old)));
@@ -110,16 +110,18 @@ class QDSeriesProxy extends QDMediaDBProxy{
 		if(is_dir($folder)){
 			$destFile = $new.'.'.$ext;
 			$idx=0;
-			while(file_exists($destFile) && $idx<20){
+			while(file_exists($destFile) && $idx<=20 && $findNextIndex){
 				$idx++;
 				$destFile = sprintf('%s(%s).%s',$new,$idx,$ext);
+			}
+			if(!$findNextIndex && file_exists($destFile)){
+				return array('ok'=>false	,'error'=>utf8_decode(sprintf('Rename error, find index is not allowed %s=>%s',$old,$destFile)));
 			}
 			//db(array($old,$destFile));return array('ok'=>true		,'error'=>'');
 			if (rename($old,$destFile)){
 				$this->makeEpisodeNFO($destFile,true,true,false);
 				return array('ok'=>true		,'error'=>'');
 			}else{
-				db(sprintf('Rename error %s=>%s',$old,$destFile)."eeee");
 				return array('ok'=>false	,'error'=>utf8_decode(sprintf('Rename error %s=>%s',$old,$destFile)));
 			}
 		}else{
