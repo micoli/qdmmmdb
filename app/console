@@ -5,6 +5,12 @@ set_time_limit(0);
 
 $app = require_once __DIR__ ."/bootstrap.php";
 
-$console = &$app["console"];
-$console->add(new \App\Commands\ApiCommand());
-$console->run();
+$sPath = realpath(__DIR__.'/App/Commands');
+$Directory = new RecursiveDirectoryIterator($sPath);
+$Iterator = new RecursiveIteratorIterator($Directory);
+$Regex = new RegexIterator($Iterator, '/^.+\.php$/i', RecursiveRegexIterator::GET_MATCH);
+foreach($Regex as $sClassName => $object){
+	$sClassName = "\\App\\Commands\\" . implode('\\',explode('/',preg_replace('!\.php$!','',str_replace($sPath.'/','',$sClassName))));
+	$app["console"]->add(new $sClassName());
+}
+$app["console"]->run();

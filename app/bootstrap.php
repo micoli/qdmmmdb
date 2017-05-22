@@ -10,6 +10,7 @@ use Symfony\Component\Config\Definition\Exception\Exception;
 use SM\SilexRestApi\Services\ApiServiceProvider;
 use Moust\Silex\Provider\CacheServiceProvider;
 use Silex\Provider\TwigServiceProvider;
+use Knp\Provider\ConsoleServiceProvider;
 
 //use Knp\Provider\ConsoleServiceProvider;
 
@@ -52,13 +53,12 @@ $app->register(new CacheServiceProvider(), array(
 
 $app->register(new ApiServiceProvider());
 
-/*
 $app->register(new ConsoleServiceProvider(),array(
 	'console.name'				=> $gblCfg['application.name'],
 	'console.version'			=> $gblCfg['application.version'],
 	'console.project_directory'	=> __DIR__
 ));
-*/
+
 /*
 $app['security.users'] = $app->share(function () use ($app) {
 	return new UserProvider('App\ORM\TAuthQuery','AutLogin','AutPassword', 'AutFonction' );
