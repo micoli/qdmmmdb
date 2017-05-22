@@ -1,4 +1,6 @@
 <?php
+namespace App\Components\QDmmmDB\Mediadb;
+
 class QDVideoFileHelper{
 	var $bin_ffmpeg;
 	var $bin_mplayer;
@@ -22,8 +24,8 @@ class QDVideoFileHelper{
 		$hours = intval(intval($sec) / 3600);
 		// add hours to $hms (with a leading 0 if asked for)
 		$hms .= ($padHours)
-			  ? str_pad($hours, 2, "0", STR_PAD_LEFT). ":"
-			  : $hours. ":";
+			? str_pad($hours, 2, "0", STR_PAD_LEFT). ":"
+			: $hours. ":";
 		// dividing the total seconds by 60 will give us the number of minutes
 		// in total, but we're interested in *minutes past the hour* and to get
 		// this, we have to divide by 60 again and then use the remainder

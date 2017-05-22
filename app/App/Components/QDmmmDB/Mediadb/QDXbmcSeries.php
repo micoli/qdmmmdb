@@ -1,4 +1,6 @@
 <?php
+namespace App\Components\QDmmmDB\Mediadb;
+
 class QDXbmcSeries extends QDSeriesProxy{
 
 	function svc_getShows(){

@@ -1,4 +1,6 @@
 <?php
+namespace App\Components\QDmmmDB\Mediadb;
+
 use App\Components\QDmmmDB\Misc\Tools;
 
 class QDMediaDBSystemStatus {

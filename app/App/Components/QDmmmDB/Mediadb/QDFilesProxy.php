@@ -1,4 +1,5 @@
 <?php
+namespace App\Components\QDmmmDB\Mediadb;
 class QDFilesProxy{
 	static $arrPaths=array();
 	function init(){

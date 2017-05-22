@@ -1,10 +1,10 @@
 <?php
 namespace App\Components\QDmmmDB\Mediadb;
-
 //include '/var/www/qdmmmdb/app/App/Components/QDmmmDB/Tools/Tools.php';
 
 use App\Components\QDmmmDB\Misc\Tools;
 use App\Components\QDmmmDB\Misc\ToolsFiles;
+use App\Components\QDmmmDB\Misc\QDLogger;
 
 /*
 select media_type,count(*) from art group by  media_type;
@@ -359,7 +359,7 @@ class QDSeriesProxy extends QDMediaDBProxy{
 	private function getBannersXml($seriesid) {
 		if ($seriesid) {
 			$url = 'http://www.thetvdb.com/api/' . $this->thetvdbkey . '/series/' . $seriesid . '/banners.xml';
-			if (url_exists($url)) {
+			if (Tools::url_exists($url)) {
 				return $this->QDNet->getCacheURL($url, 'seriesBanners', $this->cacheminutes, $this->cache);
 			}
 		}
@@ -666,7 +666,7 @@ class QDSeriesProxy extends QDMediaDBProxy{
 
 		if(!$remote_images) return '';
 
-		$xml = new SimpleXMLElement($remote_images);
+		$xml = new \SimpleXMLElement($remote_images);
 		db($xml);die();
 	}
 	private function _get_remote_imagesXml($seriesId, $type = 'poster'){
@@ -674,7 +674,7 @@ class QDSeriesProxy extends QDMediaDBProxy{
 
 		if(!$remote_images) return '';
 		try{
-			$xml = new SimpleXMLElement($remote_images);
+			$xml = new \SimpleXMLElement($remote_images);
 		}catch(Exception $e){
 			return;
 		}
@@ -714,7 +714,7 @@ class QDSeriesProxy extends QDMediaDBProxy{
 			//die($seriePath . '/tvdb_all.xml');
 			$xpath = $this->getXmlDocFromSeriePath($seriePath);
 			$seriePathD = pathinfo($filename);
-			if(in_array(strtolower($d['extension']), $this->subtitlesExt)){
+			if(in_array(strtolower($seriePathD['extension']), $this->subtitlesExt)){
 				return false;
 			}
 			$res = $this->extractSeriesFilenameStruct($seriePathD['basename']);

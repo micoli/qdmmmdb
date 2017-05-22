@@ -1,6 +1,8 @@
 <?php
+namespace App\Components\QDmmmDB\Mediadb;
 include "BEncode.php";
 use Bhutanio\BEncode\BEncode;
+use App\Components\QDmmmDB\Misc\ToolsFiles;
 
 class QDSeriesBatch extends QDSeriesProxy
 {
@@ -215,40 +217,33 @@ class QDSeriesBatch extends QDSeriesProxy
 		}
 	}
 
-	public function svc_renameIncoming()
+	public function svc_renameIncoming(/*string*/ $seriePaths,/*string*/ $path,/*boolean*/ $bDryRun)
 	{
 		$aError = [];
-		if (array_key_exists('path', $_REQUEST) && $_REQUEST['path'] != 'test') {
-			$dh = $this->getIncomingFiles($_REQUEST['path']);
+		if ($path) {
+			$dh = $this->getIncomingFiles($path);
 		} else {
 			$dh = array_map(function ($p) {
 				return '/mnt/dwn/' . $p;
 			}, json_decode(file_get_contents('/mnt/###dwn/torrents.json'), true));
 		}
 
-		if (! array_key_exists('seriePaths', $_REQUEST)) {
-			return array(
-				'success' => false,
-				'error' => 'no path specified'
-			);
-		}
-
 		print_r($dh);
-		$aSeriesPaths = $this->getSeriesAvailablePaths(explode(',', $_REQUEST['seriePaths']));
+		$aSeriesPaths = $this->getSeriesAvailablePaths(explode(',', $seriePaths));
 		print_r($aSeriesPaths);
 
 		$arrResult = [];
 		foreach ($dh as $k => $v) {
-			$a = $this->pri_getRenamedFile($aSeriesPaths, $v);
-			if ($a['success']) {
-				$arrResult[] = $a;
+			$aRenamedFile = $this->pri_getRenamedFile($aSeriesPaths, $v);
+			if ($aRenamedFile['success']) {
+				$arrResult[] = $aRenamedFile;
 			}
 		}
 
 		asort($arrResult);
 		$arrResult = array_values($arrResult);
 		foreach ($arrResult as $file) {
-			if (array_key_exists('dryRun', $_REQUEST) && $_REQUEST['dryRun']) {
+			if ($bDryRun) {
 				print(sprintf("%-80s :: %s :: %s\n", $file['originalFile'], $file['renamedPath'], $file['renamedFile'] . '.' . $file['renamedExt']));
 			} else {
 				$this->renameSerieEpisode($file['originalFile'], $file['renamedPath'] . '/' . $file['renamedFile'], $file['renamedExt']);

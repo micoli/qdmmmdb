@@ -1,4 +1,5 @@
 <?php
+namespace App\Components\QDmmmDB\Mediadb;
 /**
  * CREATE SCHEMA `qdmmmdb` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci ;
  * CREATE TABLE `FIL_FILES` (

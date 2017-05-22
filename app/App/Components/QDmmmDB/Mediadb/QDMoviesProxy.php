@@ -1,4 +1,6 @@
 <?php
+namespace App\Components\QDmmmDB\Mediadb;
+
 class QDMoviesProxy extends QDMediaDBProxy{
 	static $threadArr;
 
