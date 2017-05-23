@@ -1,6 +1,8 @@
 <?php
 namespace App\Components\QDmmmDB\Mediadb;
 
+use App\Components\QDmmmDB\Misc\Tools;
+
 class QDVideoFileHelper{
 	var $bin_ffmpeg;
 	var $bin_mplayer;
@@ -80,7 +82,7 @@ class QDVideoFileHelper{
 
 	function makeVideoPreview($o){
 		$videoFile = $o['videoFile'];
-		$this->debug = array_key_exists_assign_default('debug', $o, false);
+		$this->debug = Tools::array_key_exists_assign_default('debug', $o, false);
 		$fileMD5 = md5($videoFile);
 		$outputFolder=$this->cacheFolder.$fileMD5."/";
 		$fileInfo = $this->getVideoFileInfo($videoFile);
@@ -90,8 +92,8 @@ class QDVideoFileHelper{
 		}else{
 			if ($this->debug)  "$videoFile OK<br/>";
 		}
-		$start		= array_key_exists_assign_default("start"	, $o, 180);
-		$duration	= array_key_exists_assign_default("duration", $o,  30);
+		$start		= Tools::array_key_exists_assign_default("start"	, $o, 180);
+		$duration	= Tools::array_key_exists_assign_default("duration", $o,  30);
 		$outputFilename = sprintf('%ssample.avi',$outputFolder);
 		if(file_exists($outputFilename)){
 			unlink($outputFilename);
@@ -119,12 +121,12 @@ class QDVideoFileHelper{
 	function makeVideoThumbnails($o){
 		//http://blog.amnuts.com/2007/06/22/create-a-random-thumbnail-of-a-video-file/
 		$videoFile = $o['videoFile'];
-		$this->debug = array_key_exists_assign_default('debug', $o, false);
+		$this->debug = Tools::array_key_exists_assign_default('debug', $o, false);
 		$fileMD5 = md5($videoFile);
 		$outputFolder=$this->cacheFolder.$fileMD5."/";
 		@mkdir($outputFolder);
 		chmod($outputFolder,0777);
-		$nbFrames = array_key_exists_assign_default('nbFrames', $o,10);
+		$nbFrames = Tools::array_key_exists_assign_default('nbFrames', $o,10);
 
 		//print $outputFolder."<br/>";
 
@@ -139,7 +141,7 @@ class QDVideoFileHelper{
 		//print_r($fileInfo);
 		$arrFiles = glob($outputFolder.'*.jpg');
 		$step = (int)($fileInfo['duration']/$nbFrames);
-		if(array_key_exists_assign_default('forceThumb', $o, false)||count($arrFiles)==0){
+		if(Tools::array_key_exists_assign_default('forceThumb', $o, false)||count($arrFiles)==0){
 			//may be a rm on each file here
 			$cmd = sprintf('%s -nosound -forceidx -idx  -ss 00:00:01.001 -vo jpeg:outdir="%s" -sstep %d  -benchmark -ni -nobps -noextbased -quiet -noidle -frames %d "%s" ',
 							$this->bin_mplayer,

@@ -1,4 +1,6 @@
 <?php
+use App\Components\QDmmmDB\Misc\Tools;
+
 class QDMoviesProxy extends QDMediaDBProxy{
 	var $QDNet;
 
@@ -66,7 +68,7 @@ class QDMoviesProxy extends QDMediaDBProxy{
 		$xml		= $this->QDNet->getCacheURL("http://www.thetvdb.com/api/GetSeries.php?seriesname=".urlencode($seriename), 'getSeries', $this->cacheminutes, $this->cache);
 		$sdom		= simplexml_load_string($xml);
 		$res		= array ();
-		$dom		= object2array($sdom);
+		$dom		= Tools::object2array($sdom);
 		$f			= $sdom->xpath('Series');
 		$res['results']=array();
 		foreach ($f as $v) {
@@ -110,9 +112,9 @@ class QDMoviesProxy extends QDMediaDBProxy{
 				!file_exists($path . "/movie.tbn")) {
 				$t = glob($path . "/*.nfo");
 				if (array_key_exists(0, $t)) {
-					$sdom = simplexml_load_string(file_get_contents($t[0]));
+					$sdom = \simplexml_load_string(file_get_contents($t[0]));
 					;
-					$f = object2array($sdom->xpath('/details'));
+					$f = Tools::object2array($sdom->xpath('/details'));
 					$f = $f[0];
 					$poster = '';
 					if (array_key_exists('thumbs', $f) && array_key_exists('thumb', $f['thumbs'])) {

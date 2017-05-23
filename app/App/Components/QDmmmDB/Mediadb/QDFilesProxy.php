@@ -1,5 +1,7 @@
 <?php
 namespace App\Components\QDmmmDB\Mediadb;
+use App\Components\QDmmmDB\Misc\Tools;
+
 class QDFilesProxy{
 	static $arrPaths=array();
 	function init(){
@@ -11,7 +13,7 @@ class QDFilesProxy{
 	}
 
 	function getPath(){
-		$subpath	= array_key_exists_assign_default('node', $_REQUEST, '/');
+		$subpath	= Tools::array_key_exists_assign_default('node', $_REQUEST, '/');
 		if(preg_match('!ext\-gen!',$subpath)){
 			$subpath='/';
 		}

@@ -1,5 +1,10 @@
 <?php
-	include_once QD_PATH_3RD_PHP."simple_html_dom.php";
+namespace App\Components\QDmmmDB\Mediadb\Scrapers;
+
+use App\Components\QDmmmDB\Misc\Tools;
+use App\Components\QDmmmDB\Misc\QDNet;
+
+include_once QD_PATH_3RD_PHP."simple_html_dom.php";
 	class QDHtmlMovieParser{
 		var $XbmcMovieObjTemplate=array();
 
@@ -69,7 +74,7 @@
 		}
 		function convertToXbmcMovieNfo($res){
 			//$res = $this->utf8_decode_recurs($res);
-			$doc = new DomDocument('1.0','utf-8');
+			$doc = new \DomDocument('1.0','utf-8');
 			$doc->formatOutput = true;
 			$root = $doc->createElement('movie');
 			$root = $doc->appendChild($root);
@@ -284,7 +289,7 @@
 				try{
 					set_time_limit(5);
 					$desc = $t->parse(array('url'=>trim($link)));
-					if (array_key_exists_assign_default('badParsing', $desc, false)){
+					if (Tools::array_key_exists_assign_default('badParsing', $desc, false)){
 						$desc=array();
 					}
 				}catch (Exception $e){
@@ -311,7 +316,7 @@
 				return $arrResult;
 			}else{
 				print count($arrResult);
-				return array_key_exists_assign_default($idx,$arrResult,null);
+				return Tools::array_key_exists_assign_default($idx,$arrResult,null);
 			}
 		}
 		function extractFromTag($key,$tag,$multiple,$dom,$attribute='plaintext'){

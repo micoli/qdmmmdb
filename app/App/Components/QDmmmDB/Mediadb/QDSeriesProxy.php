@@ -121,7 +121,7 @@ class QDSeriesProxy extends QDMediaDBProxy{
 			if(!$findNextIndex && file_exists($destFile)){
 				return array('ok'=>false	,'error'=>utf8_decode(sprintf('Rename error, find index is not allowed %s=>%s',$old,$destFile)));
 			}
-			//db(array($old,$destFile));return array('ok'=>true		,'error'=>'');
+			db(array($old,$destFile));return array('ok'=>true		,'error'=>'');
 			if (rename($old,$destFile)){
 				$this->makeEpisodeNFO($destFile,true,true,false);
 				return array('ok'=>true		,'error'=>'');
@@ -451,7 +451,7 @@ class QDSeriesProxy extends QDMediaDBProxy{
 				$new		= realpath($SeriePath) . "/" . utf8_encode($v['serie']) . " [" . $v['saison'] . 'x' . sprintf('%02d', $v['episode']) . '] ' . $v['new'] . '.' . $v['ext'];
 				$new64		= realpath($SeriePath) . "/" . utf8_encode($v['serie']) . " [" . $v['saison'] . 'x' . sprintf('%02d', $v['episode']) . '] ' . utf8_encode(base64_decode($v['new64'])) . '.' . $v['ext'];
 				if (array_key_exists($v['md5'], $arrMD5)) {
-					if (file_exists($knew64)) {
+					if (file_exists($new64)) {
 						$resultRename = 'file exists';
 						if ($sMoveExists == 'true') {
 							//fb('exists');

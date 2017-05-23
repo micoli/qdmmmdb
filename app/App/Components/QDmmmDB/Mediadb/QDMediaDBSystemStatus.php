@@ -9,27 +9,6 @@ class QDMediaDBSystemStatus {
 	function __construct() {
 	}
 
-	function svc_status() {
-		$data = self::cpu();
-		return array(
-				'processes'	=> array_values($data['processes']),
-				'cpu'		=> $data['core'],
-				'disks'		=> $this->get_disks()
-		);
-	}
-
-	function svc_diskStatus() {
-		return $this->get_disks();
-	}
-
-	function svc_processes() {
-		$data = self::cpu();
-		return array(
-				'processes'	=> array_values($data['processes']),
-				'cpu'		=> $data['core'],
-		);
-	}
-
 	/**
 	 * Finds a list of disk drives on the server.
 	 * @return array The array velues are the existing disks.

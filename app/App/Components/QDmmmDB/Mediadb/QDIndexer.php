@@ -1,5 +1,7 @@
 <?php
 namespace App\Components\QDmmmDB\Mediadb;
+use App\Components\QDmmmDB\Misc\Tools;
+
 /**
  * CREATE SCHEMA `qdmmmdb` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci ;
  * CREATE TABLE `FIL_FILES` (
@@ -46,9 +48,9 @@ class QDIndexer extends QDMediaDBProxy{
 
 	function svc_getFiles(){
 		$this->QDDb = new QDDB();
-		$arr = explode(' ',array_key_exists_assign_default('search',$_REQUEST,''));
-		$this->mode = array_key_exists_assign_default('mode',$_REQUEST,'flat');
-		if(array_key_exists_assign_default('search',$_REQUEST,'')==''){
+		$arr = explode(' ',Tools::array_key_exists_assign_default('search',$_REQUEST,''));
+		$this->mode = Tools::array_key_exists_assign_default('mode',$_REQUEST,'flat');
+		if(Tools::array_key_exists_assign_default('search',$_REQUEST,'')==''){
 			return array();
 		}
 		$where = '';

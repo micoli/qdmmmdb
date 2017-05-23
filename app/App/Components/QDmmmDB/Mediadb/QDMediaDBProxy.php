@@ -102,7 +102,7 @@ class QDMediaDBProxy {
 			}else{
 				$sizes=split('x',$sC);
 				//die($this->QDNet->lastCacheFile);
-				$thumb=new Imagick($this->QDNet->lastCacheFile);
+				$thumb=new \Imagick($this->QDNet->lastCacheFile);
 				list($newX,$newY)=$this->scaleImage(
 						$thumb->getImageWidth(),
 						$thumb->getImageHeight(),

@@ -213,11 +213,4 @@ class SeriesController {
 		$qd = new QDSeriesProxy($app);
 		return $this->formatResponse($request, $app, $qd->svc_extractSeriesFilenameStruct($sFilename));
 	}
-
-/*
-
-function svc_extractSeriesFilenameStruct($intern = false) {
-	return $this->extractSeriesFilenameStruct($_REQUEST['filename']);
-*/
-
 }
