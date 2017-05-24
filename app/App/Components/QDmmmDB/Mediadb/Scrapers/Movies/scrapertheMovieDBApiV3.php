@@ -32,7 +32,7 @@ class scrapertheMovieDBApiV3 extends QDHtmlMovieParser{
 	function getList($movieName){
 		$url = 'http://api.themoviedb.org/3/search/movie?api_key='.$this->themoviedbapikey.'&query='.urlencode(preg_replace("!'!","",$movieName)).'&language=fr&page=1';
 		$res = $this->QDNet->getCacheURL($url,'themoviedbapiV3',$this->cacheminutes,$this->cache);
-		$arrResult = Tools::object2array(json_decode($res));
+		$arrResult = json_decode($res,true);
 		$searchresults = array();
 		if(is_array($arrResult['results'] )){
 			foreach($arrResult['results'] as $k=>$v){

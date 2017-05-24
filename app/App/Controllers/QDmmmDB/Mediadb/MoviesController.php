@@ -23,19 +23,7 @@ class MoviesController {
 		$sMovie = $request->get('m','');
 		$sPath = $request->get('p','');
 		$sEngine = $request->get('e','');
-		$res = $qdMovie->svc_chooseMovie($sMovie,$sPath,$sEngine);
-		return $this->formatResponse($request, $app, $res);
-	}
-
-	/**
-	 * @SLX\Route(
-	 *     @SLX\Request(uri="proxyPosterImg"),
-	 * )
-	 */
-	public function proxyPosterImg(Application $app,Request $request){
-		$qdMovie = new QDMoviesProxy($app);
-		$i64 = $request->get('i64','');
-		$res = $qdMovie->svc_proxyPosterImg($i64);
+		$res = $qdMovie->chooseMovie($sMovie,$sPath,$sEngine);
 		return $this->formatResponse($request, $app, $res);
 	}
 
@@ -51,8 +39,24 @@ class MoviesController {
 		$sFilename = $request->get('f','');
 		$iID = $request->get('i','');
 
-		$res = $qdMovie->svc_chooseMoviesDetail($sEngine,$sFilename,$iID);
+		$res = $qdMovie->chooseMoviesDetail($sEngine,$sFilename,$iID);
 		return $this->formatResponse($request, $app, $res);
+	}
+
+	/**
+	 * @SLX\Route(
+	 *     @SLX\Request(uri="proxyPosterImg"),
+	 * )
+	 */
+	public function proxyPosterImg(Application $app,Request $request){
+		$qdMovie = new QDMoviesProxy($app);
+		$i64 = $request->get('i64','');
+
+		$response = new Response();
+		$response->headers->set('Content-Disposition', $response->headers->makeDisposition(ResponseHeaderBag::DISPOSITION_INLINE, 'poster.jpg'));
+		$response->headers->set('Content-Type', 'image/jpeg');
+		$response->setContent($qdMovie->proxyPosterImg($i64));
+		return $response;
 	}
 
 	/**
@@ -63,7 +67,7 @@ class MoviesController {
 	public function checkMoviesPicture(Application $app,Request $request){
 		$qdMovie = new QDMoviesProxy($app);
 
-		$res = $qdMovie->svc_checkMoviesPicture();
+		$res = $qdMovie->checkMoviesPicture();
 		return $this->formatResponse($request, $app, $res);
 	}
 
@@ -75,7 +79,7 @@ class MoviesController {
 	public function getMoviesTree(Application $app,Request $request){
 		$qdMovie = new QDMoviesProxy($app);
 
-		$res = $qdMovie->svc_getMoviesTree();
+		$res = $qdMovie->getMoviesTree();
 		return $this->formatResponse($request, $app, $res);
 	}
 
@@ -87,7 +91,7 @@ class MoviesController {
 	public function getXbmcScraperMovieDetail(Application $app,Request $request){
 		$qdMovie = new QDMoviesProxy($app);
 
-		$res = $qdMovie->svc_getXbmcScraperMovieDetail();
+		$res = $qdMovie->getXbmcScraperMovieDetail();
 		return $this->formatResponse($request, $app, $res);
 	}
 
@@ -100,7 +104,7 @@ class MoviesController {
 		$qdMovie = new QDMoviesProxy($app);
 		$sName = $request->get('name','');
 
-		$res = $qdMovie->svc_getMoviesFiles($sName);
+		$res = $qdMovie->getMoviesFiles($sName);
 		return $this->formatResponse($request, $app, $res);
 	}
 
@@ -117,7 +121,7 @@ class MoviesController {
 		$sID = $request->get('i','');
 		$sPath = $request->get('p','');
 
-		$res = $qdMovie->svc_setMoviesFromPath($sRef,$sRecord,$sID,$sPath);
+		$res = $qdMovie->setMoviesFromPath($sRef,$sRecord,$sID,$sPath);
 		return $this->formatResponse($request, $app, $res);
 	}
 
@@ -132,7 +136,7 @@ class MoviesController {
 		$sModified = $request->get('modified','');
 		$sMoveExists = $request->get('moveExists','');
 
-		$res = $qdMovie->svc_renameMoviesFiles($sModified,$sMoveExists);
+		$res = $qdMovie->renameMoviesFiles($sModified,$sMoveExists);
 		return $this->formatResponse($request, $app, $res);
 	}
 }

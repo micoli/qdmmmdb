@@ -217,7 +217,7 @@ class QDSeriesBatch extends QDSeriesProxy
 		}
 	}
 
-	public function svc_renameIncoming(/*string*/ $seriePaths,/*string*/ $path,/*boolean*/ $bDryRun)
+	public function renameIncoming(/*string*/ $seriePaths,/*string*/ $path,/*boolean*/ $bDryRun)
 	{
 		$aError = [];
 		if ($path) {
@@ -251,7 +251,7 @@ class QDSeriesBatch extends QDSeriesProxy
 		}
 	}
 
-	public function svc_renameExisting()
+	public function renameExisting()
 	{
 		/*$fName = '/tmp/seriesa.json';
 		if (file_exists($fName) && filesize($fName)) {
@@ -260,7 +260,7 @@ class QDSeriesBatch extends QDSeriesProxy
 			$aRoots = $this->svc_getSeriesTree();
 			file_put_contents($fName, serialize($aRoots));
 		}*/
-		$aRoots = $this->svc_getSeriesTree();
+		$aRoots = $this->getSeriesTree();
 
 		$aFiles = [];
 		foreach ($aRoots as $aRoot) {

@@ -5,20 +5,42 @@ use App\Components\QDmmmDB\Misc\ToolsFiles;
 use App\Components\QDmmmDB\Misc\Tools;
 use App\Components\QDmmmDB\Mediadb\Scrapers\QDHtmlMovieParser;
 use App\Components\QDmmmDB\Mediadb\Scrapers\movies\scrapertheMovieDBApi;
+use App\Components\QDmmmDB\Mediadb\Scrapers\Movies\scraperAllocineApi;
 
 class QDMoviesProxy extends QDMediaDBProxy{
 	static $threadArr;
 
-	function svc_publish(){
+	public function chooseMovie($sMovie,$sPath,$sEngine) {
+		$sMovie = trim($sMovie);
+		$sc = null;
+		switch ($sEngine){
+			case 'allocineapi':
+				$sc = new \App\Components\QDmmmDB\Mediadb\Scrapers\Movies\scraperAllocineApi();
+			break;
+			case 'themoviedb':
+				$sc = new \App\Components\QDmmmDB\Mediadb\Scrapers\Movies\scrapertheMovieDBApi();
+			break;
+			case 'senscritique':
+				$sc = new \App\Components\QDmmmDB\Mediadb\Scrapers\Movies\scrapersenscritique();
+			break;
+		}
+		$res = array ();
+		if($sc){
+			$res['results'] = $sc->getList($sMovie);
+		}
+		return $res;
+	}
+
+	public function publish(){
 		QDLogger::log('test '.date('Ymd His'));
 	}
 
-	function svc_updateDatabase(){
+	public function updateDatabase(){
 		header('content-type:text/html');
 		$sc = new QDHtmlMovieParser;
 		$nb=0;
 		foreach($this->folderMoviesList as $movieDrive){
-			$arrMovies = $this->pri_getMoviesFiles($movieDrive['name'],'*');
+			$arrMovies = $this->getMoviesFiles($movieDrive['name'],'*');
 			foreach($arrMovies['results'] as $movieData){
 				$nb++;
 				$movieNFO=$movieData['fileDetail']['fullPath'].'/movie.nfo';
@@ -36,11 +58,11 @@ class QDMoviesProxy extends QDMediaDBProxy{
 		}
 	}
 
-	function svc_convertXBMCNfoToQdMmmDb(){
-		$this->pri_convertXBMCNfoToQdMmmDb($this->pri_getMoviesFiles('G','*'));
+	public function convertXBMCNfoToQdMmmDb(){
+		$this->pri_convertXBMCNfoToQdMmmDb($this->getMoviesFiles('G','*'));
 	}
 
-	function pri_convertXBMCNfoToQdMmmDb($arrFiles){
+	private function pri_convertXBMCNfoToQdMmmDb($arrFiles){
 		foreach($arrFiles['results'] as $file){
 			if ($file['nfo'] && !$file['qdmmmdb']!=''){
 				$nfo = $file['fullpath'].'/movie.nfo';
@@ -65,25 +87,25 @@ class QDMoviesProxy extends QDMediaDBProxy{
 		}
 	}
 
-	function svc_preloadFolder(){
+	public function preloadFolder(){
 		set_time_limit(0);
-		$this->pri_preloadFolder($this->pri_getMoviesFiles('F'));
-		//$this->pri_preloadFolder($this->pri_getMoviesFiles('Q'));
-		//$this->pri_preloadFolder($this->pri_getMoviesFiles('K'));
+		$this->pri_preloadFolder($this->getMoviesFiles('F'));
+		//$this->pri_preloadFolder($this->getMoviesFiles('Q'));
+		//$this->pri_preloadFolder($this->getMoviesFiles('K'));
 		/*
-		$this->pri_preloadFolder($this->pri_getMoviesFiles('F'));
-		$this->pri_preloadFolder($this->pri_getMoviesFiles('F1'));
-		$this->pri_preloadFolder($this->pri_getMoviesFiles('K'));
-		$this->pri_preloadFolder($this->pri_getMoviesFiles('QAct'));
-		$this->pri_preloadFolder($this->pri_getMoviesFiles('QDoc'));
-		$this->pri_preloadFolder($this->pri_getMoviesFiles('QDra'));
-		$this->pri_preloadFolder($this->pri_getMoviesFiles('QEnf'));
-		$this->pri_preloadFolder($this->pri_getMoviesFiles('QHor'));
-		$this->pri_preloadFolder($this->pri_getMoviesFiles('QHum'));
-		$this->pri_preloadFolder($this->pri_getMoviesFiles('QSFF'));
+		$this->pri_preloadFolder($this->getMoviesFiles('F'));
+		$this->pri_preloadFolder($this->getMoviesFiles('F1'));
+		$this->pri_preloadFolder($this->getMoviesFiles('K'));
+		$this->pri_preloadFolder($this->getMoviesFiles('QAct'));
+		$this->pri_preloadFolder($this->getMoviesFiles('QDoc'));
+		$this->pri_preloadFolder($this->getMoviesFiles('QDra'));
+		$this->pri_preloadFolder($this->getMoviesFiles('QEnf'));
+		$this->pri_preloadFolder($this->getMoviesFiles('QHor'));
+		$this->pri_preloadFolder($this->getMoviesFiles('QHum'));
+		$this->pri_preloadFolder($this->getMoviesFiles('QSFF'));
 		*/
 	}
-	function pri_preloadFolder($arrFiles){
+	private function pri_preloadFolder($arrFiles){
 		foreach($arrFiles['results'] as $file){
 			if (!$file['nfo'] && $file['title']!=''){
 				print "=>".$file['title']."\n";
@@ -97,7 +119,7 @@ class QDMoviesProxy extends QDMediaDBProxy{
 				if ($cnt>0){
 					$chMovie = $res['results'][0];
 					print "  =>".$chMovie['title'].' '.$chMovie['year']."\n";;
-					$res2 = $this->pri_chooseMoviesDetail(array('e'=>'themoviedb','i'=>$chMovie['id']));
+					$res2 = $this->chooseMoviesDetail('themoviedb',$chMovie['id']);
 					print "    ".$res2['data']['title']."\n";
 					print "    ".$res2['data']['summary']."\n";
 					print "    ".$res2['data']['poster']."--"."\n";
@@ -108,42 +130,11 @@ class QDMoviesProxy extends QDMediaDBProxy{
 		}
 	}
 
-	function svc_chooseMovie($sMovie,$sPath,$sEngine) {
-		return $this->pri_chooseMovie($sMovie,$sPath,$sEngine);
+	public function proxyPosterImg($i64){
+		return file_get_contents(base64_decode($i64));
 	}
 
-	function pri_chooseMovie($sMovie,$sPath,$sEngine) {
-		$sMovie = trim($sMovie);
-		$sc = null;
-		switch ($sEngine){
-			case 'allocineapi':
-				$sc = new \App\Components\QDmmmDB\Mediadb\Scrapers\Movies\scraperAllocineApi();
-			break;
-			case 'themoviedb':
-				$sc = new \App\Components\QDmmmDB\Mediadb\Scrapers\Movies\scrapertheMovieDBApi();
-			break;
-			case 'senscritique':
-				$sc = new \App\Components\QDmmmDB\Mediadb\Scrapers\Movies\scrapersenscritique();
-			break;
-		}
-		$res = array ();
-		if($sc){
-			$res['results'] = $sc->getList($sMovie);
-		}
-		return $res;
-	}
-
-	function svc_proxyPosterImg($i64){
-		header('Content-type: image/jpeg');
-		die(file_get_contents(base64_decode($i64)));
-	}
-
-
-	function svc_chooseMoviesDetail($sEngine,$sFilename,$iID) {
-		return $this->pri_chooseMoviesDetail($sEngine,$sFilename,$iID);
-	}
-
-	function pri_chooseMoviesDetail($sEngine,$sFilename,$iID) {
+	public function chooseMoviesDetail($sEngine,$sFilename,$iID) {
 		$sc = null;
 		switch ($sEngine){
 			case 'allocineapi':
@@ -183,7 +174,7 @@ class QDMoviesProxy extends QDMediaDBProxy{
 		return $res;
 	}
 
-	function pri_processCacheImage($modulo,$arr){
+	private function pri_processCacheImage($modulo,$arr){
 		foreach($arr as $k=>$v){
 			if (($k % 4)==$modulo){
 				if(is_array($v)){
@@ -197,7 +188,7 @@ class QDMoviesProxy extends QDMediaDBProxy{
 		}
 	}
 
-	function pri_cacheImages($scrapper,&$arr){
+	private function pri_cacheImages($scrapper,&$arr){
 		header('content-type:text/html');
 		$withThreads=false;
 		$nbPic=18;
@@ -263,7 +254,7 @@ class QDMoviesProxy extends QDMediaDBProxy{
 		}
 	}
 
-	function sortBySize($a,$b) {
+	private function sortBySize($a,$b) {
 		$as = $a['w']*$a['h'];
 		$bs = $b['w']*$b['h'];
 		if ($as == $bs) {
@@ -272,7 +263,7 @@ class QDMoviesProxy extends QDMediaDBProxy{
 		return (($this->sortBySize=='asc')?$as < $bs:$as > $bs) ? -1 : 1;
 	}
 
-	function svc_checkMoviesPicture() {
+	public function checkMoviesPicture() {
 		$path = "m:/___films";
 		$paths = glob($path . "/*", GLOB_ONLYDIR);
 		foreach ($paths as $path) {
@@ -298,7 +289,7 @@ class QDMoviesProxy extends QDMediaDBProxy{
 		}
 	}
 
-	function svc_getMoviesTree() {
+	public function getMoviesTree() {
 		//unset($_SESSION['cacheFolderTree']);
 		$arr = array();
 		foreach($this->folderMoviesList as $k=>$v){
@@ -313,7 +304,7 @@ class QDMoviesProxy extends QDMediaDBProxy{
 
 	}
 
-	function getMoviesDirectory($path = '.', $level = 0) {
+	private function getMoviesDirectory($path = '.', $level = 0) {
 		set_time_limit(90);
 		$arr = array();
 		$dh = @glob($path . '/*', GLOB_ONLYDIR);
@@ -341,8 +332,8 @@ class QDMoviesProxy extends QDMediaDBProxy{
 		return $arr;
 	}
 
-	function svc_getXbmcScraperMovieDetail() {
-		$sc = new scraperAllocineApi;
+	public function getXbmcScraperMovieDetail() {
+		$sc = new scraperAllocineApi();
 		foreach ($this->folderMoviesList as $path) {
 			$tmp = glob($path['path'] . '/*.*');
 			//$tmp=array();
@@ -361,13 +352,7 @@ class QDMoviesProxy extends QDMediaDBProxy{
 		}
 	}
 
-	function svc_getMoviesFiles($sName) {
-		//foreach ($this->folderMoviesList as $path) {
-		//db($this->pri_getMoviesFiles($sName));die();
-		return $this->pri_getMoviesFiles($sName);
-	}
-
-	function cleanMoviesFilename($moviename, $strict = false) {
+	private function cleanMoviesFilename($moviename, $strict = false) {
 		if ($strict) {
 			foreach ($this->arrCleanupMoviesRegexStrict as $k => $v) {
 				if(!$v['multiple'] && preg_match('/' . $v['rgx'] . '/i',$moviename)){
@@ -384,7 +369,7 @@ class QDMoviesProxy extends QDMediaDBProxy{
 		return trim(ucwords(strtolower($moviename)));
 	}
 
-	function pri_addFileToGetMoviesFiles($prm){
+	private function pri_addFileToGetMoviesFiles($prm){
 		$tmp = array(
 			'rootPath'		=> $prm['rootPath'],
 			'fullpath'		=> $prm['fileDetail']['fullPath'],
@@ -409,7 +394,7 @@ class QDMoviesProxy extends QDMediaDBProxy{
 		return $tmp;
 	}
 
-	function pri_scanMovieFolder($name,$path){
+	private function pri_scanMovieFolder($name,$path){
 		$tmp = glob($path . '/*');
 		foreach ($tmp as $file) {
 			$fileDetail = ToolsFiles::pathinfo_utf($file);
@@ -434,7 +419,7 @@ class QDMoviesProxy extends QDMediaDBProxy{
 		return !$hidden;
 	}
 
-	function pri_getMoviesFiles($name,$mask='*') {
+	public function getMoviesFiles($name,$mask='*') {
 		//$str = stripslashes(str_replace('/', '\\\\', utf8_decode($path)));
 		$this->arrMovies = array();
 		$p = $this->folderMoviesList[$name]['path'];
@@ -457,7 +442,7 @@ class QDMoviesProxy extends QDMediaDBProxy{
 		return $this->arrMovies;
 	}
 
-	function svc_setMoviesFromPath($sRef,$sRecord,$sID,$sPath) {
+	public function setMoviesFromPath($sRef,$sRecord,$sID,$sPath) {
 		header('content-type:text/html');
 		$debug				= false;
 		$forceFileWrite		= true;
@@ -626,12 +611,9 @@ class QDMoviesProxy extends QDMediaDBProxy{
 		}
 	}
 
-	function svc_renameMoviesFiles($sModified,$sMoveExists) {
-		//print '<pre>';
+	public function renameMoviesFiles($sModified,$sMoveExists) {
 		$t = utf8_decode(base64_decode($sModified));
-		//print_r($t);
 		$arr = json_decode($t, true);
-		//db($arr);
 		foreach ($arr['modified'] as $MoviesPath => $Modified) {
 			$MoviesPath = base64_decode($MoviesPath);
 			$tmp = glob($MoviesPath . '/*.*');
@@ -644,7 +626,6 @@ class QDMoviesProxy extends QDMediaDBProxy{
 			foreach ($Modified as $v) {
 				$v['serie'] = base64_decode($v['serie']);
 				$new64 = realpath($MoviesPath) . "/" . base64_decode($v['new64']) . '.' . strtolower($v['ext']);
-				//print $old.'=>'.$new.'<br />';
 				if (array_key_exists($v['md5'], $arrMD5)) {
 					//print ($new64);
 					if (file_exists($new64)) {
@@ -661,42 +642,5 @@ class QDMoviesProxy extends QDMediaDBProxy{
 			}
 		}
 		return array('result' => $arrResult);
-	}
-
-	function oldpri_getMoviesFiles($path, $only2Rename) {
-		$str = stripslashes(str_replace('/', '\\\\', utf8_decode($path)));
-		$arr = array();
-		$tmp = glob($str . '/*.*');
-		$arr = array();
-		$path = str_replace('\\\\', '\\', $path);
-		foreach ($this->folderMoviesList as $v) {
-			$p = str_replace('\\\\', '\\', $v['path']);
-			if (substr($path, 0, strlen($p)) == $p) {
-				$uncPath = str_replace('smb://', 'file:////', str_replace('\\', '/', $v['xbmcpath'] . substr($path, strlen($p))));
-				break;
-			}
-		}
-
-		foreach ($tmp as $v) {
-			$d = pathinfo($v);
-			//print_r($d);
-			if (in_array(strtolower($d['extension']), $this->allowedExt)) {
-				$cleanFileName = $this->cleanMoviesFilename($d['filename']);
-				if (!$only2Rename && $d['filename'] != $cleanFileName) {
-					//if (true){
-					$arr['results'][] = array(
-						'newfilename'	=> $cleanFileName,
-						'title'			=> $this->cleanMoviesFilename($d['filename'], true),
-						'oldfilename'	=> $d['filename'],
-						'ext'			=> $d['extension'],
-						'filesize'		=> Tools::size_readable(filesize($v)),
-						'pathfilename64'=> base64_encode(realpath($v)),
-						'uncfilename64' => base64_encode($uncPath . '/' . $d['filename'] . '.' . $d['extension']),
-						'md5'			=> md5(realpath($v))
-					);
-				}
-			}
-		}
-		return $arr;
 	}
 }

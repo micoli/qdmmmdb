@@ -22,7 +22,7 @@ class SeriesController {
 		$iId = $request->get('id',0);
 
 		$qd = new QDSeriesProxy($app);
-		return $this->formatResponse($request, $app, $qd->svc_getSeriesTree($iId,$bRefresh));
+		return $this->formatResponse($request, $app, $qd->getSeriesTree($iId,$bRefresh));
 	}
 
 	/**
@@ -36,7 +36,7 @@ class SeriesController {
 		$sPath = $request->get('p',0);
 
 		$qd = new QDSeriesProxy($app);
-		return $this->formatResponse($request, $app, $qd->svc_getSerieFromPath($sPath));
+		return $this->formatResponse($request, $app, $qd->getSerieFromPath($sPath));
 	}
 
 	/**
@@ -50,7 +50,7 @@ class SeriesController {
 		$sPath = $request->get('p',0);
 
 		$qd = new QDSeriesProxy($app);
-		return $this->formatResponse($request, $app, $qd->svc_getFolderSeriesList($sPath));
+		return $this->formatResponse($request, $app, $qd->getFolderSeriesList($sPath));
 	}
 
 	/**
@@ -64,7 +64,7 @@ class SeriesController {
 		$sPath = $request->get('d',0);
 
 		$qd = new QDSeriesProxy($app);
-		return $this->formatResponse($request, $app, $qd->svc_serieBulkRename($sPath));
+		return $this->formatResponse($request, $app, $qd->serieBulkRename($sPath));
 	}
 
 	/**
@@ -78,7 +78,7 @@ class SeriesController {
 		$sName = $request->get('name','');
 
 		$qd = new QDSeriesProxy($app);
-		return $this->formatResponse($request, $app, $qd->svc_getFileSorterList($sName));
+		return $this->formatResponse($request, $app, $qd->getFileSorterList($sName));
 	}
 
 	/**
@@ -94,7 +94,7 @@ class SeriesController {
 		$sId = $request->get('i','');
 
 		$qd = new QDSeriesProxy($app);
-		return $this->formatResponse($request, $app, $qd->svc_setSerieFromPath($sMode,$sPath,$sId));
+		return $this->formatResponse($request, $app, $qd->setSerieFromPath($sMode,$sPath,$sId));
 	}
 
 	/**
@@ -109,7 +109,7 @@ class SeriesController {
 		$sPath = $request->get('p','');
 
 		$qd = new QDSeriesProxy($app);
-		return $this->formatResponse($request, $app, $qd->svc_chooseSerie($sSerieName,$sPath));
+		return $this->formatResponse($request, $app, $qd->chooseSerie($sSerieName,$sPath));
 	}
 
 	/**
@@ -125,7 +125,7 @@ class SeriesController {
 		$sMoveExists = $request->get('moveExists','');
 
 		$qd = new QDSeriesProxy($app);
-		return $this->formatResponse($request, $app, $qd->svc_renameFiles($sModified,$sMoveExists));
+		return $this->formatResponse($request, $app, $qd->renameFiles($sModified,$sMoveExists));
 	}
 
 	/**
@@ -140,7 +140,7 @@ class SeriesController {
 		$sOnly2Rename = $request->get('only2Rename','true');
 
 		$qd = new QDSeriesProxy($app);
-		return $this->formatResponse($request, $app, $qd->svc_getFilesMulti($sFullPath,$sOnly2Rename));
+		return $this->formatResponse($request, $app, $qd->getFilesMulti($sFullPath,$sOnly2Rename));
 	}
 
 	/**
@@ -155,7 +155,21 @@ class SeriesController {
 		$bOnly2Rename = $request->get('only2Rename','false')=='true';
 
 		$qd = new QDSeriesProxy($app);
-		return $this->formatResponse($request, $app, $qd->svc_getFiles($sFullPath,$bOnly2Rename));
+		return $this->formatResponse($request, $app, $qd->getFiles($sFullPath,$bOnly2Rename));
+	}
+
+	/**
+	 * @SLX\Route(
+	 *     @SLX\Request(uri="extractSeriesFilenameStruct"),
+	 * )
+	 */
+	public function extractSeriesFilenameStruct(Application $app,Request $request){
+		$this->app = $app;
+
+		$sFilename = $request->get('filename',false);
+
+		$qd = new QDSeriesProxy($app);
+		return $this->formatResponse($request, $app, $qd->extractSeriesFilenameStruct($sFilename));
 	}
 
 	/**
@@ -169,7 +183,7 @@ class SeriesController {
 		$bForceRefresh = $request->get('forceRefresh','true');
 
 		$qd = new QDSeriesProxy($app);
-		return $this->formatResponse($request, $app, $qd->svc_updateAllXml($bForceRefresh));
+		return $this->formatResponse($request, $app, $qd->updateAllXml($bForceRefresh));
 	}
 
 	/**
@@ -185,9 +199,8 @@ class SeriesController {
 		$sKey = $request->get('key',false);
 
 		$qd = new QDSeriesProxy($app);
-		return $this->formatResponse($request, $app, $qd->svc_updateDatabase($sPathShow,$sCurrent,$sKey));
+		return $this->formatResponse($request, $app, $qd->updateDatabase($sPathShow,$sCurrent,$sKey));
 	}
-
 	/**
 	 * @SLX\Route(
 	 *     @SLX\Request(uri="updateFanartCache"),
@@ -197,20 +210,6 @@ class SeriesController {
 		$this->app = $app;
 
 		$qd = new QDSeriesProxy($app);
-		return $this->formatResponse($request, $app, $qd->svc_updateFanartCache($sPathShow));
-	}
-
-	/**
-	 * @SLX\Route(
-	 *     @SLX\Request(uri="extractSeriesFilenameStruct"),
-	 * )
-	 */
-	public function extractSeriesFilenameStruct(Application $app,Request $request){
-		$this->app = $app;
-
-		$sFilename = $request->get('filename',false);
-
-		$qd = new QDSeriesProxy($app);
-		return $this->formatResponse($request, $app, $qd->svc_extractSeriesFilenameStruct($sFilename));
+		return $this->formatResponse($request, $app, $qd->updateFanartCache($sPathShow));
 	}
 }

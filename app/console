@@ -1,51 +1,35 @@
 #!/usr/bin/env php
 <?php
-
-set_time_limit(0);
+nameSpace App\Commands;
 
 use Knp\Provider\ConsoleServiceProvider;
-$app = require_once __DIR__ ."/bootstrap.php";
+use \RecursiveDirectoryIterator;
+use \RecursiveIteratorIterator;
+use \RegexIterator;
+use \RecursiveRegexIterator;
 
+
+class CommandLauncher {
+	public static function run($app,$sPath,$sNamespace){
+		set_time_limit(0);
+
+		$Directory = new RecursiveDirectoryIterator($sPath);
+		$Iterator = new RecursiveIteratorIterator($Directory);
+		$Regex = new RegexIterator($Iterator, '/^.+\.php$/i', RecursiveRegexIterator::GET_MATCH);
+
+		foreach($Regex as $sClassName => $object){
+			$sClassName = $sNamespace . implode('\\',explode('/',preg_replace('!\.php$!','',str_replace($sPath.'/','',$sClassName))));
+			$app["console"]->add(new $sClassName());
+		}
+
+		$app["console"]->run();
+	}
+}
+
+$app = require_once(__DIR__ ."/bootstrap.php");
 $app->register(new ConsoleServiceProvider(),array(
 	'console.name'				=> $gblCfg['application.name'],
 	'console.version'			=> $gblCfg['application.version'],
 	'console.project_directory'	=> __DIR__
 ));
-
-$sPath = realpath(__DIR__.'/App/Commands');
-$Directory = new RecursiveDirectoryIterator($sPath);
-$Iterator = new RecursiveIteratorIterator($Directory);
-$Regex = new RegexIterator($Iterator, '/^.+\.php$/i', RecursiveRegexIterator::GET_MATCH);
-foreach($Regex as $sClassName => $object){
-	$sClassName = "\\App\\Commands\\" . implode('\\',explode('/',preg_replace('!\.php$!','',str_replace($sPath.'/','',$sClassName))));
-	$app["console"]->add(new $sClassName());
-}
-$app["console"]->run();
-/*
-
-use Knp\Console\Application;
-use Silex\ServiceProviderInterface;
-
-/*class UnderpantsProvider implements ServiceProviderInterface
-{
-	public function boot(Silex\Application $app){
-	}
-	public function register(Silex\Application $app)
-	{
-		if (isset($app['console'])) {
-			$app->extend('console', function (Application $console) {
-				$sPath = realpath(__DIR__.'/App/Commands');
-				$Directory = new RecursiveDirectoryIterator($sPath);
-				$Iterator = new RecursiveIteratorIterator($Directory);
-				$Regex = new RegexIterator($Iterator, '/^.+\.php$/i', RecursiveRegexIterator::GET_MATCH);
-				foreach($Regex as $sClassName => $object){
-					$sClassName = "\\App\\Commands\\" . implode('\\',explode('/',preg_replace('!\.php$!','',str_replace($sPath.'/','',$sClassName))));
-					$console->add(new $sClassName());
-				}
-			});
-		}
-	}
-}
-$app->register(new UnderpantsProvider());
-*/
-$app["console"]->run();
+CommandLauncher::run($app , __DIR__.'/App/Commands' , '\\App\\Commands\\');

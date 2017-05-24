@@ -99,13 +99,13 @@ class QDVideoFileHelper{
 			unlink($outputFilename);
 		}
 		$cmd = sprintf('%s -sameq -ss %d -t %d -i "%s" "%s"',
-						$this->bin_ffmpeg,
-						$start,
-						$duration,
-						$videoFile,
-						$outputFilename,
-						$outputFilename
-					);
+			$this->bin_ffmpeg,
+			$start,
+			$duration,
+			$videoFile,
+			$outputFilename,
+			$outputFilename
+		);
 		//db($cmd);
 		$this->binaryRun($cmd);
 		$fileInfo['preview'		]='sample.avi';
@@ -144,21 +144,21 @@ class QDVideoFileHelper{
 		if(Tools::array_key_exists_assign_default('forceThumb', $o, false)||count($arrFiles)==0){
 			//may be a rm on each file here
 			$cmd = sprintf('%s -nosound -forceidx -idx  -ss 00:00:01.001 -vo jpeg:outdir="%s" -sstep %d  -benchmark -ni -nobps -noextbased -quiet -noidle -frames %d "%s" ',
-							$this->bin_mplayer,
-							$outputFolder,
-							$step,
-							$nbFrames,
-							$videoFile
-							);
+				$this->bin_mplayer,
+				$outputFolder,
+				$step,
+				$nbFrames,
+				$videoFile
+			);
 			//db($cmd);
 			$return = $this->binaryRun($cmd);
 			$arrFiles = glob($outputFolder.'*.jpg');
 		}
 		foreach($arrFiles as $k=>&$f){
 			$f = array(
-				'fullname'	=>$f,
-				'url'		=>$fileMD5.'/'.basename($f),
-				'img'		=>basename($f),
+				'fullname'	=> $f,
+				'url'		=> $fileMD5.'/'.basename($f),
+				'img'		=> basename($f),
 				'ts'		=> $this->sec2hms($k*$step),
 				'tss'		=> $k*$step
 			);
