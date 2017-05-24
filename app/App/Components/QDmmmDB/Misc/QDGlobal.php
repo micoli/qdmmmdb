@@ -7,15 +7,15 @@ if(!defined('QD_PATH_3RD_JS'	))	define ('QD_PATH_3RD_JS'	,realpath(dirname(__FIL
 if(!defined('QD_PATH_ROOT'		))	define ('QD_PATH_ROOT'		,realpath(dirname(__FILE__).'/../../').'/');
 if(!defined('QD_PATH_MODULES'	))	define ('QD_PATH_MODULES'	,realpath(dirname(__FILE__).'/../../modules').'/');
 
-QDLogger::init(array(
+/*QDLogger::init(array(
 	'cli'=>array(),
-	/*'mom'=>array(
+	'mom'=>array(
 		'uri'=>"tcp://network.home.micoli.org:61613",
 		'user'=>'guest',
 		'password'=>'guest',
 		'queue'=>'/topic/qdmmmdb'
-	),*/
-));
+	),
+));*/
 
 function db($v){
 	if(php_sapi_name() != "cli") print '<pre>'."\n";

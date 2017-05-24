@@ -1,7 +1,7 @@
 <?php
 namespace App\Controllers\QDmmmDB\Mediadb;
 
-use App\Components\QDmmmDB\Mediadb\QDSeriesProxy;
+use App\Components\QDmmmDB\Mediadb\Series\QDSeriesProxy;
 use DDesrosiers\SilexAnnotations\Annotations as SLX;
 use Silex\Application;
 use SM\SilexRestApi\Controllers\NormalizedResponse;

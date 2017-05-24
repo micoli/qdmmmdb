@@ -1,5 +1,5 @@
 <?php
-	class QDHtmlParserBinnews extends QDHtmlMovieParser{
+	class QDHtmlParserBinnews extends MovieParser{
 		var $path = "/var/www/scripts/binnews.ok";
 		function dumpIte2Sql(){
 			mysql_connect("localhost", "root", "xxx") or

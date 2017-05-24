@@ -187,7 +187,7 @@ class QDNzbProxyFeeds{
 			$v['ITE_TITLE'] = str_replace('('.$v['ITE_YEAR'].')','',utf8_encode($v['ITE_TITLE']));
 			$desc=array();
 			if ($v['ITE_LINK_CACHE_SERIAL']=='' or $v['ITE_LINK_CACHE_SERIAL']=='[]'){
-				$desc = QDHtmlMovieParser::getDescFromLink($v['ITE_LINK']);
+				$desc = MovieParser::getDescFromLink($v['ITE_LINK']);
 				if (count($desc)>0){
 					$sql = 'update rss.ITE_ITEMS set ITE_LINK_CACHE_SERIAL=? where ITE_ID=?;';
 					$this->QDDb->execute($sql,array(json_encode($desc),$v['ITE_ID']));
@@ -195,7 +195,7 @@ class QDNzbProxyFeeds{
 			}else{
 				$desc = json_decode($v['ITE_LINK_CACHE_SERIAL'],true);
 			}
-			$desc = array_merge(QDHtmlMovieParser::initBasicResult(),$desc);
+			$desc = array_merge(MovieParser::initBasicResult(),$desc);
 			$v['ITE_LINK_CACHE_SERIAL'] = $desc;
 
 			foreach($desc as $desck=>$descv){

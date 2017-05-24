@@ -1,5 +1,5 @@
 <?php
-	class QDHtmlMovieParserCinemajeuxactu extends QDHtmlMovieParser{
+	class MovieParserCinemajeuxactu extends MovieParser{
 		function parse($o){
 			//print $o['url'];
 			$htmlStr = $this->QDNet->getCacheURL($o['url'], 'rssDetail', 60*60*24*365, true);

@@ -1,11 +1,11 @@
 <?php
 namespace App\Controllers\QDmmmDB\Mediadb;
 
+use \App\Components\QDmmmDB\Mediadb\Movies\QDMoviesProxy;
 use DDesrosiers\SilexAnnotations\Annotations as SLX;
 use Silex\Application;
 use SM\SilexRestApi\Controllers\NormalizedResponse;
 use Symfony\Component\HttpFoundation\Request;
-use \App\Components\QDmmmDB\Mediadb\QDMoviesProxy;
 
 class MoviesController {
 	use NormalizedResponse;

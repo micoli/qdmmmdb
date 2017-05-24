@@ -1,8 +1,10 @@
 <?php
+namespace App\Components\QDmmmDB\Misc;
 class QDSettingPanels{
 	static $allFiles = array();
 
 	static function init(){
+		return [];
 		self::recursPath(QD_PATH_3RD_JS.'desktop/'	,'lib.3rd_js.desktop'	,'MyDesktop');
 		self::recursPath(QD_PATH_MODULES			,'modules.qd'			,'qd'		);
 		foreach(self::$allFiles as $kk=>$vv){

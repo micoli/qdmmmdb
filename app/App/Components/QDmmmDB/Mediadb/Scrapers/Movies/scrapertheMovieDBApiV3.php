@@ -1,11 +1,11 @@
 <?php
 namespace App\Components\QDmmmDB\Mediadb\Scrapers\Movies;
 
-use App\Components\QDmmmDB\Mediadb\Scrapers\QDHtmlMovieParser;
+use App\Components\QDmmmDB\Mediadb\Scrapers\MovieParser;
 use App\Components\QDmmmDB\Misc\QDNet;
 use App\Components\QDmmmDB\Misc\Tools;
 
-class scrapertheMovieDBApiV3 extends QDHtmlMovieParser{
+class scrapertheMovieDBApiV3 extends MovieParser{
 	function __construct(){
 		$this->QDNet			= new QDNet();
 		$this->cacheminutes		= 123*59+59;

@@ -1,10 +1,10 @@
 <?php
 namespace App\Components\QDmmmDB\Mediadb\Scrapers\Movies;
 
-use App\Components\QDmmmDB\Mediadb\Scrapers\QDHtmlMovieParser;
+use App\Components\QDmmmDB\Mediadb\Scrapers\MovieParser;
 use Symfony\Component\DomCrawler\Crawler;
 use App\Components\QDmmmDB\Misc\QDNet;
-class scrapersenscritique extends QDHtmlMovieParser{
+class scrapersenscritique extends MovieParser{
 	function __construct(){
 		$this->QDNet			= new QDNet();
 		$this->cacheminutes		= 123*59+59;

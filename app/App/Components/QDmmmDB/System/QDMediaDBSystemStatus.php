@@ -1,5 +1,5 @@
 <?php
-namespace App\Components\QDmmmDB\Mediadb;
+namespace App\Components\QDmmmDB\System;
 
 use App\Components\QDmmmDB\Misc\Tools;
 

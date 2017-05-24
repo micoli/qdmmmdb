@@ -7,7 +7,7 @@ define('CFG_PATH',realpath(dirname(__FILE__)));
 define('VENDOR_PATH',realpath(dirname(__FILE__).'/../../vendor'));
 
 require dirname(__FILE__)."/../App/Components/QDmmmDB/Tools/QDGlobal.php";
-App\Components\QDmmmDB\Tools\loadConf(dirname(__FILE__).'/json/');
+App\Components\QDmmmDB\Misc\loadConf(dirname(__FILE__).'/json/');
 
 $app['debug'					] = true;
 $gblCfg['application.name'		] = 'App';

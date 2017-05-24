@@ -4,7 +4,9 @@
 	if(!defined('QD_PATH_MODULES'))	define ('QD_PATH_MODULES'	,realpath(dirname(__FILE__)).'/');
 	if(!defined('CONF_ROOT'))		define ('CONF_ROOT'			,dirname(__FILE__).'/conf/');
 
-	require 'lib/classes/QDGlobal.php';
+	require 'app/App/Components/QDmmmDB/Misc/QDGlobal.php';
+	App\Components\QDmmmDB\Misc\loadConf(dirname(__FILE__).'/app/config/json/');
+	require 'app/App/Components/QDmmmDB/Misc/QDSettingPanels.php';
 	header('Content-type: text/html; charset=UTF-8');
 	//db($GLOBALS['conf']);die();
 ?><html>
@@ -46,7 +48,7 @@
 		<script type="text/javascript">
 			document.getElementById('loading-msg').innerHTML = 'Loading Extensions';
 			var QD_GBL_CONF				=<?php print json_encode($GLOBALS['conf']);?>;
-			var QD_GBL_SETTING_PANELS	=<?php print json_encode(QDSettingPanels::init());?>
+			var QD_GBL_SETTING_PANELS	=<?php print json_encode(App\Components\QDmmmDB\Misc\QDSettingPanels::init());?>
 		</script>
 		<script type="text/javascript" src="lib/3rd_js/commonfunctions.js"></script>
 		<script type="text/javascript" src="lib/3rd_js/css.js"></script>

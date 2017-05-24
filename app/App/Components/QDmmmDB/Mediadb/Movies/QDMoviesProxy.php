@@ -1,11 +1,12 @@
 <?php
-namespace App\Components\QDmmmDB\Mediadb;
+namespace App\Components\QDmmmDB\Mediadb\Movies;
 
 use App\Components\QDmmmDB\Misc\ToolsFiles;
 use App\Components\QDmmmDB\Misc\Tools;
-use App\Components\QDmmmDB\Mediadb\Scrapers\QDHtmlMovieParser;
+use App\Components\QDmmmDB\Mediadb\Scrapers\MovieParser;
 use App\Components\QDmmmDB\Mediadb\Scrapers\movies\scrapertheMovieDBApi;
 use App\Components\QDmmmDB\Mediadb\Scrapers\Movies\scraperAllocineApi;
+use App\Components\QDmmmDB\Mediadb\QDMediaDBProxy;
 
 class QDMoviesProxy extends QDMediaDBProxy{
 	static $threadArr;
@@ -37,7 +38,7 @@ class QDMoviesProxy extends QDMediaDBProxy{
 
 	public function updateDatabase(){
 		header('content-type:text/html');
-		$sc = new QDHtmlMovieParser;
+		$sc = new MovieParser;
 		$nb=0;
 		foreach($this->folderMoviesList as $movieDrive){
 			$arrMovies = $this->getMoviesFiles($movieDrive['name'],'*');
@@ -446,7 +447,7 @@ class QDMoviesProxy extends QDMediaDBProxy{
 		header('content-type:text/html');
 		$debug				= false;
 		$forceFileWrite		= true;
-		$scraperObject		= new QDHtmlMovieParser();
+		$scraperObject		= new MovieParser();
 		$ref				= json_decode($sRef,true);
 		$originalFileName	= base64_decode($ref['pathfilename64']);
 		$fullRecord			= json_decode($sRecord,true);

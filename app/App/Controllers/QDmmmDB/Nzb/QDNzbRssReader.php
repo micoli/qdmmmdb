@@ -37,7 +37,7 @@ class QDNzbRssReader {
 			$arr = $this->QDDb->query2array($sql,array($v['unique_id']));
 			foreach($arr as $h){
 				if ($h['ITE_LINK_CACHE_SERIAL']=='' or $h['ITE_LINK_CACHE_SERIAL']=='[]'){
-					$desc = QDHtmlMovieParser::getDescFromLink($h['ITE_LINK']);
+					$desc = MovieParser::getDescFromLink($h['ITE_LINK']);
 					if (count($desc)>0){
 						print_r(join(',',array_keys($desc)));
 						$sql = 'update rss.ITE_ITEMS set ITE_LINK_CACHE_SERIAL=? where ITE_ID=?;';

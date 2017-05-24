@@ -1,10 +1,11 @@
 <?php
-namespace App\Components\QDmmmDB\Mediadb;
+namespace App\Components\QDmmmDB\Mediadb\Series;
 //include '/var/www/qdmmmdb/app/App/Components/QDmmmDB/Tools/Tools.php';
 
 use App\Components\QDmmmDB\Misc\Tools;
 use App\Components\QDmmmDB\Misc\ToolsFiles;
 use App\Components\QDmmmDB\Misc\QDLogger;
+use App\Components\QDmmmDB\Mediadb\QDMediaDBProxy;
 
 /*
 select media_type,count(*) from art group by  media_type;

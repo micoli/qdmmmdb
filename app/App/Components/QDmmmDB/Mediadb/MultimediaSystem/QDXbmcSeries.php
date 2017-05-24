@@ -1,5 +1,7 @@
 <?php
-namespace App\Components\QDmmmDB\Mediadb;
+namespace App\Components\QDmmmDB\Mediadb\MultimediaSystem;
+
+use App\Components\QDmmmDB\Mediadb\Series\QDSeriesProxy;
 
 class QDXbmcSeries extends QDSeriesProxy{
 
