@@ -1010,4 +1010,3 @@ class QDMoviesProxy extends QDMediaDBProxy{
 		print $this->xbmcHash('smb://user:pass@server/share/directory/file.ext') . '<br>' . '8ce36055' . '<br><br>';
 	}
 }
-?>

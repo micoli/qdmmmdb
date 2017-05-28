@@ -40,7 +40,7 @@ class SyncVideo extends KnpCommand{
 		);
 
 		$output->writeln(sprintf(
-			'  %s : <comment>%s</comment>',
+			'<info>%s</info> : <comment>%s</comment>',
 			$input->getOption(self::ARG_SOURCE),
 			$oKodiRpc->syncVideo($input->getOption(self::ARG_SOURCE))
 		));

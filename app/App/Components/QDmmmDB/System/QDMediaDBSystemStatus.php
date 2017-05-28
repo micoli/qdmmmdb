@@ -181,4 +181,3 @@ class QDMediaDBSystemStatus {
 		//consumption=(`awk '$1=="cpu" { cputot = $2+$3+$4+$5; } $1=='$PID' { cpupid = $14+$15+$16+$17; } END {printf "%d %d %.2f\n", cpupid, cputot, (cpupid-'${consumption[0]}')/(cputot-'${consumption[1]}')*100; }' /proc/stat /proc/$PID/stat`);
 	}
 }
-?>

@@ -165,4 +165,3 @@ class scrapertheMovieDBApiV3 extends MovieParser{
 		}
 	}
 }
-?>
