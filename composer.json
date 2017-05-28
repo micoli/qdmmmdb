@@ -19,7 +19,9 @@
 		"wyrihaximus/sli-fly": "^2.0",
 		"sunra/php-simple-html-dom-parser": "^1.5",
 		"knplabs/console-service-provider": "v1.0",
-		"knplabs/gaufrette": "^0.3.1"
+		"knplabs/gaufrette": "^0.3.1",
+		"bhutanio/torrent-bencode": "dev-master",
+		"fguillot/json-rpc": "^1.2"
 	},
 	"minimum-stability": "dev",
 	"repositories": [

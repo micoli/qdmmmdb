@@ -1,6 +1,5 @@
 <?php
 namespace App\Components\QDmmmDB\Mediadb\Series;
-include "BEncode.php";
 use Bhutanio\BEncode\BEncode;
 use App\Components\QDmmmDB\Misc\ToolsFiles;
 use App\Components\QDmmmDB\Mediadb\serieTools;

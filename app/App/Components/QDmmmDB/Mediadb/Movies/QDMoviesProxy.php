@@ -553,8 +553,6 @@ class QDMoviesProxy extends QDMediaDBProxy{
 			'inFolder'		=> 'inFolder'
 		));
 
-		//// rollback
-		//@rename($newFullFilename,$originalFileName);
 		if (file_exists($movieFolder	. '/movie.nfo')) {
 			$rec2db = Tools::object2array($scraperObject->simpleLoadXbmcMovieNfo($movieFolder	. '/movie.nfo'));
 			$rec2db['fileDetail']=$fileDetail;
@@ -573,9 +571,6 @@ class QDMoviesProxy extends QDMediaDBProxy{
 		}
 
 		return ($newRefRecord);
-
-
-
 
 		$id = 0 + $sID;
 		$path = base64_decode($sPath);
