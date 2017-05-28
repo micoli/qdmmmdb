@@ -1,16 +1,16 @@
 <?php
-
+namespace App\Controllers\QDmmmDB\Nzb;
 /**
  * Description of QDXbmc
  *
  * @author omichaud
  */
 class QDXbmc {
-    /**
-    * http://forum.xbmc.org/showthread.php?t=85445
-    *
-    * @author  narfight
-    */
+	/**
+	* http://forum.xbmc.org/showthread.php?t=85445
+	*
+	* @author  narfight
+	*/
 	function thumbnailHash($input){
 		$chars = strtolower($input);
 		$crc = 0xffffffff;
@@ -51,5 +51,3 @@ class QDXbmc {
 	}
 
 }
-
-?>

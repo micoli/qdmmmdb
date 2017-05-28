@@ -1,4 +1,6 @@
 <?php
+namespace App\Controllers\QDmmmDB\Nzb;
+
 class QDNzbRssReaderBinnews extends  QDNzbRssReader{
 	function svc_readAllFeeds(){
 		$this->svc_readFeed(6);
@@ -34,4 +36,3 @@ class QDNzbRssReaderBinnews extends  QDNzbRssReader{
 		}
 	}
 }
-?>

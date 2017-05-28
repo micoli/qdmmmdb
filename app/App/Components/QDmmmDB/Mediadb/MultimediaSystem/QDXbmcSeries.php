@@ -5,7 +5,7 @@ use App\Components\QDmmmDB\Mediadb\Series\QDSeriesProxy;
 
 class QDXbmcSeries extends QDSeriesProxy{
 
-	function svc_getShows(){
+	function getShows(){
 		$this->initdb();
 		$sql = "select
 					sh.c12 as tvdbid,
@@ -38,13 +38,13 @@ class QDXbmcSeries extends QDSeriesProxy{
 		return $serieStruct;
 	}
 
-	function svc_preGetShowSeasons(){
-		$tmp=$this->getShowStruct($_REQUEST['tvdbid']);
+	function preGetShowSeasons($sTvdbID){
+		$tmp=$this->getShowStruct($sTvdbID);
 		return $tmp['Series'];
 	}
 
-	function svc_getShowsSeasons(){
-		$serieStruct=$this->getShowStruct($_REQUEST['tvdbid']);
+	function getShowsSeasons($sTvdbID){
+		$serieStruct=$this->getShowStruct($sTvdbID);
 		$this->initdb();
 		$sql = sprintf("
 				select
@@ -61,7 +61,7 @@ class QDXbmcSeries extends QDSeriesProxy{
 				inner join path pa on pa.idPath=fi.idPath
 				where sh.c12=%s
 				group by ep.c18
-				order by ep.c12,ep.c13,pa.strPath;",$_REQUEST['tvdbid']);
+				order by ep.c12,ep.c13,pa.strPath;",$sTvdbID);
 
 
 		$seasonStruct=array();
@@ -112,8 +112,8 @@ class QDXbmcSeries extends QDSeriesProxy{
 		return array_values($res);
 	}
 
-	function svc_getEpisodeList(){
-		$serieStruct=$this->getShowStruct($_REQUEST['tvdbid']);
+	function getEpisodeList($sTvdbID,$sSeason){
+		$serieStruct=$this->getShowStruct($sTvdbID);
 		$this->initdb();
 		$sql = sprintf("
 			select
@@ -130,8 +130,8 @@ class QDXbmcSeries extends QDSeriesProxy{
 			inner	join path		pa on pa.idPath=fi.idPath
 			where	sh.c12=%s and ep.c12='%s'
 			order by ep.c12*1,ep.c13*1,pa.strPath;",
-			$_REQUEST['tvdbid'],
-			$_REQUEST['season']*1
+			$sTvdbID,
+			$sSeason*1
 		);
 
 		$res=array();

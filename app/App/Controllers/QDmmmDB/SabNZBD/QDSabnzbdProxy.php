@@ -1,5 +1,6 @@
 <?php
 // bwping  -b 1024 -s 3600 -v 450000 www.micoli.org
+namespace App\Controllers\QDmmmDB\SabNZBD;
 
 class QDSabnzbdProxy{
 	var $QDNet;
@@ -20,12 +21,12 @@ class QDSabnzbdProxy{
 		$url = sprintf("%sapi?%s",$this->sabnzbd_root,http_build_query($arrCmd));
 		$tmp = $this->QDNet->getUrl($url);
 		if ($arrCmd['mode']=="queue" && array_key_exists('name',$arrCmd)){
-			
+
 		}
 		return $tmp;
 	}
 
-	function svc_getSpeeds(){
+	function getSpeeds(){
 		return array(
 			'speed'=>array(
 				array('s'=> 200),
@@ -40,25 +41,20 @@ class QDSabnzbdProxy{
 		);
 	}
 
-	function svc_setSpeed(){
+	function setSpeed($value){
 		return $this->pri_sendCommand(array(
 			'mode'	=> 'config',
 			'name'	=> 'speedlimit',
-			'value'	=> $_REQUEST['value'],
+			'value'	=> $value,
 		));
 	}
 
-	function svc_action(){
+	function action($arr,$objReturn){
 		$arr = array();
-		foreach($_REQUEST as $k=>$v){
-			if (preg_match('!^sab_(.*)!',$k,$m)){
-				$arr[$m[1]] = $v;
-			}
-		}
 		$tmp = $this->pri_sendCommand($arr);
-		if (array_key_exists('obj_return',$_REQUEST)){
+		if ($objReturn){
 			$tmp2 = json_decode($tmp);
-			$objreturn = $_REQUEST['obj_return'];
+			$objreturn = $objReturn;
 			if (isset($tmp2->$objreturn->slots)){
 				foreach($tmp2->$objreturn->slots as $k=>&$v){
 					$v->icondwn=($v->status=='Paused')?'pause':'play';
@@ -70,4 +66,3 @@ class QDSabnzbdProxy{
 		}
 	}
 }
-?>

@@ -1,4 +1,5 @@
 <?php
+namespace App\Controllers\QDmmmDB\Nzb;
 define ('MAGPIE_CACHE_DIR','/var/www/cache/magpie');
 define ('MAGPIE_CACHE_ON',true);
 define ('MAGPIE_CACHE_AGE',60*15);
@@ -49,4 +50,3 @@ class QDNzbRssReader {
 		}
 	}
 }
-?>

@@ -1,17 +1,20 @@
 <?php
+namespace App\Controllers\QDmmmDB\Nzb;
 include_once QD_PATH_3RD_PHP."simple_html_dom.php";
 
 class QDNzbProxyFeeds{
 	var $QDNet;
 	var $QDDb;
+	var $app;
 
-	function __construct() {
+	function __construct($app) {
+		$this->app=$app;
 		$this->QDNet = new QDNet();
 		$this->QDDb = new QDDB();
 
 	}
 
-	function svc_testAllocine(){
+	function testAllocine(){
 		print "<pre>";
 		//$t = new htmlParserAllocine();
 		//print_r($t->parse(array('url'=>'http://www.allocine.fr/film/fichefilm_gen_cfilm=119031.html')));
@@ -21,33 +24,33 @@ class QDNzbProxyFeeds{
 		print_r($t->parse(array('url'=>'http://www.cinemotions.com/modules/Films/fiche/81701/Nowhere-Boy.html')));
 	}
 
-	function svc_download() {
-		switch($_REQUEST['s']) {
+	function download($sSearch) {
+		switch($sSearch) {
 			case 'newzleech':
-				$res = $this->svc_download_newzleech();
+				$res = $this->download_newzleech();
 			break;
 			case 'binsearch':
-				$res = $this->svc_download_binsearch();
+				$res = $this->download_binsearch();
 			break;
 		}
 		if (array_key_exists_assign_default('success',$res,false)=='ok'){
-			$this->svc_setTreated();
+			$this->setTreated();
 		}
 		return $res;
 	}
 
-	function svc_search() {
-		switch($_REQUEST['s']) {
+	function search($sSearch) {
+		switch($sSearch) {
 			case 'newzleech':
-				return $this->svc_search_newzleech();
+				return $this->search_newzleech();
 			break;
 			case 'binsearch':
-				return $this->svc_search_binsearch();
+				return $this->search_binsearch();
 			break;
 		}
 	}
 
-	function svc_feedCacheRSS(){
+	function feedCacheRSS(){
 		//@apache_setenv('no-gzip', 1);
 		//@ini_set('zlib.output_compression', 0);
 		//@ini_set('implicit_flush', 1);
@@ -65,8 +68,8 @@ class QDNzbProxyFeeds{
 		}
 	}
 
-	function svc_search_binsearch() {
-		$url = 'http://www.binsearch.net/?q='.urlencode($_REQUEST['q']).'&max=250&adv_age=1000&server=';
+	function search_binsearch($query) {
+		$url = 'http://www.binsearch.net/?q='.urlencode($query).'&max=250&adv_age=1000&server=';
 		$st = $this->QDNet->getURL($url,false);
 		$html = new simple_html_dom();
 		$html->load($st);
@@ -96,13 +99,13 @@ class QDNzbProxyFeeds{
 		return array('posts'=>$res);
 	}
 
-	function svc_download_binsearch() {
-		$url = 'http://www.binsearch.net/?action=nzb&q='.urlencode($_REQUEST['q']).'&max=99&adv_age=120&server=';
+	function download_binsearch($query) {
+		$url = 'http://www.binsearch.net/?action=nzb&q='.urlencode($query).'&max=99&adv_age=120&server=';
 		$ids = split('!', $_REQUEST['ids']);
 		foreach ($ids as $v) {
 				$url = $url.'&'.$v.'=on';
 		}
-		$filename=escapeshellcmd($this->normalizeNZBFilename($_REQUEST['q'])).' '.date('YmdHis').'.nzb';
+		$filename=escapeshellcmd($this->normalizeNZBFilename($query)).' '.date('YmdHis').'.nzb';
 		if (file_put_contents("/var/nzb/".$filename, $this->QDNet->getURL($url,false))) {
 			return array( 'success'=>'ok','filename'=>$filename);
 		} else {
@@ -110,7 +113,7 @@ class QDNzbProxyFeeds{
 		}
 	}
 
-	function svc_download_newzleech() {
+	function download_newzleech() {
 
 	}
 
@@ -122,41 +125,38 @@ class QDNzbProxyFeeds{
 		return $f;
 	}
 
-	function svc_search_newzleech() {
+	function search_newzleech() {
 		return  array ('url'=>$url, 'posts'=>$res);
 	}
 
-	function svc_distinctfeed() {
+	function distinctfeed() {
 		return array ('res'=>$this->QDDb->query2Array('select * from GRI_GROUP_ITEMS;'));
 	}
 
-	function svc_setStarred() {
+	function setStarred($sIteStarred,$sIteId) {
 		$sql = 'update rss.ITE_ITEMS set ITE_STARRED=? where ITE_ID=?';
-		$arr = $this->QDDb->execute($sql,array($_REQUEST['ITE_STARRED'],$_REQUEST['ITE_ID']));
-		return array('ok'=>1,'starred'=>$_REQUEST['ITE_STARRED']);
+		$arr = $this->QDDb->execute($sql,array($sIteStarred,$sIteId));
+		return array('ok'=>1,'starred'=>$sIteStarred);
 	}
 
-	function svc_setRead() {
+	function setRead($sIteRead,$sIteId) {
 		$sql = 'update rss.ITE_ITEMS set ITE_READ=? where ITE_ID=?;';
-		$arr = $this->QDDb->execute($sql,array($_REQUEST['ITE_READ'],$_REQUEST['ITE_ID']));
-		return array('ok'=>1,'read'=>$_REQUEST['ITE_READ']);
+		$arr = $this->QDDb->execute($sql,array($sIteRead,$sIteId));
+		return array('ok'=>1,'read'=>$sIteRead);
 	}
 
-	function svc_setTreated() {
+	function setTreated($sRid) {
 		$sql = 'update rss.ITE_ITEMS set ITE_TREATED=1 where ITE_ID=?;';
-		$arr = $this->QDDb->execute($sql,array($_REQUEST['rid']));
+		$arr = $this->QDDb->execute($sql,array($sRid));
 		return array('ok'=>1,'treated'=>1);
 	}
 
-	function svc_dbfeed() {
-		$start = array_key_exists_assign_default('start',$_REQUEST,0);
-		$limit = array_key_exists_assign_default('limit',$_REQUEST,20);
-		$mode =  array_key_exists_assign_default('mode',$_REQUEST,'feed');
+	function dbfeed($mode,$sIs,$sId,$sQ,$start,$limit) {
 		switch($mode){
 			case 'feed':
 				$sql = "select *
 						from rss.ITE_ITEMS
-						where ITE_FEED=".$_REQUEST['is']."
+						where ITE_FEED=".$sIs."
 						and ITE_TITLE not like 'A Tous ceux Qui%'
 						order by ITE_DATE desc,ITE_ID
 						desc limit $start,$limit";
@@ -164,10 +164,10 @@ class QDNzbProxyFeeds{
 			case 'id':
 				$sql = "select *
 						from rss.ITE_ITEMS
-						where ITE_ID=".$_REQUEST['id'];
+						where ITE_ID=".$sId;
 			break;
 			case 'fullsearch':
-				$arrQ = split(' ',$_REQUEST['q']);
+				$arrQ = split(' ',$sQ);
 				$likes = " (ITE_TITLE not like 'A Tous ceux Qui %') ";
 				foreach($arrQ as $qu){
 					$likes .= " and ( ITE_TITLE like '%".$qu."%') ";
@@ -205,11 +205,11 @@ class QDNzbProxyFeeds{
 		return array ('feeds'=>$arr,'count'=>10000);
 	}
 
-	function svc_pubGetCacheSerial(){
+	function pubGetCacheSerial($i){
 		$sql = "select *
 				from rss.ITE_ITEMS
 				where ITE_ID=?";
-		$arr = $this->QDDb->query2array($sql,array($_REQUEST['i']));
+		$arr = $this->QDDb->query2array($sql,array($i));
 		if (count($arr)==1){
 			$t = new htmlParserAllocine();
 			$desc = array();
@@ -222,10 +222,9 @@ class QDNzbProxyFeeds{
 				$arr[0]['DESC_'.strtoupper($desck)]= htmlentities(utf8_decode(is_array($descv)?join(',',$descv):$descv));
 			}
 			$sql = 'update rss.ITE_ITEMS set ITE_LINK_CACHE_SERIAL=? where ITE_ID=?;';
-			$this->QDDb->execute($sql,array(json_encode($desc),$_REQUEST['i']));
+			$this->QDDb->execute($sql,array(json_encode($desc),$i));
 			$arr[0]['ITE_LINK_CACHE_SERIAL']='--';
 			return $arr[0];
 		}
 	}
 }
-?>

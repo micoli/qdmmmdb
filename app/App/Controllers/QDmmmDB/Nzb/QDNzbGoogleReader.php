@@ -1,4 +1,6 @@
 <?php
+namespace App\Controllers\QDmmmDB\Nzb;
+
 include "greader.class.php";
 class QDNzbRssReader {
 	function __construct() {
@@ -8,4 +10,3 @@ class QDNzbRssReader {
 		print_r(json_decode($read->listAll("starred","r=n")));
 	}
 }
-?>
