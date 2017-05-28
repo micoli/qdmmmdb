@@ -29,7 +29,7 @@ class QDXbmcSeries extends QDSeriesProxy{
 	}
 
 	function getShowStruct($tvdbid){
-		$serieStruct=simpleXMLToArray(simplexml_load_string($this->getXmlDocFromSerieId($tvdbid)));
+		$serieStruct=simpleXMLToArray(\simplexml_load_string($this->getXmlDocFromSerieId($tvdbid)));
 		$nbSeasons=0;
 		foreach($serieStruct['Episode'] as $ep){
 			$nbSeasons=max($ep['SeasonNumber'],$nbSeasons);

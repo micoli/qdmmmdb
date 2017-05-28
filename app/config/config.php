@@ -6,7 +6,8 @@ define('VAR_PATH',realpath('/var/tmp/'));
 define('CFG_PATH',realpath(dirname(__FILE__)));
 define('VENDOR_PATH',realpath(dirname(__FILE__).'/../../vendor'));
 
-require dirname(__FILE__)."/../App/Components/QDmmmDB/Tools/QDGlobal.php";
+require dirname(__FILE__)."/../App/Components/QDmmmDB/Misc/QDGlobal.php";
+
 App\Components\QDmmmDB\Misc\loadConf(dirname(__FILE__).'/json/');
 
 $app['debug'					] = true;

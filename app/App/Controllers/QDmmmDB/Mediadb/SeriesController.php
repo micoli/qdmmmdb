@@ -69,16 +69,16 @@ class SeriesController {
 
 	/**
 	 * @SLX\Route(
-	 *     @SLX\Request(uri="getFileSorterList"),
+	 *     @SLX\Request(uri="getFilesSorterList"),
 	 * )
 	 */
-	public function getFileSorterList(Application $app,Request $request){
+	public function getFilesSorterList(Application $app,Request $request){
 		$this->app = $app;
 
 		$sName = $request->get('name','');
 
 		$qd = new QDSeriesProxy($app);
-		return $this->formatResponse($request, $app, $qd->getFileSorterList($sName));
+		return $this->formatResponse($request, $app, $qd->getFilesSorterList($sName));
 	}
 
 	/**

@@ -1,7 +1,7 @@
 <?php
 namespace App\Commands\QDmmmDB\Series;
 
-use App\Components\QDmmmDB\Mediadb\QDSeriesBatch;
+use App\Components\QDmmmDB\Mediadb\Series\QDSeriesBatch;
 use Knp\Command\Command as KnpCommand;
 use Symfony\Component\Console\Input\InputDefinition;
 use Symfony\Component\Console\Input\InputInterface;

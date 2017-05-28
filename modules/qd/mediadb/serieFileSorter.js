@@ -87,7 +87,7 @@ Ext.define('qd.mediadb.serieFileSorter', {
 			groupField			: 'folder',
 			proxy				: {
 				type				: 'ajaxEx',
-				url					: 'api/Series/getFileSorterList',
+				url					: 'api/Series/getFilesSorterList',
 				reader				: {
 					type				: 'json',
 					root				: 'results'
@@ -136,7 +136,7 @@ Ext.define('qd.mediadb.serieFileSorter', {
 			if(idx){
 				//that.fileToSortStore.getAt(idx).commit();
 			}
-			var selected=that.getSelectedItems();
+			var selected = that.getSelectedItems();
 
 			var pattern = '';
 			var allInFolder = false;
@@ -246,7 +246,7 @@ Ext.define('qd.mediadb.serieFileSorter', {
 
 		that.updateSelectedItems = function (){
 			that.updateControls();
-			var selected=that.getSelectedItems();
+			var selected	= that.getSelectedItems();
 			var foldername	= Ext.getCmp(that.fieldforlderid	).getValue();
 			var withsaison	= Ext.getCmp(that.fieldchksaisonid	).getValue();
 			var saison		= Ext.getCmp(that.fieldsaisonid		).getValue();

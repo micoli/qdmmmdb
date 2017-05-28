@@ -1,8 +1,7 @@
 <?php
 namespace App\Components\QDmmmDB\Mediadb;
 
-
-use App\Components\QDmmmDB\Tools\QDNet;
+use App\Components\QDmmmDB\Misc\QDNet;
 use Silex\Application;
 
 class QDMediaDBProxy {
@@ -35,7 +34,6 @@ class QDMediaDBProxy {
 		$this->arrCleanupMoviesRegexStrict 	= $GLOBALS['conf']['qdmediadb']['arrCleanupMoviesRegexStrict'];
 		$this->arrCleanupMoviesRegex		= $GLOBALS['conf']['qdmediadb']['arrCleanupMoviesRegex'];
 		$this->arrHiddenmovieRegex			= $GLOBALS['conf']['qdmediadb']['arrHiddenmovie'];
-		$this->arrRegex						= $GLOBALS['conf']['qdmediadb']['arrRegex'];
 		$this->testFilenames				= $GLOBALS['conf']['qdmediadb']['testFilenames'];
 		$episodeFormatsTmp					= $GLOBALS['conf']['qdmediadb']['episodeFormats'];
 		$this->episodeFormats = array();

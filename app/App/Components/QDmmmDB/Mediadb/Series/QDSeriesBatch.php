@@ -3,6 +3,7 @@ namespace App\Components\QDmmmDB\Mediadb\Series;
 include "BEncode.php";
 use Bhutanio\BEncode\BEncode;
 use App\Components\QDmmmDB\Misc\ToolsFiles;
+use App\Components\QDmmmDB\Mediadb\serieTools;
 
 class QDSeriesBatch extends QDSeriesProxy
 {
@@ -183,19 +184,18 @@ class QDSeriesBatch extends QDSeriesProxy
 		if (in_array(strtolower($d['extension']), $this->movieExt)) {
 			// is a video file
 			$d['filename'] = $this->cleanFilename($d['filename']);
-			$res = $this->extractSeriesFilenameStruct($d['filename']);
-			if ($res['found']) {
-				// series found
-				$seriePath = $this->findSeriesPath($aSeriesPaths, $res['serie']);
+			$res = new SerieFile($d['filename']);
+			if ($res->found) {
+				$seriePath = $this->findSeriesPath($aSeriesPaths, $res->serie);
 				if ($seriePath) {
 					$xpath = $this->getXmlDocFromSeriePath($seriePath);
 					if ($xpath) {
 						$tags = serieTools::extractLanguage($d['filename']);
 						$serieName = utf8_encode($this->cleanFilename($this->extractXQuery($xpath, "/Data/Series/SeriesName")));
-						$episodeName = utf8_encode($this->extractXQuery($xpath, "/Data/Episode[SeasonNumber='" . $res['saison'] . "' and EpisodeNumber='" . ($res['episode'] * 1) . "']/EpisodeName"));
+						$episodeName = utf8_encode($this->extractXQuery($xpath, "/Data/Episode[SeasonNumber='" . $res->saison . "' and EpisodeNumber='" . ($res->episode * 1) . "']/EpisodeName"));
 
-						$renamedPath = sprintf("%s/S%d %s", $seriePath, $res['saison'], $tags['short_language']);
-						$renamedFile = sprintf("%s [%dx%02d] %s", $serieName, $res['saison'], $res['episode'], $episodeName);
+						$renamedPath = sprintf("%s/S%d %s", $seriePath, $res->saison, $tags['short_language']);
+						$renamedFile = sprintf("%s [%dx%02d] %s", $serieName, $res->saison, $res->episode, $episodeName);
 
 						// db(sprintf("%-80s :: %s :: %s",$d['filename'],$renamedPath,$renamedFile));
 						return array(
@@ -207,7 +207,7 @@ class QDSeriesBatch extends QDSeriesProxy
 						);
 					}
 				} else {
-					$msg = sprintf('Error : Can\'t find a path for [%s]', $this->mb_str_replace('.', ' ', $res['serie']));
+					$msg = sprintf('Error : Can\'t find a path for [%s]', $this->mb_str_replace('.', ' ', $res->serie));
 					return array(
 						'success' => false,
 						'error' => $msg

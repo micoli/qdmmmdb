@@ -555,9 +555,11 @@ class QDMoviesProxy extends QDMediaDBProxy{
 
 		//// rollback
 		//@rename($newFullFilename,$originalFileName);
-		$rec2db = Tools::object2array($scraperObject->simpleLoadXbmcMovieNfo($movieFolder	. '/movie.nfo'));
-		$rec2db['fileDetail']=$fileDetail;
-		$this->makeMovieDB($rec2db);
+		if (file_exists($movieFolder	. '/movie.nfo')) {
+			$rec2db = Tools::object2array($scraperObject->simpleLoadXbmcMovieNfo($movieFolder	. '/movie.nfo'));
+			$rec2db['fileDetail']=$fileDetail;
+			$this->makeMovieDB($rec2db);
+		}
 
 		if($debug){
 			db (array(

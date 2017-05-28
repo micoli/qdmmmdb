@@ -9,7 +9,8 @@
 	"require": {
 		"sm/silexrestapi": "dev-master",
 		"moust/silex-cache": "1.0.*@dev",
-		"symfony/options-resolver": "^3.0",
+		"symfony/options-resolver": "^2.8",
+		"symfony/filesystem": "^2.8",
 		"symfony/event-dispatcher": "2.6.13",
 		"nategood/httpful": "^0.2.20",
 		"michelf/php-markdown": "^1.6",
@@ -17,7 +18,8 @@
 		"league/flysystem": "^1.0",
 		"wyrihaximus/sli-fly": "^2.0",
 		"sunra/php-simple-html-dom-parser": "^1.5",
-		"knplabs/console-service-provider": "v1.0"
+		"knplabs/console-service-provider": "v1.0",
+		"knplabs/gaufrette": "^0.3.1"
 	},
 	"minimum-stability": "dev",
 	"repositories": [
