@@ -41,7 +41,8 @@ if(!defined('QD_PATH_MODULES'	))	define ('QD_PATH_MODULES'	,realpath(dirname(__F
 			if ($err = json_last_error()){
 				print sprintf("<h1>ErrorConf : %s</h1>%s<br /><pre>%s</pre><hr />",$file,$json_errors[$err],print_r($cont,true));
 			}else{
-				$GLOBALS['conf'][str_replace('.json','',basename($file))]=$ret;
+				$k=str_replace('.json','',basename($file));
+				$GLOBALS['conf'][$k]=array_replace_recursive((array_key_exists($k,$GLOBALS['conf'])?$GLOBALS['conf'][$k]:array()),$ret);
 			}
 		}
 		//db($GLOBALS['conf']);
