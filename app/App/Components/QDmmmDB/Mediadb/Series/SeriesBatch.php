@@ -1,5 +1,6 @@
 <?php
 namespace App\Components\QDmmmDB\Mediadb\Series;
+
 use Bhutanio\BEncode\BEncode;
 use App\Components\QDmmmDB\Misc\ToolsFiles;
 use App\Components\QDmmmDB\Mediadb\serieTools;
@@ -97,6 +98,81 @@ class SeriesBatch extends SeriesManager
 		$this->svc_test2($aFiles);
 	}
 
+	public function renameIncoming($seriePaths,$path,$bDryRun=false)
+	{
+		$aIncomingFiles=[];
+		$aError = [];
+
+		if ($path) {
+			$aIncomingFiles = $this->getIncomingFiles($path);
+		} else {
+			$aIncomingFiles = array_map(function ($p) {
+				return '/mnt/dwn/' . $p;
+			}, json_decode(file_get_contents('/mnt/###dwn/torrents.json'), true));
+		}
+
+		$aSeriesPaths = $this->getSeriesAvailablePaths(explode(',', $seriePaths));
+
+		foreach ($aIncomingFiles as $k => $originalFilename) {
+			$aIncomingFiles[$k]=[
+				'originalFilename'=>$originalFilename
+			];
+			$aRenamedFile = $this->getIncomingRenamedFile($aSeriesPaths, $originalFilename);
+			if ($aRenamedFile['success']) {
+				$aIncomingFiles[$k]['renamedFile'] = $aRenamedFile;
+				if ($bDryRun) {
+					$aIncomingFiles[$k]['result'] =  sprintf("%-80s :: %s :: %s\n", $file['originalFile'], $file['renamedPath'], $file['renamedFile'] . '.' . $file['renamedExt']);
+				} else {
+					$aIncomingFiles[$k]['result'] = $this->renameSerieEpisode($file['originalFile'], $file['renamedPath'] . '/' . $file['renamedFile'], $file['renamedExt']);
+				}
+			}else{
+				$aIncomingFiles[$k]['error'] = $aRenamedFile['error'];
+			}
+		}
+		return $aIncomingFiles;
+	}
+
+	public function renameExisting($bDryRun=false,$bRefresh=true)
+	{
+		$aRoots = $this->getSeriesTree(false,$bRefresh);
+		$aRoots = [$aRoots[0]];
+		$aFiles = [];
+
+		foreach ($aRoots as $aRoot) {
+			if (is_array($aRoot) && array_key_exists('children', $aRoot)) {
+				foreach ($aRoot['children'] as $aSerie) {
+					if (is_array($aSerie) && array_key_exists('children', $aSerie)) {
+						foreach ($aSerie['children'] as $aFolder) {
+							if ($aFolder['numbertorename']) {
+								$arrToRename = $this->getFiles($aFolder['fullname'], true);
+								foreach ($arrToRename['results'] as $aFile) {
+									if ($aFile['formattedfilename'] != '' && !$aFile['formatOK'] ) {
+										array_push($aFiles,array_merge($aFile, [
+											'originalFile' => $aFolder['fullname'] . '/' . $aFile['filename'],
+											'renamedPath' => $aFile['pathName'],
+											'renamedFile' => $aFile['pathName'] . '/' . $aFile['formattedfilename'],
+											'renamedExt' => strtolower($aFile['ext'])
+										]));
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+
+		foreach($aFiles as $aFile){
+			print sprintf("%s => %s.%s \n", $aFile['originalFile'], $aFile['renamedFile'], $aFile['renamedExt']);
+			if (!$bDryRun) {
+				$a = $this->renameSerieEpisode($aFile['originalFile'], $aFile['renamedFile'], $aFile['renamedExt'], false);
+				if (! $a['ok']) {
+					print $a['error'] . "\n";
+				}
+			}
+		}
+	}
+
 	private function getSeriesAvailablePaths($aDestRootPaths)
 	{
 		$aPaths = [];
@@ -177,122 +253,41 @@ class SeriesBatch extends SeriesManager
 		return $aResult;
 	}
 
-	private function pri_getRenamedFile($aSeriesPaths, $v)
+	private function getIncomingRenamedFile($aSeriesPaths, $sFileName)
 	{
-		$d = ToolsFiles::pathinfo_utf($v);
-		if (in_array(strtolower($d['extension']), $this->movieExt)) {
-			// is a video file
-			$d['filename'] = $this->cleanFilename($d['filename']);
-			$res = new SerieFile($d['filename']);
-			if ($res->found) {
-				$seriePath = $this->findSeriesPath($aSeriesPaths, $res->serie);
-				if ($seriePath) {
-					$xpath = $this->getXmlDocFromSeriePath($seriePath);
-					if ($xpath) {
-						$tags = serieTools::extractLanguage($d['filename']);
-						$serieName = utf8_encode($this->cleanFilename($this->extractXQuery($xpath, "/Data/Series/SeriesName")));
-						$episodeName = utf8_encode($this->extractXQuery($xpath, "/Data/Episode[SeasonNumber='" . $res->saison . "' and EpisodeNumber='" . ($res->episode * 1) . "']/EpisodeName"));
+		$oSerie = new SerieFile($sFileName);
+		if ($oSerie->found) {
 
-						$renamedPath = sprintf("%s/S%d %s", $seriePath, $res->saison, $tags['short_language']);
-						$renamedFile = sprintf("%s [%dx%02d] %s", $serieName, $res->saison, $res->episode, $episodeName);
+			$seriePath = $this->findSeriesPath($aSeriesPaths, $oSerie->serie);
 
-						// db(sprintf("%-80s :: %s :: %s",$d['filename'],$renamedPath,$renamedFile));
-						return array(
-							'success' => true,
-							'originalFile' => $d['file'],
-							'renamedPath' => $renamedPath,
-							'renamedFile' => $renamedFile,
-							'renamedExt' => strtolower($d['extension'])
-						);
-					}
-				} else {
-					$msg = sprintf('Error : Can\'t find a path for [%s]', $this->mb_str_replace('.', ' ', $res->serie));
+			if ($seriePath) {
+				$xpath = $this->getXmlDocFromSeriePath($seriePath);
+
+				if ($xpath) {
+					$oSerie->filename = $this->cleanFilename($oSerie->filename);
+					$tags = serieTools::extractLanguage($oSerie->filename);
+					$serieName = utf8_encode($this->cleanFilename($this->extractXQuery($xpath, "/Data/Series/SeriesName")));
+					$episodeName = utf8_encode($this->extractXQuery($xpath, "/Data/Episode[SeasonNumber='" . $oSerie->saison . "' and EpisodeNumber='" . ($oSerie->episode * 1) . "']/EpisodeName"));
+
+					$renamedPath = sprintf("%s/S%d %s", $seriePath, $oSerie->saison, $tags['short_language']);
+					$renamedFile = sprintf("%s [%dx%02d] %s", $serieName, $oSerie->saison, $oSerie->episode, $episodeName);
+
+					// db(sprintf("%-80s :: %s :: %s",$oSerie->filename,$renamedPath,$renamedFile));
 					return array(
-						'success' => false,
-						'error' => $msg
+						'success' => true,
+						'originalFile' => $sFileName,
+						'renamedPath' => $renamedPath,
+						'renamedFile' => $renamedFile,
+						'renamedExt' => strtolower($oSerie->extension)
 					);
 				}
-			}
-		}
-	}
-
-	public function renameIncoming(/*string*/ $seriePaths,/*string*/ $path,/*boolean*/ $bDryRun)
-	{
-		$aError = [];
-		if ($path) {
-			$dh = $this->getIncomingFiles($path);
-		} else {
-			$dh = array_map(function ($p) {
-				return '/mnt/dwn/' . $p;
-			}, json_decode(file_get_contents('/mnt/###dwn/torrents.json'), true));
-		}
-
-		print_r($dh);
-		$aSeriesPaths = $this->getSeriesAvailablePaths(explode(',', $seriePaths));
-		print_r($aSeriesPaths);
-
-		$arrResult = [];
-		foreach ($dh as $k => $v) {
-			$aRenamedFile = $this->pri_getRenamedFile($aSeriesPaths, $v);
-			if ($aRenamedFile['success']) {
-				$arrResult[] = $aRenamedFile;
-			}
-		}
-
-		asort($arrResult);
-		$arrResult = array_values($arrResult);
-		foreach ($arrResult as $file) {
-			if ($bDryRun) {
-				print(sprintf("%-80s :: %s :: %s\n", $file['originalFile'], $file['renamedPath'], $file['renamedFile'] . '.' . $file['renamedExt']));
 			} else {
-				$this->renameSerieEpisode($file['originalFile'], $file['renamedPath'] . '/' . $file['renamedFile'], $file['renamedExt']);
+				$msg = sprintf('Error : Can\'t find a path for [%s]', $this->mb_str_replace('.', ' ', $oSerie->serie));
+				return array(
+					'success' => false,
+					'error' => $msg
+				);
 			}
 		}
-	}
-
-	public function renameExisting()
-	{
-		/*$fName = '/tmp/seriesa.json';
-		if (file_exists($fName) && filesize($fName)) {
-			$aRoots = unserialize(file_get_contents($fName));
-		} else {
-			$aRoots = $this->svc_getSeriesTree();
-			file_put_contents($fName, serialize($aRoots));
-		}*/
-		$aRoots = $this->getSeriesTree();
-
-		$aFiles = [];
-		foreach ($aRoots as $aRoot) {
-			if (is_array($aRoot) && array_key_exists('children', $aRoot)) {
-				foreach ($aRoot['children'] as $aSerie) {
-					if (is_array($aSerie) && array_key_exists('children', $aSerie)) {
-						foreach ($aSerie['children'] as $aFolder) {
-							if ($aFolder['numbertorename']) {
-								$arrToRename = $this->pri_getFiles($aFolder['fullname'], true);
-								if (array_key_exists('results', $arrToRename) && is_array($arrToRename['results']) && count($arrToRename['results']) > 0) {
-									foreach ($arrToRename['results'] as $aFile) {
-										if ($aFile['formattedfilename'] != '' && $aFile['originalFile'] != $aFile['renamedFile'].'.'.$aFile['renamedExt']) {
-											$aFile = array_merge($aFile, [
-												'originalFile' => $aFolder['fullname'] . '/' . $aFile['filename'],
-												'renamedPath' => $aFile['pathName'],
-												'renamedFile' => $aFile['pathName'] . '/' . $aFile['formattedfilename'],
-												'renamedExt' => strtolower($aFile['ext'])
-											]);
-											$aFiles[] = $aFile;
-											print sprintf("%s => %s.%s \n",$aFile['originalFile'], $aFile['renamedFile'], $aFile['renamedExt']);
-											$a = $this->renameSerieEpisode($aFile['originalFile'], $aFile['renamedFile'], $aFile['renamedExt'],false);
-											if(!$a['ok']){
-												print $a['error']."\n";
-											}
-										}
-									}
-								}
-							}
-						}
-					}
-				}
-			}
-		}
-		//db($aFiles);
 	}
 }

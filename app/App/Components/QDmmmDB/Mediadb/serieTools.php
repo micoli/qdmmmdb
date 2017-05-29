@@ -1,6 +1,8 @@
 <?php
 namespace App\Components\QDmmmDB\Mediadb;
 
+use App\Components\QDmmmDB\Mediadb\Series\SeriesBatch;
+
 class serieTools
 {
 
@@ -113,15 +115,15 @@ class serieTools
 	{
 		$tags = [];
 
-		if (! array_key_exists('year', QDSeriesbatch::$aAllTags)) {
+		if (! array_key_exists('year', SeriesBatch::$aAllTags)) {
 			for ($i = 1990; $i <= 2050; $i ++) {
-				QDSeriesbatch::$aAllTags['year'][] = $i;
+				SeriesBatch::$aAllTags['year'][] = $i;
 			}
 		}
 
 		$sTitle = ' ' . preg_replace('!\.!', ' ', $sTitle) . ' ';
 
-		foreach (QDSeriesbatch::$aAllTags as $sTagType => $aTag) {
+		foreach (SeriesBatch::$aAllTags as $sTagType => $aTag) {
 			foreach ($aTag as $sTag) {
 				if (preg_match('! ' . preg_quote($sTag, '!') . ' !', $sTitle)) {
 					$tags[$sTagType][] = $sTag;

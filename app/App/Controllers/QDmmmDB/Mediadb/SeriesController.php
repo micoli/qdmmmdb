@@ -7,33 +7,36 @@ use Silex\Application;
 use SM\SilexRestApi\Controllers\NormalizedResponse;
 use Symfony\Component\HttpFoundation\Request;
 
-class SeriesController {
+class SeriesController
+{
 	use NormalizedResponse;
 
 	/**
 	 * @SLX\Route(
-	 *     @SLX\Request(uri="getSeriesTree"),
+	 * @SLX\Request(uri="getSeriesTree"),
 	 * )
 	 */
-	public function getSeriesTree(Application $app,Request $request){
+	public function getSeriesTree(Application $app, Request $request)
+	{
 		$this->app = $app;
 
-		$bRefresh = $request->get('refresh',0);
-		$iId = $request->get('id',0);
+		$bRefresh = $request->get('refresh', 0);
+		$iId = $request->get('id', 0);
 
 		$qd = new SeriesManager($app);
-		return $this->formatResponse($request, $app, $qd->getSeriesTree($iId,$bRefresh));
+		return $this->formatResponse($request, $app, $qd->getSeriesTree($iId, $bRefresh));
 	}
 
 	/**
 	 * @SLX\Route(
-	 *     @SLX\Request(uri="getSerieFromPath"),
+	 * @SLX\Request(uri="getSerieFromPath"),
 	 * )
 	 */
-	public function getSerieFromPath(Application $app,Request $request){
+	public function getSerieFromPath(Application $app, Request $request)
+	{
 		$this->app = $app;
 
-		$sPath = $request->get('p',0);
+		$sPath = $request->get('p', 0);
 
 		$qd = new SeriesManager($app);
 		return $this->formatResponse($request, $app, $qd->getSerieFromPath($sPath));
@@ -41,13 +44,14 @@ class SeriesController {
 
 	/**
 	 * @SLX\Route(
-	 *     @SLX\Request(uri="getFolderSeriesList"),
+	 * @SLX\Request(uri="getFolderSeriesList"),
 	 * )
 	 */
-	public function getFolderSeriesList(Application $app,Request $request){
+	public function getFolderSeriesList(Application $app, Request $request)
+	{
 		$this->app = $app;
 
-		$sPath = $request->get('p',0);
+		$sPath = $request->get('p', 0);
 
 		$qd = new SeriesManager($app);
 		return $this->formatResponse($request, $app, $qd->getFolderSeriesList($sPath));
@@ -55,13 +59,14 @@ class SeriesController {
 
 	/**
 	 * @SLX\Route(
-	 *     @SLX\Request(uri="serieBulkRename"),
+	 * @SLX\Request(uri="serieBulkRename"),
 	 * )
 	 */
-	public function serieBulkRename(Application $app,Request $request){
+	public function serieBulkRename(Application $app, Request $request)
+	{
 		$this->app = $app;
 
-		$sPath = $request->get('d',0);
+		$sPath = $request->get('d', 0);
 
 		$qd = new SeriesManager($app);
 		return $this->formatResponse($request, $app, $qd->serieBulkRename($sPath));
@@ -69,13 +74,14 @@ class SeriesController {
 
 	/**
 	 * @SLX\Route(
-	 *     @SLX\Request(uri="getFilesSorterList"),
+	 * @SLX\Request(uri="getFilesSorterList"),
 	 * )
 	 */
-	public function getFilesSorterList(Application $app,Request $request){
+	public function getFilesSorterList(Application $app, Request $request)
+	{
 		$this->app = $app;
 
-		$sName = $request->get('name','');
+		$sName = $request->get('name', '');
 
 		$qd = new SeriesManager($app);
 		return $this->formatResponse($request, $app, $qd->getFilesSorterList($sName));
@@ -83,90 +89,97 @@ class SeriesController {
 
 	/**
 	 * @SLX\Route(
-	 *     @SLX\Request(uri="setSerieFromPath"),
+	 * @SLX\Request(uri="setSerieFromPath"),
 	 * )
 	 */
-	public function setSerieFromPath(Application $app,Request $request){
+	public function setSerieFromPath(Application $app, Request $request)
+	{
 		$this->app = $app;
 
-		$sMode = $request->get('m','');
-		$sPath = $request->get('p','');
-		$sId = $request->get('i','');
+		$sMode = $request->get('m', '');
+		$sPath = $request->get('p', '');
+		$sId = $request->get('i', '');
 
 		$qd = new SeriesManager($app);
-		return $this->formatResponse($request, $app, $qd->setSerieFromPath($sMode,$sPath,$sId));
+		return $this->formatResponse($request, $app, $qd->setSerieFromPath($sMode, $sPath, $sId));
 	}
 
 	/**
 	 * @SLX\Route(
-	 *     @SLX\Request(uri="chooseSerie"),
+	 * @SLX\Request(uri="chooseSerie"),
 	 * )
 	 */
-	public function chooseSerie(Application $app,Request $request){
+	public function chooseSerie(Application $app, Request $request)
+	{
 		$this->app = $app;
 
-		$sSerieName = $request->get('s','');
-		$sPath = $request->get('p','');
+		$sSerieName = $request->get('s', '');
+		$sPath = $request->get('p', '');
 
 		$qd = new SeriesManager($app);
-		return $this->formatResponse($request, $app, $qd->chooseSerie($sSerieName,$sPath));
+		return $this->formatResponse($request, $app, $qd->chooseSerie($sSerieName, $sPath));
 	}
 
 	/**
 	 * @SLX\Route(
-	 *     @SLX\Request(uri="renameFiles"),
+	 * @SLX\Request(uri="renameFiles"),
 	 * )
 	 */
-	public function renameFiles(Application $app,Request $request){
+	public function renameFiles(Application $app, Request $request)
+	{
 		$this->app = $app;
 
-		$sModified = $request->get('modified','');
-		$aModified = json_decode(utf8_decode(base64_decode($sModified)),true);;
-		$sMoveExists = $request->get('moveExists','');
+		$sModified = $request->get('modified', '');
+		$aModified = json_decode(utf8_decode(base64_decode($sModified)), true);
+		;
+		$sMoveExists = $request->get('moveExists', '');
 
 		$qd = new SeriesManager($app);
-		return $this->formatResponse($request, $app, $qd->renameFiles($aModified,$sMoveExists));
+		return $this->formatResponse($request, $app, $qd->renameFiles($aModified, $sMoveExists));
 	}
 
 	/**
 	 * @SLX\Route(
-	 *     @SLX\Request(uri="getFilesMulti"),
+	 * @SLX\Request(uri="getFilesMulti"),
 	 * )
 	 */
-	public function getFilesMulti(Application $app,Request $request){
+	public function getFilesMulti(Application $app, Request $request)
+	{
 		$this->app = $app;
 
-		$sFullPath = $request->get('fullpath','');
-		$sOnly2Rename = $request->get('only2Rename','true');
+		$sFullPath = $request->get('fullpath', '');
+		$sOnly2Rename = $request->get('only2Rename', 'true');
 
 		$qd = new SeriesManager($app);
-		return $this->formatResponse($request, $app, $qd->getFilesMulti($sFullPath,$sOnly2Rename));
+		return $this->formatResponse($request, $app, $qd->getFilesMulti($sFullPath, $sOnly2Rename));
 	}
 
 	/**
 	 * @SLX\Route(
-	 *     @SLX\Request(uri="getFiles"),
+	 * @SLX\Request(uri="getFiles"),
 	 * )
 	 */
-	public function getFiles(Application $app,Request $request){
+	public function getFiles(Application $app, Request $request)
+	{
 		$this->app = $app;
 
-		$sFullPath = $request->get('fullpath','');
-		$bOnly2Rename = $request->get('only2Rename','false')=='true';
+		$sFullPath = $request->get('fullpath', '');
+		$bOnly2Rename = $request->get('only2Rename', 'false') == 'true';
 
 		$qd = new SeriesManager($app);
-		return $this->formatResponse($request, $app, $qd->getFiles($sFullPath,$bOnly2Rename));
+		return $this->formatResponse($request, $app, $qd->getFiles($sFullPath, $bOnly2Rename));
 	}
 
 	/**
 	 * @SLX\Route(
-	 *     @SLX\Request(uri="extractSeriesFilenameStruct"),
+	 * @SLX\Request(uri="extractSeriesFilenameStruct"),
 	 * )
 	 */
-	public function extractSeriesFilenameStruct(Application $app,Request $request){
+	public function extractSeriesFilenameStruct(Application $app, Request $request)
+	{
 		$this->app = $app;
 
-		$sFilename = $request->get('filename',false);
+		$sFilename = $request->get('filename', false);
 
 		$qd = new SeriesManager($app);
 		return $this->formatResponse($request, $app, $qd->extractSeriesFilenameStruct($sFilename));
@@ -174,13 +187,14 @@ class SeriesController {
 
 	/**
 	 * @SLX\Route(
-	 *     @SLX\Request(uri="updateAllXml"),
+	 * @SLX\Request(uri="updateAllXml"),
 	 * )
 	 */
-	public function updateAllXml(Application $app,Request $request){
+	public function updateAllXml(Application $app, Request $request)
+	{
 		$this->app = $app;
 
-		$bForceRefresh = $request->get('forceRefresh','true');
+		$bForceRefresh = $request->get('forceRefresh', 'true');
 
 		$qd = new SeriesManager($app);
 		return $this->formatResponse($request, $app, $qd->updateAllXml($bForceRefresh));
@@ -188,25 +202,28 @@ class SeriesController {
 
 	/**
 	 * @SLX\Route(
-	 *     @SLX\Request(uri="updateDatabase"),
+	 * @SLX\Request(uri="updateDatabase"),
 	 * )
 	 */
-	public function updateDatabase(Application $app,Request $request){
+	public function updateDatabase(Application $app, Request $request)
+	{
 		$this->app = $app;
 
-		$sPathShow = $request->get('pathshow',false);
-		$sCurrent = $request->get('curent',false);
-		$sKey = $request->get('key',false);
+		$sPathShow = $request->get('pathshow', false);
+		$sCurrent = $request->get('curent', false);
+		$sKey = $request->get('key', false);
 
 		$qd = new SeriesManager($app);
-		return $this->formatResponse($request, $app, $qd->updateDatabase($sPathShow,$sCurrent,$sKey));
+		return $this->formatResponse($request, $app, $qd->updateDatabase($sPathShow, $sCurrent, $sKey));
 	}
+
 	/**
 	 * @SLX\Route(
-	 *     @SLX\Request(uri="updateFanartCache"),
+	 * @SLX\Request(uri="updateFanartCache"),
 	 * )
 	 */
-	public function updateFanartCache(Application $app,Request $request){
+	public function updateFanartCache(Application $app, Request $request)
+	{
 		$this->app = $app;
 
 		$qd = new SeriesManager($app);

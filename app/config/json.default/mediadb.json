@@ -4,7 +4,7 @@
 		"title"		: "eXtplorer",
 		"iconCls"	: "icon-extplorer"
 	},{
-		"url"		: "http://192.168.1.250:8081/sickbeard/",
+		"url"		: "http://url:8081/sickbeard/",
 		"title"		: "SickBeard",
 		"iconCls"	: "icon-sickbeard"
 	},{

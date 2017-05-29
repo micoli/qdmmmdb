@@ -1,0 +1,6 @@
+{
+	"xbmcPath" 	: "//MEDIASERVER/userdata/",
+	"xbmcDB" 	: "mysql:host=127.0.0.1;dbname=xbmc_video75",
+	"xbmcDBUser" 	: "root",
+	"xbmcDBPass" 	: "toor"
+}

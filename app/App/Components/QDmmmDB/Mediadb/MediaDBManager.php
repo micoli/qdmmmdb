@@ -21,26 +21,28 @@ class MediaDBManager {
 		$this->cacheminutes = 123*59+59;
 		$this->cache		= true;
 
-		$this->thetvdbkey					= $GLOBALS['conf']['qdmediadb']['thetvdbkey'];
-		$this->fanarttvdbkey				= $GLOBALS['conf']['qdmediadb']['fanarttvdbkey'];
 		$this->xbmcPath						= $GLOBALS['conf']['qdmediadb_xbmc']['xbmcPath'];
 		$this->xbmcDB						= $GLOBALS['conf']['qdmediadb_xbmc']['xbmcDB'];
 		$this->xbmcDBUser					= $GLOBALS['conf']['qdmediadb_xbmc']['xbmcDBUser'];
 		$this->xbmcDBPass					= $GLOBALS['conf']['qdmediadb_xbmc']['xbmcDBPass'];
 
-		$this->allowedExt 					= $GLOBALS['conf']['qdmediadb']['allowedExt'];;
-		$this->movieExt						= $GLOBALS['conf']['qdmediadb']['movieExt'];
-		$this->subtitlesExt					= $GLOBALS['conf']['qdmediadb']['subtitlesExt'];
-		$this->arrCleanupMoviesRegexStrict 	= $GLOBALS['conf']['qdmediadb']['arrCleanupMoviesRegexStrict'];
-		$this->arrCleanupMoviesRegex		= $GLOBALS['conf']['qdmediadb']['arrCleanupMoviesRegex'];
-		$this->arrHiddenmovieRegex			= $GLOBALS['conf']['qdmediadb']['arrHiddenmovie'];
-		$this->testFilenames				= $GLOBALS['conf']['qdmediadb']['testFilenames'];
-		$episodeFormatsTmp					= $GLOBALS['conf']['qdmediadb']['episodeFormats'];
+		$this->thetvdbkey					= \App\Components\QDmmmDB\Configuration\Api::$thetvdbkey;
+		$this->fanarttvdbkey				= \App\Components\QDmmmDB\Configuration\Api::$fanarttvdbkey;
+
+		$this->allowedExt 					= \App\Components\QDmmmDB\Configuration\Media::$allowedExt;
+		$this->movieExt						= \App\Components\QDmmmDB\Configuration\Media::$movieExt;
+		$this->subtitlesExt					= \App\Components\QDmmmDB\Configuration\Media::$subtitlesExt;
+		$this->arrCleanupMoviesRegexStrict 	= \App\Components\QDmmmDB\Configuration\Movies::$arrCleanupMoviesRegexStrict;
+		$this->arrCleanupMoviesRegex		= \App\Components\QDmmmDB\Configuration\Movies::$arrCleanupMoviesRegex;
+		$this->arrHiddenmovieRegex			= \App\Components\QDmmmDB\Configuration\Movies::$arrHiddenmovie;
+
+		$this->testFilenames				= \App\Components\QDmmmDB\Configuration\Series::$testFilenames;
+		$episodeFormatsTmp					= \App\Components\QDmmmDB\Configuration\Series::$episodeFormats;
 		$this->episodeFormats = array();
 		foreach($episodeFormatsTmp as $k=>$v){
 			$this->episodeFormats[$v['rgx']]=$v['rep'];
 		}
-		$this->arrKeepSpecialTag			= $GLOBALS['conf']['qdmediadb']['arrKeepSpecialTag'];
+		$this->arrKeepSpecialTag			= \App\Components\QDmmmDB\Configuration\Movies::$arrKeepSpecialTag;
 
 		$this->folderSeriesList				= $GLOBALS['conf']['qdmediadb_serie']['folderSeriesList'];
 		$arrTmp								= $GLOBALS['conf']['qdmediadb_movie']['folderMoviesList'];
@@ -818,19 +820,21 @@ class MediaDBManager {
 			}
 		}
 	}
-	function getLangFromPath($path){
-		if(substr($path,-1)=='/'){
-			$path=substr($path,0,-1);
+
+	function getLangFromPath($path)
+	{
+		if (substr($path, - 1) == '/') {
+			$path = substr($path, 0, - 1);
 		}
-		$lang='WD';
-		if(preg_match('! FR$!',$path)){
-			$lang='FR';
+		$lang = 'WD';
+		if (preg_match('! FR$!', $path)) {
+			$lang = 'FR';
 		}
-		if(preg_match('! VF$!',$path)){
-			$lang='FR';
+		if (preg_match('! VF$!', $path)) {
+			$lang = 'FR';
 		}
-		if(preg_match('! VO$!',$path)){
-			$lang='EN';
+		if (preg_match('! VO$!', $path)) {
+			$lang = 'EN';
 		}
 		return $lang;
 	}

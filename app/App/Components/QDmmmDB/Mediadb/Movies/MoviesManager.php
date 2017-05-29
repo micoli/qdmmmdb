@@ -457,7 +457,7 @@ class MoviesManager extends MediaDBManager{
 		if (in_array(trim($newFilename),array('','.','..'))){
 			return array('corrupted'=>true);
 		}
-		if (Tools::array_key_exists_assign_default('movieFolderWithYear',$GLOBALS['conf']['qdmediadb'],false)){
+		if (\App\Components\QDmmmDB\Configuration\Movies::$movieFolderWithYear){
 			$newFilename .= (Tools::array_key_exists_assign_default('year', $compatRecord, false)?' ('.$compatRecord['year'].')':'');
 		}
 		$newFolder = $newFilename;

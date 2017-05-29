@@ -7,3 +7,4 @@ nbproject
 /graph
 vendor/
 sync.sh
+app/config/json

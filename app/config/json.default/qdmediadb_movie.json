@@ -1,0 +1,5 @@
+{
+	"folderMoviesList" : [
+		{"name":"dwn"	, "path":"/__Films"				, "xbmcpath":"smb://MEDIASERVER/Movies"				,"current":1}
+	]
+}
