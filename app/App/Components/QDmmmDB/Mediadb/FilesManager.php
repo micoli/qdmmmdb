@@ -2,7 +2,7 @@
 namespace App\Components\QDmmmDB\Mediadb;
 use App\Components\QDmmmDB\Misc\Tools;
 
-class QDFilesProxy{
+class FilesManager{
 	static $arrPaths=array();
 	function init(){
 		self::$arrPaths=array(
@@ -131,10 +131,10 @@ class QDFilesProxy{
 			$style	= "border: medium none transparent;height: 100px;padding: 5px;width: 100%;";
 			switch ($type){
 				case 'img':
-					$preview = '<img src="p/QDFilesProxy.getPreview/?type=imgfull&root='.$_REQUEST['root'].'&id='.$id.'&ext='.$ext.'" style="'.$style.'" />';
+					$preview = '<img src="p/FilesManager.getPreview/?type=imgfull&root='.$_REQUEST['root'].'&id='.$id.'&ext='.$ext.'" style="'.$style.'" />';
 				break;
 				case 'txt':
-					$preview = '<iframe src="p/QDFilesProxy.getPreview/?type=txt&root='.$_REQUEST['root'].'&id='.$id.'&ext='.$ext.'" style="'.$style.'" ></iframe>';
+					$preview = '<iframe src="p/FilesManager.getPreview/?type=txt&root='.$_REQUEST['root'].'&id='.$id.'&ext='.$ext.'" style="'.$style.'" ></iframe>';
 				break;
 			}
 			$res[]		= array(

@@ -5,7 +5,7 @@ use DDesrosiers\SilexAnnotations\Annotations as SLX;
 use Silex\Application;
 use SM\SilexRestApi\Controllers\NormalizedResponse;
 use Symfony\Component\HttpFoundation\Request;
-use App\Controllers\QDmmmDB\SabNZBD\QDSabnzbdProxy;
+use App\Controllers\QDmmmDB\SabNZBD\SabnzbdManager;
 
 class SabnzbdController {
 	use NormalizedResponse;
@@ -16,7 +16,7 @@ class SabnzbdController {
 	 * )
 	 */
 	public function getSpeeds(Application $app,Request $request){
-		$qd = new QDSabnzbdProxy($app);
+		$qd = new SabnzbdManager($app);
 		return $this->formatResponse($request,$app,$qd->getSpeeds());
 	}
 
@@ -26,7 +26,7 @@ class SabnzbdController {
 	 * )
 	 */
 	public function setSpeed(Application $app,Request $request){
-		$qd = new QDSabnzbdProxy($app);
+		$qd = new SabnzbdManager($app);
 		$value = $request('value');
 		return $this->formatResponse($request,$app,$qd->setSpeed($value));
 	}
@@ -37,7 +37,7 @@ class SabnzbdController {
 	 * )
 	 */
 	public function action(Application $app,Request $request){
-		$qd = new QDSabnzbdProxy($app);
+		$qd = new SabnzbdManager($app);
 		$arr = [];
 		foreach($request->request->all() as $k=>$v){
 			if (preg_match('!^sab_(.*)!',$k,$m)){

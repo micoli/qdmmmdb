@@ -3,7 +3,7 @@ namespace App\Components\QDmmmDB\Mediadb;
 
 use App\Components\QDmmmDB\Misc\Tools;
 
-class QDVideoFileHelper{
+class VideoFileHelper{
 	var $bin_ffmpeg;
 	var $bin_mplayer;
 	var $cacheFodler;

@@ -15,7 +15,7 @@ class IndexerController {
 	 * )
 	 */
 	public function showDisks(Application $app,Request $request){
-		$qd = new \App\Components\QDmmmDB\Mediadb\QDIndexer($app);
+		$qd = new \App\Components\QDmmmDB\Mediadb\MediaIndexer($app);
 		return $this->formatResponse($request,$app,$qd->svc_showDisks());
 	}
 
@@ -25,7 +25,7 @@ class IndexerController {
 	 * )
 	 */
 	public function index(Application $app,Request $request){
-		$qd = new \App\Components\QDmmmDB\Mediadb\QDIndexer($app);
+		$qd = new \App\Components\QDmmmDB\Mediadb\MediaIndexer($app);
 		return $this->formatResponse($request,$app,$qd->svc_index());
 	}
 
@@ -35,7 +35,7 @@ class IndexerController {
 	 * )
 	 */
 	public function indexAll(Application $app,Request $request){
-		$qd = new \App\Components\QDmmmDB\Mediadb\QDIndexer($app);
+		$qd = new \App\Components\QDmmmDB\Mediadb\MediaIndexer($app);
 		return $this->formatResponse($request,$app,$qd->svc_indexAll());
 	}
 
@@ -45,7 +45,7 @@ class IndexerController {
 	 * )
 	 */
 	public function getFiles(Application $app,Request $request){
-		$qd = new \App\Components\QDmmmDB\Mediadb\QDIndexer($app);
+		$qd = new \App\Components\QDmmmDB\Mediadb\MediaIndexer($app);
 
 		$arr = explode(' ',$request->get('search',''));
 		$this->mode = $request->get('mode','flat');

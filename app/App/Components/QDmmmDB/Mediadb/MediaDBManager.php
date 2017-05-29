@@ -4,7 +4,7 @@ namespace App\Components\QDmmmDB\Mediadb;
 use App\Components\QDmmmDB\Misc\QDNet;
 use Silex\Application;
 
-class QDMediaDBProxy {
+class MediaDBManager {
 	var $QDNet;
 	var $app;
 	static $XbmcDBPDO=null;
@@ -89,7 +89,7 @@ class QDMediaDBProxy {
 		//Return the results
 		return array($nx,$ny);
 	}
-	function svc_proxyImg($sUrl,$sC){
+	function proxyImg($sUrl,$sC){
 		$tmp = $this->QDNet->getCacheURL($sUrl, 'imgs', 60*24*365*20,true,'');
 		header('Content-type: '.$this->QDNet->lastMimeType);
 		if($sC && $this->QDNet->lastCacheFile){

@@ -6,9 +6,9 @@ use App\Components\QDmmmDB\Misc\Tools;
 use App\Components\QDmmmDB\Mediadb\Scrapers\MovieParser;
 use App\Components\QDmmmDB\Mediadb\Scrapers\movies\scrapertheMovieDBApi;
 use App\Components\QDmmmDB\Mediadb\Scrapers\Movies\scraperAllocineApi;
-use App\Components\QDmmmDB\Mediadb\QDMediaDBProxy;
+use App\Components\QDmmmDB\Mediadb\MediaDBManager;
 
-class QDMoviesProxy extends QDMediaDBProxy{
+class MoviesManager extends MediaDBManager{
 	static $threadArr;
 
 	public function chooseMovie($sMovie,$sPath,$sEngine) {
@@ -370,7 +370,7 @@ class QDMoviesProxy extends QDMediaDBProxy{
 		return trim(ucwords(strtolower($moviename)));
 	}
 
-	private function pri_addFileToGetMoviesFiles($prm){
+	private function addFileToGetMoviesFiles($prm){
 		$tmp = array(
 			'rootPath'		=> $prm['rootPath'],
 			'fullpath'		=> $prm['fileDetail']['fullPath'],
@@ -400,7 +400,7 @@ class QDMoviesProxy extends QDMediaDBProxy{
 		foreach ($tmp as $file) {
 			$fileDetail = ToolsFiles::pathinfo_utf($file);
 			if (in_array(strtolower($fileDetail['extension']), $this->movieExt) && $this->pri_movieFileIsVisible($fileDetail['filename'])) {
-				$this->arrMovies['results'][] = $this->pri_addFileToGetMoviesFiles(array(
+				$this->arrMovies['results'][] = $this->addFileToGetMoviesFiles(array(
 					'rootPath'		=> $name,
 					'fileDetail'	=> $fileDetail,
 					'mtime'			=> $fileDetail['mtime'],
@@ -431,7 +431,7 @@ class QDMoviesProxy extends QDMediaDBProxy{
 			}else{
 				$fileDetail = ToolsFiles::pathinfo_utf($file);
 				if (in_array(strtolower($fileDetail['extension']), $this->movieExt)) {
-					$this->arrMovies['results'][] = $this->pri_addFileToGetMoviesFiles(array(
+					$this->arrMovies['results'][] = $this->addFileToGetMoviesFiles(array(
 						'rootPath'		=> $name,
 						'fileDetail'	=> $fileDetail,
 						'inFolder'		=> 'file'
@@ -547,7 +547,7 @@ class QDMoviesProxy extends QDMediaDBProxy{
 		}
 
 		$fileDetail = ToolsFiles::pathinfo_utf($newFullFilename);
-		$newRefRecord =  $this->pri_addFileToGetMoviesFiles(array(
+		$newRefRecord =  $this->addFileToGetMoviesFiles(array(
 			'rootPath'		=> $ref['rootPath'],
 			'fileDetail'	=> $fileDetail,
 			'inFolder'		=> 'inFolder'

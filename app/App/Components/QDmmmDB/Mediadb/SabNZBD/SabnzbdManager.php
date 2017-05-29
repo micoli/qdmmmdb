@@ -2,7 +2,7 @@
 // bwping  -b 1024 -s 3600 -v 450000 www.micoli.org
 namespace App\Components\QDmmmDB\Mediadb\SabNZBD;
 
-class QDSabnzbdProxy{
+class SabnzbdManager{
 	var $QDNet;
 
 	function __construct() {

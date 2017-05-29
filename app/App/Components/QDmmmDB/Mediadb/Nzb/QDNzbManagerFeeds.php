@@ -2,7 +2,7 @@
 namespace App\Controllers\QDmmmDB\Nzb;
 include_once QD_PATH_3RD_PHP."simple_html_dom.php";
 
-class QDNzbProxyFeeds{
+class QDNzbManagerFeeds{
 	var $QDNet;
 	var $QDDb;
 	var $app;

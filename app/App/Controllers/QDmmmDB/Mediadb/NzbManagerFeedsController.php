@@ -5,8 +5,8 @@ use DDesrosiers\SilexAnnotations\Annotations as SLX;
 use Silex\Application;
 use SM\SilexRestApi\Controllers\NormalizedResponse;
 use Symfony\Component\HttpFoundation\Request;
-use App\Controllers\QDmmmDB\Nzb\QDNzbProxyFeeds;
-class NzbProxyFeedsController {
+use App\Controllers\QDmmmDB\Nzb\QDNzbManagerFeeds;
+class NzbManagerFeedsController {
 	use NormalizedResponse;
 
 	/**
@@ -15,7 +15,7 @@ class NzbProxyFeedsController {
 	 * )
 	 */
 	public function testAllocine(Application $app,Request $request){
-		$qd = new QDNzbProxyFeeds($app);
+		$qd = new QDNzbManagerFeeds($app);
 		return $this->formatResponse($request,$app,$qd->testAllocine());
 	}
 
@@ -25,7 +25,7 @@ class NzbProxyFeedsController {
 	 * )
 	 */
 	public function download(Application $app,Request $request){
-		$qd = new QDNzbProxyFeeds($app);
+		$qd = new QDNzbManagerFeeds($app);
 		$search = $request->get('s','');
 		return $this->formatResponse($request,$app,$qd->download($search));
 	}
@@ -36,7 +36,7 @@ class NzbProxyFeedsController {
 	 * )
 	 */
 	public function search(Application $app,Request $request){
-		$qd = new QDNzbProxyFeeds($app);
+		$qd = new QDNzbManagerFeeds($app);
 		$search = $request->get('s','');
 		return $this->formatResponse($request,$app,$qd->search($search));
 	}
@@ -47,7 +47,7 @@ class NzbProxyFeedsController {
 	 * )
 	 */
 	public function feedCacheRSS(Application $app,Request $request){
-		$qd = new QDNzbProxyFeeds($app);
+		$qd = new QDNzbManagerFeeds($app);
 		return $this->formatResponse($request,$app,$qd->feedCacheRSS());
 	}
 	/**
@@ -56,7 +56,7 @@ class NzbProxyFeedsController {
 	 * )
 	 */
 	public function search_binsearch(Application $app,Request $request){
-		$qd = new QDNzbProxyFeeds($app);
+		$qd = new QDNzbManagerFeeds($app);
 		$query = $request->get('q','');
 		return $this->formatResponse($request,$app,$qd->search_binsearch($query));
 	}
@@ -66,7 +66,7 @@ class NzbProxyFeedsController {
 	 * )
 	 */
 	public function download_binsearch(Application $app,Request $request){
-		$qd = new QDNzbProxyFeeds($app);
+		$qd = new QDNzbManagerFeeds($app);
 		$query = $request->get('q','');
 		return $this->formatResponse($request,$app,$qd->download_binsearch($query));
 	}
@@ -77,7 +77,7 @@ class NzbProxyFeedsController {
 	 * )
 	 */
 	public function download_newzleech(Application $app,Request $request){
-		$qd = new QDNzbProxyFeeds($app);
+		$qd = new QDNzbManagerFeeds($app);
 		return $this->formatResponse($request,$app,$qd->download_newzleech());
 	}
 
@@ -87,7 +87,7 @@ class NzbProxyFeedsController {
 	 * )
 	 */
 	public function search_newzleech(Application $app,Request $request){
-		$qd = new QDNzbProxyFeeds($app);
+		$qd = new QDNzbManagerFeeds($app);
 		return $this->formatResponse($request,$app,$qd->search_newzleech());
 	}
 
@@ -97,7 +97,7 @@ class NzbProxyFeedsController {
 	 * )
 	 */
 	public function distinctfeed(Application $app,Request $request){
-		$qd = new QDNzbProxyFeeds($app);
+		$qd = new QDNzbManagerFeeds($app);
 		return $this->formatResponse($request,$app,$qd->distinctfeed());
 	}
 
@@ -107,7 +107,7 @@ class NzbProxyFeedsController {
 	 * )
 	 */
 	public function setStarred(Application $app,Request $request){
-		$qd = new QDNzbProxyFeeds($app);
+		$qd = new QDNzbManagerFeeds($app);
 		$sIteStarred = $request->get('ITE_STARRED');
 		$sIteId = $request->get('ITE_ID');
 		return $this->formatResponse($request,$app,$qd->setStarred($sIteStarred,$sIteId));
@@ -119,7 +119,7 @@ class NzbProxyFeedsController {
 	 * )
 	 */
 	public function setRead(Application $app,Request $request){
-		$qd = new QDNzbProxyFeeds($app);
+		$qd = new QDNzbManagerFeeds($app);
 		$sIteRead = $request->get('ITE_READ');
 		$sIteId = $request->get('ITE_ID');
 		return $this->formatResponse($request,$app,$qd->setRead($sIteRead,$sIteId));
@@ -131,7 +131,7 @@ class NzbProxyFeedsController {
 	 * )
 	 */
 	public function setTreated(Application $app,Request $request){
-		$qd = new QDNzbProxyFeeds($app);
+		$qd = new QDNzbManagerFeeds($app);
 		$sRid = $request->get('rid');
 		return $this->formatResponse($request,$app,$qd->setTreated($sRid));
 	}
@@ -142,7 +142,7 @@ class NzbProxyFeedsController {
 	 * )
 	 */
 	public function dbfeed(Application $app,Request $request){
-		$qd = new QDNzbProxyFeeds($app);
+		$qd = new QDNzbManagerFeeds($app);
 		$mode =  $request->get('mode','feed');
 		$sIs = $request->get('is');
 		$sId = $request->get('id');
@@ -158,7 +158,7 @@ class NzbProxyFeedsController {
 	 * )
 	 */
 	public function pubGetCacheSerial(Application $app,Request $request){
-		$qd = new QDNzbProxyFeeds($app);
+		$qd = new QDNzbManagerFeeds($app);
 		$i = $request->get('i');
 		return $this->formatResponse($request,$app,$qd->pubGetCacheSerial($i));
 	}

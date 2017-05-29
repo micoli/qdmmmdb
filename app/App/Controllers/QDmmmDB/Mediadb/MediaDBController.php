@@ -5,7 +5,7 @@ use DDesrosiers\SilexAnnotations\Annotations as SLX;
 use Silex\Application;
 use SM\SilexRestApi\Controllers\NormalizedResponse;
 use Symfony\Component\HttpFoundation\Request;
-use App\Components\QDmmmDB\Mediadb\QDMediaDBProxy;
+use App\Components\QDmmmDB\Mediadb\MediaDBManager;
 
 class MediaDBController {
 	use NormalizedResponse;
@@ -22,7 +22,7 @@ class MediaDBController {
 		$sUrl = $request->get('u',0);
 		$sC = $request->get('c',false);
 
-		$qd = new QDMediaDBProxy($app);
-		return $this->formatResponse($request, $app, $qd->svc_proxyImg($sUrl,$sC));
+		$qd = new MediaDBManager($app);
+		return $this->formatResponse($request, $app, $qd->proxyImg($sUrl,$sC));
 	}
 }

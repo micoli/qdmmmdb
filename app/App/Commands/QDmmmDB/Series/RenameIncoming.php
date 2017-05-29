@@ -1,7 +1,7 @@
 <?php
 namespace App\Commands\QDmmmDB\Series;
 
-use App\Components\QDmmmDB\Mediadb\Series\QDSeriesBatch;
+use App\Components\QDmmmDB\Mediadb\Series\SeriesBatch;
 use Knp\Command\Command as KnpCommand;
 use Symfony\Component\Console\Input\InputDefinition;
 use Symfony\Component\Console\Input\InputInterface;
@@ -30,7 +30,7 @@ class RenameIncoming extends KnpCommand{
 
 
 	protected function execute(InputInterface $input , OutputInterface $output){
-		$qd = new QDSeriesBatch($this->getSilexApplication());
+		$qd = new SeriesBatch($this->getSilexApplication());
 		$qd->renameIncoming(
 			$input->getOption(self::ARG_SERIE_PATHS),
 			$input->getOption(self::ARG_PATH),

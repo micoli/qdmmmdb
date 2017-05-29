@@ -16,7 +16,7 @@ class MediaDBSystemStatusController {
 	 * )
 	 */
 	public function status(Application $app,Request $request){
-		$qd = new QDMediaDBSystemStatus();
+		$qd = new MediaDBSystemStatus();
 		$data = $qd->cpu();
 		return $this->formatResponse($request, $app, [
 			'processes'	=> array_values($data['processes']),
@@ -24,15 +24,17 @@ class MediaDBSystemStatusController {
 			'disks'		=> $qd->get_disks()
 		]);
 	}
+
 	/**
 	 * @SLX\Route(
 	 *     @SLX\Request(uri="diskStatus"),
 	 * )
 	 */
 	public function diskStatus(Application $app,Request $request){
-		$qd = new QDMediaDBSystemStatus();
+		$qd = new MediaDBSystemStatus();
 		return $this->formatResponse($request, $app, [$qd->get_disks()]);
 	}
+
 	/**
 	 * @SLX\Route(
 	 *     @SLX\Request(uri="processes"),

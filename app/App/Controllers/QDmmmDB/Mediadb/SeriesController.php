@@ -1,7 +1,7 @@
 <?php
 namespace App\Controllers\QDmmmDB\Mediadb;
 
-use App\Components\QDmmmDB\Mediadb\Series\QDSeriesProxy;
+use App\Components\QDmmmDB\Mediadb\Series\SeriesManager;
 use DDesrosiers\SilexAnnotations\Annotations as SLX;
 use Silex\Application;
 use SM\SilexRestApi\Controllers\NormalizedResponse;
@@ -21,7 +21,7 @@ class SeriesController {
 		$bRefresh = $request->get('refresh',0);
 		$iId = $request->get('id',0);
 
-		$qd = new QDSeriesProxy($app);
+		$qd = new SeriesManager($app);
 		return $this->formatResponse($request, $app, $qd->getSeriesTree($iId,$bRefresh));
 	}
 
@@ -35,7 +35,7 @@ class SeriesController {
 
 		$sPath = $request->get('p',0);
 
-		$qd = new QDSeriesProxy($app);
+		$qd = new SeriesManager($app);
 		return $this->formatResponse($request, $app, $qd->getSerieFromPath($sPath));
 	}
 
@@ -49,7 +49,7 @@ class SeriesController {
 
 		$sPath = $request->get('p',0);
 
-		$qd = new QDSeriesProxy($app);
+		$qd = new SeriesManager($app);
 		return $this->formatResponse($request, $app, $qd->getFolderSeriesList($sPath));
 	}
 
@@ -63,7 +63,7 @@ class SeriesController {
 
 		$sPath = $request->get('d',0);
 
-		$qd = new QDSeriesProxy($app);
+		$qd = new SeriesManager($app);
 		return $this->formatResponse($request, $app, $qd->serieBulkRename($sPath));
 	}
 
@@ -77,7 +77,7 @@ class SeriesController {
 
 		$sName = $request->get('name','');
 
-		$qd = new QDSeriesProxy($app);
+		$qd = new SeriesManager($app);
 		return $this->formatResponse($request, $app, $qd->getFilesSorterList($sName));
 	}
 
@@ -93,7 +93,7 @@ class SeriesController {
 		$sPath = $request->get('p','');
 		$sId = $request->get('i','');
 
-		$qd = new QDSeriesProxy($app);
+		$qd = new SeriesManager($app);
 		return $this->formatResponse($request, $app, $qd->setSerieFromPath($sMode,$sPath,$sId));
 	}
 
@@ -108,7 +108,7 @@ class SeriesController {
 		$sSerieName = $request->get('s','');
 		$sPath = $request->get('p','');
 
-		$qd = new QDSeriesProxy($app);
+		$qd = new SeriesManager($app);
 		return $this->formatResponse($request, $app, $qd->chooseSerie($sSerieName,$sPath));
 	}
 
@@ -121,11 +121,11 @@ class SeriesController {
 		$this->app = $app;
 
 		$sModified = $request->get('modified','');
-		$sModified = utf8_decode(base64_decode($sModified));
+		$aModified = json_decode(utf8_decode(base64_decode($sModified)),true);;
 		$sMoveExists = $request->get('moveExists','');
 
-		$qd = new QDSeriesProxy($app);
-		return $this->formatResponse($request, $app, $qd->renameFiles($sModified,$sMoveExists));
+		$qd = new SeriesManager($app);
+		return $this->formatResponse($request, $app, $qd->renameFiles($aModified,$sMoveExists));
 	}
 
 	/**
@@ -139,7 +139,7 @@ class SeriesController {
 		$sFullPath = $request->get('fullpath','');
 		$sOnly2Rename = $request->get('only2Rename','true');
 
-		$qd = new QDSeriesProxy($app);
+		$qd = new SeriesManager($app);
 		return $this->formatResponse($request, $app, $qd->getFilesMulti($sFullPath,$sOnly2Rename));
 	}
 
@@ -154,7 +154,7 @@ class SeriesController {
 		$sFullPath = $request->get('fullpath','');
 		$bOnly2Rename = $request->get('only2Rename','false')=='true';
 
-		$qd = new QDSeriesProxy($app);
+		$qd = new SeriesManager($app);
 		return $this->formatResponse($request, $app, $qd->getFiles($sFullPath,$bOnly2Rename));
 	}
 
@@ -168,7 +168,7 @@ class SeriesController {
 
 		$sFilename = $request->get('filename',false);
 
-		$qd = new QDSeriesProxy($app);
+		$qd = new SeriesManager($app);
 		return $this->formatResponse($request, $app, $qd->extractSeriesFilenameStruct($sFilename));
 	}
 
@@ -182,7 +182,7 @@ class SeriesController {
 
 		$bForceRefresh = $request->get('forceRefresh','true');
 
-		$qd = new QDSeriesProxy($app);
+		$qd = new SeriesManager($app);
 		return $this->formatResponse($request, $app, $qd->updateAllXml($bForceRefresh));
 	}
 
@@ -198,7 +198,7 @@ class SeriesController {
 		$sCurrent = $request->get('curent',false);
 		$sKey = $request->get('key',false);
 
-		$qd = new QDSeriesProxy($app);
+		$qd = new SeriesManager($app);
 		return $this->formatResponse($request, $app, $qd->updateDatabase($sPathShow,$sCurrent,$sKey));
 	}
 	/**
@@ -209,7 +209,7 @@ class SeriesController {
 	public function updateFanartCache(Application $app,Request $request){
 		$this->app = $app;
 
-		$qd = new QDSeriesProxy($app);
+		$qd = new SeriesManager($app);
 		return $this->formatResponse($request, $app, $qd->updateFanartCache($sPathShow));
 	}
 }

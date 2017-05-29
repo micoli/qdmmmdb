@@ -1,11 +1,10 @@
 <?php
 namespace App\Components\QDmmmDB\Mediadb\Series;
-//include '/var/www/qdmmmdb/app/App/Components/QDmmmDB/Tools/Tools.php';
 
 use App\Components\QDmmmDB\Misc\Tools;
 use App\Components\QDmmmDB\Misc\ToolsFiles;
 use App\Components\QDmmmDB\Misc\QDLogger;
-use App\Components\QDmmmDB\Mediadb\QDMediaDBProxy;
+use App\Components\QDmmmDB\Mediadb\MediaDBManager;
 
 /*
 select media_type,count(*) from art group by  media_type;
@@ -45,7 +44,7 @@ inner join tvshow on media_id=idShow and media_type='tvshow'
 where true;
 */
 
-class QDSeriesProxy extends QDMediaDBProxy{
+class SeriesManager extends MediaDBManager{
 	static $tvdbxpath = array();
 	static $tvdbxpathId = array();
 
@@ -367,6 +366,7 @@ class QDSeriesProxy extends QDMediaDBProxy{
 	}
 
 	protected function getUpdateUrlOrXmlFromSerieID($seriesid, $mode,$seriePath) {
+		$url='';
 		if ($seriesid) {
 			if ($seriePath!='' && file_exists($seriePath . '/tvdb_all.xml') && filesize($seriePath . '/tvdb_all.xml')) {
 				$xml = file_get_contents($seriePath . '/tvdb_all.xml');
@@ -423,10 +423,9 @@ class QDSeriesProxy extends QDMediaDBProxy{
 		return self::$tvdbxpathId[$serieId];
 	}
 
-	public function renameFiles($sModified,$sMoveExists) {
+	public function renameFiles($arrModified,$sMoveExists) {
 		$debug = false;
-		$arr = json_decode($sModified, true);
-		foreach ($arr as $SeriePath => $Modified) {
+		foreach ($arrModified as $SeriePath => $Modified) {
 			$SeriePath = base64_decode($SeriePath);
 			$tmp = glob($SeriePath . '/*.*');
 			$arrMD5 = array();
@@ -442,14 +441,13 @@ class QDSeriesProxy extends QDMediaDBProxy{
 			$first = true;
 			foreach ($Modified['modified'] as $v) {
 				$v['serie'] = base64_decode($v['serie']);
-				$old		= realpath($SeriePath . "/" . $v['old']);
-				$new		= realpath($SeriePath) . "/" . utf8_encode($v['serie']) . " [" . $v['saison'] . 'x' . sprintf('%02d', $v['episode']) . '] ' . $v['new'] . '.' . $v['ext'];
-				$new64		= realpath($SeriePath) . "/" . utf8_encode($v['serie']) . " [" . $v['saison'] . 'x' . sprintf('%02d', $v['episode']) . '] ' . utf8_encode(base64_decode($v['new64'])) . '.' . $v['ext'];
+				//$old	= realpath($SeriePath . "/" . $v['old']);
+				//$new	= realpath($SeriePath) . "/" . utf8_encode($v['serie']) . " [" . $v['saison'] . 'x' . sprintf('%02d', $v['episode']) . '] ' . $v['new'] . '.' . $v['ext'];
+				$new64	= realpath($SeriePath) . "/" . utf8_encode($v['serie']) . " [" . $v['saison'] . 'x' . sprintf('%02d', $v['episode']) . '] ' . utf8_encode(base64_decode($v['new64'])) . '.' . $v['ext'];
 				if (array_key_exists($v['md5'], $arrMD5)) {
 					if (file_exists($new64)) {
 						$resultRename = 'file exists';
 						if ($sMoveExists == 'true') {
-							//fb('exists');
 						}
 					} else {
 						if ($debug){
@@ -461,7 +459,7 @@ class QDSeriesProxy extends QDMediaDBProxy{
 					}
 					$d = ToolsFiles::pathinfo_utf($new64);
 					if (in_array(strtolower($d['extension']), $this->movieExt)) {
-						$this->makeEpisodeNFO($new64,true,true);
+						$this->makeEpisodeNFO($new64,true,true,true);
 					}
 					if ($first) {
 						$this->makeSerieNFO($new64);
@@ -641,6 +639,7 @@ class QDSeriesProxy extends QDMediaDBProxy{
 		$xml = new \SimpleXMLElement($remote_images);
 		db($xml);die();
 	}
+
 	private function _get_remote_imagesXml($seriesId, $type = 'poster'){
 		$remote_images = $this->getBannersXml($seriesId);
 
@@ -683,7 +682,6 @@ class QDSeriesProxy extends QDMediaDBProxy{
 		QDLogger::log($filename);
 		$seriePath = $this->getSeriePath(dirname($filename));
 		if (file_exists($seriePath . '/tvdb_all.xml')) {
-			//die($seriePath . '/tvdb_all.xml');
 			$xpath = $this->getXmlDocFromSeriePath($seriePath);
 			$serieFile = new SerieFile($filename);
 			if($serieFile->isSubtitleFile()){
@@ -762,8 +760,7 @@ class QDSeriesProxy extends QDMediaDBProxy{
 				$this->addNFOTextNode($xmldocNFO, $root, "aired"	, $o['aired'	]);
 				$this->addNFOTextNode($xmldocNFO, $root, "thumb"	, $o['thumb'	]);
 				$this->addNFOTextNode($xmldocNFO, $root, "fanart"	, $o['fanart'	]);
-
-				$saisonNfoFilename	= $serieFile->dirname . '/' . $serieFile->filename . '.nfo';
+				$sEpisodeNfoFilename	= $serieFile->dirname . '/' . $serieFile->filenameNoExtension . '.nfo';
 
 				$o['files'] = array();
 				$o['files']['seasontbn'	] = array('type'=>'sea','art_type'=>'thumb'		,'file'=>$seriePath . '/season' . sprintf('%02d', $o['season']) . '.tbn');
@@ -772,15 +769,16 @@ class QDSeriesProxy extends QDMediaDBProxy{
 				$o['files']['clearlogo'	] = array('type'=>'sho','art_type'=>'clearlogo'	,'file'=>$seriePath . '/clearart.png');
 				$o['files']['fanart'	] = array('type'=>'sho','art_type'=>'fanart'	,'file'=>$seriePath . '/fanart.jpg');
 				$o['files']['poster'	] = array('type'=>'sho','art_type'=>'poster'	,'file'=>$seriePath . '/poster.jpg');
-				$o['files']['thumb'		] = array('type'=>'epi','art_type'=>'thumb'		,'file'=>$serieFile->dirname . '/' . $serieFile->filename . '.tbn');
+
+				$o['files']['thumb'		] = array('type'=>'epi','art_type'=>'thumb'		,'file'=>$serieFile->dirname . '/' . $serieFile->filenameNoExtension . '.tbn');
 
 				$o['posters'		]=$this->_get_remote_imagesXml($this->extractXQuery($xpath, "/Data/Series/id"),'poster');
 				$o['backdrops'		]=$this->_get_remote_imagesXml($this->extractXQuery($xpath, "/Data/Series/id"),'backdrop');
 				$o['arts'			]=array();
 
-				if($writeFiles && (!file_exists($saisonNfoFilename)|| $forceFile)){
-						file_put_contents($saisonNfoFilename, $xmldocNFO->saveXML());
-						QDLogger::log($saisonNfoFilename);
+				if($writeFiles && (!file_exists($sEpisodeNfoFilename)|| $forceFile)){
+					file_put_contents($sEpisodeNfoFilename, $xmldocNFO->saveXML());
+					QDLogger::log($sEpisodeNfoFilename);
 				}
 				foreach($o['files'] as $k=>$v){
 					if(array_key_exists($k,$o) && $o[$k]){
@@ -806,30 +804,10 @@ class QDSeriesProxy extends QDMediaDBProxy{
 					if($lang){
 						$o['title'].=' ('.$lang.')';
 					}
-
 					//////////////////$this->makeEpisodeDB($o);
 				}
 			}
 		}
-		/*if (file_exists($tbnFilename	)){
-			$o['art'][]=array('type'=>'fanart','file'=>$tbnFilename);
-		}*/
-		/*
-		<thumb aspect="banner">http://thetvdb.com/banners/graphical/255326-g5.jpg</thumb>
-		<thumb aspect="banner">http://thetvdb.com/banners/graphical/255326-g4.jpg</thumb>
-		<thumb aspect="banner">http://thetvdb.com/banners/graphical/255326-g.jpg</thumb>
-		<thumb aspect="banner">http://thetvdb.com/banners/graphical/255326-g3.jpg</thumb>
-		<thumb aspect="banner">http://thetvdb.com/banners/graphical/255326-g2.jpg</thumb>
-		<thumb aspect="banner">http://thetvdb.com/banners/graphical/255326-g6.jpg</thumb>
-		<thumb aspect="poster" type="season" season="1">http://thetvdb.com/banners/seasons/255326-1.jpg</thumb>
-		<thumb aspect="poster" type="season" season="1">http://thetvdb.com/banners/seasons/255326-1-2.jpg</thumb>
-		<thumb aspect="poster">http://thetvdb.com/banners/posters/255326-3.jpg</thumb>
-		<thumb aspect="poster">http://thetvdb.com/banners/posters/255326-2.jpg</thumb>
-		<thumb aspect="poster">http://thetvdb.com/banners/posters/255326-1.jpg</thumb>
-		<thumb aspect="poster" type="season" season="-1">http://thetvdb.com/banners/posters/255326-3.jpg</thumb>
-		<thumb aspect="poster" type="season" season="-1">http://thetvdb.com/banners/posters/255326-2.jpg</thumb>
-		<thumb aspect="poster" type="season" season="-1">http://thetvdb.com/banners/posters/255326-1.jpg</thumb>
-		*/
 	}
 
 	public function updateAllXml($sForceRefresh){
@@ -838,12 +816,12 @@ class QDSeriesProxy extends QDMediaDBProxy{
 		$forceRefresh = ($sForceRefresh=="true");
 		foreach ($this->folderSeriesList as $v) {
 			$drivePath = array(
-					'text'		=> $v['name'],
-					'fullname'	=> $v['path'],
-					'rootDrive'	=> 1,
-					'leaf'		=> false,
-					'id'		=> '::'.$v['name'],
-					'children'	=> $this->getSeriesDirectory($v['path'])
+				'text'		=> $v['name'],
+				'fullname'	=> $v['path'],
+				'rootDrive'	=> 1,
+				'leaf'		=> false,
+				'id'		=> '::'.$v['name'],
+				'children'	=> $this->getSeriesDirectory($v['path'])
 			);
 			if (is_array($drivePath['children'])){
 				foreach($drivePath['children'] as $seriePath){

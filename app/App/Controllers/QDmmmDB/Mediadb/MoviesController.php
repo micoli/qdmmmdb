@@ -1,7 +1,7 @@
 <?php
 namespace App\Controllers\QDmmmDB\Mediadb;
 
-use \App\Components\QDmmmDB\Mediadb\Movies\QDMoviesProxy;
+use \App\Components\QDmmmDB\Mediadb\Movies\MoviesManager;
 use DDesrosiers\SilexAnnotations\Annotations as SLX;
 use Silex\Application;
 use SM\SilexRestApi\Controllers\NormalizedResponse;
@@ -19,7 +19,7 @@ class MoviesController {
 	 * )
 	 */
 	public function chooseMovie(Application $app,Request $request){
-		$qdMovie = new QDMoviesProxy($app);
+		$qdMovie = new MoviesManager($app);
 		$sMovie = $request->get('m','');
 		$sPath = $request->get('p','');
 		$sEngine = $request->get('e','');
@@ -33,7 +33,7 @@ class MoviesController {
 	 * )
 	 */
 	public function chooseMoviesDetail(Application $app,Request $request){
-		$qdMovie = new QDMoviesProxy($app);
+		$qdMovie = new MoviesManager($app);
 
 		$sEngine = $request->get('e','');
 		$sFilename = $request->get('f','');
@@ -49,7 +49,7 @@ class MoviesController {
 	 * )
 	 */
 	public function proxyPosterImg(Application $app,Request $request){
-		$qdMovie = new QDMoviesProxy($app);
+		$qdMovie = new MoviesManager($app);
 		$i64 = $request->get('i64','');
 
 		$response = new Response();
@@ -65,7 +65,7 @@ class MoviesController {
 	 * )
 	 */
 	public function checkMoviesPicture(Application $app,Request $request){
-		$qdMovie = new QDMoviesProxy($app);
+		$qdMovie = new MoviesManager($app);
 
 		$res = $qdMovie->checkMoviesPicture();
 		return $this->formatResponse($request, $app, $res);
@@ -77,7 +77,7 @@ class MoviesController {
 	 * )
 	 */
 	public function getMoviesTree(Application $app,Request $request){
-		$qdMovie = new QDMoviesProxy($app);
+		$qdMovie = new MoviesManager($app);
 
 		$res = $qdMovie->getMoviesTree();
 		return $this->formatResponse($request, $app, $res);
@@ -89,7 +89,7 @@ class MoviesController {
 	 * )
 	 */
 	public function getXbmcScraperMovieDetail(Application $app,Request $request){
-		$qdMovie = new QDMoviesProxy($app);
+		$qdMovie = new MoviesManager($app);
 
 		$res = $qdMovie->getXbmcScraperMovieDetail();
 		return $this->formatResponse($request, $app, $res);
@@ -101,7 +101,7 @@ class MoviesController {
 	 * )
 	 */
 	public function getMoviesFiles(Application $app,Request $request){
-		$qdMovie = new QDMoviesProxy($app);
+		$qdMovie = new MoviesManager($app);
 		$sName = $request->get('name','');
 
 		$res = $qdMovie->getMoviesFiles($sName);
@@ -114,7 +114,7 @@ class MoviesController {
 	 * )
 	 */
 	public function setMoviesFromPath(Application $app,Request $request){
-		$qdMovie = new QDMoviesProxy($app);
+		$qdMovie = new MoviesManager($app);
 
 		$sRef = $request->get('ref','');
 		$sRecord = $request->get('record','');
@@ -131,7 +131,7 @@ class MoviesController {
 	 * )
 	 */
 	public function renameMoviesFiles(Application $app,Request $request){
-		$qdMovie = new QDMoviesProxy($app);
+		$qdMovie = new MoviesManager($app);
 
 		$sModified = $request->get('modified','');
 		$sMoveExists = $request->get('moveExists','');

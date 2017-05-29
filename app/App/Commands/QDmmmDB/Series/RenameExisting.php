@@ -1,7 +1,7 @@
 <?php
 namespace App\Commands\QDmmmDB\Series;
 
-use App\Components\QDmmmDB\Mediadb\Series\QDSeriesBatch;
+use App\Components\QDmmmDB\Mediadb\Series\SeriesBatch;
 use Knp\Command\Command as KnpCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
@@ -25,7 +25,7 @@ class RenameExisting extends KnpCommand{
 	}
 
 	protected function execute(InputInterface $input, OutputInterface $output) {
-		$qd = new QDSeriesBatch($this->getSilexApplication());
+		$qd = new SeriesBatch($this->getSilexApplication());
 		$qd->renameExisting();
 		$output->writeln(sprintf('  <comment>%s</comment>',"aaaa"));
 	}

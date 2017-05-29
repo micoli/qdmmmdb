@@ -1,7 +1,7 @@
 <?php
 use App\Components\QDmmmDB\Misc\Tools;
 
-class QDMoviesProxy extends QDMediaDBProxy{
+class QDMoviesManager extends MediaDBManager{
 	var $QDNet;
 
 	function svc_getSerieFromPath() {

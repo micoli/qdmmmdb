@@ -12,7 +12,7 @@ use App\Components\QDmmmDB\Misc\Tools;
  *) ENGINE=MyISAM DEFAULT CHARSET=utf8'
 
  */
-class QDIndexer extends QDMediaDBProxy{
+class MediaIndexer extends MediaDBManager{
 	static $id=0;
 
 	function svc_showDisks(){

@@ -23,9 +23,9 @@ slashApiMediaDBSystemStatus:
   resource: '@App\Controllers\QDmmmDB\Mediadb\MediaDBSystemStatusController'
   type: annotation
 
-slashApiNzbProxyFeeds:
-  prefix: /api/NzbProxyFeeds
-  resource: '@App\Controllers\QDmmmDB\Mediadb\NzbProxyFeedsController'
+slashApiNzbManagerFeeds:
+  prefix: /api/NzbManagerFeeds
+  resource: '@App\Controllers\QDmmmDB\Mediadb\NzbManagerFeedsController'
   type: annotation
 
 slashApiXbmcSeries:

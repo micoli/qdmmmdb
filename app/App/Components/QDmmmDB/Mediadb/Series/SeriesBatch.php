@@ -4,7 +4,7 @@ use Bhutanio\BEncode\BEncode;
 use App\Components\QDmmmDB\Misc\ToolsFiles;
 use App\Components\QDmmmDB\Mediadb\serieTools;
 
-class QDSeriesBatch extends QDSeriesProxy
+class SeriesBatch extends SeriesManager
 {
 
 	static $aAllTags = array(

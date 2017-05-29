@@ -3,7 +3,7 @@ namespace App\Components\QDmmmDB\System;
 
 use App\Components\QDmmmDB\Misc\Tools;
 
-class QDMediaDBSystemStatus {
+class MediaDBSystemStatus {
 	var $QDNet;
 
 	function __construct() {

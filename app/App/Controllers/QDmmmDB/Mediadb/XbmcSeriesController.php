@@ -5,7 +5,7 @@ use DDesrosiers\SilexAnnotations\Annotations as SLX;
 use Silex\Application;
 use SM\SilexRestApi\Controllers\NormalizedResponse;
 use Symfony\Component\HttpFoundation\Request;
-use App\Components\QDmmmDB\Mediadb\MultimediaSystem\QDXbmcSeries;
+use App\Components\QDmmmDB\Mediadb\MultimediaSystem\XbmcSeries;
 
 class XbmcSeriesController {
 	use NormalizedResponse;
@@ -16,7 +16,7 @@ class XbmcSeriesController {
 	 * )
 	 */
 	public function getShows(Application $app,Request $request){
-		$qd = new QDXbmcSeries($app);
+		$qd = new XbmcSeries($app);
 		return $this->formatResponse($request,$app,$qd->getShows($value));
 
 	}
@@ -27,7 +27,7 @@ class XbmcSeriesController {
 	 * )
 	 */
 	public function preGetShowSeasons(Application $app,Request $request){
-		$qd = new QDXbmcSeries($app);
+		$qd = new XbmcSeries($app);
 		$sTvdbID = $request('tvdbid');
 		return $this->formatResponse($request,$app,$qd->preGetShowSeasons($sTvdbID));
 
@@ -38,7 +38,7 @@ class XbmcSeriesController {
 	 * )
 	 */
 	public function getShowsSeasons(Application $app,Request $request){
-		$qd = new QDXbmcSeries($app);
+		$qd = new XbmcSeries($app);
 		$sTvdbID = $request('tvdbid');
 		return $this->formatResponse($request,$app,$qd->getShowsSeasons($sTvdbID));
 
@@ -49,7 +49,7 @@ class XbmcSeriesController {
 	 * )
 	 */
 	public function getEpisodeList(Application $app,Request $request){
-		$qd = new QDXbmcSeries($app);
+		$qd = new XbmcSeries($app);
 		$sTvdbID = $request('tvdbid');
 		$sSeason = $request('season');
 		return $this->formatResponse($request,$app,$qd->getEpisodeList($sTvdbID,$sSeason));

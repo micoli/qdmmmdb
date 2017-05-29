@@ -22,6 +22,7 @@ class SerieFile{
 		$aFileStruct = ToolsFiles::pathinfo_utf($sFullFilename);
 
 		$this->filename   = $aFileStruct['basename'];
+		$this->filenameNoExtension   = $aFileStruct['filename'];
 		$this->extension  = $aFileStruct['extension'];
 		$this->dirname    = $aFileStruct['dirname'];
 
@@ -44,7 +45,7 @@ class SerieFile{
 				$pos = strpos($this->filename,$this->rgx_match[0]);
 				if($pos !== false){
 					$this->root_file = substr($this->filename,0,$pos);
-					$this->clean_root_file = preg_replace('! !',' ',ucfirst(strtolower(str_replace(array('.','_'),array(' ',' '),($res['root_file'])))));
+					$this->clean_root_file = preg_replace('! !',' ',ucfirst(strtolower(str_replace(array('.','_'),array(' ',' '),($this->root_file)))));
 				}
 				break;
 			}
@@ -55,6 +56,7 @@ class SerieFile{
 		return[
 			'found'				=> $this->found,
 			'filename'			=> $this->filename,
+			'filenameNoExtension' => $this->filenameNoExtension,
 			'extension'			=> $this->extension,
 			'saison'			=> $this->saison,
 			'episode'			=> $this->episode,

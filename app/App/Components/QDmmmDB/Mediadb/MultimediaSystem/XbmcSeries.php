@@ -1,9 +1,9 @@
 <?php
 namespace App\Components\QDmmmDB\Mediadb\MultimediaSystem;
 
-use App\Components\QDmmmDB\Mediadb\Series\QDSeriesProxy;
+use App\Components\QDmmmDB\Mediadb\Series\SeriesManager;
 
-class QDXbmcSeries extends QDSeriesProxy{
+class XbmcSeries extends SeriesManager{
 
 	function getShows(){
 		$this->initdb();
