@@ -1,5 +1,5 @@
 <?php
-namespace App\Controllers\QDmmmDB\Nzb;
+namespace App\Components\QDmmmDB\Mediadb\Scrapers;
 
 class QDHtmlParserBinnews extends MovieParser{
 	var $path = "/var/www/scripts/binnews.ok";

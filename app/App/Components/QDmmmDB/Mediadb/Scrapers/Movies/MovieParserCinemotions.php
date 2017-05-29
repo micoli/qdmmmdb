@@ -1,5 +1,5 @@
 <?php
-namespace App\Controllers\QDmmmDB\Nzb;
+namespace App\Components\QDmmmDB\Mediadb\Scrapers\Movies;
 
 class MovieParserCinemotions extends MovieParser{
 	function parse($o){

@@ -22,7 +22,6 @@ class MovieParser{
 		return $t[$key];
 	}
 
-
 	function initBasicResult(){
 		$arr['id'				]='';
 		$arr['engine'			]='';

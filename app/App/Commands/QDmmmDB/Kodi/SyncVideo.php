@@ -25,7 +25,7 @@ class SyncVideo extends KnpCommand{
 				new InputOption(self::ARG_PORT, 'p', InputOption::VALUE_OPTIONAL,'port','8080'),
 				new InputOption(self::ARG_USERNAME, 'u', InputOption::VALUE_OPTIONAL,'username','kodi'),
 				new InputOption(self::ARG_PASSWORD, 'w', InputOption::VALUE_OPTIONAL,'password','kodi'),
-				new InputOption(self::ARG_SOURCE, 's', InputOption::VALUE_REQUIRED,'source/Path'),
+				new InputOption(self::ARG_SOURCE, 's', InputOption::VALUE_REQUIRED,'sources/Paths, multiple sources can be separated by ";"'),
 			))
 		);
 
@@ -39,10 +39,12 @@ class SyncVideo extends KnpCommand{
 			$input->getOption(self::ARG_PASSWORD)
 		);
 
-		$output->writeln(sprintf(
-			'<info>%s</info> : <comment>%s</comment>',
-			$input->getOption(self::ARG_SOURCE),
-			$oKodiRpc->syncVideo($input->getOption(self::ARG_SOURCE))
-		));
+		foreach(explode(';',$input->getOption(self::ARG_SOURCE)) as $sSource){
+			$output->writeln(sprintf(
+				'<info>%s</info> : <comment>%s</comment>',
+				$sSource,
+				$oKodiRpc->syncVideo($sSource)
+			));
+		}
 	}
 }
