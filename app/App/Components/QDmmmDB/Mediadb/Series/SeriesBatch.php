@@ -110,7 +110,7 @@ class SeriesBatch extends SeriesManager
 				return '/mnt/dwn/' . $p;
 			}, json_decode(file_get_contents('/mnt/###dwn/torrents.json'), true));
 		}
-
+db($aIncomingFiles);
 		$aSeriesPaths = $this->getSeriesAvailablePaths(explode(',', $seriePaths));
 
 		foreach ($aIncomingFiles as $k => $originalFilename) {
@@ -121,9 +121,9 @@ class SeriesBatch extends SeriesManager
 			if ($aRenamedFile['success']) {
 				$aIncomingFiles[$k]['renamedFile'] = $aRenamedFile;
 				if ($bDryRun) {
-					$aIncomingFiles[$k]['result'] =  sprintf("%-80s :: %s :: %s\n", $file['originalFile'], $file['renamedPath'], $file['renamedFile'] . '.' . $file['renamedExt']);
+					$aIncomingFiles[$k]['result'] = sprintf("%-80s :: %s/%s\n", $aRenamedFile['originalFile'], $aRenamedFile['renamedPath'], $aRenamedFile['renamedFile'] . '.' . $aRenamedFile['renamedExt']);
 				} else {
-					$aIncomingFiles[$k]['result'] = $this->renameSerieEpisode($file['originalFile'], $file['renamedPath'] . '/' . $file['renamedFile'], $file['renamedExt']);
+					$aIncomingFiles[$k]['result'] = $this->renameSerieEpisode($aRenamedFile['originalFile'], $aRenamedFile['renamedPath'] . '/' . $aRenamedFile['renamedFile'], $aRenamedFile['renamedExt']);
 				}
 			}else{
 				$aIncomingFiles[$k]['error'] = $aRenamedFile['error'];
