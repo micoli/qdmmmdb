@@ -2,6 +2,7 @@
 namespace App\Components\QDmmmDB\Mediadb;
 
 use App\Components\QDmmmDB\Mediadb\Series\SeriesBatch;
+use App\Components\QDmmmDB\Misc\ToolsString;
 
 class serieTools
 {
@@ -45,6 +46,11 @@ class serieTools
 		$serieFilename = str_replace('\'', ' ', $serieFilename);
 		$serieFilename = str_replace('"', ' ', $serieFilename);
 		$serieFilename = str_replace(':', ' ', $serieFilename);
+		$serieFilename = str_replace(',', ' ', $serieFilename);
+		do {
+			$serieFilename = str_replace('  ', ' ', $serieFilename);
+		} while (mb_strpos($serieFilename, '  ') > 0);
+
 
 		foreach (self::$aFilters as $sFilterName) {
 			$serieFilename = self::$sFilterName(trim($serieFilename));
