@@ -41,6 +41,7 @@ class serieTools
 			return self::$cleanedFilenameCache[$serieFilename];
 		}
 		$serieFilename = str_replace('.', ' ', $serieFilename);
+		$serieFilename = str_replace('\'s ', 's ', $serieFilename);
 		$serieFilename = str_replace('\'', ' ', $serieFilename);
 		$serieFilename = str_replace('"', ' ', $serieFilename);
 		$serieFilename = str_replace(':', ' ', $serieFilename);

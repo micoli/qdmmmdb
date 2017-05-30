@@ -110,7 +110,6 @@ class SeriesBatch extends SeriesManager
 				return '/mnt/dwn/' . $p;
 			}, json_decode(file_get_contents('/mnt/###dwn/torrents.json'), true));
 		}
-db($aIncomingFiles);
 		$aSeriesPaths = $this->getSeriesAvailablePaths(explode(',', $seriePaths));
 
 		foreach ($aIncomingFiles as $k => $originalFilename) {
