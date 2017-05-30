@@ -5,6 +5,7 @@
 	if(!defined('CONF_ROOT'))		define ('CONF_ROOT'			,dirname(__FILE__).'/conf/');
 
 	require 'app/App/Components/QDmmmDB/Misc/QDGlobal.php';
+	App\Components\QDmmmDB\Misc\loadConf(dirname(__FILE__).'/app/config/json.default/');
 	App\Components\QDmmmDB\Misc\loadConf(dirname(__FILE__).'/app/config/json/');
 	require 'app/App/Components/QDmmmDB/Misc/QDSettingPanels.php';
 	header('Content-type: text/html; charset=UTF-8');
