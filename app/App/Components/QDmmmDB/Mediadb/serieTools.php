@@ -2,7 +2,6 @@
 namespace App\Components\QDmmmDB\Mediadb;
 
 use App\Components\QDmmmDB\Mediadb\Series\SeriesBatch;
-use App\Components\QDmmmDB\Misc\ToolsString;
 
 class serieTools
 {
@@ -14,6 +13,7 @@ class serieTools
 		'removeLongTitle',
 		'removeCountry',
 		'removeApo',
+		'replaceSigle',
 		'removeProvider',
 		'removeYear'
 	];
@@ -51,7 +51,6 @@ class serieTools
 			$serieFilename = str_replace('  ', ' ', $serieFilename);
 		} while (mb_strpos($serieFilename, '  ') > 0);
 
-
 		foreach (self::$aFilters as $sFilterName) {
 			$serieFilename = self::$sFilterName(trim($serieFilename));
 		}
@@ -60,7 +59,7 @@ class serieTools
 		return $serieFilename;
 	}
 
-	private function removeAccent($str, $charset='utf-8')
+	private function removeAccent($str, $charset = 'utf-8')
 	{
 		$str = htmlentities($str, ENT_NOQUOTES, $charset);
 
@@ -74,6 +73,15 @@ class serieTools
 	private static function removeApo($s)
 	{
 		return str_replace('\'', '', $s);
+	}
+
+	private static function replaceSigle($s)
+	{
+		$s = preg_replace_callback('!\s([a-z]\.){2,5}\s!', function ($m) {
+			return str_replace('.', '', $m[0]);
+		}, ' ' . $s . ' ');
+
+		return trim($s);
 	}
 
 	private static function removeProvider($s)
