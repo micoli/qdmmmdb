@@ -50,7 +50,7 @@ class SerieFile
 				}
 				$this->saison = $match[$rgx['s']] * 1;
 				$this->episode = $match[$rgx['e']] * 1;
-				$this->serie = $match[$rgx['n']];
+				$this->serie = trim($match[$rgx['n']]," \t\n\r\0\x0B-");
 				$this->rgx = $rgx['rgx'];
 				$this->rgxnum = $k;
 				$this->rgx_match = $match;

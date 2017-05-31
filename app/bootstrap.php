@@ -13,15 +13,22 @@ use Moust\Silex\Provider\CacheServiceProvider;
 //use Knp\Provider\ConsoleServiceProvider;
 
 function db($o,$withTrace=false){
-	header('Content-type: text/html');
-	print "<pre>";
+	$bIsWeb = php_sapi_name() != "cli";
+	if($bIsWeb){
+		header('Content-type: text/html');
+		print "<pre>\n";
+	}
 	if($withTrace){
 		$e = new Exception();
 		$aExpl=explode("\n",$e->getTraceAsString());
 		print sprintf('[%s,%s]',$aExpl[1],$aExpl[2]);
 	}
 	print_r($o);
-	print "</pre>";
+	if($bIsWeb){
+		print "</pre>\n";
+	}else{
+	print "\n";
+	}
 }
 
 $app = new Application();

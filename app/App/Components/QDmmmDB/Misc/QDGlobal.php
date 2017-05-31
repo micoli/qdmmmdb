@@ -16,14 +16,6 @@ if(!defined('QD_PATH_MODULES'	))	define ('QD_PATH_MODULES'	,realpath(dirname(__F
 		'queue'=>'/topic/qdmmmdb'
 	),
 ));*/
-	function d2($v){
-		if(php_sapi_name() != "cli") print '<pre>'."\n";
-		print_r($v);
-		if(php_sapi_name() == "cli") print "\n";
-		//print htmlentities(print_r($v,true));
-		if(php_sapi_name() != "cli") print '</pre>'."\n";
-	}
-
 	function loadConf($path){
 		$constants = get_defined_constants(true);
 		$json_errors = array();
