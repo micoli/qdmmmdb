@@ -48,6 +48,7 @@ class SerieFile
 				if ($rgx['tyear'] && preg_match('!(19|20)[0-9]{2}!', $this->filename)) {
 					continue;
 				}
+				//db(array($this->filename,$rgx));
 				$this->saison = $match[$rgx['s']] * 1;
 				$this->episode = $match[$rgx['e']] * 1;
 				$this->serie = trim($match[$rgx['n']]," \t\n\r\0\x0B-");
